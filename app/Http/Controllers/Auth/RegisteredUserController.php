@@ -44,13 +44,16 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'birthday' => $request->birthday,
             'password' => Hash::make($request->password),
-
+            'birthday' => $request->birthday,
+            'sex' => $request->sex,
+            'position' => $request->position,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return response()->json(['success' => 'Usuário cadastrado com sucesso!']);
+        //return redirect(route('dashboard', absolute: false));
     }
 }
