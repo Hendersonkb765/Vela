@@ -93,6 +93,57 @@ export default function Register() {
 
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
+            
+                <div className="mt-4">
+                    <InputLabel htmlFor="password_confirmation" value="Data de Nascimento" />
+
+                    <TextInput
+                        id=""
+                        type="text"
+                        name="birthday"
+                        value={data.birthday}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        onChange={(e) => setData('birthday', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.birthday} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="password_confirmation" value="Cargo" />
+
+                    <TextInput
+                        id=""
+                        type="text"
+                        name="position"
+                        value={data.position}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        onChange={(e) => setData('position', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.position} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="password_confirmation" value="Sexo" />
+
+                    <TextInput
+                        id=""
+                        type="text"
+                        name="sex"
+                        value={data.sex}
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                        onChange={(e) => setData('sex', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.position} className="mt-2" />
+                </div>
 
                 <div className="flex items-center justify-end mt-4">
                     <Link

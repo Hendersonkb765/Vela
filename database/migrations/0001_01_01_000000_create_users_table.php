@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('provider',['email','google'])->default('email');
             $table->enum('position',['Presidente','Gerente','Administrador(a)']);
-            $table->enum('sexo',['Masculino','Feminino','Outros']);
+            $table->enum('sex',['Masculino','Feminino','Outros']);
             $table->date('birthday');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
