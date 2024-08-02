@@ -15,13 +15,14 @@ class RegistrationTest extends TestCase
         $response = $this->get('/register');
 
         $response->assertStatus(200);
+        
     }
 
     public function test_new_users_can_register(): void
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
-            'birthday' => '1990-01-01',
+            'birthday' => '1999-01-01',
             'position' => 'Presidente',
             'sex' => 'Masculino',
             'email' => 'hendersonkb765@gmail.com',
