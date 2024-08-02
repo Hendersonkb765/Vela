@@ -121,8 +121,14 @@ class RegisteredUserController extends Controller
             //DB::rollBack();
             return redirect(route('dashboard', absolute: false));
         }
-        catch (\Exception $e){
-            DB::rollBack();
+        catch(ConnectionException $e){
+            echo "Ops! Parece que você está sem conexão com a internet!";
+
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
+        }
+        catch(\Exception $e){
             return redirect(route('dashboard', absolute: false));
         }
        
