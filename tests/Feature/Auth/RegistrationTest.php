@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+//php artisan test --filter RegistrationTest
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
@@ -20,7 +21,10 @@ class RegistrationTest extends TestCase
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'birthday' => '1990-01-01',
+            'position' => 'Presidente',
+            'sex' => 'Masculino',
+            'email' => 'hendersonkb765@gmail.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
