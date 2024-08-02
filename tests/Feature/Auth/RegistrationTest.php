@@ -15,7 +15,7 @@ class RegistrationTest extends TestCase
         $response = $this->get('/register');
 
         $response->assertStatus(200);
-        
+
     }
 
     public function test_new_users_can_register(): void
@@ -32,5 +32,23 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard', absolute: false));
+    }
+    public function test_new_presidents_can_register(): void
+    {
+        $response = $this->post('/novo/presidente', [
+            'name' => 'Test User',
+            'birthday' => '1999-01-01',
+            'position' => 'Presidente',
+            'sex' => 'Masculino',
+            'email' => 'hendersonkb765@gmail.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+            'osc_name' => 'nome da osc',
+            'foundation_date' => '2000-01-01'
+        ]);
+
+
+        $response->assertRedirect(route('dashboard', absolute: false));
+
     }
 }
