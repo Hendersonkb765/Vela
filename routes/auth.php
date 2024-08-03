@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProviderAuthController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite; // Add this line
 
 
 Route::middleware('guest')->group(function () {
@@ -18,8 +19,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/auth/redirect/{provider}/', [ProviderAuthController::class, 'redirect'])
                 ->name('redirect');
     
-    Route::get('/auth/callback/google', [ProviderAuthController::class, 'callback'])
+    Route::get('/auth/callback/{provider}', [ProviderAuthController::class, 'callback'])
                 ->name('callback');
+    
     
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');

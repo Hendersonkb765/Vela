@@ -14,15 +14,16 @@ class ProviderAuthController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    function callback(){
-        
-        $user = Socialite::driver('google')->user();
+    function callback($provider){
 
-        User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'provider'=> 'google',  
-        ]);
+        $user = Socialite::driver($provider)->user();
+
+        $user_registred = User::updateOrCreate([
+            'email' => $user->getEmail()
+        ],[
+            'name' => $user->getName(),
+            'password' => bcrypt('password')
+        ])
 
         dd($user);
     }
