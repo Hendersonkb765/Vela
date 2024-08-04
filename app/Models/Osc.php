@@ -15,6 +15,7 @@ class Osc extends Model
         'foundation_date',
         'banner_url',
         'img_url',
+        'user_id',
     ];
 }
 

@@ -70,5 +70,5 @@ Route::middleware('auth')->group(function () {
                 ->name('logout');
 });
 
-Route::post('/novo/presidente',[RegisteredUserController::class, 'registered_President']);
+Route::post('/novo/presidente',[RegisteredUserController::class, 'registeredPresident']);
 
