@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('foundation_date');
             $table->string('banner_url')->nullable();
             $table->string('img_url')->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('osc');
+        Schema::dropIfExists('oscs');
     }
 };
