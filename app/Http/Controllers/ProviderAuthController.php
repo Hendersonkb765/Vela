@@ -20,7 +20,7 @@ class ProviderAuthController extends Controller
     function callback($provider){
 
         try{
-            
+
             $user = Socialite::driver($provider)->user();
 
             $userExist =User::where('email',$user->email)->exist();
@@ -34,16 +34,18 @@ class ProviderAuthController extends Controller
                     'provider' => $provider,
                     'url_image' => $user->avatar
                 ]);
+
+                Cache::forever('ismember', false);
             }
 
             
-            $isRecent = $user->wasRecentlyCreated;
-            
+            //$isRecent = $user->wasRecentlyCreated;
+            /*
             if($isRecent){
                 
                 Cache::forever('ismember', false);
             }
-            
+            */
             Auth::login($user);
 
             
@@ -68,13 +70,10 @@ class ProviderAuthController extends Controller
             }
         }
         catch (\Exception $e){
-            return redirect()->route('login');
+            dd($e);
 
         }
-      
-        
 
-        return response()->json(['message' => 'Usuário logado com sucesso!'], 200);
     }
     
 }
