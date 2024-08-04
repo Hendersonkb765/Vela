@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('email', function () {
     
+    $randomNumber = rand(1000000, 9999999);
+    dd($randomNumber);
     $email = Mail::to('gustavo.raimundo.rodrigues@gmail.com','Gustavo Noia')->send(new InvitationSender());
     dd($email);
 });
