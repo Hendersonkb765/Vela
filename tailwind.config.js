@@ -13,8 +13,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                neutral: {
-                  DEFAULT: '#1E1E1E', // Base Black
+                neutralcolors: {
+                  DEFAULT: '#F0EFED',
                   100: '#F0EFED', // Soft Gray
                   200: '#D8D8D8', // Light Gray
                   300: '#737373', // Medium Gray
@@ -36,8 +36,8 @@ export default {
                 info: ['#17A2B8'],
             },
             fontFamily: {
-                body: ['Poppins'],
-                headers: ['Open Sans'],
+                headers: ['Poppins'],
+                body: ['Open Sans'],
             },
         },
     },

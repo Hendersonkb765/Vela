@@ -64,13 +64,12 @@ export default function Resources({ auth, laravelVersion, phpVersion }) {
 
                 <div className='p-8 border-2 rounded-md flex flex-col space-y-4'>
                     <div className='flex space-x-4 justify-evenly items-center'>
-                        <SecondaryIconButton disabled={true} icon={<FaArrowRight className='w-4 h-4'/>}/>
+                        <SecondaryIconButton gray={true} icon={<FaArrowRight className='w-4 h-4'/>}/>
                         <SecondaryButton disabled={true} center={true}/>
                         <SecondaryButton  disabled={true}  icon={<FaArrowRight className='w-3 h-3'/>}/>
                         <SecondaryButton disabled={true} rounded={true} />
                         <SecondaryButton disabled={true} rounded={true} center={true}/>
                         <SecondaryButton disabled={true} rounded={true} icon={<FaArrowRight className='w-3 h-3'/>}/>
-
                     </div>
 
                     <div className='flex space-x-4 justify-evenly items-center'>
@@ -80,7 +79,6 @@ export default function Resources({ auth, laravelVersion, phpVersion }) {
                         <SecondaryButton rounded={true} />
                         <SecondaryButton rounded={true} center={true}/>
                         <SecondaryButton rounded={true} icon={<FaArrowRight className='w-3 h-3'/>}/>
-
                     </div>
 
                     <div className='flex space-x-4 justify-evenly items-center'>
