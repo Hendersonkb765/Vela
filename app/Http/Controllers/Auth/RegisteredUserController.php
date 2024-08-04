@@ -77,9 +77,10 @@ class RegisteredUserController extends Controller
         
         
     }
-    public function registered_President(Request $request) : RedirectResponse{
+    public function registeredPresident(Request $request) : RedirectResponse{
         
 
+        return redirect(route('dashboard', absolute: false));
 
         try{
             $request->validate([
@@ -116,19 +117,19 @@ class RegisteredUserController extends Controller
     
             DB::commit();
     
-    
-            
-            //DB::rollBack();
-            return redirect(route('dashboard', absolute: false));
+            event(new Registered($user));
         }
         catch(ConnectionException $e){
+            DB::rollBack();
             echo "Ops! Parece que você está sem conexão com a internet!";
 
         }
         catch(\Illuminate\Database\QueryException $e){
+            DB::rollBack();
             echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
         }
         catch(\Exception $e){
+            DB::rollBack();
             return redirect(route('dashboard', absolute: false));
         }
        
