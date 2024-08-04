@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Mail\InvitationCode;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Mail;
 
 //php artisan test --filter RegistrationTest
 class RegistrationTest extends TestCase
@@ -51,4 +53,5 @@ class RegistrationTest extends TestCase
         $response->assertRedirect(route('dashboard', absolute: false));
 
     }
+
 }

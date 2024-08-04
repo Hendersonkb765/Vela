@@ -8,17 +8,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Address;
 
-class InvitationCode extends Mailable
+class InvitationSender extends Mailable
 {
     use Queueable, SerializesModels;
 
+    
     /**
      * Create a new message instance.
      */
     public function __construct()
     {
-        //
+        
+   
+
     }
 
     /**
@@ -27,6 +31,7 @@ class InvitationCode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            
             subject: 'Invitation Code',
         );
     }
@@ -36,8 +41,10 @@ class InvitationCode extends Mailable
      */
     public function content(): Content
     {
+        $code = '123456';
         return new Content(
-            view: 'view.name',
+            view: 'mail.invitation_code',
+            with: ['code' => $code]
         );
     }
 
@@ -50,4 +57,6 @@ class InvitationCode extends Mailable
     {
         return [];
     }
+
+   
 }

@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Cache; // Add this line
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Mail\InvitationCode;
+use App\Mail\InvitationSender;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -29,6 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+});
+
+
+Route::get('email', function () {
+    
+    $email = Mail::to('gustavo.raimundo.rodrigues@gmail.com','Gustavo Noia')->send(new InvitationSender());
+    dd($email);
 });
 
 
