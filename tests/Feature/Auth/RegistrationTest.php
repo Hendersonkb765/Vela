@@ -39,14 +39,15 @@ class RegistrationTest extends TestCase
     {
         $response = $this->post('/novo/presidente', [
             'name' => 'Test User',
-            'birthday' => '1999-01-01',
-            'position' => 'Presidente',
-            'sex' => 'Masculino',
             'email' => 'hendersonkb765@gmail.com',
             'password' => 'password',
-            'password_confirmation' => 'password',
+            'birthday' => '1999-01-01',      
+            'sex' => 'Masculino',
+            'position' => 'Presidente',   
             'osc_name' => 'nome da osc',
-            'foundation_date' => '2000-01-01'
+            'foundation_date' => '2000-01-01', 
+            'password_confirmation' => 'password'
+            
         ]);
 
 

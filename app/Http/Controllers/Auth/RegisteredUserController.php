@@ -77,10 +77,8 @@ class RegisteredUserController extends Controller
         
         
     }
-    public function registered_President(Request $request) : RedirectResponse{
+    public function registeredPresident(Request $request) : RedirectResponse{
         
-
-
         try{
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -89,7 +87,7 @@ class RegisteredUserController extends Controller
                 'birthday' => 'required|date|before:today',
                 'sex' =>'required',
             ]);
-    
+            
             $request->validate(
                 [
                     'osc_name' => 'required|string|max:255',
@@ -98,7 +96,7 @@ class RegisteredUserController extends Controller
             );
     
             DB::beginTransaction();
-    
+            
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -107,28 +105,33 @@ class RegisteredUserController extends Controller
                 'sex' => $request->sex,
                 'position' => $request->position,
             ]);
-    
+            
             $osc = Osc::create([
                 'name' => $request->osc_name,
                 'presidents_name' => $request->name,
                 'foundation_date' => $request->foundation_date,
+                'user_id' => $user->id,
             ]);
-    
+            
             DB::commit();
     
-    
+            event(new Registered($user));
             
-            //DB::rollBack();
             return redirect(route('dashboard', absolute: false));
+
+            
         }
         catch(ConnectionException $e){
+            DB::rollBack();
             echo "Ops! Parece que você está sem conexão com a internet!";
 
         }
         catch(\Illuminate\Database\QueryException $e){
+            DB::rollBack();
             echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
         }
         catch(\Exception $e){
+            DB::rollBack();
             return redirect(route('dashboard', absolute: false));
         }
        
