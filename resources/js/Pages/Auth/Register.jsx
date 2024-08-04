@@ -30,7 +30,7 @@ export default function Register() {
             <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Crie Sua Conta</h2>
             <div className='flex flex-col space-y-8 divide-y-2'>
 
-                <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 bg-white '>Continuar com o Google</PrimaryButton>
+                <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 bg-white ' href={route('resources')}>Continuar com o Google</PrimaryButton>
 
                 <form onSubmit={submit} className='pt-4'>
                     <div>
@@ -119,7 +119,6 @@ export default function Register() {
                             <PrimaryButton className="h-12 w-1/2" disabled={processing} center={true}>
                                 Registre-se
                             </PrimaryButton>
-
                             <Link
                                 href={route('login')}
                                 className="underline text-sm text-gray-600  hover:text-gray-900 dark:hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"

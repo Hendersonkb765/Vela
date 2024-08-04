@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import React, { Children } from 'react';
 
-export default function PrimaryButton({ className='', disabled=false, gray=false, blocked=false , children='texto', rounded=false, center=false, icon: Icon }) {
+export default function PrimaryButton({ className='', href, disabled=false, gray=false, blocked=false , children='texto', rounded=false, center=false, icon: Icon }) {
     return (
         <Link
             className={`flex px-4 py-2  gap-2 items-center min-w-32 min-h-8 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-500 transition-colors duration-300 ease-out'
@@ -10,6 +10,7 @@ export default function PrimaryButton({ className='', disabled=false, gray=false
             ${center && 'justify-center'}
             ${blocked && '!bg-primary-900'} ${className}`}
             disabled={disabled}
+            href={href}
         >
             {Icon}
             {children}
