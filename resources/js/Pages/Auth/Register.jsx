@@ -7,7 +7,6 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
 import SecondaryButton from '@/FigmaComponents/SecondaryButton';
 
-
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
