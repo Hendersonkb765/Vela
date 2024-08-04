@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Mail\InvitationCode;
 use App\Mail\InvitationSender;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\ProviderAuthController; // Add this line
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -33,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
 });
-
 
 Route::get('email', function () {
     
