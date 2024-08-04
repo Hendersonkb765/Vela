@@ -79,9 +79,6 @@ class RegisteredUserController extends Controller
     }
     public function registeredPresident(Request $request) : RedirectResponse{
         
-
-        return redirect(route('dashboard', absolute: false));
-
         try{
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -90,7 +87,7 @@ class RegisteredUserController extends Controller
                 'birthday' => 'required|date|before:today',
                 'sex' =>'required',
             ]);
-    
+            
             $request->validate(
                 [
                     'osc_name' => 'required|string|max:255',
@@ -99,7 +96,7 @@ class RegisteredUserController extends Controller
             );
     
             DB::beginTransaction();
-    
+            
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -108,16 +105,21 @@ class RegisteredUserController extends Controller
                 'sex' => $request->sex,
                 'position' => $request->position,
             ]);
-    
+            
             $osc = Osc::create([
                 'name' => $request->osc_name,
                 'presidents_name' => $request->name,
                 'foundation_date' => $request->foundation_date,
+                'user_id' => $user->id,
             ]);
-    
+            
             DB::commit();
     
             event(new Registered($user));
+            
+            return redirect(route('dashboard', absolute: false));
+
+            
         }
         catch(ConnectionException $e){
             DB::rollBack();
