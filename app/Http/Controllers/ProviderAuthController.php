@@ -23,18 +23,17 @@ class ProviderAuthController extends Controller
 
             $user = Socialite::driver($provider)->user();
 
-            $userExist =User::where('email',$user->email)->exist();
+            $userExist =User::where('email',$user->email)->exists();
 
             if(!$userExist){
                 $user = User::Create([
-                    'email' => $user->email
-                ],[
                     'name' => $user->name,
                     'email' => $user->email,
                     'provider' => $provider,
                     'url_image' => $user->avatar
                 ]);
 
+                dd($user);
                 Cache::forever('ismember', false);
             }
 
@@ -47,7 +46,6 @@ class ProviderAuthController extends Controller
             }
             */
             Auth::login($user);
-
             
             if(Cache::get('ismember')){
 
@@ -56,14 +54,12 @@ class ProviderAuthController extends Controller
             }
             else{
 
-                if(Osc::where('user_id',$user->id)->exist()){
+                if(Osc::where('user_id',$user->id)->exists()){
 
                     Cache::forever('ismember', true);
 
                     return redirect()->route('dashboard');
                 }
-                
-
 
                 //rota para usuario que não tem osc associada
                 return redirect()->route('resources');
