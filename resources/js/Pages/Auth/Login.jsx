@@ -87,7 +87,6 @@ export default function Login({ status, canResetPassword }) {
                     <PrimaryButton className="h-12 w-full" disabled={processing} center={true}>Entrar</PrimaryButton>
                     <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 w-full bg-white justify-center'>Entrar com o Google</PrimaryButton>
                 </div>
-                <a href='http://localhost:8000/auth/redirect/google'>GOOGLE</a>
 
 
             </form>
