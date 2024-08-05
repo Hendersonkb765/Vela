@@ -33,20 +33,14 @@ class ProviderAuthController extends Controller
                     'url_image' => $user->avatar
                 ]);
 
-                dd($user);
+                Auth::login($user);
                 Cache::forever('ismember', false);
             }
-
-            
-            //$isRecent = $user->wasRecentlyCreated;
-            /*
-            if($isRecent){
-                
-                Cache::forever('ismember', false);
+            else{
+                $userid = User::where('email',$user->email)->first()->id;
+                Auth::loginUsingId($userid);
             }
-            */
-            Auth::login($user);
-            
+    
             if(Cache::get('ismember')){
 
                 //rota para quem tem organização associada
@@ -54,7 +48,7 @@ class ProviderAuthController extends Controller
             }
             else{
 
-                if(Osc::where('user_id',$user->id)->exists()){
+                if(Osc::where('user_id',Auth::user()->id)->exists()){
 
                     Cache::forever('ismember', true);
 
