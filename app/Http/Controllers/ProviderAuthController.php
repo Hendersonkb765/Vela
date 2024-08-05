@@ -56,7 +56,7 @@ class ProviderAuthController extends Controller
                 }
 
                 //rota para usuario que não tem osc associada
-                return redirect()->route('resources');
+                echo "Usuário não tem organização associada";
             }
         }
         catch (\Exception $e){
