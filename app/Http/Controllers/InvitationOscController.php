@@ -23,7 +23,13 @@ class InvitationOscController extends Controller
             $randomcode = Str::random(32);
             $linkInvitation = url('/validacao/'.$randomcode);
             Cache::put('invitation_code', [$randomcode,$osc->id], now()->addMinutes(30));
-            Mail::to($mail,'Gustavo')->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+            try{
+                Mail::to($mail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+
+            }
+            catch(\Exception $e){
+                echo "Erro ao enviar convite";
+            }
 
             echo "Convite enviado com sucesso";
         }
