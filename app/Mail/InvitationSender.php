@@ -14,14 +14,20 @@ class InvitationSender extends Mailable
 {
     use Queueable, SerializesModels;
 
-    
+    protected $linkInvitation;
+    protected $oscName;
+    protected $imgUrl;
+    protected $presidentName;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($linkInvitation,$oscName,$imgUrl,$presidentName)
     {
         
-   
+        $this->linkInvitation = $linkInvitation;
+        $this->oscName = $oscName;
+        $this->imgUrl = $imgUrl;
+        $this->presidentName = $presidentName;
 
     }
 
@@ -41,10 +47,12 @@ class InvitationSender extends Mailable
      */
     public function content(): Content
     {
-        $code = '123456';
         return new Content(
-            view: 'mail.invitation_code',
-            with: ['code' => $code]
+            view: 'mail.invitationOsc',
+            with: ['linkInvitation' => $this->linkInvitation,
+                    'oscName' => $this->oscName,
+                    'imgUrl' => $this->imgUrl,
+                    'presidentName' => $this->presidentName]
         );
     }
 
