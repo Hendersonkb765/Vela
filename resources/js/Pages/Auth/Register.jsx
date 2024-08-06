@@ -1,11 +1,11 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/FigmaComponents/InputError';
-import InputLabel from '@/FigmaComponents/InputLabel';
-import PrimaryButton from '@/FigmaComponents/PrimaryButton';
-import TextInput from '@/FigmaComponents/TextInput';
+import InputError from '@/FigmaComponents/Inputs/InputError';
+import InputLabel from '@/FigmaComponents/Inputs/InputLabel';
+import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
+import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
-import SecondaryButton from '@/FigmaComponents/SecondaryButton';
+import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -28,8 +28,10 @@ export default function Register() {
             <Head title="Register" />
             <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Crie Sua Conta</h2>
             <div className='flex flex-col space-y-8 divide-y-2'>
-
-                <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 bg-white ' href={route('resources')}>Continuar com o Google</PrimaryButton>
+                <a
+                    className='flex px-4 py-2  gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('resources')}>
+                    <FcGoogle className='w-8 h-8'></FcGoogle>Continuar com o Google
+                </a>
 
                 <form onSubmit={submit} className='pt-4'>
                     <div>

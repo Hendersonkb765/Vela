@@ -1,9 +1,9 @@
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/FigmaComponents/InputError';
-import InputLabel from '@/FigmaComponents/InputLabel';
-import PrimaryButton from '@/FigmaComponents/PrimaryButton';
-import TextInput from '@/FigmaComponents/TextInput';
+import InputError from '@/FigmaComponents/Inputs/InputError';
+import InputLabel from '@/FigmaComponents/Inputs/InputLabel';
+import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
+import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
 
