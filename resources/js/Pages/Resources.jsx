@@ -1,8 +1,8 @@
-import PrimaryButton from '@/FigmaComponents/PrimaryButton';
-import PrimaryIconButton from '@/FigmaComponents/PrimaryIconButton';
-import SecondaryButton from '@/FigmaComponents/SecondaryButton';
-import SecundaryButton from '@/FigmaComponents/SecondaryButton';
-import SecondaryIconButton from '@/FigmaComponents/SecondaryIconButton';
+import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
+import PrimaryIconButton from '@/FigmaComponents/Button/PrimaryIconButton';
+import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
+import SecondaryIconButton from '@/FigmaComponents/Button/SecondaryIconButton';
+import SideMenu from '@/FigmaComponents/NavMenu/SideMenu';
 import Tags from '@/FigmaComponents/Tags';
 import { Link, Head } from '@inertiajs/react';
 
@@ -27,6 +27,7 @@ export default function Resources({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
+            <SideMenu> </SideMenu>
             <section className='m-8 mb-0 p-8 w-fit'>
                 <h1 className='text-xl font-headers font-semibold mb-4'>Botões Primários</h1>
                 <div className='p-8 border-2 rounded-md flex flex-col space-y-4'>
