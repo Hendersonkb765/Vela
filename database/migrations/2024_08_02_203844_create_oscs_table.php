@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('oscs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('CNPJ',14)->unique();
-            $table->string('institutional_email');
+            $table->string('CNPJ')->unique();
+            $table->string('institutional_email',);
             $table->string('phone_number');
             $table->string('company_name');
             $table->string('fantasy_name');
