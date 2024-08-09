@@ -1,20 +1,61 @@
-import { Link } from '@inertiajs/react';
-import React, { Children } from 'react';
+import React from 'react';
 
-export default function PrimaryButton({ className='', href, disabled=false, gray=false, blocked=false , children='texto', rounded=false, center=false, icon: Icon }) {
+export default function PrimaryButton({
+    className = '',
+    href,
+    disabled = false,
+    gray = false,
+    blocked = false,
+    children = 'texto',
+    rounded = false,
+    center = false,
+    icon: Icon,
+    onClick,
+    type = 'button'
+}) {
+    const handleClick = (e) => {
+        if (onClick) onClick(e);
+        if (disabled) {
+            e.preventDefault();
+            return;
+        }
+        if (href && !e.defaultPrevented) {
+            e.preventDefault();
+            window.location.href = href;
+        }
+    };
+
+    const classNames = `flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-500 transition-colors duration-300 ease-out
+        ${gray ? '!bg-neutralcolors-100 !text-neutralcolors-400' : ''}
+        ${rounded ? '!rounded-full' : ''}
+        ${center ? 'justify-center' : ''}
+        ${blocked ? '!bg-primary-900' : ''}
+        ${disabled ? 'cursor-not-allowed  !text-neutralcolors-200 opacity-40' : ''}
+        ${className}`;
+
+    if (href && !disabled) {
+        return (
+            <a
+                href={href}
+                onClick={handleClick}
+                className={classNames}
+                role="button"
+            >
+                {Icon}
+                {children}
+            </a>
+        );
+    }
+
     return (
-        <Link
-            className={`flex px-4 py-2  gap-2 items-center min-w-32 min-h-8 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-500 transition-colors duration-300 ease-out'
-            ${gray && '!bg-neutralcolors-100 !text-neutralcolors-400'}
-            ${rounded && '!rounded-full'}
-            ${center && 'justify-center'}
-            ${blocked && '!bg-primary-900'} ${className}`}
+        <button
+            className={classNames}
             disabled={disabled}
-            href={href}
+            onClick={handleClick}
+            type={type}
         >
             {Icon}
             {children}
-        </Link>
+        </button>
     );
 }
-

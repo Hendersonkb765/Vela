@@ -43,6 +43,9 @@ Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
 })->name('dashboardtest');
 
+Route::get('/profilesetup', function () {
+    return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
+})->name('profilesetup');
 
 
 

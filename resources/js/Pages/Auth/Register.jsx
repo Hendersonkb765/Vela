@@ -5,11 +5,9 @@ import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
-import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -24,34 +22,23 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
-            <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Crie Sua Conta</h2>
-            <div className='flex flex-col space-y-8 divide-y-2'>
-                <a
-                    className='flex px-4 py-2  gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('resources')}>
-                    <FcGoogle className='w-8 h-8'></FcGoogle>Continuar com o Google
-                </a>
-
-                <form onSubmit={submit} className='pt-4'>
-                    <div>
-                        <InputLabel htmlFor="name" value="Nome" />
-                        <TextInput
-                            id="name"
-                            name="name"
-                            value={data.name}
-                            className="mt-1 block w-full"
-                            autoComplete="name"
-                            isFocused={true}
-                            onChange={(e) => setData('name', e.target.value)}
-                            placeholder={"Seu nome completo"}
-                            required
-                        />
-
-                        <InputError message={errors.name} className="mt-2" />
+        <section className='bg-primary h-screen flex flex-col items-center justify-center py-8'>
+            <Head title="Cadastro" />
+            <div className='w-2/5 flex flex-col items-center bg-white px-4 py-8  rounded-xl'>
+                <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-400 '>Crie Sua Conta</h2>
+                <form onSubmit={submit} className='flex flex-col space-y-4'>
+                    <a
+                        className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('resources')}>
+                        <FcGoogle className='w-8 h-8'></FcGoogle>Continuar com o Google
+                    </a>
+                    <div className='flex w-full justify-center items-center space-x-2'>
+                        <div className='w-full h-0.5 bg-neutralcolors-100'/>
+                        <span className='text-neutralcolors-200'>Ou</span>
+                        <div className='w-full h-0.5 bg-neutralcolors-100' />
                     </div>
 
-                    <div className="mt-4">
+
+                    <div className="">
                         <InputLabel htmlFor="email" value="Email" />
 
                         <TextInput
@@ -69,7 +56,7 @@ export default function Register() {
                         <InputError message={errors.email} className="mt-2" />
                     </div>
 
-                    <div className="mt-4">
+                    <div className="">
                         <InputLabel htmlFor="password" value="Senha" />
 
                         <TextInput
@@ -87,7 +74,7 @@ export default function Register() {
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
-                    <div className="mt-4">
+                    <div className="4">
                         <InputLabel htmlFor="password_confirmation" value="Confirme sua senha" />
 
                         <TextInput
@@ -105,7 +92,7 @@ export default function Register() {
                         <InputError message={errors.password_confirmation} className="mt-2" />
                     </div>
 
-                    <div className="flex flex-col  justify-center mt-4 space-y-4">
+                    <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">
                         <p className='text-sm'>
                             Ao se cadastrar, você concorda com os
                             <Link
@@ -116,21 +103,19 @@ export default function Register() {
                             </Link>
                         </p>
 
-                        <div className='flex space-x-4 items-center'>
-                            <PrimaryButton className="h-12 w-1/2" disabled={processing} center={true}>
+                        <div className='flex flex-col space-y-4 justify-center items-center'>
+                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true}>
                                 Registre-se
                             </PrimaryButton>
-                            <Link
-                                href={route('login')}
-                                className="underline text-sm text-gray-600  hover:text-gray-900 dark:hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                            >
-                                Já tem uma conta?
-                            </Link>
+                            <p className="text-sm text-neutralcolors-400">
+                                Já tem uma conta? <Link href={route('login')} className="underline  text-primary">Entre aqui </Link>
+                            </p>
+
                         </div>
 
                     </div>
                 </form>
             </div>
-        </GuestLayout>
+        </section>
     );
 }
