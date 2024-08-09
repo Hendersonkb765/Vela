@@ -12,6 +12,7 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
+    //php artisan test --filter RegistrationTest::test_registration_screen_can_be_rendered
     public function test_registration_screen_can_be_rendered(): void
     {
         $response = $this->get('/register');
@@ -19,6 +20,7 @@ class RegistrationTest extends TestCase
 
     }
 
+    //php artisan test --filter RegistrationTest::test_new_users_can_register
     public function test_new_users_can_register(): void
     {
         $response = $this->post('/register', [
@@ -34,6 +36,9 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard', absolute: false));
     }
+
+    //php artisan test --filter RegistrationTest::test_new_presidents_can_register
+
     public function test_new_presidents_can_register(): void
     {
         $response = $this->post('/novo/presidente', [
@@ -48,9 +53,6 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password'
             
         ]);
-
-
         $response->assertRedirect(route('dashboard', absolute: false));
-
     }
 }

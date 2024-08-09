@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
        
+        /*
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
@@ -43,9 +44,22 @@ class RegisteredUserController extends Controller
             'sex' =>'required',
             'position' => 'required',
         ]);
-
+        */
     
         try{
+
+            $user = User::create([
+                'name' => 'Test User',
+                'email' => 'hendersonkb765@gmail.com',
+                'password' => 'password',
+                'birthday' => '1999-01-01',      
+                'sex' => 'Masculino',
+                'position' => 'Presidente',   
+                'osc_name' => 'nome da osc',
+                'foundation_date' => '2000-01-01', 
+                'password_confirmation' => 'password'
+            ]);
+            /*
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -54,14 +68,14 @@ class RegisteredUserController extends Controller
                 'sex' => $request->sex,
                 'position' => $request->position,
             ]);
-            
+            */
             //$user->sendVerifyEmailNotification();
             
             event(new Registered($user));
     
             Auth::login($user);
     
-            return redirect(route('dashboard', absolute: false));
+            return redirect(route('dashboard',absolute: false));
         }
         catch(ConnectionException $e){
             echo "Ops! Parece que você está sem conexão com a internet!";
@@ -71,7 +85,7 @@ class RegisteredUserController extends Controller
             echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
         }
         catch(\Exception $e){
-            return redirect(route('dashboard', absolute: false));
+            return redirect(route('resources', absolute: false));
         }
         
         
