@@ -3,6 +3,7 @@
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\OscController; // Add this line
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,7 +44,7 @@ Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
 })->name('dashboardtest');
 
-
+Route::get('/osc', [OscController::class, 'index'])->name('osc.index');
 
 
 require __DIR__.'/auth.php';

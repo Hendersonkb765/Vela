@@ -48,4 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+    public function oscs()
+    {
+        return $this->hasMany(Osc::class);
+    }
 }
