@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('oscs_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('osc_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
