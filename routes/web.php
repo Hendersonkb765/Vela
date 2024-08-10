@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +21,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/resources', function () {
+Route::get('/resources/test', function () {
     return Inertia::render('Resources');
 })->name('resources');
 
@@ -32,12 +33,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('email', function () {
-    $email = Mail::to('gustavo.raimundo.rodrigues@gmail.com','Gustavo Noia')->send(new InvitationSender());
-    dd($email);
     Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
     Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
 });
 
+Route::get('register/ds', [RegisteredUserController::class,'store']);
 
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');

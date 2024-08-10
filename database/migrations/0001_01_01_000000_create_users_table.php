@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name',100);
+            $table->string('email',150)->unique();
             $table->enum('provider',['email','google'])->default('email');
-            $table->enum('position',['Presidente','Gerente','Administrador(a)'])->nullable();
+            $table->enum('position',['Presidente','Gerente','Administrador(a),Equipe Vela,Dev'])->nullable();
             $table->enum('sex',['Masculino','Feminino','Outros'])->nullable();
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('url_image')->nullable();
-            $table->string('password')->nullable();
+            $table->string('url_image',255)->nullable();
+            $table->string('contato',20)->nullable();
+            $table->string('password',255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -40,6 +41,12 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('telephone',function(Blueprint $table){
+            $table->foreignId('user_id')->constrained();
+            $table->string('number_phone');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -47,8 +54,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('telephone');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        
     }
 };

@@ -21,9 +21,12 @@ class InvitationOscController extends Controller
         if($user->position == 'Presidente' || $user->position == 'Gerente'){
             $osc = Osc::where('user_id', $user->id)->first();
             $randomcode = Str::random(32);
-            $linkInvitation = url('/validacao/'.$randomcode);
+            $linkInvitation = 'http://127.0.0.1:8000/validacao/'.$randomcode;
             Cache::put('invitation_code', [$randomcode,$osc->id], now()->addMinutes(30));
-            Mail::to($mail,'Gustavo')->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+           
+            Mail::to($mail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+
+         
 
             echo "Convite enviado com sucesso";
         }
@@ -38,7 +41,8 @@ class InvitationOscController extends Controller
         $invitationCode = Cache::get('invitation_code')[0];
         if(Auth::check()){
 
-            if($code == $invitationCode[0]){
+             
+            if($code == $invitationCode){
                 //Osc::where('id',$invitationCode[1])->update(['user_id' => Auth::user()->id]);
 
                 // Código para vincular usuario com uma organização social.
