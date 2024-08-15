@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('oscs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('CNPJ')->unique();
+            $table->string('cnpj')->unique();
             $table->string('institutional_email',);
-            $table->string('phone_number');
+            $table->string('phone');
             $table->string('company_name')->nullable();
             $table->string('fantasy_name')->nullable();
             $table->string('presidents_name');
@@ -25,19 +24,17 @@ return new class extends Migration
             $table->string('img_url')->nullable();
             $table->string('legal_nature')->nullable();
             $table->string('statute_url')->nullable();
-            $table->string('cnae_main')->nullable();
-            $table->foreignId('user_id')->constrained();
-            
+            $table->string('cnae_main')->nullable();            
             $table->timestamps();
         });
         Schema::create('cnaes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('code');
             $table->timestamps();
         });
 
-        Schema::create('osc_cnaes', function (Blueprint $table) {
+        Schema::create('cnae_osc', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
             $table->foreignId('cnae_id')->constrained();
@@ -46,11 +43,10 @@ return new class extends Migration
 
         Schema::create('target_audiences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('osc_id')->constrained();
-            $table->string('description');
+            $table->string('name');
             $table->timestamps();
         });
-        Schema::create('osc_target_audiences', function (Blueprint $table) {
+        Schema::create('osc_target_audience', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
             $table->foreignId('target_audience_id')->constrained();
@@ -61,7 +57,7 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
         });
-        Schema::create('osc_type_performances', function (Blueprint $table) {
+        Schema::create('osc_type_performance', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
             $table->foreignId('type_performance_id')->constrained();

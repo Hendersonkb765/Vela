@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('name',100);
             $table->string('email',150)->unique();
             $table->enum('provider',['email','google'])->default('email');
-            $table->enum('position',['Presidente','Gerente','Administrador(a),Equipe Vela,Dev'])->nullable();
+            $table->enum('position',['Presidente','Gerente','Administrador(a)','Equipe Vela','Dev'])->nullable();
             $table->enum('sex',['Masculino','Feminino','Outros'])->nullable();
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('url_image',255)->nullable();
-            $table->string('contato',20)->nullable();
             $table->string('password',255)->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -42,12 +41,13 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        Schema::create('telephone',function(Blueprint $table){
+        Schema::create('telephones',function(Blueprint $table){
             $table->foreignId('user_id')->constrained();
             $table->string('number_phone');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

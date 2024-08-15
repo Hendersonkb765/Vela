@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oscs_users', function (Blueprint $table) {
+        Schema::create('dependencies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('osc_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('step_id')->constrained();
+            $table->foreignId('task_id')->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oscs_users');
+        Schema::dropIfExists('dependencies');
     }
 };

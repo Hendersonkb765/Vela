@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('level_id')->constrained();
             $table->text('description');
-            $table->string('qt_steps');
             $table->string('message_conclusion');
             $table->timestamps();
         });
