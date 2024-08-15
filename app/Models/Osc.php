@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany; // Add this line
-
 class Osc extends Model
 {
     use HasFactory;
@@ -28,14 +27,8 @@ class Osc extends Model
         'user_id',
     ];
     
-    public function OscCnae() : HasMany 
-    {
-        return $this->hasMany(OscCnae::class);
-    }
-    public function OscTargetAudience() : HasMany 
-    {
-        return $this->hasMany(OscTargetAudience::class);
-    }
+  
+  // Relacionamento um para muitos
     public function OscTypePerformance() : HasMany 
     {
         return $this->hasMany(OscTypePerformance::class);
@@ -44,10 +37,29 @@ class Osc extends Model
     {
         return $this->hasMany(Address::class);
     }
-    public function user(): BelongsTo
+    public function activitie(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Activitie::class);
     }
+
+    // Relacionamento muitos para muitos
+    public function cnae(): BelongsToMany
+    {
+        return $this->belongsToMany(Cnae::class);
+    }
+    public function user(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function targetAudience(): BelongsToMany
+    {
+        return $this->belongsToMany(TargetAudience::class);
+    }
+    public function typePerformance(): BelongsToMany
+    {
+        return $this->belongsToMany(TypePerformance::class);
+    }
+    
 }
 
 

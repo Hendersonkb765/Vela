@@ -4,14 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TypePerformance extends Model
 {
     use HasFactory;
 
-    public function Osc()
+    protected $fillable = [
+        'name'
+    ];
+    public function Osc() : BelongsToMany
     {
         //muitos para um
-        return $this->belongsTo(Osc::class);
+        return $this->belongsToMany(Osc::class);
     }
 }

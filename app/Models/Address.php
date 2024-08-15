@@ -12,16 +12,17 @@ class Address extends Model
     protected $fillable = [
         'cep',
         'street',
+        'counties',
         'number',
         'complement',
         'neighborhood',
-        'city',
         'state',
         'osc_id'
     ];
+
+    // Relacionamento muitos para um
     public function osc()
     {
-        //muitos para um
         return $this->belongsTo(Osc::class);
     }
 }

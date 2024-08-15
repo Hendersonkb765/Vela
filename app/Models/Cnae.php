@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Cnae extends Model
 {
     use HasFactory;
@@ -14,9 +13,14 @@ class Cnae extends Model
         'name',
         'code',
     ];
-    public function osc_cnaes(): HasMany
+
+    // Relacionamento muitos para muitos
+     public function oscs(): BelongsToMany
     {
-        return $this->hasMany(OscCnae::class);
+        return $this->BelongsToMany(Osc::class);
+    }
+    public function dependence(){
+        return $this->belongsTo(Dependence::class);
     }
 
 }

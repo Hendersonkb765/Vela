@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TargetAudience extends Model
 {
     use HasFactory;
     
     protected $fillable = [
-        'name',
+        'name'
     ];
 
-    public function oscTargetAudience()
+    public function osc():BelongsToMany
     {
-        // um para muitos
-        return $this->hasMany(OscTargetAudience::class);
+        
+        return $this->belongsToMany(Osc::class);
     }
 }
