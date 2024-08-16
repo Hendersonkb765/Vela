@@ -13,31 +13,34 @@ return new class extends Migration
     {
         Schema::create('oscs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('CNPJ')->unique();
+            $table->string('cnpj')->unique();
             $table->string('institutional_email',);
-            $table->string('phone_number');
-            $table->string('company_name');
-            $table->string('fantasy_name');
+            $table->string('company_name')->nullable();
+            $table->string('fantasy_name')->nullable();
             $table->string('presidents_name');
             $table->date('foundation_date');
             $table->string('banner_url')->nullable();
             $table->string('img_url')->nullable();
-            $table->string('legal_nature');
-            $table->string('statute_url');
-            $table->string('cnae_main');
-            $table->foreignId('user_id')->constrained();
-            
+            $table->string('legal_nature')->nullable();
+            $table->string('statute_url')->nullable();
+            $table->string('cnae_main')->nullable();            
+            $table->timestamps();
+        });
+
+        Schema::create('phone_numbers', function (Blueprint $table) {
+            $table->id();
+            $table->string('number');
+            $table->foreignId('osc_id')->constrained();
             $table->timestamps();
         });
         Schema::create('cnaes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('code');
             $table->timestamps();
         });
 
-        Schema::create('osc_cnae', function (Blueprint $table) {
+        Schema::create('cnae_osc', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
             $table->foreignId('cnae_id')->constrained();
@@ -46,11 +49,10 @@ return new class extends Migration
 
         Schema::create('target_audiences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('osc_id')->constrained();
-            $table->string('description');
+            $table->string('name');
             $table->timestamps();
         });
-        Schema::create('osc_target_audiences', function (Blueprint $table) {
+        Schema::create('osc_target_audience', function (Blueprint $table) {
             $table->id();
             $table->foreignId('osc_id')->constrained();
             $table->foreignId('target_audience_id')->constrained();

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pich_url');
             $table->string('thumbnail_photos_url');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('address_id')->constrained('address');
+            $table->foreignId('address_id')->constrained();
             $table->timestamps();
         });
         Schema::create('day_weeks', function (Blueprint $table) {

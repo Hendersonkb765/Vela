@@ -28,10 +28,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
-        Schema::create('address_activities', function (Blueprint $table) {
+
+        
+        Schema::create('address_activitie', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_id')->constrained();
-            $table->foreignId('address_id')->constrained('address');
+            $table->foreignId('address_id')->constrained();
             $table->timestamps();
         });
 
