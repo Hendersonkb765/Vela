@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('cnpj')->unique();
             $table->string('institutional_email',);
-            $table->string('phone');
             $table->string('company_name')->nullable();
             $table->string('fantasy_name')->nullable();
             $table->string('presidents_name');
@@ -25,6 +24,13 @@ return new class extends Migration
             $table->string('legal_nature')->nullable();
             $table->string('statute_url')->nullable();
             $table->string('cnae_main')->nullable();            
+            $table->timestamps();
+        });
+
+        Schema::create('phone_numbers', function (Blueprint $table) {
+            $table->id();
+            $table->string('number');
+            $table->foreignId('osc_id')->constrained();
             $table->timestamps();
         });
         Schema::create('cnaes', function (Blueprint $table) {

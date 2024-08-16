@@ -35,10 +35,8 @@ class OscController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($request, [
-            'name'=>'required',
+        $request->validate([
             'cnpj'=>'required|max:18',
-            'phone_number'=>'required|max:11',
             'presidents_name'=>'required',
             'foundation_date'=>'required',
 
@@ -64,10 +62,8 @@ class OscController extends Controller
         */
 
         $osc =Osc::create([
-            'name' => $request->input('name', null),
             'cnpj' => $request->input('cnpj', null),
             'institutional_email' => $request->input('institutional_email', null),
-            'phone_number' => $request->input('phone_number', null),
             'company_name' => $request->input('company_name', null),
             'fantasy_name' => $request->input('fantasy_name', null),
             'presidents_name' => Auth::user()->name,
@@ -77,8 +73,14 @@ class OscController extends Controller
             'legal_nature' => $request->input('legal_nature', null),
             'statute_url' => $request->input('statute_url', null),
             'cnae_main' => $request->input('cnae_main', null),
-            'user_id' => Auth::user()->id,
         ]);
+
+        $osc->phoneNumber()->create([
+            'number' => $request->phone_number,
+            'osc_id' => $osc->id,
+        ]);
+
+        $osc->user()->attach(Auth::user()->id);
 
         
 

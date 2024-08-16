@@ -12,9 +12,8 @@ class Osc extends Model
 
     protected $fillable = [
         'name',
-        'CNPJ',
+        'cnpj',
         'institutional_email',
-        'phone_number',
         'company_name',
         'fantasy_name',
         'presidents_name',
@@ -40,6 +39,10 @@ class Osc extends Model
     public function activitie(): HasMany
     {
         return $this->hasMany(Activitie::class);
+    }
+    public function phoneNumber() : HasMany 
+    {
+        return $this->hasMany(PhoneNumber::class);
     }
 
     // Relacionamento muitos para muitos

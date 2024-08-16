@@ -13,6 +13,7 @@ use App\Models\Cnae;
 use App\Models\TargetAudience;
 use App\Models\Telephone;
 use App\Models\Level;
+use App\Models\PhoneNumber;
 use App\Models\Step;
 use App\Models\Task; 
 use Illuminate\Database\Seeder;
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         Level::factory(10)->create();
         Task::factory(20)->create();
         Step::factory(20)->create();
+        PhoneNumber::factory(20)->create();
         
         //OscUser::factory(100)->create();
     }
