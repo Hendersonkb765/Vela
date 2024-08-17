@@ -41,9 +41,6 @@ Route::middleware('auth')->group(function () {
 Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
 Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
 
-
-Route::post('register/ds', [RegisteredUserController::class,'store'])->name('register.store');
-
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
 })->name('dashboardtest');
