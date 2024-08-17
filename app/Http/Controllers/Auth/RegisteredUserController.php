@@ -34,16 +34,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-       
-        dd($request->all());
-        $request->validate([
+       /*
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => 'required|confirmed|min:8',
         
         ]);
+        */
         
         try{
+
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -53,7 +54,6 @@ class RegisteredUserController extends Controller
             ]);
             
             //$user->sendVerifyEmailNotification();
-            
             event(new Registered($user));
     
             Auth::login($user);
@@ -65,10 +65,11 @@ class RegisteredUserController extends Controller
 
         }
         catch(\Illuminate\Database\QueryException $e){
+            dd($e);
             echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
         }
         catch(\Exception $e){
-            return redirect(route('resources', absolute: false));
+            return redirect()->back();
         }
         
         

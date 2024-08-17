@@ -33,6 +33,9 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create();
         User::factory(10)->state(['position' => 'Presidente'])->create();
         User::factory(10)->state(['position' => 'Equipe Vela'])->create();
+        Axe::factory(10)->create();
+        Level::factory(10)->create();
+        Task::factory(20)->create();
         Osc::factory(10)->create();
         Address::factory(30)->create();
         Cnae::factory(10)->create();
@@ -40,9 +43,8 @@ class DatabaseSeeder extends Seeder
         TypePerformance::factory(10)->create();
         Activitie::factory(100)->create();
         Telephone::factory(130)->create();
-        Axe::factory(10)->create();
-        Level::factory(10)->create();
-        Task::factory(20)->create();
+        
+        
         Step::factory(20)->create();
         PhoneNumber::factory(20)->create();
         

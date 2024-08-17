@@ -16,7 +16,7 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'), {
+        post(route('register.store'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -104,7 +104,7 @@ export default function Register() {
                         </p>
 
                         <div className='flex flex-col space-y-4 justify-center items-center'>
-                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true}>
+                            <PrimaryButton className="h-12 w-full " type='submit' disabled={processing} center={true}>
                                 Registre-se
                             </PrimaryButton>
                             <p className="text-sm text-neutralcolors-400">

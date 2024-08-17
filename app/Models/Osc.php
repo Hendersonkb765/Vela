@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany; // Add this line
 class Osc extends Model
@@ -45,6 +46,12 @@ class Osc extends Model
         return $this->hasMany(PhoneNumber::class);
     }
 
+    //um para muitos (inverso)
+    public function level() :BelongsTo
+    {
+        return $this->belongsTo(Level::class);
+    }
+   
     // Relacionamento muitos para muitos
     public function cnae(): BelongsToMany
     {
@@ -62,6 +69,7 @@ class Osc extends Model
     {
         return $this->belongsToMany(TypePerformance::class);
     }
+    
     
 }
 
