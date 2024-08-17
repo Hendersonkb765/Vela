@@ -28,7 +28,6 @@ class OscFactory extends Factory
             'fantasy_name' => fake()->company(),
             'cnpj' => fake()->unique()->cnpj(),
             'institutional_email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
             'company_name' => fake()->company(),
             'presidents_name' => $this->generatetPresidentsName(),
             'foundation_date' => fake()->date(),
@@ -38,6 +37,7 @@ class OscFactory extends Factory
             'statute_url' => fake()->url(),
             'created_at' => now(),
             'updated_at' => now(),
+            'level_id' =>fake()->numberBetween(1,10),
 
         ];
     }
