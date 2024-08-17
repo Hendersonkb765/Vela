@@ -3,10 +3,12 @@
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OscController; // Add this line
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -40,7 +42,7 @@ Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
 Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
 
 
-Route::get('register/ds', [RegisteredUserController::class,'store']);
+Route::post('register/ds', [RegisteredUserController::class,'store'])->name('register.store');
 
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
@@ -50,5 +52,6 @@ Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
 
+Route::get('/dashboard/back',[DashboardController::class,'index']);
 
 require __DIR__.'/auth.php';
