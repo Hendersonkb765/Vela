@@ -35,10 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/osc/criar', [OscController::class, 'store'])->name('osc.store');
 });
 
-Route::get('email', function () {
-    Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
-    Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
-});
+
+Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
+Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
+
 
 Route::get('register/ds', [RegisteredUserController::class,'store']);
 

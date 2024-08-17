@@ -83,11 +83,11 @@ export default function Login({ status, canResetPassword }) {
                             </Link>
                         )}
                     </div>
-
-                <div className='flex flex-col space-y-4 mt-12'>
+                
+                {/* <div className='flex flex-col space-y-4 mt-12'>
                     <PrimaryButton href={route('logar')} className="h-12 w-full" disabled={processing} center={true}>Entrar</PrimaryButton>
                     <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 w-full bg-white justify-center'>Entrar com o Google</PrimaryButton>
-                </div>
+                </div> */}
 
                     <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">
                         <div className='flex flex-col space-y-4 justify-center items-center'>
@@ -104,8 +104,7 @@ export default function Login({ status, canResetPassword }) {
                             <span className='text-neutralcolors-200'>Ou</span>
                             <div className='w-full h-0.5 bg-neutralcolors-100' />
                         </div>
-                        <a
-                            className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('resources')}>
+                        <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('redirect',['google'])}>
                             <FcGoogle className='w-8 h-8'></FcGoogle>Entrar com o Google
                         </a>
 

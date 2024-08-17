@@ -19,25 +19,25 @@ class ProviderAuthController extends Controller
 
     function callback($provider){
 
+        
         try{
+            $socialUser = Socialite::driver($provider)->user();
 
-            $user = Socialite::driver($provider)->user();
+            $user =User::where('email',$socialUser->email)->exists();
 
-            $userExist =User::where('email',$user->email)->exists();
-
-            if(!$userExist){
+            if(!$user){
                 $user = User::Create([
-                    'name' => $user->name,
-                    'email' => $user->email,
+                    'name' => $socialUser->name,
+                    'email' => $socialUser->email,
                     'provider' => $provider,
-                    'url_image' => $user->avatar
+                    'url_image' => $socialUser->avatar
                 ]);
 
                 Auth::login($user);
                 Cache::forever('ismember', false);
             }
             else{
-                $userid = User::where('email',$user->email)->first()->id;
+                $userid = User::where('email',$socialUser->email)->first()->id;
                 Auth::loginUsingId($userid);
             }
     
@@ -47,16 +47,14 @@ class ProviderAuthController extends Controller
                 return redirect()->route('dashboard');
             }
             else{
-
-                if(Osc::where('user_id',Auth::user()->id)->exists()){
-
+                if($user->osc()->exists()){
                     Cache::forever('ismember', true);
-
                     return redirect()->route('dashboard');
                 }
-
+                else{
+                    echo "Usuário não tem organização associada";
+                }
                 //rota para usuario que não tem osc associada
-                echo "Usuário não tem organização associada";
             }
         }
         catch (\Exception $e){
