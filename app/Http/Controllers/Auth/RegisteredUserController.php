@@ -79,8 +79,6 @@ class RegisteredUserController extends Controller
     public function completeRegistration(Request $request): RedirectResponse{
 
         $userRequest = $request['user'];
-
-
         dd($userRequest);
         if($userRequest['profilePicture']){
             if(!Storage::exists('profile-photos')){
