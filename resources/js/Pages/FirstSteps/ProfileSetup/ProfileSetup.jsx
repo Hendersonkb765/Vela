@@ -12,7 +12,7 @@ export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post,patch,processing, errors, reset } = useForm({
         user: {
             name: '',
             profilePicture: '',
@@ -62,22 +62,43 @@ export default function ProfileSetup() {
     };
 
     const handleNextStep = (e) => {
+        
         e.preventDefault();
         if (currentStep === maxStep) {
             handleSubmit();
-        } else {
+        }
+        else if(currentStep === 2 && !data.hasOrganization) {
+            handleSubmit(true);
+        }
+        else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (hasOSC) => {
+        
+        if(hasOSC == true){
+           
+            patch(route('completeRegistration'), {
+                data: {user: data.user},
+                onFinish: () => reset(),
+            });
+            
+        }
+        else{
+            post(route('profile.update'), {
+                onFinish: () => reset(),
+            });
+        }
+        
+        
         setComplete(true);
     };
 
     return (
         <ProfileSetupLayout hideProfile={currentStep === 1} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col" encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
                     <div className="flex justify-between mt-auto ">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">

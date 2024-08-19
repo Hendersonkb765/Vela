@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,15 +24,16 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
     }
-
     /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+      
         $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
+
+        if ($request->user()->isDirty('email')){
             $request->user()->email_verified_at = null;
         }
 
@@ -39,7 +41,6 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit');
     }
-
     /**
      * Delete the user's account.
      */

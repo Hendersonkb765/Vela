@@ -1,16 +1,20 @@
 import RadialOptions from "@/FigmaComponents/Inputs/RadialOptions";
 import React from "react";
 
-const Stage2 = ({baseInfo, maxStep, data, setData, errors}) => {
 
+const Stage2 = ({baseInfo, maxStep, data, setData, errors}) => {
+    
     const options = [
+        
         { id: 1, title: 'Presidente de Organização', imageSrc: 'storage/Images/New team members-amico.svg' },
         { id: 2, title: 'Membro de Organização', imageSrc: 'storage/Images/Presentation-amico.svg' },
         { id: 3, title: 'Voluntário de Organização', imageSrc: 'storage/Images/Volunteering-amico.svg' },
     ];
+    
 
     const handleOptionSelect = (title) => {
-        const isPresident = title === 'Presidente de Organização';
+        title = title.split(' ')[0];
+        const isPresident = title === 'Presidente';
         setData({
           ...data,
           user: {

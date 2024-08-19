@@ -11,9 +11,9 @@ const ProfileUploadInput = ({ firstletter, onImageChange }) => {
         if (selectedFile) {
             if (selectedFile.type.startsWith('image/')) {
                 const url = URL.createObjectURL(selectedFile);
-                setImageUrl(url);
+                setImageUrl(selectedFile);
                 setError(null);
-                if (onImageChange) onImageChange(url);
+                if (onImageChange) onImageChange(selectedFile);
             } else {
                 setError('Por favor, selecione um arquivo de imagem.');
                 setImageUrl(null);

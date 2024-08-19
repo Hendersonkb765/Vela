@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/osc/criar', [OscController::class, 'store'])->name('osc.store');
+
+    Route::patch('/criar/novo-usuario', [RegisteredUserController::class, 'completeRegistration'])->name('completeRegistration');
 });
 
 
@@ -50,5 +52,8 @@ Route::get('/profilesetup', function () {
 })->name('profilesetup');
 
 Route::get('/dashboard/back',[DashboardController::class,'index']);
+Route::get('/teste',function(){
+    echo 'teste';
+})->name('teste');
 
 require __DIR__.'/auth.php';

@@ -14,8 +14,11 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Osc;
+use Exception;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -71,11 +74,51 @@ class RegisteredUserController extends Controller
         catch(\Exception $e){
             return redirect()->back();
         }
-        
-        
-        
     }
-    public function registeredPresident(Request $request) : RedirectResponse{
+
+    public function completeRegistration(Request $request): RedirectResponse{
+
+        $userRequest = $request['user'];
+
+
+        dd($userRequest);
+        if($userRequest['profilePicture']){
+            if(!Storage::exists('profile-photos')){
+                Storage::makeDirectory('profile-photos');
+            }
+            Storage::disk('local')->put('fotos01', $userRequest['profilePicture']);
+            $image = $userRequest->file('profilePicture')->store();
+            dd($image);
+        }
+        try{
+            /*
+            $user->validate([
+                'name' => 'required|string|max:255',
+                //'url_image' => 'required|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
+                //'position' => 'required|string|enum:Presidente,Gerente,Administrador',
+                //'birthday' => 'required|date|before:today',
+            ]);
+            */ 
+            
+            $userRequest['profilePicture'];
+            $user = $request->user()->fill([
+                'name' => $userRequest['name'],
+                'position' => $userRequest['roleInOrganization'],
+                'birthday' => $userRequest['birthday'],
+                
+            ]);
+            $user->save();
+            
+            return redirect()->back();
+
+        }
+        catch(Exception $e){
+            return response()->json(['error' => 'Erro ao completar o registro.'], 500);
+
+        }
+
+    }
+    public function completeRegistrationPresident(Request $request) : RedirectResponse{
         
         try{
             $request->validate([
@@ -114,8 +157,6 @@ class RegisteredUserController extends Controller
             DB::commit();
     
             event(new Registered($user));
-            
-            return redirect(route('dashboard', absolute: false));
 
             
         }

@@ -28,7 +28,8 @@ export default function Register() {
                 <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-400 '>Crie Sua Conta</h2>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                     <a
-                        className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('resources')}>
+                        href={route('redirect',['google'])}
+                        className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' >
                         <FcGoogle className='w-8 h-8'></FcGoogle>Continuar com o Google
                     </a>
                     <div className='flex w-full justify-center items-center space-x-2'>
