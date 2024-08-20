@@ -17,7 +17,7 @@ const Stage5 = ({baseInfo, maxStep, data, setData, errors}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-8 pb-8">
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700">{baseInfo.title}</h1>

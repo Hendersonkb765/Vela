@@ -35,7 +35,7 @@ const SideMenu = ({className}) => {
                         className={`
                             ${open ? 'space-x-2 pl-4' : 'justify-center'} w-full h-14 flex items-center  text-base cursor-pointer hover:bg-neutralcolors rounded-md duration-300 ease-in-out'
                             ${index == 4 && 'mb-auto'}
-                            ${index === Menus.length - 1 && 'hover:!bg-danger-0 text-danger-0 hover:!text-white'}
+                            ${index === Menus.length - 1 && 'hover:!bg-danger text-danger hover:!text-white'}
                             ${menu.route === currentRoute.url.replace(/^\//, '') && '!bg-primary !text-white hover:!bg-primary-200'}
                         `}
                                                                          // adicionar lógica para deslogar

@@ -1,9 +1,20 @@
 import InputError from "@/FigmaComponents/Inputs/InputError";
-import ProfileUploadInput from "@/FigmaComponents/Inputs/ProfileUploadInput";
+import ProfileUploadInput from "@/FigmaComponents/Inputs/ImageUpload/ProfileUploadInput";
 import TextInput from "@/FigmaComponents/Inputs/TextInput";
-import React from "react";
+import {React, useState} from "react";
 
 const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
+
+    const [imageUrl, setImageUrl] = useState(data.organizationProfilePicture || null);
+    // Função para lidar com a mudança da imagem
+    const handleImageChange = (url) => {
+        setImageUrl(url);
+        setData('organization', {
+            ...data.organization,
+            organizationProfilePicture: url
+        })
+    };
+
     return (
         <div className="flex flex-col space-y-8">
             <div className="flex flex-col">
@@ -40,7 +51,10 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                     <h3 className="font-headers font-medium text-large text-neutralcolors-700">Escolha uma foto para o perfil da organização</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700">Coloque uma foto que represente sua organização. Faça essa escolha com carinho, mas não se preocupe, você poderá mudar depois.</p>
                 </div>
-                <ProfileUploadInput firstletter={data.organization.organizationName?.charAt(0).toUpperCase()}/>
+                <ProfileUploadInput
+                    firstletter={data.organization.organizationName?.charAt(0).toUpperCase()}
+                    updateAvatarUrl={handleImageChange}
+                />
             </div>
             <div>
 

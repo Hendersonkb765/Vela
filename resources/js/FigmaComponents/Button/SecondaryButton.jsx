@@ -7,6 +7,7 @@ export default function SecondaryButton({
     blocked = false,
     children = 'texto',
     rounded = false,
+    gray = false,
     center = true,
     icon: Icon,
     onClick,
@@ -27,6 +28,7 @@ export default function SecondaryButton({
     const classNames = `flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-transparent border-primary text-primary border-2 font-body hover:bg-primary hover:text-white transition-colors duration-300 ease-out
         ${rounded ? '!rounded-full' : ''}
         ${center ? 'justify-center' : ''}
+        ${gray ? '!border-neutralcolors-100 !text-neutralcolors-300 hover:!bg-transparent hover:text-neutralcolors-200' : ''}
         ${blocked ? '!border-primary-900 text-primary-900 hover:!bg-primary-900' : ''}
         ${disabled ? 'cursor-not-allowed !text-neutralcolors-200 opacity-40' : ''}
         ${className}`;

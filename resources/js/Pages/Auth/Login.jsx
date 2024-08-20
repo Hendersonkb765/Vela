@@ -91,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
 
                     <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">
                         <div className='flex flex-col space-y-4 justify-center items-center'>
-                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true}>
+                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true} type='submit'>
                                 Entrar
                             </PrimaryButton>
                             <p className="text-sm text-neutralcolors-400">

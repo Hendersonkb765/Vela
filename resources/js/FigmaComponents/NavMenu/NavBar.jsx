@@ -11,8 +11,8 @@ const NavBar = ({className, hideLogo, hideProfile, imgUrl, userName, firstletter
             <div className='flex w-full space-x-2 justify-end items-center'>
                 <p>{userName}</p>
                 <div
-                    className={`w-12 h-12 rounded-full border border-primary flex items-center justify-center bg-cover bg-center text-primary`}
-                    style={{ backgroundImage: imgUrl ? `url(${imgUrl})` : 'none', backgroundColor: imgUrl ? 'transparent' : 'transparent' }}
+                    className={`w-12 h-12 rounded-full  flex items-center justify-center bg-cover bg-center text-primary`}
+                    style={{backgroundImage: imgUrl ? `url(${imgUrl}) border border-primary` : 'none', backgroundColor: imgUrl ? 'transparent' : 'transparent' }}
                 >
                     {!imgUrl && <span className="font-headers text-lg font-semibold">{firstletter}</span>}
                 </div>

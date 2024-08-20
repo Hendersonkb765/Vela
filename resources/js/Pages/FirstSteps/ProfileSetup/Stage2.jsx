@@ -10,14 +10,16 @@ const Stage2 = ({baseInfo, maxStep, data, setData, errors}) => {
     ];
 
     const handleOptionSelect = (title) => {
-        const isPresident = title === 'Presidente de Organização';
+        title = title.split(' ')[0];
+        const isPresident = (title === 'Presidente');
+
         setData({
-          ...data,
-          user: {
-            ...data.user,
-            roleInOrganization: title,
-          },
-          hasOrganization: isPresident,
+            ...data,
+            user: {
+                ...data.user,
+                roleInOrganization: title,
+            },
+            hasOrganization: isPresident,
         });
     };
 

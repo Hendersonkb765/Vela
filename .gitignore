@@ -18,3 +18,4 @@ yarn-error.log
 .phpunit.result.cache
 .env
 /.vscode
+.vscode/time_log.json
