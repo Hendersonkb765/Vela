@@ -12,7 +12,7 @@ export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
 
-    const { data, setData, post,patch,processing, errors, reset } = useForm({
+    const { data, setData, post, patch,processing, errors, reset } = useForm({
         user: {
             name: '',
             profilePicture: '',
@@ -37,6 +37,7 @@ export default function ProfileSetup() {
         { stage: 3, title: 'Fale mais sobre sua organização', description: 'Nos fale um pouco sobre sua organização para que possamos conhecê-la melhor' },
         { stage: 4, title: 'Quais são seus eixos de atuação?', description: '' },
     ];
+
     const maxStep = steps.length;
 
     const RenderStepContent = (step) => {
@@ -62,8 +63,9 @@ export default function ProfileSetup() {
     };
 
     const handleNextStep = (e) => {
-        
+
         e.preventDefault();
+
         if (currentStep === maxStep) {
             handleSubmit();
         }
@@ -76,27 +78,25 @@ export default function ProfileSetup() {
     };
 
     const handleSubmit = (hasOSC) => {
-        
+
         if(hasOSC == true){
-           
+
             patch(route('completeRegistration'), {
                 data: {user: data.user},
                 onFinish: () => reset(),
             });
-            
+
         }
         else{
             post(route('profile.update'), {
                 onFinish: () => reset(),
             });
         }
-        
-        
-        setComplete(true);
+
     };
 
     return (
-        <ProfileSetupLayout hideProfile={currentStep === 1} imgUrl={data.profilePicture} userName={data.name}>
+        <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
                 <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col" encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
@@ -105,12 +105,12 @@ export default function ProfileSetup() {
                             Voltar
                         </PrimaryButton>
                         <PrimaryButton center={true} className="h-12" type="submit">
-                            Continuar
+                            {complete ? "Finalizar" : "Continuar"}
                         </PrimaryButton>
                     </div>
                 </form>
             ) : (
-                <h1 className="h-full flex justify-center items-center text-4xl font-bold">FODA DEMAIS</h1>
+                <h1 className="h-full flex justify-center items-center text-4xl font-bold">Formulário Completo</h1>
             )}
         </ProfileSetupLayout>
     );

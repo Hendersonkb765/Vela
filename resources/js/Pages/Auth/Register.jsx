@@ -15,7 +15,6 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register.store'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
@@ -37,8 +36,6 @@ export default function Register() {
                         <span className='text-neutralcolors-200'>Ou</span>
                         <div className='w-full h-0.5 bg-neutralcolors-100' />
                     </div>
-
-
                     <div className="">
                         <InputLabel htmlFor="email" value="Email" />
 
@@ -75,7 +72,7 @@ export default function Register() {
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
-                    <div className="4">
+                    <div className="">
                         <InputLabel htmlFor="password_confirmation" value="Confirme sua senha" />
 
                         <TextInput
@@ -105,7 +102,8 @@ export default function Register() {
                         </p>
 
                         <div className='flex flex-col space-y-4 justify-center items-center'>
-                            <PrimaryButton className="h-12 w-full " type='submit' disabled={processing} center={true}>
+
+                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true} type={'submit'}>
                                 Registre-se
                             </PrimaryButton>
                             <p className="text-sm text-neutralcolors-400">

@@ -5,12 +5,27 @@ export default function PrimaryIconButton({
     className = '',
     href,
     disabled = false,
+    gray = false,
     blocked = false,
-    text = 'texto',
-    rounded = true,
-    icon: Icon
+    children = 'texto',
+    rounded = false,
+    icon: Icon,
+    onClick,
+    type = 'button'
 }) {
-    const baseClassNames = `flex px-4 py-4 gap-2 items-center min-h-10 rounded-md bg-primary text-white hover:bg-primary-500 transition-colors duration-300 ease-out`;
+    const handleClick = (e) => {
+        if (onClick) onClick(e);
+        if (disabled) {
+            e.preventDefault();
+            return;
+        }
+        if (href && !e.defaultPrevented) {
+            e.preventDefault();
+            window.location.href = href;
+        }
+    };
+
+    const baseClassNames = `flex px-4 py-4 gap-2 items-center min-w-32 min-h-10 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-200 transition-colors duration-300 ease-out `;
     const classNames = `
         ${baseClassNames}
         ${disabled ? 'pointer-events-none !text-neutralcolors-200 opacity-40 cursor-not-allowed' : ''}
@@ -19,22 +34,29 @@ export default function PrimaryIconButton({
         ${className}
     `;
 
-    if (disabled) {
+    if (href && !disabled) {
         return (
-            <div className={classNames}>
+            <a
+                href={href}
+                onClick={handleClick}
+                className={classNames}
+                role="button"
+            >
                 {Icon}
-            </div>
+                {children}
+            </a>
         );
     }
 
     return (
-        <a
-            href={href}
-            onClick={handleClick}
+        <button
             className={classNames}
-            role="button"
+            disabled={disabled}
+            onClick={handleClick}
+            type={type}
         >
             {Icon}
-        </a>
+            {children}
+        </button>
     );
 }

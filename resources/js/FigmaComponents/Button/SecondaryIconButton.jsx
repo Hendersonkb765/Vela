@@ -16,24 +16,33 @@ export default function SecondaryIconButton({
         ${gray ? '!border-neutralcolors-100 !text-neutralcolors-200 hover:!bg-transparent hover:text-neutralcolors-200' : ''}
         ${rounded ? '!rounded-full' : ''}
         ${blocked ? '!border-primary-900 text-primary-900 hover:!bg-primary-900' : ''}
-        ${disabled ? 'cursor-not-allowed  !text-neutralcolors-200 opacity-40' : ''}
+        ${disabled ? 'pointer-events-none !text-neutralcolors-200 opacity-40 cursor-not-allowed' : ''}
         ${className}
     `;
 
-    if (disabled) {
+    if (href && !disabled) {
         return (
-            <div className={classNames}>
+            <a
+                href={href}
+                onClick={handleClick}
+                className={classNames}
+                role="button"
+            >
                 {Icon}
-            </div>
+                {children}
+            </a>
         );
     }
 
     return (
-        <a
+        <button
             className={classNames}
-            href={href}
+            disabled={disabled}
+            onClick={handleClick}
+            type={type}
         >
             {Icon}
-        </a>
+            {children}
+        </button>
     );
 }

@@ -83,7 +83,7 @@ export default function Login({ status, canResetPassword }) {
                             </Link>
                         )}
                     </div>
-                
+
                 {/* <div className='flex flex-col space-y-4 mt-12'>
                     <PrimaryButton href={route('logar')} className="h-12 w-full" disabled={processing} center={true}>Entrar</PrimaryButton>
                     <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 w-full bg-white justify-center'>Entrar com o Google</PrimaryButton>
@@ -91,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
 
                     <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">
                         <div className='flex flex-col space-y-4 justify-center items-center'>
-                            <PrimaryButton className="h-12 w-full " type='submit' disabled={processing} center={true}>
+                            <PrimaryButton className="h-12 w-full " disabled={processing} center={true} type='submit'>
                                 Entrar
                             </PrimaryButton>
                             <p className="text-sm text-neutralcolors-400">

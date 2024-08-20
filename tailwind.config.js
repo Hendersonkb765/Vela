@@ -28,13 +28,12 @@ export default {
                     100: '#B6DCFF', // Light Primary
                     200: '#0A53AB', // Medium Primary
                     300: '#012340', // Dark Primary
-                    400: '#057EE8', // Standard Primary
                     wave: '#1A76CC',
                 },
-                danger: ['#DC3545'],
-                warning: ['#FFC107'],
-                success: ['#28A745'],
-                info: ['#17A2B8'],
+                danger: '#DC3545',
+                warning: '#FFC107',
+                success: '#28A745',
+                info: '#17A2B8',
             },
             fontFamily: {
                 headers: ['Poppins'],
