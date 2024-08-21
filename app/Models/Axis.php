@@ -12,7 +12,8 @@ class Axis extends Model
     protected $fillable = [
         'name',
         'image',
-        'description'
+        'description',
+        'current_level_id'
     ];
 
     public function osc(){
@@ -22,5 +23,6 @@ class Axis extends Model
     public function level(){
         return $this->hasMany(Level::class);
     }
+   
 
 }

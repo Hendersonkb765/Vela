@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('image');
             $table->timestamps();
         });
+
+      
     }
 
     /**

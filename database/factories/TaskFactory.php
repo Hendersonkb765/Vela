@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Level;
+use App\Models\Task;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
  */
@@ -18,9 +19,12 @@ class TaskFactory extends Factory
     {
         return [
             'title'=> fake()->title(),
-            'level_id'=>Level::inRandomOrder()->first(),
+            'level_id'=>fake()->numberBetween(1,9),
             'description' => fake()->text(),
+            'status' => fake()->randomElement(['pending', 'completed']),
             'message_conclusion' => fake()->text()
         ];
     }
+
+    
 }
