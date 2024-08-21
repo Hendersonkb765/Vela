@@ -69,7 +69,10 @@ class Osc extends Model
     {
         return $this->belongsToMany(TypePerformance::class);
     }
-    
+    public function axis(): BelongsToMany
+    {
+        return $this->belongsToMany(Axis::class);
+    }
     
 }
 
