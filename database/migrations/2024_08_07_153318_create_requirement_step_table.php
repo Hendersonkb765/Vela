@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('steps_requirements', function (Blueprint $table) {
+        Schema::create('requirement_step', function (Blueprint $table) {
             $table->id();
             $table->foreignId('step_id')->constrained();
             $table->foreignId('requirement_id')->constrained();

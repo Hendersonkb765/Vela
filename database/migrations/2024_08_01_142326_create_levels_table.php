@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('axis_id')->constrained();
-            $table->integer('position');
+            $table->integer('position'); 
             $table->text('description');
             $table->integer('image');
             $table->timestamps();
         });
+
+      
     }
 
     /**

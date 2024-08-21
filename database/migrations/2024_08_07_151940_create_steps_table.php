@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained();
             $table->text('description');
             $table->integer('position');
+            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->timestamps();
         });
 

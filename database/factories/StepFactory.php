@@ -21,7 +21,8 @@ class StepFactory extends Factory
             'title'=> fake()->title(),
             'task_id' => Task::inRandomOrder()->first(),
             'description' => fake()->text(),
-            'position'=> fake()->NumberBetween(1,10)
+            'position'=> fake()->NumberBetween(1,10),
+            'status' => fake()->randomElement(['pending', 'completed']),
 
         ];
     }

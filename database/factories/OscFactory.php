@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Osc;
 use App\Models\User; // Add this line to import the User class
+use App\Models\Axis; // Add this line to import the Axis class
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as FakerFactory;
 /**
@@ -37,7 +38,6 @@ class OscFactory extends Factory
             'statute_url' => fake()->url(),
             'created_at' => now(),
             'updated_at' => now(),
-            'level_id' =>fake()->numberBetween(1,10),
 
         ];
     }
@@ -47,6 +47,9 @@ class OscFactory extends Factory
 
             $users = User::inRandomOrder()->limit(10)->get();
             $osc->user()->attach($users);
+
+            $axis = Axis::inRandomOrder()->limit(10)->get();
+            //
         });
     }
     public function generatetPresidentsName(){

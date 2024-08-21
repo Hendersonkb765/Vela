@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('level_id')->constrained();
             $table->text('description');
+            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->string('message_conclusion');
             $table->timestamps();
         });

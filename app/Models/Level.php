@@ -23,4 +23,7 @@ class Level extends Model
     public function osc(){
         return $this->hasMany(Osc::class);
     }
+    public function axis(){
+        return $this->belongsTo(Axis::class);
+    }
 }

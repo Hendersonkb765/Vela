@@ -16,7 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->foreignId('user_id')->constrained();
-            $table->text('description'); 
+            $table->text('description');
+            $table->integer('current_level_id')->nullable(); 
+            $table->timestamps();
+        });
+
+        Schema::create('axis_osc', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('axis_id')->constrained();
+            $table->foreignId('osc_id')->constrained();
             $table->timestamps();
         });
     }

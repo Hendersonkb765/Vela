@@ -23,7 +23,6 @@ class Task extends Model
     }
     public function depencence(){
         return $this->hasMany(Dependence::class);
-
     }
     
 }
