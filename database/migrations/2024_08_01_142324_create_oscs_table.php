@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('legal_nature')->nullable();
             $table->string('statute_url')->nullable();
             $table->string('cnae_main')->nullable();       
-            $table->foreignId('level_id')->constrained();     
             $table->timestamps();
         });
 
