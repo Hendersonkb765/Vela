@@ -14,12 +14,11 @@ class ProviderAuthController extends Controller
     //
     function redirect($provider){
 
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->with(['prompt' => 'select_account'])->redirect();
     }
 
     function callback($provider){
-
-        
+            
         try{
             $socialUser = Socialite::driver($provider)->user();
 
@@ -34,28 +33,20 @@ class ProviderAuthController extends Controller
                 ]);
 
                 Auth::login($user);
-                Cache::forever('ismember', false);
+                //Cache::forever('ismember', false);
             }
             else{
                 $userid = User::where('email',$socialUser->email)->first()->id;
                 Auth::loginUsingId($userid);
             }
-    
+            return redirect()->route('dashboard');
+    /*
             if(Cache::get('ismember')){
 
                 //rota para quem tem organização associada
                 return redirect()->route('dashboard');
             }
-            else{
-                if($user->osc()->exists()){
-                    Cache::forever('ismember', true);
-                    return redirect()->route('dashboard');
-                }
-                else{
-                    echo "Usuário não tem organização associada";
-                }
-                //rota para usuario que não tem osc associada
-            }
+    */        
         }
         catch (\Exception $e){
             dd($e);
