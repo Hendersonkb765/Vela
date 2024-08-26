@@ -25,7 +25,7 @@ export default function PrimaryIconButton({
         }
     };
 
-    const baseClassNames = `flex px-4 py-4 gap-2 items-center min-w-32 min-h-10 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-200 transition-colors duration-300 ease-out `;
+    const baseClassNames = `flex px-4 py-4 gap-2 items-center  min-h-10 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-200 transition-colors duration-300 ease-out `;
     const classNames = `
         ${baseClassNames}
         ${disabled ? 'pointer-events-none !text-neutralcolors-200 opacity-40 cursor-not-allowed' : ''}

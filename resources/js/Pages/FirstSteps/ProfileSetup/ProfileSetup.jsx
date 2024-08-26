@@ -12,7 +12,7 @@ export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
 
-    const { data, setData, post, patch,processing, errors, reset } = useForm({
+    const { data, setData, post, patch, processing, errors, reset } = useForm({
         user: {
             name: '',
             profilePicture: '',
@@ -33,7 +33,7 @@ export default function ProfileSetup() {
     const steps = [
         { stage: 1, title: 'Vamos Começar Incrementando Seu Perfil', description: 'Adicione a sua foto de perfil e nos fale um pouco sobre você para que possamos conhecê-lo melhor e personalizar sua experiência na nossa plataforma.' },
         { stage: 2, title: 'Quem é você no terceiro setor?', description: '' },
-        { stage: 3, title: 'Fale mais sobre sua organização ', description: 'Nos fale um pouco sobre sua organização para que possamos conhecê-la melhor' },
+        { stage: 3, title: 'Fale mais sobre sua organização', description: 'Nos fale um pouco sobre sua organização para que possamos conhecê-la melhor' },
         { stage: 3, title: 'Fale mais sobre sua organização', description: 'Nos fale um pouco sobre sua organização para que possamos conhecê-la melhor' },
         { stage: 4, title: 'Quais são seus eixos de atuação?', description: '' },
     ];
@@ -80,7 +80,6 @@ export default function ProfileSetup() {
     const handleSubmit = (hasOSC) => {
 
         if(hasOSC == true){
-
             patch(route('completeRegistration'), {
                 data: {user: data.user},
                 onFinish: () => reset(),

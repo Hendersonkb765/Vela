@@ -4,6 +4,7 @@ import InputLabel from "@/FigmaComponents/Inputs/InputLabel";
 import ProfileUploadInput from "@/FigmaComponents/Inputs/ImageUpload/ProfileUploadInput";
 import TextInput from "@/FigmaComponents/Inputs/TextInput";
 import React, { useState } from "react";
+import { Head } from '@inertiajs/react';
 
 export default function({ baseInfo, maxStep, data, setData, errors }) {
 
@@ -19,6 +20,7 @@ export default function({ baseInfo, maxStep, data, setData, errors }) {
 
     return (
         <div className="flex flex-col space-y-8">
+            <Head title="Incremente Seu Perfil"/>
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700">{baseInfo.title}</h1>

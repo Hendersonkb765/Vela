@@ -21,8 +21,28 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
+// ->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/myuploads', function () {
+    return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
+})->middleware(['auth'])->name('myuploads');
+// ->middleware(['auth', 'verified'])->name('myuploads');
+
+Route::get('/taskhub', function () {
+    return Inertia::render('VelaSocialLab/TaskHub/TaskHub');
+})->middleware(['auth'])->name('taskhub');
+// ->middleware(['auth', 'verified'])->name('taskhub');
+
+Route::get('/axishub', function () {
+    return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
+})->middleware(['auth'])->name('axishub');
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+Route::get('/timeline', function () {
+    return Inertia::render('VelaSocialLab/Timeline/Timeline');
+})->middleware(['auth'])->name('timeline');
+// ->middleware(['auth', 'verified'])->name('axishub');
 
 Route::get('/resources/test', function () {
     return Inertia::render('Resources');
@@ -38,7 +58,6 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/criar/novo-usuario', [RegisteredUserController::class, 'completeRegistration'])->name('completeRegistration');
 });
-
 
 Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
 Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);

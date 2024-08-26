@@ -1,16 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const categories = [
-  { id: 1, name: 'Assistência social', image: 'storage/images/realistic-scene-with-elderly-care-senior-people.jpg' },
-  { id: 2, name: 'Saúde', image: 'storage/images/view-hands-holding-red-heart-represent-affection.jpg' },
-  { id: 3, name: 'Defesa de direitos', image: 'storage/images/worker-protesting-working-rights.jpg' },
-  { id: 4, name: 'Meio ambiente', image: 'storage/images/sustainable-travel-concept.jpg' },
-  { id: 5, name: 'Habitação', image: 'storage/images/back-view-romantic-couple-outdoors.jpg' },
-  { id: 6, name: 'Educação e pesquisa', image: 'storage/images/smiley-teacher-classroom.jpg' },
-  { id: 7, name: 'Cultura', image: 'storage/images/young-kids-performing-play-theatre-stage-celebrate-world-theatre-day.jpg' },
-];
-
-export default function CheckboxGallery({ onSelectionChange }) {
+export default function CheckboxGallery({ onSelectionChange, categories }) {
     const [selected, setSelected] = useState([]);
 
     const handleSelect = (id) => {

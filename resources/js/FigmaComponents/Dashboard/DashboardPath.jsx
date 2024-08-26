@@ -4,10 +4,11 @@ import WaveLine from './WaveLine';
 
 
 export default function DashboardPath({tituloTarefa="Consultar um contador"}) {
+
     return (
-        <div className='flex flex-col space-x-4 w-full h-64 bg-primary'>
+        <div className='relative flex flex-col justify-center h-96 bg-primary overflow-x-scroll'>
             <WaveLine />
-            <div className='card h-64 flex flex-col justify-end p-2'>
+            <div className='card mt-auto p-4'>
                 <h4 className='font-headers text-white text-base'>Caminho planejado para você</h4>
                 <div className='bg-white w-80 h-fit px-4 py-2 rounded-xl flex flex-col space-y-4'>
                     <div>

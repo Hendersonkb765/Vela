@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
+        name: 'Gustavo',
         email: '',
         password: '',
         password_confirmation: '',

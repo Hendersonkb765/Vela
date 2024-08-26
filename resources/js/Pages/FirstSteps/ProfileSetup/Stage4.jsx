@@ -2,10 +2,13 @@ import Checkbox from "@/Components/Checkbox";
 import InputError from "@/FigmaComponents/Inputs/InputError";
 import TextInput from "@/FigmaComponents/Inputs/TextInput";
 import React from "react";
+import { Head } from '@inertiajs/react';
 
 const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
     return (
         <div className="flex flex-col space-y-8">
+            <Head title="Fale mais sobre sua organização"/>
+
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700">{baseInfo.title}</h1>
@@ -34,7 +37,7 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
                     <label className="flex items-center">
                             <Checkbox
                                 name="remember"
-                                checked={data.doesNotHaveCNPJ}
+                                checked={data.organization.doesNotHaveCNPJ}
                                 onChange={(e) => setData('organization', {
                                     ...data.organization,
                                     doesNotHaveCNPJ: e.target.checked
@@ -43,14 +46,14 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
                             <span className="ms-2 text-sm text-neutralcolors-400">Minha organização não possui cnpj</span>
                     </label>
                 </div>
-                {data.doesNotHaveCNPJ &&
+                {data.organization.doesNotHaveCNPJ &&
                     <div>
                         <h3 className="font-headers font-medium text-large text-neutralcolors-700 mt-2">Seu CPF</h3>
                         <div>
                             <TextInput
                                 id="CPF"
                                 name="CPF"
-                                value={data.CPF}
+                                value={data.organizationCPF}
                                 className="mt-1 block w-96 min-w-fit"
                                 autoComplete="CPF"
                                 isFocused={true}

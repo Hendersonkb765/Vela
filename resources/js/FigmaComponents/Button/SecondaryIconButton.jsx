@@ -3,13 +3,28 @@ import React from 'react';
 export default function SecondaryIconButton({
     className = '',
     href,
-    gray = false,
     disabled = false,
+    gray = false,
     blocked = false,
-    text = 'texto',
-    rounded = true,
-    icon: Icon
-}) {
+    children,
+    rounded = false,
+    icon: Icon,
+    onClick,
+    type = 'button'
+})
+{
+    const handleClick = (e) => {
+        if (onClick) onClick(e);
+        if (disabled) {
+            e.preventDefault();
+            return;
+        }
+        if (href && !e.defaultPrevented) {
+            e.preventDefault();
+            window.location.href = href;
+        }
+    };
+
     const baseClassNames = `flex px-4 py-4 gap-2 items-center w-fit min-h-10 min-w-10 rounded-md border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-300 ease-out cursor-pointer`;
     const classNames = `
         ${baseClassNames}

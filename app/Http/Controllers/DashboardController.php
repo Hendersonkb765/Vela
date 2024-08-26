@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $level = $axis->level->where('id',$axis->current_level_id)->first();
         $tasks = Level::with(['task' => function($query){
             $query->where('status','pending');
-        },'task.step'])->where('id', $level->id)->first(); 
+        },'task.step'])->where('id', $level->id)->first();
         $arrayTasks = ['axis'=>$axis->name];
 
         foreach ($tasks['task'] as $task) {
@@ -43,7 +43,7 @@ class DashboardController extends Controller
             $taskNew['step'] = $step;
             array_push($arrayTasks,$taskNew);
 
-        }      
+        }
 
         return Inertia::render('Dashboard',[
             'user' => $user,
@@ -62,7 +62,7 @@ class DashboardController extends Controller
        catch(\Exception $e){
            return $e->getMessage();
        }
-        
+
 
     }
 }
