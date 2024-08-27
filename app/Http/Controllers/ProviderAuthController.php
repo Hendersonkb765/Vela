@@ -20,10 +20,9 @@ class ProviderAuthController extends Controller
     function callback($provider){
             
         try{
+            
             $socialUser = Socialite::driver($provider)->user();
-
             $user =User::where('email',$socialUser->email)->exists();
-
             if(!$user){
                 $user = User::Create([
                     'name' => $socialUser->name,

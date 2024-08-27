@@ -35,6 +35,7 @@ class OscController extends Controller
      */
     public function store(Request $request)
     {
+       
         $request->validate([
             'cnpj'=>'required|max:18',
             'presidents_name'=>'required',
@@ -61,7 +62,8 @@ class OscController extends Controller
         ]);
         */
 
-        $osc =Osc::create([
+        
+        $osc = Osc::create([
             'cnpj' => $request->input('cnpj', null),
             'institutional_email' => $request->input('institutional_email', null),
             'company_name' => $request->input('company_name', null),
