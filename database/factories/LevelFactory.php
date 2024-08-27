@@ -20,8 +20,8 @@ class LevelFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
-            'image' => $this->faker->numberBetween(1, 100),
-            'axis_id' => fake()->numberBetween(1,7),
+            'image_url' => fake()->text(),
+            'axis_id' => 1,
             'position' => $this->faker->numberBetween(1, 10),
         ];
     }

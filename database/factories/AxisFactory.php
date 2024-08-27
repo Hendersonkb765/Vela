@@ -26,9 +26,9 @@ class AxisFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'description' => $this->faker->text(),
             'user_id' => User::inRandomOrder()->first()->id,
-            //'current_level_id' => Level::factory()->create()->id,
         ];
     }
+    /*
     public function configure(){
         
         return $this->afterCreating(function(Axis $axe){
@@ -38,6 +38,7 @@ class AxisFactory extends Factory
 
         });
     }
+        */
 
     
    

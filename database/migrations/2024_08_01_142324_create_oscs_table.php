@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('oscs', function (Blueprint $table) {
             $table->id();
-            $table->string('cnpj')->unique();
-            $table->string('institutional_email',);
+            $table->string('cnpj')->unique()->nullable();
+            $table->string('institutional_email',)->nullable();
             $table->string('company_name')->nullable();
             $table->string('fantasy_name')->nullable();
             $table->string('presidents_name');
-            $table->date('foundation_date');
+            $table->date('foundation_date')->nullable();
             $table->string('banner_url')->nullable();
             $table->string('img_url')->nullable();
             $table->string('legal_nature')->nullable();

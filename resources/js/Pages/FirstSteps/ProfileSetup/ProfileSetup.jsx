@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useForm} from '@inertiajs/react';
+import {useForm, usePage} from '@inertiajs/react';
 import PrimaryButton from "@/FigmaComponents/Button/PrimaryButton";
 import ProfileSetupLayout from "@/Layouts/ProfileSetupLayout";
 import Stage1 from "./Stage1";
@@ -11,8 +11,13 @@ import Stage5 from "./Stage5";
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
+<<<<<<< HEAD
 
     const { data, setData, post, patch, processing, errors, reset } = useForm({
+=======
+    const { data, setData, post, patch,processing, errors, reset } = useForm({
+    
+>>>>>>> feature/connect-front-back
         user: {
             name: '',
             profilePicture: '',
@@ -70,13 +75,14 @@ export default function ProfileSetup() {
             handleSubmit();
         }
         else if(currentStep === 2 && !data.hasOrganization) {
-            handleSubmit(true);
+            handleSubmit();
         }
         else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
         }
     };
 
+<<<<<<< HEAD
     const handleSubmit = (hasOSC) => {
 
         if(hasOSC == true){
@@ -91,7 +97,15 @@ export default function ProfileSetup() {
                 onFinish: () => reset(),
             });
         }
+=======
+    const handleSubmit = () => {
+>>>>>>> feature/connect-front-back
 
+        patch(route('completeRegistration.store'), {
+            data: data,
+            onFinish: () => reset(),
+        });
+        
     };
 
     return (

@@ -34,7 +34,6 @@ export default function ForgotPassword({ status }) {
                             isFocused={true}
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder={"Digite seu email"}
-
                         />
 
                         <InputError message={errors.email} className="mt-2" />
@@ -42,7 +41,7 @@ export default function ForgotPassword({ status }) {
 
 
                     <div className="flex items-center justify-end mt-8">
-                        <PrimaryButton className="h-12 w-full" disabled={processing} center={true}>
+                        <PrimaryButton className="h-12 w-full" disabled={processing} center={true} type='submit'>
                             Receber Email
                         </PrimaryButton>
                     </div>
