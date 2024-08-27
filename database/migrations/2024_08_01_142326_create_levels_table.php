@@ -17,10 +17,16 @@ return new class extends Migration
             $table->foreignId('axis_id')->constrained();
             $table->integer('position'); 
             $table->text('description');
-            $table->integer('image');
+            $table->string('image_url');
             $table->timestamps();
         });
-
+        Schema::create('axis_osc', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('axis_id')->constrained();
+            $table->foreignId('osc_id')->constrained();
+            $table->integer('current_level')->default(1);
+            $table->timestamps();
+        });
       
     }
 

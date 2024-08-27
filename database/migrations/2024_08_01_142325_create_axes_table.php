@@ -21,12 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('axis_osc', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('axis_id')->constrained();
-            $table->foreignId('osc_id')->constrained();
-            $table->timestamps();
-        });
+        
     }
 
     /**
