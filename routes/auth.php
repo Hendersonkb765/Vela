@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProviderAuthController;
+use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite; // Add this line
 
@@ -68,7 +69,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+
 });
+//Route::get('/criar/novo-usuario', [RegisteredUserController::class, 'create'])->name('completeRegistration.create');
 
 Route::post('/novo/presidente',[RegisteredUserController::class, 'registeredPresident']);
 
