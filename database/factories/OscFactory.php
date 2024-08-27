@@ -48,7 +48,9 @@ class OscFactory extends Factory
             $users = User::inRandomOrder()->limit(10)->get();
             $osc->user()->attach($users);
 
-            $axis = Axis::inRandomOrder()->limit(10)->get();
+            $axis = Axis::inRandomOrder()->first();
+            $axis->osc()->attach($osc,['current_level'=>rand(1,10)]);
+
             //
         });
     }
