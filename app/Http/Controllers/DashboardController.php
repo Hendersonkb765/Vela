@@ -22,8 +22,9 @@ class DashboardController extends Controller
         $user = Auth::user();
         $osc = $user->osc->first();
         $axis = $osc->axis->first();
-        dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
-        $level = $axis->level->where('id',$axis->current_level_id)->first();
+        //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
+        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first();
+        $level = $axis->level->where('id',$currentLevel->id)->first();
         $tasks = Level::with(['task' => function($query){
             $query->where('status','pending');
         },'task.step'])->where('id', $level->id)->first();
