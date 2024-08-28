@@ -36,7 +36,6 @@ Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
     ['auth','verified',CheckUserRegistration::class,
     CheckOsc::class
     ])->name('dashboard');
->>>>>>> feature/connect-front-back
 
 Route::get('/myuploads', function () {
     return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
