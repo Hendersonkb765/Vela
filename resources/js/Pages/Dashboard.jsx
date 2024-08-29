@@ -7,13 +7,13 @@ import PrimaryIconButton from '@/FigmaComponents/Button/PrimaryIconButton';
 import RecordActivity from './VelaSocialLab/Dashboard/RecordActivity';
 import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 
-export default function Dashboard({ auth, }) {
+export default function Dashboard({ user,osc,level,tasks }) {
     // informacoes
     const Fails = 0;
     const imagePath = "storage/Images/LogoOriginal.png"
-    const OscLevel = 1;
-    const OscName = "União Beneficente Brasileira em Assistência Social";
-    const Progress = 5 / 30; // (tasks feitas / total de tasks do level)
+    const OscLevel = level.current_level;
+    const OscName = osc.fantasy_name;
+    const Progress = tasks.tasks_completed / tasks.tasks_max; // (tasks feitas / total de tasks do level
 
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
@@ -32,12 +32,12 @@ export default function Dashboard({ auth, }) {
 
     return (
         <VelaSocialLayout
-            userName={"Gustavo Raimundo Rodrigues"} //auth.user
-            imgUrl={'storage/Images/PerfilExemplo.jpg'}
+            userName={user.name} //auth.user
+            imgUrl={'storage/profile-photos/PerfilExemplo.jpg'}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard"/>
-            <DashboardPath />
+            <DashboardPath titleTask={tasks.pending[0].title}/>
             <section className='p-4 gap-4 flex [&>*]:rounded-lg '>
                 <div className='flex flex-col gap-4  [&>*]:rounded-lg w-1/2 min-w-fit'>
                     <OscProfileCard OscProfilePicture={imagePath}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
@@ -51,7 +51,7 @@ export default function Dashboard({ auth, }) {
                         <img src="storage/Images/Target.png" alt="" className='w-16 h-16'/>
                         <h3 className='font-headers text-primary-300 font-semibold flex flex-col '>
                             Todas as tarefas
-                            <span  className='font-normal text-xs'> 3 / 27  tarefas concluídas </span>
+                            <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasks_max}  tarefas concluídas </span>
                         </h3>
                     </div>
                     <p className='font-headers text-xs mt-2 w-72 text-wrap truncate'> Veja todas as tarefas que sua organização precisa concluir para avançar </p>

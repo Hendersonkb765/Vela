@@ -105,11 +105,6 @@ class CompleteRegistrationController extends Controller
         $osc->user()->attach(Auth::user()->id);
         $osc->axis()->attach(1);
         
-        /*
-        $targetAudience = TargetAudience::insert([
-            'name' => $request->focusAreas,
-        ]);
-        */
         $focusAreas = $request->input('organization.focusAreas');
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){
@@ -117,7 +112,6 @@ class CompleteRegistrationController extends Controller
             }
         }
         $osc->save();
-        
         }
         catch(\Exception $e){
             dd($e);
