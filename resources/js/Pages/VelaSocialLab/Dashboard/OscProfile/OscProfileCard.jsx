@@ -7,6 +7,7 @@ import { CiImageOn } from "react-icons/ci";
 
 
 const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => {
+    
     return (
         <div className='h-52 bg-white flex items-center p-4 space-x-4 '>
             <div className="relative flex items-center justify-center w-28 h-28 rounded-full cursor-pointer"

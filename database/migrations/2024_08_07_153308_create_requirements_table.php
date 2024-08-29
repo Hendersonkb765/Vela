@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('folder_url')->nullable();
             $table->enum('type', ['link', 'documento', 'video', 'outros']);
-            $table->enum('status', ['concluido','pendente','em analise']);
+            $table->enum('status', ['concluido','pendente','em analise','reprovado']);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

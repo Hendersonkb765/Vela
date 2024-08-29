@@ -11,13 +11,9 @@ import Stage5 from "./Stage5";
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
-<<<<<<< HEAD
 
     const { data, setData, post, patch, processing, errors, reset } = useForm({
-=======
-    const { data, setData, post, patch,processing, errors, reset } = useForm({
-    
->>>>>>> feature/connect-front-back
+   
         user: {
             name: '',
             profilePicture: '',
@@ -82,24 +78,8 @@ export default function ProfileSetup() {
         }
     };
 
-<<<<<<< HEAD
-    const handleSubmit = (hasOSC) => {
 
-        if(hasOSC == true){
-            patch(route('completeRegistration'), {
-                data: {user: data.user},
-                onFinish: () => reset(),
-            });
-
-        }
-        else{
-            post(route('profile.update'), {
-                onFinish: () => reset(),
-            });
-        }
-=======
     const handleSubmit = () => {
->>>>>>> feature/connect-front-back
 
         patch(route('completeRegistration.store'), {
             data: data,
