@@ -23,18 +23,17 @@ class DashboardController extends Controller
         $osc = $user->osc->first();
         $axis = $osc->axis->first();
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
-        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first();
-        $level = $axis->level->where('id',$currentLevel->id)->first();
-        $tasks = Level::with(['task' => function($query){
-            $query->where('status','pending');
-        },'task.step'])->where('id', $level->id)->first();
-        $arrayTasks = ['axis'=>$axis->name];
+        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first()->id;
+        $level = $axis->level->where('id',$currentLevel)->first();
+        $tasks = Level::with(['task','task.step'])->where('id', $level->id)->first();
+        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0];
 
         foreach ($tasks['task'] as $task) {
             $peding = 0;
             $completed = 0;
             $step = [];
-            $taskNew = ['id'=> $task->id,'title'=>$task->title,'status'=>$task->status,'step'=>[]];
+            
+            $taskNew = ['id'=> $task->id,'title'=>$task->title,'status'=>$task->status,'step'=>[],''];
             foreach ($task['step'] as $step) {
                 if($step->status == 'completed'){
                     $completed++;
@@ -46,10 +45,21 @@ class DashboardController extends Controller
             $step['pending'] = $peding;
             $step['completed'] = $completed;
             $taskNew['step'] = $step;
-            array_push($arrayTasks,$taskNew);
+            $task->status == 'completed'?
+            array_push($arrayTasks['completed'],$taskNew):
+            array_push($arrayTasks['pending'],$taskNew);
 
         }
+        //array_push($arrayTasks['completed'],['total'=> Level::where('id',$currentLevel)->first()->task->where('status','completed')->count()]);
+        $arrayTasks['completed']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
+        $arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
+        $arrayTasks['tasks_completed'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
+        $arrayTasks['tasks_max'] = Level::where('id',$currentLevel)->first()->task->count();
 
+        $requirements = $tasks;
+        //dd($requirements);
+
+        //dd($arrayTasks);
         return Inertia::render('Dashboard',[
             'user' => $user,
             'osc' => [
@@ -59,9 +69,9 @@ class DashboardController extends Controller
                     ],
             'level' => [
                         'max_level'=>$axis->level->count(),
-                        'current_level'=>$level->position,
+                        'current_level'=>$currentLevel,
                     ],
-            'task' => $arrayTasks,
+            'tasks' => $arrayTasks,
         ]);
        }
        catch(\Exception $e){
