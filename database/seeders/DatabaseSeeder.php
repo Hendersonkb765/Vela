@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create();
         User::factory(10)->state(['position' => 'Presidente'])->create();
         User::factory(10)->state(['position' => 'Equipe Vela'])->create();
-        Requirement::factory(10)->create();
+        
         
         Axis::factory()->create(
              [
@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
         
         
         Step::factory(20)->create();
+        Requirement::factory(10)->create();
         PhoneNumber::factory(20)->create();
         
         //OscUser::factory(100)->create();

@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first()->id;
         $level = $axis->level->where('id',$currentLevel)->first();
         $tasks = Level::with(['task','task.step'])->where('id', $level->id)->first();
-        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0];
+        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirements_failed'=>0];
 
         foreach ($tasks['task'] as $task) {
             $peding = 0;
@@ -35,6 +35,12 @@ class DashboardController extends Controller
             
             $taskNew = ['id'=> $task->id,'title'=>$task->title,'status'=>$task->status,'step'=>[],''];
             foreach ($task['step'] as $step) {
+
+                foreach ($step->requirement as $requirement) {
+                    if ($requirement->status == 'reprovado'){
+                        $arrayTasks['requirements_failed']++;
+                    }
+                }
                 if($step->status == 'completed'){
                     $completed++;
                 }else{
@@ -58,7 +64,6 @@ class DashboardController extends Controller
 
         $requirements = $tasks;
         //dd($requirements);
-
         //dd($arrayTasks);
         return Inertia::render('Dashboard',[
             'user' => $user,
