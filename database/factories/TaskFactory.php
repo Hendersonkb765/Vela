@@ -25,6 +25,14 @@ class TaskFactory extends Factory
             'message_conclusion' => fake()->text()
         ];
     }
+    public function configure()
+    {
+        return $this->afterCreating(function (Task $task) {
+            $task->order()->create([
+                'order_number' => fake()->numberBetween(1,9),
+            ]);
+        });
+    }
 
     
 }
