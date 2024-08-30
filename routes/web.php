@@ -33,7 +33,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth','verified',CheckUserRegistration::class,
+    ['auth',CheckUserRegistration::class,
     CheckOsc::class
     ])->name('dashboard');
 
