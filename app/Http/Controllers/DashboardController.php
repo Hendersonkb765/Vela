@@ -23,12 +23,13 @@ class DashboardController extends Controller
         $user = Auth::user();
         $osc = $user->osc->first();
         $axis = $osc->axis->first();
+       
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
-        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first()->id;
+        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first()->current_level;
         $level = $axis->level->where('id',$currentLevel)->first();
-        $tasks = Level::with(['task','task.step'])->where('id', $level->id)->first();
+        $tasks = Level::with(['task','task.step'])->where('position', $level->id)->first();
         $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirements_failed'=>0];
-
+       
         
         foreach ($tasks['task'] as $task) {
 
@@ -65,7 +66,6 @@ class DashboardController extends Controller
         $arrayTasks['tasks_completed'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasks_max'] = Level::where('id',$currentLevel)->first()->task->count();
         
-        
         return Inertia::render('Dashboard',[
             'user' => $user,
             'osc' => [
@@ -81,7 +81,7 @@ class DashboardController extends Controller
         ]);
        }
        catch(\Exception $e){
-           return $e->getMessage();
+           return dd($e);
        }
 
 
