@@ -9,8 +9,10 @@ import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 
 export default function Dashboard({ user,osc,level,tasks }) {
     // informacoes
+    // numero de requisitos reprovados está em ( tasks.requirements_failed )
     const Fails = 0;
     const imagePath = "storage/Images/LogoOriginal.png"
+    const currentTask = tasks.pending[0]; // array das informações da tarefa atual 
     const OscLevel = level.current_level;
     const OscName = osc.fantasy_name;
     const Progress = tasks.tasks_completed / tasks.tasks_max; // (tasks feitas / total de tasks do level
@@ -31,13 +33,15 @@ export default function Dashboard({ user,osc,level,tasks }) {
     }
 
     return (
+
         <VelaSocialLayout
             userName={user.name} //auth.user
-            imgUrl={'storage/profile-photos/PerfilExemplo.jpg'}
+            imgUrl={'storage/profile/66cb7d9b90bea.png'}
+            role={user.position}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard"/>
-            <DashboardPath titleTask={tasks.pending[0].title}/>
+            <DashboardPath titleTask={currentTask.title}/>
             <section className='p-4 gap-4 flex [&>*]:rounded-lg '>
                 <div className='flex flex-col gap-4  [&>*]:rounded-lg w-1/2 min-w-fit'>
                     <OscProfileCard OscProfilePicture={imagePath}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>

@@ -20,6 +20,13 @@ return new class extends Migration
             $table->string('message_conclusion');
             $table->timestamps();
         });
+
+        Schema::create('task_orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('task_id')->constrained();
+            $table->integer('order_number')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
