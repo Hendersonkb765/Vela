@@ -22,20 +22,14 @@ class CompleteRegistrationController extends Controller
     public function create()
     {
 
-        return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup',['user' => [
-            'name' => Auth::user()->name,
-            'email' => Auth::user()->email,
-            'url_image' => Auth::user()->url_image
-        ]]);
-        // return Auth::user()->provider === 'google'
-        //     ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
-        //         'user' => [
-        //             'name' => Auth::user()->name,
-        //             'email' => Auth::user()->email,
-        //             'url_image' => Auth::user()->url_image
-        //         ]
-        //     ])
-        //     : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
+        return Auth::user()->provider === 'google'
+            ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
+                'user' => [
+                    'name' => Auth::user()->name,
+                    'url_image' => Auth::user()->url_image
+                ]
+            ])
+            : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
     }
 
     public function store(Request $request): RedirectResponse
