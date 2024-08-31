@@ -22,15 +22,20 @@ class CompleteRegistrationController extends Controller
     public function create()
     {
 
-        return Auth::user()->provider === 'google'
-            ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
-                'user' => [
-                    'name' => Auth::user()->name,
-                    'email' => Auth::user()->email,
-                    'url_image' => Auth::user()->url_image
-                ]
-            ])
-            : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', ['nome' => 'henderson']);
+        return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup',['user' => [
+            'name' => Auth::user()->name,
+            'email' => Auth::user()->email,
+            'url_image' => Auth::user()->url_image
+        ]]);
+        // return Auth::user()->provider === 'google'
+        //     ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
+        //         'user' => [
+        //             'name' => Auth::user()->name,
+        //             'email' => Auth::user()->email,
+        //             'url_image' => Auth::user()->url_image
+        //         ]
+        //     ])
+        //     : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
     }
 
     public function store(Request $request): RedirectResponse
@@ -50,11 +55,11 @@ class CompleteRegistrationController extends Controller
                 list(, $imageData) = explode(',', $imageData);
                 $imageData = base64_decode($imageData);
                 $imageName = uniqid() . '.png';
-                Auth::user()->url_image = $imageName;
+                Auth::user()->url_image = 'storage/profile/'.$imageName;
                 if (!Storage::exists('profile-photos')) {
                     Storage::makeDirectory('profile-photos');
                 }
-                Storage::disk('local')->put('profile-photos/' . $imageName, $imageData);
+                Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
             $userRequest['profilePicture'];
             $user = $request->user()->fill([
@@ -102,6 +107,7 @@ class CompleteRegistrationController extends Controller
             'presidents_name' => Auth::user()->name,
             'img_url' => $request->input($imageName.'.png', null),
         ]);
+        
         $osc->user()->attach(Auth::user()->id);
         $osc->axis()->attach(1);
         
