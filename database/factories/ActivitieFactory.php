@@ -19,7 +19,7 @@ class ActivitieFactory extends Factory
     {
         $user = User::inRandomOrder()->first();
         return [
-            'title' => $this->faker->name(),
+            'title' => $this->faker->sentence(),
             'hour_start' => $this->faker->time(),
             'hour_end' => $this->faker->time(),
             'date' => $this->faker->date(),

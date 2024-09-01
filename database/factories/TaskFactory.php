@@ -18,8 +18,8 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=> fake()->title(),
-            'level_id'=>fake()->numberBetween(1,9),
+            'title'=> fake()->sentence(),
+            'level_id'=>fake()->numberBetween(1,7),
             'description' => fake()->text(),
             'status' => fake()->randomElement(['pending', 'completed']),
             'message_conclusion' => fake()->text()
@@ -29,7 +29,7 @@ class TaskFactory extends Factory
     {
         return $this->afterCreating(function (Task $task) {
             $task->order()->create([
-                'order_number' => fake()->numberBetween(1,9),
+                'order_number' => fake()->numberBetween(1,7),
             ]);
         });
     }
