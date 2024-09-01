@@ -10,7 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Osc;
+use App\Models\Level; // Add this line
 use App\Models\TargetAudience; // Add this line
+use App\Models\Axis; // Add this line
+use App\Models\Task; // Add this line
+use App\Models\Step; // Add this line
+use App\Models\Requirement; // Add this line
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\ConnectionException;
@@ -49,9 +54,9 @@ class CompleteRegistrationController extends Controller
                 list(, $imageData) = explode(',', $imageData);
                 $imageData = base64_decode($imageData);
                 $imageName = uniqid() . '.png';
-                Auth::user()->url_image = 'storage/profile/'.$imageName;
-                if (!Storage::exists('profile-photos')) {
-                    Storage::makeDirectory('profile-photos');
+                Auth::user()->image_url = asset('storage/profile-photos/'.$imageName);
+                if (!Storage::disk('public')->exists('profile-photos')) {
+                    Storage::disk('public')->makeDirectory('profile-photos');
                 }
                 Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
@@ -84,27 +89,63 @@ class CompleteRegistrationController extends Controller
             list($type, $imageData) = explode(';', $imageData);
             list(, $imageData) = explode(',', $imageData);
             $imageData = base64_decode($imageData);
-            $imageName = uniqid() . '.png';
-            Auth::user()->url_image = $imageName;
-            if (!Storage::exists('profile-photos-osc')) {
-                Storage::makeDirectory('profile-photos-osc');
+            $imageName = uniqid().'.png';
+            if (!Storage::disk('public')->exists('profile-photos-osc')) {
+                Storage::disk('public')->makeDirectory('profile-photos-osc');
             }
-            Storage::disk('local')->put('profile-photos-osc/' . $imageName, $imageData);
+            Storage::disk('public')->put('profile-photos-osc/' . $imageName, $imageData);
+            $imageUrl = asset('storage/profile-photos-osc/'.$imageName);
+            
         }
         else{
-            $imageName = null;
+            $imageUrl = null;
         }
         $osc = Osc::create([
             'cnpj' => $request->input('organization.CNPJ', null),
             'institutional_email' => $request->input('organization.institutional_email', null),
             'fantasy_name' => $request->input('organization.organizationName', null),
             'presidents_name' => Auth::user()->name,
-            'img_url' => $request->input($imageName.'.png', null),
+            'image_url' => $imageUrl,
         ]);
-        
         $osc->user()->attach(Auth::user()->id);
         $osc->axis()->attach(1);
-        
+        /*
+        for ($i = 1; $i <= 7; $i++) {
+            $level = Level::factory()->create([
+                'name' => "OSC Marketing Nível $i",
+                'description' => "Descrição do Nível $i de marketing.",
+                'image_url' => fake()->url(),
+                'axis_id' => $osc->axis->first()->id,
+                'position' => $i,
+            ]);
+            $osc->level()->attach($level->id);
+            for ($j = 1; $j <= 5; $j++) {
+                $task = Task::factory()->create([
+                    'name' => "Tarefa $j",
+                    'description' => "Descrição da tarefa $j.",
+                    'level_id' => $level->id,
+                ]);
+                $level->task()->attach($task->id);
+                for ($k = 1; $k <= 5; $k++) {
+                    $step = Step::factory()->create([
+                        'name' => "Passo $k",
+                        'description' => "Descrição do passo $k.",
+                        'task_id' => $task->id,                    ]);
+                    $task->step()->attach($step->id);
+
+                    for ($l = 1; $l <= 5; $l++){
+                        $requirement = Requirement::create([
+                            'name' => "Requisito $l",
+                            'description' => "Descrição do requisito $l.",
+                            'step_id' => $step->id,
+                        ]);
+                        $step->requirement()->attach($requirement->id);
+                    }
+                }
+            }
+            
+        }
+            */
         $focusAreas = $request->input('organization.focusAreas');
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){

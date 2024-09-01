@@ -10,13 +10,13 @@ import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 export default function Dashboard({ user,osc,level,tasks }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
-    const Fails = 0;
-    const imagePath = "storage/Images/LogoOriginal.png"
+    const Fails = tasks.requirements_failed;
+    const imageUrlOsc = osc.image_url;  
+    const imageUrlUser = user.image_url;
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual 
     const OscLevel = level.current_level;
     const OscName = osc.fantasy_name;
     const Progress = tasks.tasks_completed / tasks.tasks_max; // (tasks feitas / total de tasks do level
-
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
             <div className={`w-3/5 min-w-fit  bg-white flex items-center justify-between p-2 space-x-4  ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
@@ -36,7 +36,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
 
         <VelaSocialLayout
             userName={user.name} //auth.user
-            imgUrl={'storage/profile/66cb7d9b90bea.png'}
+            imgUrl={imageUrlUser}
             role={user.position}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
@@ -44,7 +44,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
             <DashboardPath titleTask={currentTask.title}/>
             <section className='p-4 gap-4 flex [&>*]:rounded-lg '>
                 <div className='flex flex-col gap-4  [&>*]:rounded-lg w-1/2 min-w-fit'>
-                    <OscProfileCard OscProfilePicture={imagePath}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
+                    <OscProfileCard OscProfilePicture={imageUrlOsc}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
                     <div className='min-w-fit flex justify-between space-x-4 [&>*]:rounded-lg'>
                         <SubmissionFailed NumberOfFails={Fails} />
                         <RecordActivity />
