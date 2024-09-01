@@ -33,7 +33,7 @@ class OscFactory extends Factory
             'presidents_name' => $this->generatetPresidentsName(),
             'foundation_date' => fake()->date(),
             'banner_url' => fake()->imageUrl(),
-            'img_url' => fake()->text(),
+            'image_url' => fake()->text(),
             'legal_nature' => fake()->randomElement(['Ativo','Inativo']),
             'statute_url' => fake()->url(),
             'created_at' => now(),

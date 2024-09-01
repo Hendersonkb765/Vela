@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('presidents_name');
             $table->date('foundation_date')->nullable();
             $table->string('banner_url')->nullable();
-            $table->string('img_url')->nullable();
+            $table->string('image_url')->nullable();
             $table->string('legal_nature')->nullable();
             $table->string('statute_url')->nullable();
             $table->string('cnae_main')->nullable();       

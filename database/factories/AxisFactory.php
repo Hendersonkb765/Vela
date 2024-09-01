@@ -25,7 +25,7 @@ class AxisFactory extends Factory
             'name' => $this->faker->name(),
             'image' => $this->faker->imageUrl(),
             'description' => $this->faker->text(),
-            'user_id' => User::inRandomOrder()->first()->id,
+            'responsible_id' => User::inRandomOrder()->first()->id,
         ];
     }
     /*

@@ -20,7 +20,7 @@ class Osc extends Model
         'presidents_name',
         'foundation_date',
         'banner_url',
-        'img_url',
+        'image_url',
         'legal_nature',
         'statute_url',
         'cnae_main',

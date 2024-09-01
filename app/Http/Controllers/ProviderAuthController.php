@@ -28,7 +28,7 @@ class ProviderAuthController extends Controller
                     'name' => $socialUser->name,
                     'email' => $socialUser->email,
                     'provider' => $provider,
-                    'url_image' => $socialUser->avatar
+                    'image_url' => $socialUser->avatar
                 ]);
 
                 Auth::login($user);

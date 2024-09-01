@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('sex',['Masculino','Feminino','Outros'])->nullable();
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('url_image',255)->nullable();
+            $table->string('image_url',255)->nullable();
             $table->string('password',255)->nullable();
             $table->rememberToken();
             $table->timestamps();
