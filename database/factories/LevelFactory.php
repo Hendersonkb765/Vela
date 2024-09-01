@@ -18,7 +18,7 @@ class LevelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->sentence(),
             'description' => $this->faker->text,
             'image_url' => fake()->text(),
             'axis_id' => 1,

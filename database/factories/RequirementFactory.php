@@ -22,7 +22,7 @@ class RequirementFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->word,
+            'title' => fake()->sentence(),
             'folder_url' => fake()->url,
             'type' => fake()->randomElement(['link', 'documento', 'video', 'outros']),
             'status' => fake()->randomElement(['concluido','pendente','em analise']),

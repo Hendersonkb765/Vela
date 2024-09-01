@@ -33,17 +33,25 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create();
         User::factory(10)->state(['position' => 'Presidente'])->create();
         User::factory(10)->state(['position' => 'Equipe Vela'])->create();
-        
-        
-        Axis::factory()->create(
+        $marketingAxis = Axis::factory()->create(
              [
                 'name'=> 'Markerting',
                 'description'=>'O eixo de marketing em uma organização social desempenha um papel crucial ao conectar a missão e os valores da instituição com seu público-alvo. Ele é responsável por desenvolver estratégias que promovem a causa social, aumentam a visibilidade da organização e atraem apoio, seja em forma de doações, voluntariado ou parcerias. A importância desse eixo reside na sua capacidade de comunicar a relevância e o impacto das ações da organização, fortalecer sua marca e criar engajamento contínuo com a comunidade. Assim, o marketing contribui diretamente para o alcance dos objetivos sociais e para a sustentabilidade da organização.'
             ]
         );
-        Level::factory(10)->create();
+        
         Osc::factory(10)->create();
+        for ($i = 1; $i <= 7; $i++) {
+            Level::factory()->create([
+                'name' => "OSC Marketing Nível $i",
+                'description' => "Descrição do Nível $i de marketing.",
+                'image_url' => fake()->url(),
+                'axis_id' => $marketingAxis->id,
+                'position' => $i,
+            ]);
+        }
         Task::factory(60)->create(); 
+        
         Address::factory(30)->create();
         Cnae::factory(10)->create();
         TargetAudience::factory()->create(['name'=>'Assistência Social']);
@@ -56,11 +64,8 @@ class DatabaseSeeder extends Seeder
         TypePerformance::factory(10)->create();
         Activitie::factory(100)->create();
         Telephone::factory(130)->create();
-
-        
-        
         Step::factory(20)->create();
-        Requirement::factory(10)->create();
+        Requirement::factory(60)->create();
         PhoneNumber::factory(20)->create();
         
         //OscUser::factory(100)->create();

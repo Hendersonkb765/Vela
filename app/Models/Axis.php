@@ -13,7 +13,7 @@ class Axis extends Model
         'name',
         'image',
         'description',
-        'current_level_id'
+    
     ];
 
     public function osc(){
