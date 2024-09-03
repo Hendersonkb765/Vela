@@ -5,6 +5,7 @@ import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 
 export default function Login({ status, canResetPassword }) {
@@ -23,9 +24,10 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <section className='bg-primary h-screen flex flex-col items-center justify-center py-8'>
+        <section className='bg-primary h-screen  flex flex-col items-center justify-center sm:py-8 pt-60'>
             <Head title="Entrar"/>
-            <div className='w-2/5 flex flex-col items-center bg-white px-4 py-8 rounded-xl '>
+
+            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center bg-white px-4 py-8 rounded-xl '>
                 <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Bem vindo de volta!</h2>
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
@@ -44,7 +46,7 @@ export default function Login({ status, canResetPassword }) {
                             required
                         />
 
-                        
+
                         <InputError message={errors.email} className="mt-2" />
                     </div>
                     <div className="">
@@ -90,12 +92,12 @@ export default function Login({ status, canResetPassword }) {
                     <PrimaryButton gray={true} icon={<FcGoogle className='w-8 h-8'></FcGoogle>} className='h-12 w-full bg-white justify-center'>Entrar com o Google</PrimaryButton>
                 </div> */}
 
-                    <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">
+                    <div className="flex flex-col justify-start sm:justify-center space-y-4 pt-3 mb-4">
                         <div className='flex flex-col space-y-4 justify-center items-center'>
                             <PrimaryButton className="h-12 w-full " disabled={processing} center={true} type='submit'>
                                 Entrar
                             </PrimaryButton>
-                            <p className="text-sm text-neutralcolors-400">
+                            <p className="w-full text-sm text-neutralcolors-400">
                                 Ainda não tem uma conta? <Link href={route('register')} className="underline  text-primary">Cadastre-se</Link>
                             </p>
                         </div>

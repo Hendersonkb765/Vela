@@ -15,6 +15,8 @@ const Stage5 = ({baseInfo, maxStep, data, setData, errors}) => {
         { id: 5, name: 'Habitação', image: 'storage/Images/Eixos/Eixo5.jpg' },
         { id: 6, name: 'Educação e pesquisa', image: 'storage/Images/Eixos/Eixo6.jpg' },
         { id: 7, name: 'Cultura', image: 'storage/Images/Eixos/Eixo7.jpg' },
+        { id: 7, name: 'Cultura', image: 'storage/Images/Eixos/Eixo7.jpg' },
+
     ];
 
     const handleSelectionChange = (selectedNames) => {

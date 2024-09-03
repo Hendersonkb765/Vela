@@ -22,9 +22,9 @@ export default function Register() {
     };
 
     return (
-        <section className='bg-primary h-screen flex flex-col items-center justify-center py-8'>
+        <section className='bg-primary h-screen  flex flex-col items-center justify-center sm:py-8 pt-60'>
             <Head title="Cadastro" />
-            <div className='w-2/5 flex flex-col items-center bg-white px-4 py-8  rounded-xl'>
+            <div className='min-w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center bg-white px-4 py-8 rounded-xl '>
                 <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-400 '>Crie Sua Conta</h2>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                     <a
