@@ -23,22 +23,15 @@ class AxisFactory extends Factory
         return [
             
             'name' => $this->faker->name(),
-            'image' => $this->faker->imageUrl(),
+            'image_url' => $this->faker->imageUrl(),
             'description' => $this->faker->text(),
-            'responsible_id' => User::inRandomOrder()->first()->id,
+            'responsible_id' => User::inRandomOrder()->first(),
         ];
     }
-    /*
-    public function configure(){
+    
+    
+
         
-        return $this->afterCreating(function(Axis $axe){
-
-            $osc = Osc::inRandomOrder()->limit(10)->get();
-            $axe->osc()->attach($osc);
-
-        });
-    }
-        */
 
     
    

@@ -7,6 +7,7 @@ use Database\Factories\Osc;
 use Database\Factories\Axis;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Requirement;
+use App\Models\Task;
 use App\Models\User;
 
 /**
@@ -26,7 +27,7 @@ class RequirementFactory extends Factory
             'folder_url' => fake()->url,
             'type' => fake()->randomElement(['link', 'documento', 'video', 'outros']),
             'status' => fake()->randomElement(['concluido','pendente','em analise']),
-            'user_id' => User::inRandomOrder()->where('position','Equipe Vela')->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 
@@ -34,8 +35,14 @@ class RequirementFactory extends Factory
         
         return $this->afterCreating(function(Requirement $requirement){
 
-            $steps = Step::inRandomOrder()->limit(20)->get();
-            $requirement->step()->attach($steps);
+            $steps = Step::all();
+
+            foreach($steps as $step){
+                $requirement->step()->attach($step->id);
+            }
+
+            
+            //$requirement->step()->attach($steps);
 
         });
     }
