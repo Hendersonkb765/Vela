@@ -44,6 +44,7 @@ class RecurringActivityFactory extends Factory
         return $this->afterCreating(function(RecurringActivity $recurringActivity){
             $recurringActivity->dayWeek()->attach(DayWeek::factory()->create());
 
+            $recurringActivity->address()->save(Address::factory(['addressable_id'=>$recurringActivity->id,'addressable_type'=>$recurringActivity->getMorphClass()])->make());
         });
     }
 }
