@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('image_url')->nullable();
             $table->string('legal_nature')->nullable();
             $table->string('statute_url')->nullable();
-            $table->string('cnae_main')->nullable();       
+            $table->string('cnae_main')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('phone_numbers', function (Blueprint $table) {
+        Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            $table->foreignId('osc_id')->constrained();
+            $table->morphs('phoneable');
             $table->timestamps();
         });
         Schema::create('cnaes', function (Blueprint $table) {
