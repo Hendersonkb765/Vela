@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany; // Add this line
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder; // Add this line
+
 class Osc extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'cnpj',
         'institutional_email',
         'company_name',
@@ -24,55 +25,59 @@ class Osc extends Model
         'legal_nature',
         'statute_url',
         'cnae_main',
-        'user_id',
     ];
     
-  
-  // Relacionamento um para muitos
-    public function OscTypePerformance() : HasMany 
-    {
-        return $this->hasMany(OscTypePerformance::class);
-    }
-    public function Address() : HasMany 
-    {
-        return $this->hasMany(Address::class);
-    }
-    public function activitie(): HasMany
-    {
-        return $this->hasMany(Activitie::class);
-    }
-    public function phoneNumber() : HasMany 
-    {
-        return $this->hasMany(PhoneNumber::class);
-    }
+// Escopos
 
-    //um para muitos (inverso)
-    public function level() :BelongsTo
-    {
-        return $this->belongsTo(Level::class);
-    }
+  // Relacionamento um para muitos
+  
+  public function address(){
+    return $this->morphMany(Address::class,'addressable');
+}
+    
    
-    // Relacionamento muitos para muitos
-    public function cnae(): BelongsToMany
-    {
-        return $this->belongsToMany(Cnae::class);
-    }
-    public function user(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class);
-    }
-    public function targetAudience(): BelongsToMany
-    {
-        return $this->belongsToMany(TargetAudience::class);
-    }
-    public function typePerformance(): BelongsToMany
-    {
-        return $this->belongsToMany(TypePerformance::class);
-    }
-    public function axis(): BelongsToMany
+    public function axis()
     {
         return $this->belongsToMany(Axis::class);
     }
+    public function level()
+    {
+        return $this->belongsToMany(Level::class);
+    }
+    // Relacionamento muitos para muitos
+    public function cnae()
+    {
+        return $this->belongsToMany(Cnae::class);
+    }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function targetAudience()
+    {
+        return $this->belongsToMany(TargetAudience::class);
+    }
+    public function typePerformance()
+    {
+        return $this->belongsToMany(TypePerformance::class);
+    }
+    
+    public function task(){
+        return $this->belongsToMany(Task::class)->withPivot('status');
+    }
+    
+    public function phone(){
+        return $this->morphTo(Phone::class,'phoneable');
+    }
+    public function recurring_activity(){
+        return $this->hasMany(RecurringActivity::class);
+    }
+    public function activitie(){
+        return $this->hasMany(Activitie::class);
+    }
+
+  
+    
     
 }
 
