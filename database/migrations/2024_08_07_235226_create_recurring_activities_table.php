@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('recurring_activities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->time('hour_start');
-            $table->time('hour_end');
+            $table->time('hour_start')->nullable();
+            $table->time('hour_end')->nullable();
             $table->enum('type_recurrence',['Semanal', 'Mensal', 'Esporádico']);
             $table->string('description');
             $table->integer('estimated_audience');
-            $table->date('date');
+            //$table->('day_recurrence');
             $table->string('send_by');
             $table->string('pich_url');
+            $table->string('photo_url');
             $table->string('thumbnail_photos_url');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('address_id')->constrained();
+            $table->foreignId('responsible_id')->constrained('users');
             $table->timestamps();
         });
         Schema::create('day_weeks', function (Blueprint $table) {
@@ -36,10 +37,10 @@ return new class extends Migration
             $table->boolean('sexta')->default(false);
             $table->boolean('sabado')->default(false);
             $table->boolean('domingo')->default(false);
-            $table->boolean('Indefinido')->default(false);
+            $table->boolean('indefinido')->default(false);
             $table->timestamps();
         });
-        Schema::create('recurring_day_week',function (Blueprint $table){
+        Schema::create('day_week_recurring_activity',function (Blueprint $table){
             $table->id();
             $table->foreignId('recurring_activity_id')->constrained('recurring_activities');
             $table->foreignId('day_week_id')->constrained();
