@@ -29,13 +29,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        
+        /*
         Schema::create('address_activitie', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_id')->constrained();
             $table->foreignId('address_id')->constrained();
             $table->timestamps();
         });
+        */
 
     
     }
