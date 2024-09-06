@@ -14,9 +14,5 @@ class TargetAudience extends Model
         'name'
     ];
 
-    public function osc():BelongsToMany
-    {
-        
-        return $this->belongsToMany(Osc::class);
-    }
+    
 }
