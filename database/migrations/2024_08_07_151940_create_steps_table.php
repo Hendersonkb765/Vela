@@ -17,6 +17,14 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained();
             $table->text('description');
             $table->integer('position');
+            //$table->enum('status', ['pending', 'completed'])->default('pending');
+            $table->timestamps();
+        });
+
+        Schema::create('osc_step',function(Blueprint $table){
+            $table->id();
+            $table->foreignId('osc_id')->constrained();
+            $table->foreignId('step_id')->constrained();
             $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->timestamps();
         });

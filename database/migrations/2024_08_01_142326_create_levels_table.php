@@ -14,19 +14,25 @@ return new class extends Migration
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('axis_id')->constrained();
+            $table->foreignId('axis_id');
             $table->integer('position'); 
             $table->text('description');
-            $table->string('image_url');
             $table->timestamps();
         });
-        Schema::create('axis_osc', function (Blueprint $table) {
+        Schema::create('level_osc', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('axis_id')->constrained();
             $table->foreignId('osc_id')->constrained();
-            $table->integer('current_level')->default(1);
+            $table->foreignId('level_id')->constrained('levels');
             $table->timestamps();
         });
+
+        // Schema::create('axis_level', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('axis_id')->constrained();
+        //     $table->foreignId('level_id')->constrained('levels');
+        //     $table->timestamps();
+        // });
+        
       
     }
 

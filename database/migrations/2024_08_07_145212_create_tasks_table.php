@@ -14,13 +14,28 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('level_id')->constrained();
             $table->text('description');
-            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->string('message_conclusion');
+            $table->foreignId('level_id')->constrained('levels');
             $table->timestamps();
         });
 
+        Schema::create('osc_task', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('osc_id')->constrained();
+            $table->foreignId('task_id')->constrained();
+            $table->enum('status', ['pendente', 'concluído'])->default('pendente');
+            $table->timestamps();
+        });
+
+        /*
+        Schema::create('level_task', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('level_id')->constrained('axis_level');
+            $table->foreignId('task_id')->constrained();
+            $table->timestamps();
+        });
+        */
         Schema::create('task_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('task_id')->constrained();

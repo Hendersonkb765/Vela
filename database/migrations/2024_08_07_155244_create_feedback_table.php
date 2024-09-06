@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date_time');
-            $table->enum('rat',['1','2','3','4','5']);
+            //$table->dateTime('date_time');
+            $table->enum('rating',['1','2','3','4','5']);
             $table->text('message');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('team_vela')->constrained('users');
             $table->foreignId('requirement_id')->constrained();
             $table->timestamps();
         });
