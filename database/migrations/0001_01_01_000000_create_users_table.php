@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('name',100)->nullable();
             $table->string('email',150)->unique();
             $table->enum('provider',['email','google'])->default('email');
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('role_id')->nullable()->constrained();
             $table->enum('sex',['Masculino','Feminino','Outros'])->nullable();
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
