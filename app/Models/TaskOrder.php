@@ -9,9 +9,7 @@ class TaskOrder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order', 'task_id'];
+    protected $fillable = ['order'];
 
-    public function task(){
-        return $this->belongsTo(Task::class);
-    }
+    
 }

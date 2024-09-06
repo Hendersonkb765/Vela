@@ -23,10 +23,5 @@ class TypePerformanceFactory extends Factory
         ];
     }
 
-    public function  configure(){
-        return $this->afterCreating(function(TypePerformance $model){
-            $oscs = Osc::inRandomOrder()->first();
-            $model->osc()->attach($oscs);
-        } );
-    }
+  
 }

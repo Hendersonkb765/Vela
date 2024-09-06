@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('feedback_id')->constrained();
             $table->text('message');
-            $table->foreignId('user_id')->constrained();
-            $table->dateTime('date_time');
+            $table->foreignId('author_id')->constrained('users');
+            //$table->dateTime('date_time');
             $table->timestamps();
         });
+
     }
 
     /**

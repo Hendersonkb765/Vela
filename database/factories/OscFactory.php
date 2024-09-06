@@ -5,6 +5,9 @@ namespace Database\Factories;
 use App\Models\Osc;
 use App\Models\User; // Add this line to import the User class
 use App\Models\Axis; // Add this line to import the Axis class
+use App\Models\Cnae; // Add this line to import the Cnae class
+use App\Models\TargetAudience; // Add this line to import the TargetAudience class
+use App\Models\TypePerformance; // Add this line to import the TypePerformance class
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as FakerFactory;
 /**
@@ -49,13 +52,18 @@ class OscFactory extends Factory
             $osc->user()->attach($users);
 
             $axis = Axis::inRandomOrder()->first();
-            $axis->osc()->attach($osc,['current_level'=>rand(1,10)]);
+            $axis->osc()->attach($osc,['current_level'=>rand(1,7)]);
 
-            //
+            $osc->cnae()->attach(Cnae::inRandomOrder()->limit(10)->get());
+
+            $osc->targetAudience()->attach(TargetAudience::inRandomOrder()->limit(10)->get());
+        
+            $osc->typePerformance()->attach(TypePerformance::inRandomOrder()->limit(10)->get());
+        
         });
     }
     public function generatetPresidentsName(){
-        $user = User::inRandomOrder()->where('position','Presidente')->first();
+        $user = User::where('role_id',2)->inRandomOrder()->first();
         return $user->name;
     }
 }

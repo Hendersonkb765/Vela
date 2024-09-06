@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-class Cnae extends Model
+
+class DayWeek extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'code',
+        'segunda',
+        'terca',
+        'quarta',
+        'quinta',
+        'sexta',
+        'sabado',
+        'domingo',
+        'indefinido'
     ];
-
-    // Relacionamento muitos para muitos
-  
-
 }
-
-

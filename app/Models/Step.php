@@ -22,7 +22,10 @@ class Step extends Model
     public function dependence(){
         return $this->hasMany(Dependence::class);
     }
-    public function requirement(){
+    public function requeriment(){
         return $this->belongsToMany(Requirement::class);
+    }
+    public function osc(){
+        return $this->belongsToMany(Osc::class)->withPivot('status');
     }
 }

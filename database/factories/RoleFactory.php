@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Telephone>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
  */
-class TelephoneFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +17,9 @@ class TelephoneFactory extends Factory
     public function definition(): array
     {
         return [
-            'number_phone' => $this->faker->phoneNumber(),
-            'user_id' => User::inRandomOrder()->first()->id,
+            //
         ];
     }
+
+
 }

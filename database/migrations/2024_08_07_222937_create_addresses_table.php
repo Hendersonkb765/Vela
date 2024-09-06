@@ -16,12 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('counties');
             $table->string('neighborhood');
-            $table->string('states');
+            $table->string('state');
             $table->string('cep');
             $table->string('street');
             $table->string('number');
             $table->string('complement')->nullable();
-            $table->foreignId('osc_id')->constrained();
+            $table->morphs('addressable');
             $table->timestamps();
         });
         

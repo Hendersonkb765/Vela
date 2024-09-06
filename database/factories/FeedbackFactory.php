@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\TargetAudience;
-use App\Models\Osc; // Add this line to import the Osc class
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\User;
+use App\Models\Feedback;
+use App\Models\Requirement;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class TargetAudienceFactory extends Factory
+class FeedbackFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,10 @@ class TargetAudienceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'message' => $this->faker->text,
+            'rating'=> fake()->randomElement(['1','2','3','4','5']),
+            'team_vela' => User::all()->random()->first(),
+            'requirement_id'=> Requirement::inRandomOrder()->first(),
         ];
     }
-    
 }

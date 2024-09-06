@@ -22,9 +22,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'provider',
-        'position',
+        'role',
         'sex',
         'birthday',
+        'image_url',
         
     ];
 
@@ -55,9 +56,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Osc::class);
     }
-    public function telephone() : HasMany
+    public function telephone() 
     {
-        return $this->hasMany(Telephone::class);
+        return $this->morphTo(Phone::class);
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
     
 }

@@ -13,9 +13,6 @@ class TypePerformance extends Model
     protected $fillable = [
         'name'
     ];
-    public function Osc() : BelongsToMany
-    {
-        //muitos para um
-        return $this->belongsToMany(Osc::class);
-    }
+    
+   
 }

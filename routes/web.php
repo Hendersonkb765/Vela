@@ -8,6 +8,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OscController; // Add this line
 use App\Http\Middleware\CheckOsc; // Add this line
 use App\Http\Middleware\CheckUserRegistration;
+use App\Models\Axis;
+use App\Models\Level;
+use App\Models\Osc;
+use App\Models\User; // Add this line
+use App\Models\Task; // Add this line
+use App\Models\Address; // Add this line
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -95,9 +101,18 @@ Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
 
+
+/////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
-    echo 'teste';
+    $osc = Osc::find(4);
+    dd($osc->address);
+    //dd($osc->first()->task->first()->pivot->status);
+    //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
+    //$osc->save();
+
 })->name('teste');
+
+
 
 
 

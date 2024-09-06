@@ -25,11 +25,5 @@ class CnaeFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (\App\Models\Cnae $cnae) {
-            $oscs = Osc::inRandomOrder()->limit(10)->get();
-            $cnae->oscs()->attach($oscs);
-        });
-    }
+   
 }

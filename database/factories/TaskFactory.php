@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Level;
+use App\Models\Osc;
 use App\Models\Task;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
@@ -19,9 +20,9 @@ class TaskFactory extends Factory
     {
         return [
             'title'=> fake()->sentence(),
-            'level_id'=>fake()->numberBetween(1,7),
+            'level_id'=>fake()->numberBetween(1,2),
             'description' => fake()->text(),
-            'status' => fake()->randomElement(['pending', 'completed']),
+            //'status' => fake()->randomElement(['pending', 'completed']),
             'message_conclusion' => fake()->text()
         ];
     }
@@ -31,6 +32,11 @@ class TaskFactory extends Factory
             $task->order()->create([
                 'order_number' => fake()->numberBetween(1,7),
             ]);
+            $oscs = Osc::all();
+            foreach($oscs as $osc){
+                $task->osc()->attach($osc->id);
+            }
+                
         });
     }
 

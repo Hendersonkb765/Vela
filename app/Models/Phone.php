@@ -4,19 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-class Cnae extends Model
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Phone extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'code',
+        'number',
     ];
 
-    // Relacionamento muitos para muitos
-  
-
 }
-
-
