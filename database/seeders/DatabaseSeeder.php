@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
         TypePerformance::factory(3)->create();
-        Cnae::factory(3)->create();
+        //Cnae::factory(3)->create();
         Osc::factory(3)->create();
         for ($i = 1; $i <= 2; $i++) {
             Level::factory()->create([
@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
         }
         Task::factory(4)->create(); 
         
-        Address::factory(3)->create();
+        //Address::factory(3)->create();
         
         TargetAudience::factory()->create(['name'=>'Assistência Social']);
         TargetAudience::factory()->create(['name'=>'Saúde']);
@@ -74,7 +74,6 @@ class DatabaseSeeder extends Seeder
         TargetAudience::factory()->create(['name'=>'Cultura']);
         
         Activitie::factory(4)->create();
-        Phone::factory(20)->create();
         Step::factory(10)->create();
         Requirement::factory(3)->create();
         Feedback::factory(5)->create();

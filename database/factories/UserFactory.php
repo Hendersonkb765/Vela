@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Phone; // Add this line to import the Phone class
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -39,6 +40,17 @@ class UserFactory extends Factory
 
     }
   
+    public function configure(){
+        return $this->afterCreating(function(User $user){
+            $user->phone()->create(
+                Phone::factory(
+                    ['phoneable_id'=>$user->id,
+                    'phoneable_type'=>$user->getMorphClass()]
+                )->make()->toArray());
+        });
+        //$osc->address()->create(Address::factory(['addressable_id'=>$osc->id,'addressable_type'=>$osc->getMorphClass()])->make()->toArray());
+
+    }
 
 
     /**

@@ -67,7 +67,7 @@ class Osc extends Model
     }
     
     public function phone(){
-        return $this->morphTo(Phone::class,'phoneable');
+        return $this->morphMany(Phone::class,'phoneable');
     }
     public function recurring_activity(){
         return $this->hasMany(RecurringActivity::class);
