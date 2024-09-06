@@ -56,9 +56,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Osc::class);
     }
-    public function telephone() 
+    public function phone() 
     {
-        return $this->morphTo(Phone::class);
+        return $this->morphMany(Phone::class,'phoneable');
     }
     public function role()
     {
