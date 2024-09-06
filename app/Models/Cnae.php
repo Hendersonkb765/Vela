@@ -15,13 +15,7 @@ class Cnae extends Model
     ];
 
     // Relacionamento muitos para muitos
-     public function oscs(): BelongsToMany
-    {
-        return $this->BelongsToMany(Osc::class);
-    }
-    public function dependence(){
-        return $this->belongsTo(Dependence::class);
-    }
+  
 
 }
 
