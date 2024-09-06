@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Address extends Model
 {
@@ -17,12 +18,12 @@ class Address extends Model
         'complement',
         'neighborhood',
         'state',
-        'osc_id'
+        
     ];
 
-    // Relacionamento muitos para um
-    public function osc()
+    
+    public function addressable(): MorphTo
     {
-        return $this->belongsTo(Osc::class);
+        return $this->morphTo();
     }
 }
