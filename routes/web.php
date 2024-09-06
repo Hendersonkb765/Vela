@@ -104,8 +104,17 @@ Route::get('/profilesetup', function () {
 
 /////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
-    $osc = Osc::find(4);
-    dd($osc->address);
+    $osc = Osc::find(2);
+    $address = new Address([
+        'counties' => 'Example City',
+        'neighborhood' => 'Example Neighborhood',
+        'state' => 'Example State',
+        'cep' => '12345-678',
+        'street' => 'Example Street',
+        'number' => '123',
+        'complement' => 'Apt 456',
+    ]);
+    dd($osc->address()->save($address));
     //dd($osc->first()->task->first()->pivot->status);
     //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
     //$osc->save();
