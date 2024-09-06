@@ -22,11 +22,5 @@ class TargetAudienceFactory extends Factory
             'name' => fake()->name(),
         ];
     }
-    public function configure(){
-
-        return $this->afterCreating(function(TargetAudience $model){
-            $oscs = Osc::inRandomOrder()->first();
-            $model->osc()->attach($oscs);
-        } );
-    }
+    
 }
