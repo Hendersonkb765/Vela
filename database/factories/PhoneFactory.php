@@ -18,12 +18,10 @@ class PhoneFactory extends Factory
      */
     public function definition(): array
     {
-        $phoneableType = $this->faker->randomElement([User::class, Osc::class]);
-        $phoneable = $phoneableType::factory()->create();
         return [
             'number' => $this->faker->phoneNumber(),
-            'phoneable_id' => $phoneable->id,
-            'phoneable_type' => $phoneableType,
+            'phoneable_id' =>'',
+            'phoneable_type' => '',
         ];
     }
 }
