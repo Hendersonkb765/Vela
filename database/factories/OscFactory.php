@@ -10,6 +10,8 @@ use App\Models\TargetAudience; // Add this line to import the TargetAudience cla
 use App\Models\TypePerformance; // Add this line to import the TypePerformance class
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as FakerFactory;
+use App\Models\Address; // Add this line to import the Address class
+use App\Models\Phone; // Add this line to import the Phone class
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Osc>
  */
@@ -59,7 +61,10 @@ class OscFactory extends Factory
             $osc->targetAudience()->attach(TargetAudience::inRandomOrder()->limit(10)->get());
         
             $osc->typePerformance()->attach(TypePerformance::inRandomOrder()->limit(10)->get());
+
+            $osc->address()->create(Address::factory(['addressable_id'=>$osc->id,'addressable_type'=>$osc->getMorphClass()])->make()->toArray());
         
+            $osc->phone()->create(Phone::factory(['phoneable_id'=>$osc->id,'phoneable_type'=>$osc->getMorphClass()])->make()->toArray());
         });
     }
     public function generatetPresidentsName(){
