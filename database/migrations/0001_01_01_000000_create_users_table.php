@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('roles',function (Blueprint $table){
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name',100)->nullable();
             $table->string('email',150)->unique();
             $table->enum('provider',['email','google'])->default('email');
-            $table->enum('position',['Presidente','Administrador(a)','Membro','Voluntário','Equipe Vela','Dev'])->nullable()->default('Membro');
+            $table->foreignId('role_id')->constrained();
             $table->enum('sex',['Masculino','Feminino','Outros'])->nullable();
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -25,6 +30,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
+        
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -41,11 +48,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        Schema::create('telephones',function(Blueprint $table){
-            $table->foreignId('user_id')->constrained();
-            $table->string('number_phone');
-            $table->timestamps();
-        });
+        
     }
     
 
