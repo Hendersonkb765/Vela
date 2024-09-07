@@ -16,7 +16,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual 
     const OscLevel = level.current_level;
     const OscName = osc.fantasy_name;
-    const Progress = tasks.tasks_completed / tasks.tasks_max; // (tasks feitas / total de tasks do level
+    const Progress = tasks.completed.total / tasks.tasks_max; // (tasks feitas / total de tasks do level
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
             <div className={`w-3/5 min-w-fit  bg-white flex items-center justify-between p-2 space-x-4  ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
@@ -37,7 +37,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
         <VelaSocialLayout
             userName={user.name} //auth.user
             imgUrl={imageUrlUser}
-            role={user.position}
+            role={user.role}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard"/>
