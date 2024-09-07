@@ -20,7 +20,7 @@ class TaskFactory extends Factory
     {
         return [
             'title'=> fake()->sentence(),
-            'level_id'=>fake()->numberBetween(1,2),
+            'level_id'=>fake()->numberBetween(1,7),
             'description' => fake()->text(),
             //'status' => fake()->randomElement(['pending', 'completed']),
             'message_conclusion' => fake()->text()
