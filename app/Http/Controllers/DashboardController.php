@@ -7,6 +7,7 @@ use App\Models\AxisOsc;
 use App\Models\Level;
 use Illuminate\Http\Request;
 use App\Models\Osc;
+use App\Models\Task;
 use App\Models\TaskOrder;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -25,21 +26,25 @@ class DashboardController extends Controller
         $axis = $osc->axis->first();
        
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
-        $currentLevel = DB::table('axis_osc')->where('osc_id',$osc->id)->where('axis_id',$axis->id)->first()->current_level;
-        $level = $axis->level->where('id',$currentLevel)->first();
-        $tasks = Level::with(['task','task.step'])->where('position', $level->id)->first();
+     
+        $currentLevel = $osc->axis->first()->pivot->current_level;
+       
+        $level = $axis->level->where('position',$currentLevel)->first();
+        $tasks = $level->task;
+        //$tasks = $axis->level->first()->with(['task','task.step'])->where('position', $level->id)->first();
         $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirements_failed'=>0];
        
-        
-        foreach ($tasks['task'] as $task) {
+
+        foreach ($tasks as $task) {
 
             $numberPeding = 0;
             $numberCompleted = 0;
             $step = [];
-            
-            $taskNew = ['id'=> $task->id,'title'=>$task->title,'status'=>$task->status,'step'=>[],'order_number'=>$task->order->order_number];
-            foreach ($task['step'] as $step) {
-
+           
+            $taskNew = ['id'=> $task->id,'title'=>$task->title,'status'=>$task->osc->first()->pivot->status,'step'=>[],'order_number'=>$task->order->order_number];
+           
+            foreach ($task->step as $step) {
+                
                 foreach ($step->requirement as $requirement) {
                     if ($requirement->status == 'reprovado'){
                         $arrayTasks['requirements_failed']++;
@@ -56,17 +61,31 @@ class DashboardController extends Controller
             $step['pending'] = $numberPeding;
             $step['completed'] = $numberCompleted; 
             $taskNew['step'] = $step;
-            $task->status == 'completed'?
+            $task->osc->first()->pivot->status == 'concluído'?
             array_push($arrayTasks['completed'],$taskNew):
             array_push($arrayTasks['pending'],$taskNew);
-        }
+        }   
+
         //array_push($arrayTasks['completed'],['total'=> Level::where('id',$currentLevel)->first()->task->where('status','completed')->count()]);
-        $arrayTasks['completed']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
-        $arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
-        $arrayTasks['tasks_completed'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
-        $arrayTasks['tasks_max'] = Level::where('id',$currentLevel)->first()->task->count();
+        
+        foreach($level->task as $task){
+            $task->osc->first()->pivot->status == 'concluído'?
+            $arrayTasks['completed']['total']++:
+            $arrayTasks['pending']['total']++;
+        }
+        
+        //$arrayTasks['completed']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
+        //$arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
+        $arrayTasks['tasks_completed'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
+        $arrayTasks['tasks_max'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
         return Inertia::render('Dashboard',[
-            'user' => $user,
+            'user' =>[
+                        'id'=> $user->id,
+                        'name'=>$user->name,
+                        'email' => $user->email,
+                        'image_url' => $user->image_url,
+                        'role' => $user->role->name,
+                    ],
             'osc' => [
                         'id'=> $osc->id,
                         'fantasy_name'=>$osc->fantasy_name,
