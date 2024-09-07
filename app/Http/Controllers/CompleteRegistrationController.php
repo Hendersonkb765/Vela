@@ -16,6 +16,7 @@ use App\Models\Axis; // Add this line
 use App\Models\Task; // Add this line
 use App\Models\Step; // Add this line
 use App\Models\Requirement; // Add this line
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\ConnectionException;
@@ -31,7 +32,7 @@ class CompleteRegistrationController extends Controller
             ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
                 'user' => [
                     'name' => Auth::user()->name,
-                    'url_image' => Auth::user()->url_image
+                    'image_url' => Auth::user()->image_url
                 ]
             ])
             : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
@@ -47,6 +48,7 @@ class CompleteRegistrationController extends Controller
                 //'roleInOrganization' => 'required|string|enum:Presidente,Gerente,Administrador,Membro',
             ]);
         */
+        
             $userRequest = $request['user'];
             if (isset($userRequest['profilePicture'])) {
                 $imageData = $userRequest['profilePicture'];
@@ -60,14 +62,16 @@ class CompleteRegistrationController extends Controller
                 }
                 Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
+            $roleId = Role::where('name','=',$userRequest['roleInOrganization'])->id;
             $userRequest['profilePicture'];
             $user = $request->user()->fill([
                 'name' => $userRequest['name'],
-                'position' => $userRequest['roleInOrganization'],
+                'role_id' => $roleId,
                 'birthday' => $userRequest['birthday'],
             ]);
             $user->save();
 
+            
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
@@ -108,44 +112,19 @@ class CompleteRegistrationController extends Controller
             'image_url' => $imageUrl,
         ]);
         $osc->user()->attach(Auth::user()->id);
-        $osc->axis()->attach(1);
-        /*
-        for ($i = 1; $i <= 7; $i++) {
-            $level = Level::factory()->create([
-                'name' => "OSC Marketing Nível $i",
-                'description' => "Descrição do Nível $i de marketing.",
-                'image_url' => fake()->url(),
-                'axis_id' => $osc->axis->first()->id,
-                'position' => $i,
-            ]);
-            $osc->level()->attach($level->id);
-            for ($j = 1; $j <= 5; $j++) {
-                $task = Task::factory()->create([
-                    'name' => "Tarefa $j",
-                    'description' => "Descrição da tarefa $j.",
-                    'level_id' => $level->id,
-                ]);
-                $level->task()->attach($task->id);
-                for ($k = 1; $k <= 5; $k++) {
-                    $step = Step::factory()->create([
-                        'name' => "Passo $k",
-                        'description' => "Descrição do passo $k.",
-                        'task_id' => $task->id,                    ]);
-                    $task->step()->attach($step->id);
-
-                    for ($l = 1; $l <= 5; $l++){
-                        $requirement = Requirement::create([
-                            'name' => "Requisito $l",
-                            'description' => "Descrição do requisito $l.",
-                            'step_id' => $step->id,
-                        ]);
-                        $step->requirement()->attach($requirement->id);
-                    }
-                }
-            }
-            
+        $axes = Axis::all();
+        foreach($axes as $axis){
+            $osc->axis()->attach($axis->id);
         }
-            */
+        $task = Task::all();
+        foreach($task as $task){
+            $osc->task()->attach($task->id);
+        }
+        $level = Level::all();
+        foreach($level as $level){
+            $osc->level()->attach($level->id);
+        }
+      
         $focusAreas = $request->input('organization.focusAreas');
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){
@@ -158,49 +137,5 @@ class CompleteRegistrationController extends Controller
             dd($e);
         }
     }
-    /*
-    public function storePresident(Request $request)
-    {
 
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:' . User::class,
-                'password' => 'required|confirmed|min:8',
-                'birthday' => 'required|date|before:today',
-                'sex' => 'required',
-            ]);
-
-            $request->validate(
-                [
-                    'osc_name' => 'required|string|max:255',
-                    'foundation_date' => 'required|date|before:today',
-                ]
-            );
-
-            DB::beginTransaction();
-
-
-            $osc = Osc::create([
-                'name' => $request->osc_name,
-                'presidents_name' => $request->name,
-                'foundation_date' => $request->foundation_date,
-                'user_id' => $user->id,
-            ]);
-
-            DB::commit();
-
-            event(new Registered($user));
-        } catch (ConnectionException $e) {
-            DB::rollBack();
-            echo "Ops! Parece que você está sem conexão com a internet!";
-        } catch (\Illuminate\Database\QueryException $e) {
-            DB::rollBack();
-            echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect(route('dashboard', absolute: false));
-        }
-    }
-        */
 }
