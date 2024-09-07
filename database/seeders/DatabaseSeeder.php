@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         TypePerformance::factory(3)->create();
         //Cnae::factory(3)->create();
         Osc::factory(3)->create();
-        for ($i = 1; $i <= 2; $i++) {
+        for ($i = 1; $i <= 7; $i++) {
             Level::factory()->create([
                 'name' => "OSC Marketing Nível $i",
                 'description' => "Descrição do Nível $i de marketing.",
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
                 'axis_id'=>1
             ]);
         }
-        Task::factory(4)->create(); 
+        Task::factory(20)->create(); 
         
         //Address::factory(3)->create();
         

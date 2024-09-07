@@ -16,6 +16,7 @@ class Level extends Model
         'position',
     ];
 
+ 
     public function task(){
         return $this->hasMany(Task::class);
     }

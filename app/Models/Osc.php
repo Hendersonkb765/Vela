@@ -31,14 +31,16 @@ class Osc extends Model
 
   // Relacionamento um para muitos
   
-  public function address(){
-    return $this->morphMany(Address::class,'addressable');
-}
+
     
-   
+    public function address(){
+        return $this->morphMany(Address::class,'addressable');
+    }
+    
+
     public function axis()
     {
-        return $this->belongsToMany(Axis::class);
+        return $this->belongsToMany(Axis::class)->withPivot('current_level');
     }
     public function level()
     {

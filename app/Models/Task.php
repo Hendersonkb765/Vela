@@ -17,7 +17,21 @@ class Task extends Model
     ];
 
 
-
+    public function scopeTaskCompleted(Builder $query){
+        
+        return $query->whereHas('osc', function (Builder $query) {
+            $query->where('osc_task.status', 'concluído');
+           
+        });
+    
+    }
+    public function scopeTaskPending(Builder $query){
+        
+        return $query->whereHas('osc', function (Builder $query) {
+            $query->where('osc_task.status', 'pendente');
+        });
+    
+    }
     public function level(){
         return $this->belongsTo(Level::class);
     }

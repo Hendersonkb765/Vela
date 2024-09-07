@@ -21,7 +21,7 @@ class Axis extends Model
     }
 
     public function level(){
-        return $this->belongsToMany(Level::class);
+        return $this->hasMany(Level::class);
     }
     public function responsible(){
         return $this->belongsTo(User::class);
