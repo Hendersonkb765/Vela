@@ -17,7 +17,7 @@ export default function ForgotPassword({ status }) {
     };
 
     return (
-        <section className='bg-primary h-screen flex flex-col items-center justify-center py-8'>
+        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-center justify-center py-8'>
             <Head title="Trocar senha" />
             <div className='w-2/5 flex flex-col items-center bg-white px-4 py-8 rounded-xl'>
                 <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Esqueceu sua senha?</h2>

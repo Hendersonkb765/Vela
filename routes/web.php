@@ -41,7 +41,12 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
     ['auth',CheckUserRegistration::class,
     CheckOsc::class
-    ])->name('dashboard');
+])->name('dashboard');
+
+Route::get('/settings', function () {
+    return Inertia::render('VelaSocialLab/Profile/Settings');
+})->middleware(['auth'])->name('settings');
+// ->middleware(['auth', 'verified'])->name('Configurações');
 
 Route::get('/myuploads', function () {
     return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
@@ -81,7 +86,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/osc/criar', [OscController::class, 'store'])->name('osc.store');
 
-    
+
     Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');

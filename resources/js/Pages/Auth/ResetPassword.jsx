@@ -22,9 +22,9 @@ export default function ResetPassword({ token, email }) {
     };
 
     return (
-        <section className='bg-primary h-screen flex flex-col items-center justify-center py-8'>
+        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-center justify-center py-8'>
             <Head title="Trocar senha" />
-            <div className='w-2/5 flex flex-col items-center bg-white px-4 py-8  rounded-xl'>
+            <div className='w-2/5 flex flex-col items-center px-4 py-8  rounded-xl bg-white dark:bg-gray-900 dark:text-neutral-400'>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                     <div>
                         <InputLabel htmlFor="email" value="Email" />
