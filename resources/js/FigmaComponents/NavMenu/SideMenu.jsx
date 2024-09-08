@@ -14,9 +14,9 @@ const SideMenu = ({className}) => {
         {title: "Eixos", icon: <GoChecklist className='w-6 h-6'/>, route: 'axishub'},
         {title: "Tarefas", icon: <GoGoal className='w-6 h-6'/>, route: 'taskhub'},
         {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
+        {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'settings'},
         {title: "Suporte", icon: <GoQuestion className='w-6 h-6'/>, route: 'resources'},
-        {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'resources'},
-        {title: "Sair", icon: <GoSignOut className='w-6 h-6 '/>, route: 'logout'}
+        {title: "Sair", icon: <GoSignOut className='w-6 h-6 '/>, route: 'logout', method: "post"}
     ]
 
     const MobileMenusOptions = [
@@ -25,7 +25,7 @@ const SideMenu = ({className}) => {
         {title: "Eixos", icon: <GoChecklist className='w-6 h-6'/>, route: 'axishub'},
         {title: "Tarefas", icon: <GoGoal className='w-6 h-6'/>, route: 'taskhub'},
         {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
-        {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'logout'},
+        {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'settings'},
 
     ]
     return (
@@ -33,7 +33,7 @@ const SideMenu = ({className}) => {
             <div
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave ={() => setIsOpen(false)}
-                className={` ${isOpen ? 'w-60' : 'w-20'}  h-screen  hidden md:flex flex-col py-4 border-r border-neutralcolors-100 duration-300  ${className} `}
+                className={` ${isOpen ? 'w-60' : 'w-20'}  h-screen  hidden lg:flex flex-col py-4 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300  ${className} `}
             >
 
                 <ApplicationLogo className='w-full mb-4 opacity-0 hidden sm:block'/>
@@ -43,13 +43,15 @@ const SideMenu = ({className}) => {
                         <Link
                             key={index}
                             className={`
-                                ${isOpen ? 'space-x-2 pl-4' : 'justify-center'} w-full h-14 flex items-center  text-base cursor-pointer hover:bg-neutralcolors rounded-md duration-300 ease-in-out'
+                                dark:text-white
+                                ${isOpen ? 'space-x-2 pl-4' : 'justify-center'} w-full h-14 flex items-center  text-base cursor-pointer hover:bg-neutralcolors dark:hover:bg-gray-950 rounded-md duration-300 ease-in-out'
                                 ${index == 4 && 'mb-auto'}
-                                ${index === MenusOptions.length - 1 && 'hover:!bg-danger text-danger hover:!text-white'}
+                                ${index === MenusOptions.length - 1 && 'hover:!bg-danger !text-danger hover:!text-white'}
                                 ${menu.route === currentRoute.url.replace(/^\//, '') && '!bg-primary !text-white hover:!bg-primary-200'}
                             `}
                                                                             // adicionar lógica para deslogar
-                            href={index === MenusOptions.length ? route('register') : route(menu.route) }
+                            href={index === MenusOptions.length ? route('logout') : route(menu.route) }
+                            method={menu.method ? menu.method : "get"}
 
                         >
                             <div >{menu.icon}</div>
@@ -59,16 +61,15 @@ const SideMenu = ({className}) => {
                 </ul>
             </div>
             <div>
-                <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white text-primary-300 flex justify-around p-4 shadow-sm">
-                    <ul className='flex w-full justify-evenly px-2 gap-y-2'>
+                <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm">
+                    <ul className='flex w-full justify-evenly space-x-2 items-center '>
                         {MobileMenusOptions.map((menu, index) => (
                             <Link
                                 key={index}
-                                className={`w-14 h-14 flex items-center justify-center text-base cursor-pointer hover:bg-neutralcolors rounded-full duration-300 ease-in-out'
-                                    ${menu.route === currentRoute.url.replace(/^\//, '') && '!bg-primary !text-white hover:!bg-primary-200'}
+                                className={` w-14 h-14 flex items-center justify-center text-base cursor-pointer dark:text-white  hover:bg-neutralcolors dark:hover:bg-gray-950 rounded-full duration-300 ease-in-out'
+                                    ${menu.route === currentRoute.url.replace(/^\//, '') && 'sm:!bg-primary !text-primary sm:!text-white hover:!bg-primary-200'}
                                 `}
-                                                                                // adicionar lógica para deslogar
-                                href={index === MobileMenusOptions.length ? route('register') : route(menu.route) }
+                                href={route(menu.route) }
 
                             >
                                 <div >{menu.icon}</div>

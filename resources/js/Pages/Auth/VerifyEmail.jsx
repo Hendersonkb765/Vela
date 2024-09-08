@@ -12,11 +12,11 @@ export default function VerifyEmail({ status }) {
     };
 
     return (
-        <section className='bg-primary h-screen flex flex-col items-start sm:items-center justify-center sm:py-8 pt-60'>
+        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-start sm:items-center justify-center sm:py-8 pt-60 '>
             <Head title="Email Verification" />
 
-            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-start bg-white px-4 py-8 rounded-xl '>
-                <div className='text-neutralcolors-700 font-body'>
+            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-start bg-white px-4 py-8 rounded-xl dark:bg-gray-900 '>
+                <div className='text-neutralcolors-700 dark:text-neutralcolors-200 font-body'>
                     <div className="mb-4 text-sm ">
                         Obrigado por se inscrever! Antes de começar, poderia verificar seu endereço de e-mail clicando no link que acabamos de enviar para você? Se você não recebeu o e-mail, ficaremos felizes em enviar outro.
                     </div>

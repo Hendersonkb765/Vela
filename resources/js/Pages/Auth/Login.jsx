@@ -24,11 +24,11 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <section className='bg-primary h-screen  flex flex-col items-center justify-center sm:py-8 pt-60'>
+        <section className='bg-primary dark:bg-primary-300 h-screen  flex flex-col items-center justify-center sm:py-8 pt-60'>
             <Head title="Entrar"/>
 
-            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center bg-white px-4 py-8 rounded-xl '>
-                <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 '>Bem vindo de volta!</h2>
+            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center px-4 py-8 rounded-xl bg-white  dark:bg-gray-900 dark:text-neutralcolors-200'>
+                <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 dark:text-neutralcolors-200'>Bem vindo de volta!</h2>
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                     <div className="">
@@ -97,7 +97,7 @@ export default function Login({ status, canResetPassword }) {
                             <PrimaryButton className="h-12 w-full " disabled={processing} center={true} type='submit'>
                                 Entrar
                             </PrimaryButton>
-                            <p className="w-full text-sm text-neutralcolors-400">
+                            <p className="w-full text-sm text-neutralcolors-400 dark:text-neutralcolors-200">
                                 Ainda não tem uma conta? <Link href={route('register')} className="underline  text-primary">Cadastre-se</Link>
                             </p>
                         </div>
@@ -107,7 +107,7 @@ export default function Login({ status, canResetPassword }) {
                             <span className='text-neutralcolors-200'>Ou</span>
                             <div className='w-full h-0.5 bg-neutralcolors-100' />
                         </div>
-                        <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out' href={route('redirect',['google'])}>
+                        <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out dark:bg-gray-800 dark:hover:bg-gray-800/50 dark:text-neutralcolors-200' href={route('redirect',['google'])}>
                             <FcGoogle className='w-8 h-8'></FcGoogle>Entrar com o Google
                         </a>
 

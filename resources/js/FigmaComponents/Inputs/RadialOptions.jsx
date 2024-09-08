@@ -14,7 +14,7 @@ import { React, useState } from 'react';
         {options.map((option) => (
           <div
             key={option.id}
-            className={`w-80 h-96 relative p-4 border ${selectedOption === option.id ? 'border-primary' : 'border-gray-300'} rounded-lg shadow-lg cursor-pointer`}
+            className={`w-80 h-96 relative p-4 border ${selectedOption === option.id ? 'border-primary' : 'border-gray-200'} rounded-lg shadow-sm cursor-pointer`}
             onClick={() => handleSelect(option.id)}
           >
             <div className={`absolute top-2 right-2 w-3 h-3 rounded-full ${selectedOption === option.id ? 'bg-primary' : 'bg-gray-300'}`}></div>
