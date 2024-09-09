@@ -20,7 +20,6 @@ class DashboardController extends Controller
 
     public function index(){
        try{
-        
         $user = Auth::user();
         $osc = $user->osc->first();
         $axis = $osc->axis->first();
