@@ -40,6 +40,8 @@ class CompleteRegistrationController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        
+
         try {
             /*
             $request->validate([
@@ -62,8 +64,8 @@ class CompleteRegistrationController extends Controller
                 }
                 Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
-            $roleId = Role::where('name','=',$userRequest['roleInOrganization'])->id;
-            $userRequest['profilePicture'];
+            
+            $roleId = Role::where('name','=',$userRequest['roleInOrganization'])->first()->id;
             $user = $request->user()->fill([
                 'name' => $userRequest['name'],
                 'role_id' => $roleId,
@@ -71,7 +73,7 @@ class CompleteRegistrationController extends Controller
             ]);
             $user->save();
 
-            
+
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
@@ -132,6 +134,7 @@ class CompleteRegistrationController extends Controller
             }
         }
         $osc->save();
+        
         }
         catch(\Exception $e){
             dd($e);
