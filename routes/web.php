@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitieController;
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -125,6 +126,8 @@ Route::get('/teste',function(){
     //$osc->save();
 
 })->name('teste');
+
+Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
 
 
 
