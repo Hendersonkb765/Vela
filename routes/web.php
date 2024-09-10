@@ -106,7 +106,8 @@ Route::get('/dashboardtest', function () {
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-
+Route::get('/registrar-atividade', [ActivitieController::class,'create'])->name('activitie.create');
+Route::post('/registrar-atividade', [ActivitieController::class,'store'])->name('activitie.store');
 
 /////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
