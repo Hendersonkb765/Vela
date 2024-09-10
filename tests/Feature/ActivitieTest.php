@@ -31,7 +31,6 @@ class ActivitieTest extends TestCase
             'date' => '2025-10-01',
             'hour_start' => '08:00',
             'hour_end' => '12:00'
-            ,
         ]);
 
         $response->assertStatus(200);
