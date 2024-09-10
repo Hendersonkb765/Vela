@@ -13,6 +13,8 @@ class ActivitieTest extends TestCase
     /**
      * A basic feature test example.
      */
+
+    //php artisan test --filter RegistrationTest
     public function test_index_displays_list_of_activities(): void
     {
         $response = $this->get('/');
@@ -21,10 +23,9 @@ class ActivitieTest extends TestCase
     }
     public function test_register_activity(): void
     {
-        $user = User::factory()->create();
-        Auth::login($user);
+        Auth::loginUsingId(14);
 
-        $response = $this->post('/dashboard', [
+        $response = $this->post(route('activitie.store'), [
             'title' => 'Atividade 1',
             'description' => 'Descrição da atividade 1',
             'start_date' => '2021-10-01',
