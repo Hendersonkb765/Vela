@@ -12,7 +12,7 @@ class ActivitieController extends Controller
     public function index(){
         //lista de atividades
     
-        return view('activitie.index');
+       
     }
     public function create(){
         //formulario de cadastro de atividades
@@ -21,7 +21,7 @@ class ActivitieController extends Controller
     public function store(Request $request){
 
         try{
-            Auth::loginUsingId(14);
+            
             Activitie::create([
                 'title' => $request->title,
                 'description' => $request->description,
