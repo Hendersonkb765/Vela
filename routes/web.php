@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitieController;
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -105,7 +106,8 @@ Route::get('/dashboardtest', function () {
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-
+Route::get('/registrar-atividade', [ActivitieController::class,'create'])->name('activitie.create');
+Route::post('/registrar-atividade', [ActivitieController::class,'store'])->name('activitie.store');
 
 /////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
@@ -125,6 +127,8 @@ Route::get('/teste',function(){
     //$osc->save();
 
 })->name('teste');
+
+Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
 
 
 

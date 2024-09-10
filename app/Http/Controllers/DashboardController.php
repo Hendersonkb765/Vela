@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $tasks = $level->task;
         //$tasks = $axis->level->first()->with(['task','task.step'])->where('position', $level->id)->first();
         $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirements_failed'=>0];
-       
+
 
         foreach ($tasks as $task) {
 
@@ -77,6 +77,8 @@ class DashboardController extends Controller
         //$arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
         $arrayTasks['tasks_completed'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasks_max'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
+       
+        
         return Inertia::render('Dashboard',[
             'user' =>[
                         'id'=> $user->id,
