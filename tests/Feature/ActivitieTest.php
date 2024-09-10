@@ -14,7 +14,7 @@ class ActivitieTest extends TestCase
      * A basic feature test example.
      */
 
-    //php artisan test --filter RegistrationTest
+    //php artisan test --filter ActivitieTest
     public function test_index_displays_list_of_activities(): void
     {
         $response = $this->get('/');
@@ -28,9 +28,10 @@ class ActivitieTest extends TestCase
         $response = $this->post(route('activitie.store'), [
             'title' => 'Atividade 1',
             'description' => 'Descrição da atividade 1',
-            'start_date' => '2021-10-01',
-            'end_date' => '2021-10-10',
-            'status' => 'Ativa',
+            'date' => '2025-10-01',
+            'hour_start' => '08:00',
+            'hour_end' => '12:00'
+            ,
         ]);
 
         $response->assertStatus(200);
