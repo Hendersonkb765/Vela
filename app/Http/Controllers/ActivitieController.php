@@ -19,7 +19,13 @@ class ActivitieController extends Controller
         return view('activitie.create'); 
     }
     public function store(Request $request){
-
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'date'=> 'required|date',
+            'hour_start' => 'required|date_format:H:i|before:hour_end',
+            'hour_end' => 'required|date_format:H:i|after:hour_start',
+        ]);
         try{
             
             Activitie::create([
