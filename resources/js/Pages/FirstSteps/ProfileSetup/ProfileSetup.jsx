@@ -13,12 +13,12 @@ export default function ProfileSetup() {
     const [complete, setComplete] = useState(false);
 
     const { data, setData, post, patch, processing, errors, reset } = useForm({
-   
+
         user: {
             name: '',
             profilePicture: '',
             birthday: '',
-            roleInOrganization: '',
+            roleInOrganization: null,
         },
         hasOrganization: false,
         organization: {
@@ -64,15 +64,13 @@ export default function ProfileSetup() {
     };
 
     const handleNextStep = (e) => {
-
         e.preventDefault();
 
-        if (currentStep === maxStep) {
-            handleSubmit();
-        }
-        else if(currentStep === 2 && !data.hasOrganization) {
-            handleSubmit();
-        }
+        // Solução provisória para evitar avanço do stage2 sem selecionar role
+        if(currentStep == 2 && !data.user.roleInOrganization ) return alert("Selecione uma das opções");
+
+        if (currentStep === maxStep) handleSubmit();
+
         else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
         }
@@ -80,25 +78,25 @@ export default function ProfileSetup() {
 
 
     const handleSubmit = () => {
-
         patch(route('completeRegistration.store'), {
             data: data,
             onFinish: () => reset(),
+
         });
-        
+
     };
 
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col" encType="multipart/form-data">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col " encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
                     <div className="flex justify-between mt-auto ">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">
                             Voltar
                         </PrimaryButton>
                         <PrimaryButton center={true} className="h-12" type="submit">
-                            {complete ? "Finalizar" : "Continuar"}
+                            {(currentStep === maxStep) ? "Finalizar" : "Continuar"}
                         </PrimaryButton>
                     </div>
                 </form>

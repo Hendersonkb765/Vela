@@ -11,12 +11,12 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
-                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700">{baseInfo.title}</h1>
-                <p className="font-body font-normal text-base text-neutralcolors-700">{baseInfo.description}</p>
+                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
+                <p className="font-body font-normal text-base text-neutralcolors-700 dark:text-gray-300">{baseInfo.description}</p>
             </div>
             <div className="flex flex-col space-y-2">
 
-                <h3 className="font-headers font-medium text-large text-neutralcolors-700">CNPJ da sua Organização</h3>
+                <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">CNPJ da sua Organização</h3>
                 <div>
                 <TextInput
                     id="CNPJ"
@@ -43,17 +43,17 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
                                     doesNotHaveCNPJ: e.target.checked
                                 })}
                             />
-                            <span className="ms-2 text-sm text-neutralcolors-400">Minha organização não possui cnpj</span>
+                            <span className="ms-2 text-sm text-neutralcolors-400 dark:text-gray-400">Minha organização não possui cnpj</span>
                     </label>
                 </div>
                 {data.organization.doesNotHaveCNPJ &&
                     <div>
-                        <h3 className="font-headers font-medium text-large text-neutralcolors-700 mt-2">Seu CPF</h3>
+                        <h3 className="font-headers font-medium text-large text-neutralcolors-700 mt-2 dark:text-gray-200">Seu CPF</h3>
                         <div>
                             <TextInput
                                 id="CPF"
                                 name="CPF"
-                                value={data.organizationCPF}
+                                value={data.organization.organizationCPF}
                                 className="mt-1 block w-96 min-w-fit"
                                 autoComplete="CPF"
                                 isFocused={true}

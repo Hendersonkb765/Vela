@@ -20,7 +20,7 @@ export default function CheckboxGallery({ onSelectionChange, categories }) {
 
     return (
       <div>
-        <p>{selected.length} Selecionados</p>
+        <p className='dark:text-gray-400'>{selected.length} Selecionados</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map(category => (
             <label key={category.id} className="relative cursor-pointer">

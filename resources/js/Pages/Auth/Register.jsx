@@ -36,9 +36,14 @@ export default function Register() {
     const submit = (e) => {
         e.preventDefault();
         post(route('register.store'), {
+            onError: (errors) => {
+                alert('Ocorreu um erro no registro. Verifique os dados e tente novamente!');
+                setPasswordValidations({minLength: false, uppercase: false, specialChar: false})
+            },
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
+
 
     return (
         <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-center justify-center sm:py-8 pt-60'>
