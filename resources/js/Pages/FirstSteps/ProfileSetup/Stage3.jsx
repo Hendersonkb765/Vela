@@ -22,13 +22,13 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
-                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700">{baseInfo.title}</h1>
-                <p className="font-body font-normal text-base text-neutralcolors-700">{baseInfo.description}</p>
+                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
+                <p className="font-body font-normal text-base text-neutralcolors-700 dark:text-gray-300">{baseInfo.description}</p>
             </div>
             <div className="flex flex-col space-y-2">
                 <div>
-                    <h3 className="font-headers font-medium text-large text-neutralcolors-700">Nome da sua Organização</h3>
-                    <p className="font-body font-normal text-sm text-neutralcolors-700">Esse nome vai ser aquele apresentado para outros usuários que querem encontrar sua organização</p>
+                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Nome da sua Organização</h3>
+                    <p className="font-body font-normal text-sm text-neutralcolors-700  dark:text-gray-400">Esse nome vai ser aquele apresentado para outros usuários que querem encontrar sua organização</p>
                 </div>
                 <div>
                     <TextInput
@@ -51,8 +51,8 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
             </div>
             <div className="flex flex-col space-y-2">
                 <div className="mb-2">
-                    <h3 className="font-headers font-medium text-large text-neutralcolors-700">Escolha uma foto para o perfil da organização</h3>
-                    <p className="font-body font-normal text-sm text-neutralcolors-700">Coloque uma foto que represente sua organização. Faça essa escolha com carinho, mas não se preocupe, você poderá mudar depois.</p>
+                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Escolha uma foto para o perfil da organização</h3>
+                    <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-400">Coloque uma foto que represente sua organização. Faça essa escolha com carinho, mas não se preocupe, você poderá mudar depois.</p>
                 </div>
                 <ProfileUploadInput
                     firstletter={data.organization.organizationName?.charAt(0).toUpperCase()}

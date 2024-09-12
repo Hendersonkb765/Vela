@@ -14,10 +14,10 @@ const ProfileUploadInput = ({updateAvatarUrl }) => {
 
     return (
         <div>
-            <div className='flex items-center space-x-4'>
+            <div className='flex items-center space-x-4 '>
                 <img
                     src={avatarUrl.current}
-                    className="w-[150px] h-[150px] rounded-full bg-cover bg-center bg-no-repeat border-2 border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
+                    className="w-[150px] h-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
                 />
                 <SecondaryButton className='h-12' onClick={() => setModalOpen(true)}>
                     Escolher uma foto

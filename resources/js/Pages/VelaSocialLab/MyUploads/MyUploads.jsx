@@ -27,7 +27,7 @@ export default function Myuploads({ auth }) {
                 <form className="relative flex flex-col justify-center items-center h-80 bg-primary dark:bg-primary-300">
                     <FileUploadDragDrop />
                 </form>
-                <section className='w-full p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+                <section className='w-full p-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
                     {files.map((file) => (
                         <FileCard key={file.id} file={file} />
                     ))}
