@@ -64,15 +64,13 @@ class CompleteRegistrationController extends Controller
                 }
                 Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
-
-            $roleId = Role::where('name','=',$userRequest['roleInOrganization'])->first()->id;
+            //$roleId = Role::where('name','=',$userRequest['roleInOrganization'])->first()->id;
             $user = $request->user()->fill([
                 'name' => $userRequest['name'],
-                'role_id' => $roleId,
+                'role_id' => $userRequest['roleInOrganization'],
                 'birthday' => $userRequest['birthday'],
             ]);
             $user->save();
-
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
