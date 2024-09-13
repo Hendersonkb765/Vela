@@ -40,7 +40,6 @@ export default function ProfileSetup() {
     ];
 
     const maxStep = steps.length;
-
     const RenderStepContent = (step) => {
         switch (step) {
             case 1:
@@ -65,11 +64,11 @@ export default function ProfileSetup() {
 
     const handleNextStep = (e) => {
         e.preventDefault();
-
         // Solução provisória para evitar avanço do stage2 sem selecionar role
-        if(currentStep == 2 && !data.user.roleInOrganization ) return alert("Selecione uma das opções");
-
         if (currentStep === maxStep) handleSubmit();
+        if(currentStep == 2 && !data.user.roleInOrganization) return alert("Selecione uma das opções");
+        if (currentStep === 2 && !data.hasOrganization) handleSubmit();
+
 
         else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
