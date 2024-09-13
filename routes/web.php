@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Psy\VersionUpdater\Checker;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use Google\Client;
+use Google\Service\Drive;
+use Google\Service\Drive\DriveFile;
+use App\Http\Controllers\Services\Google\DriveController;
+use Laravel\Socialite\Facades\Socialite; // Add this line
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -129,9 +133,48 @@ Route::get('/teste',function(){
 })->name('teste');
 
 Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
+Route::get('/google',function(){
+    $client = new Client();
+    $client->setApplicationName('Vela_Social_Lab');
+    $client->setClientId(env('GOOGLE_CLIENT_ID'));
+    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
+    $client->setRedirectUri('http://127.0.0.1:8000/auth/callback/google');
+    $client->setAccessType('offline');
+    $client->setPrompt('select_account consent');
+    $client->setScopes([Drive::DRIVE]);
 
 
 
+    // Verifica se o token expirou e tenta renovar
+    if ($client->isAccessTokenExpired()) {
+        if ($client->getRefreshToken()) {
+            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+        } else {
+            // Redireciona para a URL de autenticação do Google
+            $authUrl = $client->createAuthUrl();
+            return redirect($authUrl);
+        }
+        // Salva o token de acesso atualizado
+        file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+    }
+
+    $service = new Drive($client);
+
+    // Cria a pasta no Google Drive
+    $folderMetadata = new DriveFile([
+        'name' => 'Nova Pasta',
+        'mimeType' => 'application/vnd.google-apps.folder'
+    ]);
+
+    $folder = $service->files->create($folderMetadata, [
+        'fields' => 'id'
+    ]);
+
+    return response()->json(['folderId' => $folder->id]);
+});
+
+Route::get('/drive',[DriveController::class,'createFolder']);
+Route::get('/drive/create-folder',[DriveController::class,'createDefaultDirectories']);
 
 
 require __DIR__.'/auth.php';

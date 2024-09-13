@@ -13,7 +13,7 @@ use App\Http\Controllers\ProviderAuthController;
 use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite; // Add this line
-
+use SebastianBergmann\CodeCoverage\Driver\Driver;
 
 Route::middleware('guest')->group(function () {
 
@@ -22,7 +22,6 @@ Route::middleware('guest')->group(function () {
     
     Route::get('/auth/callback/{provider}', [ProviderAuthController::class, 'callback'])
                 ->name('callback');
-    
     
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
