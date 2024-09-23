@@ -10,10 +10,10 @@ const ImageModal = ({closeModal, updateAvatar}) => {
           role="dialog"
           aria-modal="true"
         >
-          <div className="fixed inset-0 bg-neutralcolors-200 bg-opacity-75 transition-all backdrop-blur-sm"></div>
+          <div className="fixed inset-0 bg-neutralcolors-200 bg-opacity-75 transition-all backdrop-blur-sm dark:bg-gray-900 dark:!bg-opacity-75"></div>
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div className="flex min-h-full justify-center px-2 py-12 text-center ">
-                <div className="relative w-[80%] h-fit sm:w-[50%] sm:min-h-[60vh] sm:min-w-[fit] rounded-2xl bg-white text-slate-100 text-left shadow-xl transition-all">
+                <div className="relative w-[80%] h-fit sm:w-[50%] sm:min-h-[60vh] sm:min-w-[fit] rounded-2xl bg-white  text-slate-100 text-left shadow-xl transition-all dark:bg-gray-800 dark:!text-gray-300">
                     <div className="px-5 py-4">
                         {/* <button
                             type="button"

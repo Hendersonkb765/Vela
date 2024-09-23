@@ -6,11 +6,11 @@ import WaveLine from './WaveLine';
 export default function DashboardPath({titleTask}) {
 
     return (
-        <div className='relative flex flex-col justify-center h-96 bg-primary overflow-x-scroll'>
+        <div className='relative flex flex-col justify-center sm:items-start items-center sm:h-96  fullhd:h-2/5 bg-primary overflow-x-scroll dark:bg-primary-200'>
             <WaveLine />
-            <div className='card mt-auto p-4'>
-                <h4 className='font-headers text-white text-base'>Caminho planejado para você</h4>
-                <div className='bg-white w-80 h-fit px-4 py-2 rounded-xl flex flex-col space-y-4'>
+            <div className='card mt-auto px-4 py-8 sm:p-4'>
+                <h4 className='hidden sm:block font-headers text-white text-base '>Caminho planejado para você</h4>
+                <div className='bg-white w-80 h-fit px-4 py-2 rounded-xl flex flex-col space-y-4 dark:bg-gray-800 dark:text-gray-300'>
                     <div>
                         <span className='font-headers text-xs'>Próxima Tarefa</span>
                         <h3 className='font-headers font-semibold text-sm  -mt-1'>{titleTask}</h3>

@@ -65,8 +65,8 @@ const WaveLine = () => {
   };
 
   return (
-    <div className="wave-line absolute top-1">
-      <svg id="waveLineSVG" width="4000" height="200" xmlns="http://www.w3.org/2000/svg" className="absolute">
+    <div className="hidden sm:block wave-line absolute -top-5">
+      <svg id="waveLineSVG" width="4000" height="200" xmlns="http://www.w3.org/2000/svg" className="absolute ">
         <path d="M 0 100 Q 50 50, 100 100 T 200 100 T 300 100 T 400 100 T 500 100 T 600 100 T 700 100 T 800 100 T 900 100 T 1000 100"
           stroke="#1A76CC" fill="transparent" strokeWidth="2" />
         <path d="M 1000 100 Q 1050 50, 1100 100 T 1200 100 T 1300 100 T 1400 100 T 1500 100 T 1600 100 T 1700 100 T 1800 100 T 1900 100 T 2000 100"

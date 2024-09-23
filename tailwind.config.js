@@ -5,7 +5,7 @@ import forms from '@tailwindcss/forms';
 
 export default {
     darkMode: 'class',
-    
+
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -15,6 +15,9 @@ export default {
 
     theme: {
         extend: {
+            screens: {
+                'fullhd': '1920px', // Breakpoint para telas de 1920px ou maiores
+            },
             colors: {
                 neutralcolors: {
                   DEFAULT: '#F0EFED',

@@ -33,12 +33,12 @@ const SideMenu = ({className}) => {
             <div
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave ={() => setIsOpen(false)}
-                className={` ${isOpen ? 'w-60' : 'w-20'}  h-screen  hidden lg:flex flex-col py-4 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300  ${className} `}
+                className={`${isOpen ? 'w-60' : 'w-20'}  h-screen hidden lg:flex flex-col py-8 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 shadow-sm  ${className} `}
             >
 
                 <ApplicationLogo className='w-full mb-4 opacity-0 hidden sm:block'/>
 
-                <ul className='flex flex-col h-full px-2 gap-y-2'>
+                <ul className={`${isOpen ? 'w-60' : 'w-20'}  bg-white  fixed h-screen hidden lg:flex flex-col py-8 px-2 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 gap-y-2 ease-out ${className}`}>
                     {MenusOptions.map((menu, index) => (
                         <Link
                             key={index}
@@ -62,7 +62,7 @@ const SideMenu = ({className}) => {
                 </ul>
             </div>
             <div>
-                <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm">
+                <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm z-50">
                     <ul className='flex w-full justify-evenly space-x-2 items-center '>
                         {MobileMenusOptions.map((menu, index) => (
                             <Link

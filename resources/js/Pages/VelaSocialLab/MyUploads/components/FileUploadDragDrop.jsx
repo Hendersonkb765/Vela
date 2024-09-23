@@ -45,7 +45,7 @@ const Input = ({ dropzone }) => {
     return (
         <div
             {...getRootProps()}
-            className={`w-3/4 sm:w-1/3 p-2 rounded-lg border-dashed border-2 bg-primary-200/25 hover:bg-primary-200/10 dark:bg-primary-300/25 hover:dark:bg-primary-200/10 transition-colors ${isDragActive ? 'border-neutralcolors-100/50' : 'border-neutralcolors-100'}`}>
+            className={`w-3/4 sm:w-1/3 p-2 rounded-lg border-dashed border-2 cursor-pointer bg-primary-200/25 hover:bg-primary-200/10 dark:bg-primary-300/25 hover:dark:bg-primary-200/10 transition-colors ${isDragActive ? 'border-neutralcolors-100/50' : 'border-neutralcolors-100'}`}>
             <label htmlFor="dropzone-file" className="cursor-pointer w-full h-full">
                 <div className={`flex flex-col items-center justify-center space-y-6 pt-5 pb-6 h-full w-full ${isDragActive ? 'text-neutralcolors-100/50' : 'text-neutralcolors-100'}`}>
                     <GoUpload className="w-10 h-10" />

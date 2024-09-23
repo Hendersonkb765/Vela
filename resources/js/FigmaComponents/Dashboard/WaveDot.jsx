@@ -4,7 +4,7 @@ import { FaLock, FaCheck  } from "react-icons/fa";
 const WaveDot = ({ x, y, isActive, isActivated }) => {
   return (
     <div
-      className={`w-8 h-8 flex justify-center items-center rounded-full bg-primary ${(isActive || isActivated) ? 'text-white' : 'text-primary-300/20'}`}
+      className={`w-8 h-8 flex justify-center items-center rounded-full bg-primary  dark:bg-primary-200 ${(isActive || isActivated) ? 'text-white' : 'text-primary-300/20'}`}
       style={{
         position: 'absolute',
         left: x,
