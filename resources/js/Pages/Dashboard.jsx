@@ -10,13 +10,13 @@ import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 export default function Dashboard({ user,osc,level,tasks }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
-    const Fails = tasks.requirements_failed;
-    const imageUrlOsc = osc.image_url;
-    const imageUrlUser = user.image_url;
+    const Fails = tasks.requirementsFailed;
+    const imageUrlOsc = osc.imageUrl;
+    const imageUrlUser = user.imageUrl;
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual
-    const OscLevel = level.current_level;
-    const OscName = osc.fantasy_name;
-    const Progress = tasks.completed.total / tasks.tasks_max; // (tasks feitas / total de tasks do level
+    const OscLevel = level.currentLevel;
+    const OscName = osc.fantasyName;
+    const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
             <div className={`w-96 sm:w-3/5 sm:min-w-fit  bg-white flex flex-col sm:flex-row items-center justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
@@ -52,7 +52,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
                         <img src="storage/Images/Target.png" alt="" className='w-16 h-16'/>
                         <h3 className='font-headers text-primary-300 font-semibold flex flex-col dark:text-gray-300'>
                             Todas as tarefas
-                            <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasks_max}  tarefas concluídas </span>
+                            <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasksMax}  tarefas concluídas </span>
                         </h3>
                     </div>
                     <p className='font-headers text-xs mt-2 w-72 text-wrap truncate dark:text-gray-300'> Veja todas as tarefas que sua organização precisa concluir para avançar </p>
