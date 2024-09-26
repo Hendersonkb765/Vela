@@ -38,7 +38,7 @@ const SideMenu = ({className}) => {
 
                 <ApplicationLogo className='w-full mb-4 opacity-0 hidden sm:block'/>
 
-                <ul className={`${isOpen ? 'w-60' : 'w-20'}  bg-white  fixed h-screen hidden lg:flex flex-col py-8 px-2 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 gap-y-2 ease-out ${className}`}>
+                <ul className={`${isOpen ? 'w-60' : 'w-20'}  bg-white  fixed h-screen hidden lg:flex flex-col py-8 px-2 border-r dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 gap-y-2 ease-out z-40 ${className}`}>
                     {MenusOptions.map((menu, index) => (
                         <Link
                             key={index}

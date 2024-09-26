@@ -13,8 +13,8 @@ const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => 
 
 
     return (
-        <div className='sm:h-52 bg-white flex items-center p-4 space-x-4 dark:bg-slate-800'>
-            <div className="w-20 h-20 sm:w-28 sm:h-28 relative flex items-center justify-center  rounded-full cursor-pointer "
+        <div className='sm:h-52 bg-white flex items-center p-4 space-x-4 dark:bg-slate-800 fullhd:p-8 fullhd:space-x-12'>
+            <div className="w-20 h-20 sm:w-28 sm:h-28 relative flex items-center justify-center  rounded-full cursor-pointer fullhd:scale-125"
                 // Resolver bug que na troca de temas, a barra se progresso só muda ao recarregar página
                 style={{
                     background: `conic-gradient(from 150deg, #057EE8 0% ${Progress * 100}%,  ${isDarkMode ? "#111827" : "#f0efed"}  ${Progress * 100}% 100%)`,
