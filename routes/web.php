@@ -25,6 +25,11 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Models\GoogleDriveFile;
+use App\Services\Google\Drive\File;
+use App\Services\Google\Drive\Folder;
+use App\Services\Google\Drive\GoogleDrive;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; // Add this line
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -133,48 +138,24 @@ Route::get('/teste',function(){
 })->name('teste');
 
 Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
-Route::get('/google',function(){
-    $client = new Client();
-    $client->setApplicationName('Vela_Social_Lab');
-    $client->setClientId(env('GOOGLE_CLIENT_ID'));
-    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
-    $client->setRedirectUri('http://127.0.0.1:8000/auth/callback/google');
-    $client->setAccessType('offline');
-    $client->setPrompt('select_account consent');
-    $client->setScopes([Drive::DRIVE]);
-
-
-
-    // Verifica se o token expirou e tenta renovar
-    if ($client->isAccessTokenExpired()) {
-        if ($client->getRefreshToken()) {
-            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-        } else {
-            // Redireciona para a URL de autenticação do Google
-            $authUrl = $client->createAuthUrl();
-            return redirect($authUrl);
-        }
-        // Salva o token de acesso atualizado
-        file_put_contents($tokenPath, json_encode($client->getAccessToken()));
-    }
-
-    $service = new Drive($client);
-
-    // Cria a pasta no Google Drive
-    $folderMetadata = new DriveFile([
-        'name' => 'Nova Pasta',
-        'mimeType' => 'application/vnd.google-apps.folder'
-    ]);
-
-    $folder = $service->files->create($folderMetadata, [
-        'fields' => 'id'
-    ]);
-
-    return response()->json(['folderId' => $folder->id]);
+Route::get('/criar-arquivo',function(){
+    $driveFile = new Folder(Auth::user()->osc->first()->id);
+    $driveFile->createDefaultDirectories();
+    return response()->json(['status'=>200,'message' => 'Arquivo criado com sucesso']);
 });
+Route::get('/formulario',function(){
+    $driveFolder = new Folder(Auth::user()->osc->first()->id);
+    $driveFolder->createDefaultDirectories();
+    return response()->json(['status'=>200,'message' => 'Pastas criadas com sucesso']);
+    return view('Formulario');
+});
+Route::post('/drive',function(Request $request){
+    $fileDatabase = $request->file('database');
+    $driveFile = new File(Auth::user()->osc->first()->id);
+    $driveFile->update("1B2idd4NaTyc7vT4RzIbh_QOUq-q6cvfm",$fileDatabase);
 
-Route::get('/drive',[DriveController::class,'createFolder']);
-Route::get('/drive/create-folder',[DriveController::class,'createDefaultDirectories']);
+})->name('formulario');
+
 
 
 require __DIR__.'/auth.php';
