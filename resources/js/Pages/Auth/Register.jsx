@@ -46,16 +46,19 @@ export default function Register() {
             <div className='min-w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center px-4 py-8 rounded-xl bg-white dark:bg-gray-900 dark:text-neutral-400'>
                 <h2 className='font-headers font-bold text-3xl mb-6 text-neutralcolors-200'>Crie Sua Conta</h2>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
+                   {/*
                     <a
                         href={route('redirect', ['google'])}
                         className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm font-body  transition-colors duration-300 ease-out dark:bg-gray-800 dark:hover:bg-gray-800/50 dark:text-neutralcolors-200'>
                         <FcGoogle className='w-8 h-8' />Continuar com o Google
                     </a>
+
                     <div className='flex w-full justify-center items-center space-x-2'>
                         <div className='w-full h-0.5 bg-neutralcolors-200' />
                         <span className='text-neutralcolors-200'>Ou</span>
                         <div className='w-full h-0.5 bg-neutralcolors-200' />
                     </div>
+                    */}
                     <div className="">
                         <InputLabel htmlFor="email" value="Email" />
                         <TextInput
