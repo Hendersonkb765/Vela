@@ -1,7 +1,9 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/FigmaComponents/Dropdown';
 import React from 'react';
-import DarkModeToggle from '../DarkModeToggle';
+import DarkModeToggleicon from '../DarkMode/DarkModeToggleIcon';
+import DarkModeToggle from '../DarkMode/DarkModeToggle';
+import Notification from '../Notification/Notification';
 
 const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName, role="Nenhum", email="Nenhum"}) => {
 
@@ -10,6 +12,8 @@ const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName,
             <ApplicationLogo className={`${hideLogo && 'opacity-0'}`} />
             {!hideProfile &&
                 <div className='flex w-full space-x-4 justify-end items-center'>
+                    <Notification />
+                    <DarkModeToggleicon />
                     <div className='hidden sm:flex flex-col text-sm font-headers '>
                         <p className='dark:text-white'>{userName}</p>
                         <p className='text-neutralcolors-300 dark:text-neutralcolors-200'>{role}</p>
@@ -23,9 +27,7 @@ const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName,
                         </Dropdown.Trigger>
                         <Dropdown.Content>
                             <Dropdown.Link href={'settings'}>Configurações</Dropdown.Link>
-                            <Dropdown.Link>Teste</Dropdown.Link>
                             <DarkModeToggle />
-
                             <Dropdown.Link className='!text-danger' href={'logout'} method="post" as={'button'}>Sair</Dropdown.Link>
                         </Dropdown.Content>
                     </Dropdown>
