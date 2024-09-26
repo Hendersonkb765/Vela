@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $level = $axis->level->where('position',$currentLevel)->first();
         $tasks = $level->task;
         //$tasks = $axis->level->first()->with(['task','task.step'])->where('position', $level->id)->first();
-        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirements_failed'=>0];
+        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirementsFailed'=>0];
 
 
         foreach ($tasks as $task) {
@@ -46,7 +46,7 @@ class DashboardController extends Controller
                 
                 foreach ($step->requirement as $requirement) {
                     if ($requirement->status == 'reprovado'){
-                        $arrayTasks['requirements_failed']++;
+                        $arrayTasks['requirementsFailed']++;
                     }
                 }
 
@@ -75,25 +75,25 @@ class DashboardController extends Controller
         
         //$arrayTasks['completed']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         //$arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
-        $arrayTasks['tasks_completed'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
-        $arrayTasks['tasks_max'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
+        $arrayTasks['tasksCompleted'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
+        $arrayTasks['tasksMax'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
        
         return Inertia::render('Dashboard',[
             'user' =>[
                         'id'=> $user->id,
                         'name'=>$user->name,
                         'email' => $user->email,
-                        'image_url' => $user->image_url,
-                        'role' => $user->role->name,
+                        'profilePicture' => $user->image_url,
+                        'roleInOrganization' => $user->role->name,
                     ],
             'osc' => [
                         'id'=> $osc->id,
-                        'fantasy_name'=>$osc->fantasy_name,
-                        'image_url' => $osc->image_url,
+                        'fantasyName'=>$osc->fantasy_name,
+                        'imageUrl' => $osc->image_url,
                     ],
             'level' => [
-                        'max_level'=>$axis->level->count(),
-                        'current_level'=>$currentLevel,
+                        'maxLevel'=>$axis->level->count(),
+                        'currentLevel'=>$currentLevel,
                     ],
             'tasks' => $arrayTasks,
         ]);
