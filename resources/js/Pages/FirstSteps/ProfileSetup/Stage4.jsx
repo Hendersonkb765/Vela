@@ -53,7 +53,7 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
                             <TextInput
                                 id="CPF"
                                 name="CPF"
-                                value={data.organization.organizationCPF}
+                                value={data.organization.CPF}
                                 className="mt-1 block w-96 min-w-fit"
                                 autoComplete="CPF"
                                 isFocused={true}

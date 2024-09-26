@@ -45,7 +45,7 @@ const SideMenu = ({className}) => {
                             as='button'
                             className={`
                                 dark:text-white
-                                ${isOpen ? 'space-x-2 pl-4' : 'justify-center'} w-full h-14 flex items-center  text-base cursor-pointer hover:bg-neutralcolors dark:hover:bg-gray-950 rounded-md duration-300 ease-in-out'
+                                ${isOpen ? 'space-x-2 pl-4' : 'justify-center'} w-full h-14 flex items-center   text-base cursor-pointer hover:bg-neutralcolors  dark:hover:bg-gray-950 rounded-md duration-300 ease-in-out '
                                 ${index == 4 && 'mb-auto'}
                                 ${index === MenusOptions.length - 1 && 'hover:!bg-danger !text-danger hover:!text-white'}
                                 ${menu.route === currentRoute.url.replace(/^\//, '') && '!bg-primary !text-white hover:!bg-primary-200'}
@@ -56,7 +56,7 @@ const SideMenu = ({className}) => {
 
                         >
                             <div >{menu.icon}</div>
-                            <span className={`${!isOpen && 'hidden'} origin-left duration-400  text-body`}>{menu.title}</span>
+                            <span className={`${!isOpen && 'hidden'} origin-left text-body transition duration-400 `}>{menu.title}</span>
                         </Link>
                     ))}
                 </ul>

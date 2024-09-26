@@ -31,11 +31,11 @@ export default function Myuploads({ auth }) {
         >
             <Head title="Meus Uploads" />
             <section className='flex flex-col min-h-fit  overflow-x-hidden pb-8'>
-                <form className="relative flex flex-col justify-center items-center h-64 bg-primary dark:bg-primary-200 fullhd:h-3/4">
+                <form className="relative flex flex-col justify-center items-center min-h-64 bg-primary dark:bg-primary-200 fullhd:h-3/4">
                     <FileUploadDragDrop />
                 </form>
                 <Filter />
-                <section className='w-full px-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+                <section className='w-full px-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 '>
                     {files.map((file) => (
                         <FileCard key={file.id} file={file} />
                     ))}

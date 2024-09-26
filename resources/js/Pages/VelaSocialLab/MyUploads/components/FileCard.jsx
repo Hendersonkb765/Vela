@@ -23,7 +23,7 @@ const getIcon = (fileType) => {
 
 export default function FileCard({ file }) {
     return (
-        <div className='bg-white dark:bg-slate-800 w-full h-32 rounded-md flex flex-col justify-center items-start p-2'>
+        <div className='bg-white dark:bg-slate-800 w-full h-32 rounded-md flex flex-col justify-center items-start p-2 min-w-fit '>
             <div className="flex items-center justify-start">
                 {getIcon(file.fileType)}
                 <div className='flex flex-col items-start justify-center'>
