@@ -78,7 +78,6 @@ class DashboardController extends Controller
         $arrayTasks['tasks_completed'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasks_max'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
        
-        
         return Inertia::render('Dashboard',[
             'user' =>[
                         'id'=> $user->id,
