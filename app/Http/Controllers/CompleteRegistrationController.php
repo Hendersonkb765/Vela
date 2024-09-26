@@ -71,6 +71,7 @@ class CompleteRegistrationController extends Controller
                 'role_id' => $roleId,
                 'birthday' => $userRequest['birthday'],
             ]);
+            
             $user->save();
 
             if ($request['hasOrganization'] === true) {
