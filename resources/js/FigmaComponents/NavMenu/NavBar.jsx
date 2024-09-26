@@ -3,10 +3,10 @@ import Dropdown from '@/FigmaComponents/Dropdown';
 import React from 'react';
 import DarkModeToggle from '../DarkModeToggle';
 
-const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName, role="Nenhum"}) => {
+const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName, role="Nenhum", email="Nenhum"}) => {
 
     return (
-        <div className={`fixed h-16 sm:h-14 w-full py-2 sm:pr-4 bg-white dark:bg-gray-900 flex items-center z-40 ${className}`}>
+        <div className={`fixed h-16 sm:h-14 w-full py-2 sm:pr-4 bg-white dark:bg-gray-900 flex items-center z-40 shadow-sm  ${className}`}>
             <ApplicationLogo className={`${hideLogo && 'opacity-0'}`} />
             {!hideProfile &&
                 <div className='flex w-full space-x-4 justify-end items-center'>

@@ -14,7 +14,7 @@ export default forwardRef(function DateInput({ value = '', type = 'date', classN
             value={value}
             type={type}
             className={
-                'h-10 min-w-96 rounded-md border-2 border-neutralcolors text-neutralcolors-600 text-sm dark:border-neutralcolors-300 dark:bg-gray-900 dark:text-neutral-400 dark:[color-scheme:dark] cursor-pointer ' +
+                'h-10 min-w-96 rounded-md border-2 border-neutralcolors text-neutralcolors-600 text-sm dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400 dark:[color-scheme:dark] cursor-pointer ' +
                 className
             }
             min={minDate}

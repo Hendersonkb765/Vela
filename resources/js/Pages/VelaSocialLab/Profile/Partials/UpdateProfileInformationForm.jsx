@@ -4,6 +4,8 @@ import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
+import ProfileUploadInput from '@/FigmaComponents/Inputs/ImageUpload/ProfileUploadInput';
+import { useState } from 'react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
@@ -11,6 +13,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        profilePicture: user.profilePicture,
     });
 
     const submit = (e) => {
@@ -19,17 +22,30 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         patch(route('profile.update'));
     };
 
+    const [imageUrl, setImageUrl] = useState(data.profilePicture || null);
+    const handleImageChange = (url) => {
+        setImageUrl(url);
+        setData('user', {
+            ...data.user,
+            profilePicture: url
+        });
+    };
+
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Informações de Perfil</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    Atualize suas informações de perfil
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
+                <ProfileUploadInput
+                    firstletter={data.name?.charAt(0).toUpperCase()}
+                    updateAvatarUrl={handleImageChange}
+                />
                 <div>
                     <InputLabel htmlFor="name" value="Nome" />
 
@@ -94,7 +110,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Alterações Salvas.</p>
                     </Transition>
                 </div>
             </form>

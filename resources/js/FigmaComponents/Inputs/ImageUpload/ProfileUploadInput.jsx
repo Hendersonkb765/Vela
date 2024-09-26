@@ -20,7 +20,7 @@ const ProfileUploadInput = ({updateAvatarUrl }) => {
                     className="w-[150px] h-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
                 />
                 <SecondaryButton className='h-12' onClick={() => setModalOpen(true)}>
-                    Escolher uma foto
+                    {avatarUrl.current ? "Escolher outra foto" : "Escolher uma foto"}
                 </SecondaryButton>
             </div>
             {ModalOpen && <ImageModal updateAvatar={updateAvatar} closeModal={() => setModalOpen(false)} />}

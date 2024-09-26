@@ -40,7 +40,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth',CheckUserRegistration::class,
+    ['auth', 'verified',CheckUserRegistration::class,
     CheckOsc::class
 ])->name('dashboard');
 

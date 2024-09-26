@@ -6,8 +6,6 @@ export default function Timeline({ auth, }) {
 
     return (
         <VelaSocialLayout
-            userName={"Gustavo Raimundo Rodrigues"} //auth.user
-            imgUrl={'storage/Images/PerfilExemplo.jpg'}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Meus Uploads</h2>}
         >
             <Head title="Timeline"/>

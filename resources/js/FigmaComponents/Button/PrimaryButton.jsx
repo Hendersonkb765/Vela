@@ -25,7 +25,7 @@ export default function PrimaryButton({
         }
     };
 
-    const classNames = `flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-200 transition-colors duration-300 ease-out
+    const classNames = `flex px-2 py-2 sm:px-4 sm:py-2 gap-2 items-center min-w-fit sm:min-w-32 sm:min-h-8 rounded-md bg-primary text-sm text-white font-body hover:bg-primary-200 transition-colors duration-300 ease-out
         ${gray ? '!bg-neutralcolors-100 !text-neutralcolors-400 dark:!bg-gray-900 dark:!text-white' : ''}
         ${rounded ? '!rounded-full' : ''}
         ${center ? 'justify-center' : ''}

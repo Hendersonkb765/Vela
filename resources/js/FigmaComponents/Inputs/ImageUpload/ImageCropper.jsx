@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop } from 'react-image-crop'
 import { CiImageOn } from "react-icons/ci";
 import PrimaryIconButton from "@/FigmaComponents/Button/PrimaryIconButton";
@@ -17,6 +17,14 @@ const ImageCropper = ({closeModal, updateAvatar}) => {
     const [imgSrc, setImgSrc] = useState('');
     const [crop, setCrop] = useState();
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        const savedAvatar = localStorage.getItem('savedAvatar');
+        if (savedAvatar) {
+            setImgSrc(savedAvatar);
+        }
+    }, []);
+
     const onSelectFile = (e) => {
         const file = e.target.files?.[0];
         if(!file) return;
@@ -41,6 +49,8 @@ const ImageCropper = ({closeModal, updateAvatar}) => {
 
         reader.readAsDataURL(file);
     };
+
+
 
     const onImageLoad = (e) => {
         const {width, height} = e.currentTarget;
@@ -87,17 +97,17 @@ const ImageCropper = ({closeModal, updateAvatar}) => {
             {error && <p className="mt-auto font-body text-sm text-neutralcolors-500"><span className="font-bold text-danger-0">FALHA NO UPLOAD: </span> {error}</p>}
             <div>
                 <label className="block mb-3 w-full">
-                <span className="sr-only">Choose profile photo</span>
+                <span className="sr-only">Escolha foto de perfil</span>
                 <input
                     type="file"
                     accept="image/*"
                     onChange={onSelectFile}
-                    className="block w-full  text-sm text-neutralcolors-500 border-2 border-neutralcolors-200 rounded-md py-3 px-4 cursor-pointer file:min-w-32 file:bg-neutralcolors-700 file:mr-4 file:py-3 file:px-4 file:rounded-md file:border-0 file:text-xs file:text-white file:cursor-pointer hover:file:bg-primary"
+                    className="block w-full  text-sm text-neutralcolors-500 border-2 border-neutralcolors-200 rounded-md py-3 px-4 cursor-pointer file:min-w-32 file:bg-neutralcolors-700 file:mr-4 file:py-3 file:px-4 file:rounded-md file:border-0 file:text-xs file:text-white file:cursor-pointer hover:file:bg-primary dark:text-gray-300"
                 />
                 </label>
             </div>
             <div className="flex justify-between space-x-4">
-                <SecondaryButton className="flex justify-center w-1/2 sm:w-1/3" onClick={closeModal} gray> Cancelar</SecondaryButton>
+                <SecondaryButton className="flex justify-center w-1/2 sm:w-1/3 dark:!text-gray-300" onClick={closeModal} gray> Cancelar</SecondaryButton>
                 <PrimaryIconButton className="flex justify-center w-1/2 sm:w-1/3 hover:bg-primary-200"
                     onClick={() => {
                         setCanvasPreview(
@@ -109,8 +119,9 @@ const ImageCropper = ({closeModal, updateAvatar}) => {
                                 imgRef.current.height,
                             )
                         );
-                        const dataurl = previewCanvasRef.current.toDataURL()
-                        updateAvatar(dataurl);
+                        const dataUrl = previewCanvasRef.current.toDataURL()
+                        updateAvatar(dataUrl);
+                        localStorage.setItem('savedAvatar', dataUrl);
                         closeModal();
                     }}
                 >
