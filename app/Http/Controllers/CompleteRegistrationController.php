@@ -70,6 +70,7 @@ class CompleteRegistrationController extends Controller
                 'role_id' => $userRequest['roleInOrganization'],
                 'birthday' => $userRequest['birthday'],
             ]);
+            
             $user->save();
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);

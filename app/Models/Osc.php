@@ -77,6 +77,9 @@ class Osc extends Model
     public function activitie(){
         return $this->hasMany(Activitie::class);
     }
+    public function driveFolder(){
+        return $this->hasMany(DriveFolder::class);
+    }
 
   
     

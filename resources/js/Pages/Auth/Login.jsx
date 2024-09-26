@@ -101,15 +101,16 @@ export default function Login({ status, canResetPassword }) {
                                 Ainda não tem uma conta? <Link href={route('register')} className="underline  text-primary">Cadastre-se</Link>
                             </p>
                         </div>
-
+ {/*
                         <div className='flex w-full justify-center items-center space-x-2'>
                             <div className='w-full h-0.5 bg-neutralcolors-100'/>
                             <span className='text-neutralcolors-200'>Ou</span>
                             <div className='w-full h-0.5 bg-neutralcolors-100' />
                         </div>
-                        <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out dark:bg-gray-800 dark:hover:bg-gray-800/50 dark:text-neutralcolors-200' href={route('redirect',['google'])}>
+                        
+                       <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out dark:bg-gray-800 dark:hover:bg-gray-800/50 dark:text-neutralcolors-200' href={route('redirect',['google'])}>
                             <FcGoogle className='w-8 h-8'></FcGoogle>Entrar com o Google
-                        </a>
+                        </a>*/}
 
                     </div>
                 </form>

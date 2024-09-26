@@ -13,17 +13,19 @@ use App\Http\Controllers\ProviderAuthController;
 use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite; // Add this line
-
-
+use SebastianBergmann\CodeCoverage\Driver\Driver;
+use Google\Client as GoogleClient;
+use Google\Service\Drive as Google_Service_Drive;
+use App\Http\Middleware\CheckPresident;
 Route::middleware('guest')->group(function () {
 
+    /*
     Route::get('/auth/redirect/{provider}/', [ProviderAuthController::class, 'redirect'])
                 ->name('redirect');
     
     Route::get('/auth/callback/{provider}', [ProviderAuthController::class, 'callback'])
                 ->name('callback');
-    
-    
+    */
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
@@ -70,9 +72,20 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
+    
 
 });
+Route::middleware(['auth',CheckPresident::class])->group(function () {
+    Route::get('auth/osc/redirect/google', function () {
+        return Socialite::driver('google')->with(['prompt' => 'select_account','access_type' => 'offline'])->scopes(['https://www.googleapis.com/auth/drive'])->redirect();
+                    
+        });
+        Route::get('/auth/callback/google', [ProviderAuthController::class, 'callbackOscGoogle'])
+        ->name('callback');
+                    
+    });
 //Route::get('/criar/novo-usuario', [RegisteredUserController::class, 'create'])->name('completeRegistration.create');
 
 Route::post('/novo/presidente',[RegisteredUserController::class, 'registeredPresident']);
+
 
