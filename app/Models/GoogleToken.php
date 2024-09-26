@@ -12,8 +12,12 @@ class GoogleToken extends Model
     protected $fillable = [
         'access_token',
         'refresh_token',
-        'user_id'
+        'osc_id'
     ];
+
+    public function osc(){
+        return $this->belongsTo(Osc::class);
+    }
 
 
 }
