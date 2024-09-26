@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('google_tokens', function (Blueprint $table) {
+        Schema::create('google_drive_folders', function (Blueprint $table) {
             $table->id();
-            $table->string('access_token');
-            $table->string('refresh_token');
-            $table->foreignId('osc_id')->constrained('oscs');
-            $table->timestamps();
+            $table->string('name');
+            $table->dateTime('creation_folder_date');
+            $table->foreignId('osc_id')->constrained();
+            $table->string('folder_type');
+            $table->string('folder_id');
         });
+        
     }
 
     /**
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('token_google');
+        Schema::dropIfExists('folders');
     }
 };
