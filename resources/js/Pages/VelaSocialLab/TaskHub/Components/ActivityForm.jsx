@@ -34,6 +34,7 @@ export default function ActivityForm({ onSubmit }) {
 
     return (
         <form onSubmit={handleSubmit}>
+            
             {!processing ?
             <>
                 <div className="mb-4">
@@ -90,7 +91,7 @@ export default function ActivityForm({ onSubmit }) {
                         </select>
                     </div>
                 </div>
-                <PrimaryButton type="submit" className='h-12 w-full' center>
+                <PrimaryButton type={"submit"} className='h-12 w-full' disabled={processing}  href={route('activity.store')} center >
                     Registrar Atividade
                 </PrimaryButton>
             </>
