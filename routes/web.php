@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ActivitieController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -25,6 +25,7 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Models\Activity;
 use App\Models\GoogleDriveFile;
 use App\Services\Google\Drive\File;
 use App\Services\Google\Drive\Folder;
@@ -63,9 +64,9 @@ Route::get('/myuploads', function () {
 })->middleware(['auth'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
-Route::get('/taskhub', function () {
-    return Inertia::render('VelaSocialLab/TaskHub/TaskHub');
-})->middleware(['auth'])->name('taskhub');
+Route::get('/taskhub', [ActivityController::class,'index'])->middleware(['auth'])->name('taskhub');
+Route::post('/registrar-atividade', [ActivityController::class,'store'])->name('activity.store');
+    
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {
@@ -115,8 +116,8 @@ Route::get('/dashboardtest', function () {
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-Route::get('/registrar-atividade', [ActivitieController::class,'create'])->name('activitie.create');
-Route::post('/registrar-atividade', [ActivitieController::class,'store'])->name('activitie.store');
+Route::get('/registrar-atividade', [ActivityController::class,'create'])->name('activity.create');
+Route::post('/registrar-atividade', [ActivityController::class,'store'])->name('activity.store');
 
 /////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
@@ -137,7 +138,7 @@ Route::get('/teste',function(){
 
 })->name('teste');
 
-Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
+Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');
 Route::get('/criar-arquivo',function(){
     $driveFile = new Folder(Auth::user()->osc->first()->id);
     $driveFile->createDefaultDirectories();
