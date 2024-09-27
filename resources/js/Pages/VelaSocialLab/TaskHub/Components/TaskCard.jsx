@@ -13,7 +13,7 @@ export default function TaskCard({data}) {
                         <div className="flex flex-col space-y-2 ">
                             <h3 className="font-headers text-lg dark:text-gray-200">{data.title}</h3>
                             <p className="font-body text-xs max-w-80 max-h-20 truncate text-wrap dark:text-gray-300">
-                                {data.text}
+                                {data.description}
                             </p>
                         </div>
 

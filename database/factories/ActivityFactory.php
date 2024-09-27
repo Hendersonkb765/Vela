@@ -5,12 +5,12 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Osc;
-use App\Models\Activitie;
+use App\Models\Activity;
 use App\Models\Address; // Add this line to import the Address class
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ActivitieFactory extends Factory
+class ActivityFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -36,8 +36,8 @@ class ActivitieFactory extends Factory
         ];
     }
     public function configure(){
-        return $this->afterCreating(function(Activitie $activitie){
-            $activitie->address()->save(Address::factory()->make());
+        return $this->afterCreating(function(Activity $activity){
+            $activity->address()->save(Address::factory()->make());
         });
     }
 }
