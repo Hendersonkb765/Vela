@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Google\Service\YouTube\Resource\Activities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -74,11 +75,11 @@ class Osc extends Model
     public function recurring_activity(){
         return $this->hasMany(RecurringActivity::class);
     }
-    public function activitie(){
-        return $this->hasMany(Activitie::class);
+    public function activities(){
+        return $this->hasMany(Activity::class);
     }
-    public function driveFolder(){
-        return $this->hasMany(DriveFolder::class);
+    public function GoogledriveFolder(){
+        return $this->hasMany(GoogleDriveFolder::class);
     }
 
   
