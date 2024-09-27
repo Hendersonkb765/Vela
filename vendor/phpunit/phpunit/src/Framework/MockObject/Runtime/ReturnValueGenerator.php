@@ -21,6 +21,7 @@ use function str_starts_with;
 use function substr;
 use PHPUnit\Framework\MockObject\Generator\Generator;
 use ReflectionClass;
+use ReflectionObject;
 use stdClass;
 use Throwable;
 
@@ -30,13 +31,18 @@ use Throwable;
 final class ReturnValueGenerator
 {
     /**
+<<<<<<< Updated upstream
      * @psalm-param class-string $className
      * @psalm-param non-empty-string $methodName
      * @psalm-param class-string $stubClassName
+=======
+     * @param class-string     $className
+     * @param non-empty-string $methodName
+>>>>>>> Stashed changes
      *
      * @throws Exception
      */
-    public function generate(string $className, string $methodName, string $stubClassName, string $returnType): mixed
+    public function generate(string $className, string $methodName, StubInternal $testStub, string $returnType): mixed
     {
         $intersection = false;
         $union        = false;
@@ -93,7 +99,7 @@ final class ReturnValueGenerator
             }
 
             if (in_array('static', $lowerTypes, true)) {
-                return $this->newInstanceOf($stubClassName, $className, $methodName);
+                return $this->newInstanceOf($testStub, $className, $methodName);
             }
 
             if (in_array('object', $lowerTypes, true)) {
@@ -172,16 +178,37 @@ final class ReturnValueGenerator
     }
 
     /**
+<<<<<<< Updated upstream
      * @psalm-param class-string $stubClassName
      * @psalm-param class-string $className
      * @psalm-param non-empty-string $methodName
+=======
+     * @param class-string     $className
+     * @param non-empty-string $methodName
+>>>>>>> Stashed changes
      *
      * @throws RuntimeException
      */
-    private function newInstanceOf(string $stubClassName, string $className, string $methodName): Stub
+    private function newInstanceOf(StubInternal $testStub, string $className, string $methodName): Stub
     {
         try {
+<<<<<<< Updated upstream
             return (new ReflectionClass($stubClassName))->newInstanceWithoutConstructor();
+=======
+            $object    = (new ReflectionClass($testStub::class))->newInstanceWithoutConstructor();
+            $reflector = new ReflectionObject($object);
+
+            $reflector->getProperty('__phpunit_state')->setValue(
+                $object,
+                new TestDoubleState(
+                    $testStub->__phpunit_state()->configurableMethods(),
+                    $testStub->__phpunit_state()->generateReturnValues(),
+                ),
+            );
+
+            return $object;
+            // @codeCoverageIgnoreStart
+>>>>>>> Stashed changes
         } catch (Throwable $t) {
             throw new RuntimeException(
                 sprintf(

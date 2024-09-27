@@ -9,6 +9,12 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
+<<<<<<< Updated upstream
+=======
+use Closure;
+use ReflectionFunction;
+
+>>>>>>> Stashed changes
 /**
  * @psalm-template CallbackInput of mixed
  *
@@ -37,6 +43,20 @@ final class Callback extends Constraint
         return 'is accepted by specified callback';
     }
 
+<<<<<<< Updated upstream
+=======
+    public function isVariadic(): bool
+    {
+        foreach ((new ReflectionFunction(Closure::fromCallable($this->callback)))->getParameters() as $parameter) {
+            if ($parameter->isVariadic()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+>>>>>>> Stashed changes
     /**
      * Evaluates the constraint for parameter $value. Returns true if the
      * constraint is met, false otherwise.

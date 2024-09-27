@@ -27,6 +27,10 @@ class ContextServiceProvider extends ServiceProvider
     public function boot()
     {
         Queue::createPayloadUsing(function ($connection, $queue, $payload) {
+<<<<<<< Updated upstream
+=======
+            /** @phpstan-ignore staticMethod.notFound */
+>>>>>>> Stashed changes
             $context = Context::dehydrate();
 
             return $context === null ? $payload : [
@@ -36,6 +40,10 @@ class ContextServiceProvider extends ServiceProvider
         });
 
         $this->app['events']->listen(function (JobProcessing $event) {
+<<<<<<< Updated upstream
+=======
+            /** @phpstan-ignore staticMethod.notFound */
+>>>>>>> Stashed changes
             Context::hydrate($event->job->payload()['illuminate:log:context'] ?? null);
         });
     }

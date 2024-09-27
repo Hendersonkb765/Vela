@@ -132,6 +132,8 @@ Route::get('/teste2',[ActivitieController::class,'index'])->name('teste2');
 
 
 
-
+Route::get('/ola',function(){
+    return view();
+});
 
 require __DIR__.'/auth.php';

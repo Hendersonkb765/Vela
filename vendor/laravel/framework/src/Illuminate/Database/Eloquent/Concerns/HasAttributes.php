@@ -1396,6 +1396,10 @@ trait HasAttributes
             return Hash::make($value);
         }
 
+<<<<<<< Updated upstream
+=======
+        /** @phpstan-ignore staticMethod.notFound */
+>>>>>>> Stashed changes
         if (! Hash::verifyConfiguration($value)) {
             throw new RuntimeException("Could not verify the hashed value's configuration.");
         }

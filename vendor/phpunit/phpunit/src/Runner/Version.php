@@ -34,7 +34,11 @@ final class Version
         }
 
         if (self::$version === '') {
+<<<<<<< Updated upstream
             self::$version = (new VersionId('11.2.8', dirname(__DIR__, 2)))->asString();
+=======
+            self::$version = (new VersionId('11.3.6', dirname(__DIR__, 2)))->asString();
+>>>>>>> Stashed changes
         }
 
         return self::$version;
