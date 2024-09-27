@@ -2,16 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Activitie;
-use App\Models\Address;
+use App\Models\Activity;
 use App\Models\Axis;
 use App\Models\Osc;
 use App\Models\User;
-use App\Models\Cnae;
 use App\Models\TargetAudience;
-use App\Models\Phone;
 use App\Models\Level;
-use App\Models\PhoneNumber;
 use App\Models\Step;
 use App\Models\Task; 
 use App\Models\Requeriment;
@@ -73,7 +69,7 @@ class DatabaseSeeder extends Seeder
         TargetAudience::factory()->create(['name'=>'Educação e Pequisa']);
         TargetAudience::factory()->create(['name'=>'Cultura']);
         
-        Activitie::factory(4)->create();
+        Activity::factory(4)->create();
         Step::factory(10)->create();
         Requirement::factory(3)->create();
         Feedback::factory(5)->create();
