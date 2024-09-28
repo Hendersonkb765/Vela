@@ -12,6 +12,7 @@ const ASPECT_RATIO = 1;
 export default function MultiStepActivityForm({ onSubmit }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
+    const [imgSrc, setImgSrc] = useState('');
 
     const minDate = "1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
@@ -60,7 +61,7 @@ export default function MultiStepActivityForm({ onSubmit }) {
         if (data.activityHourStart >= data.activityHourEnd) {
             newErrors.activityHourEnd = 'A hora de fim deve ser após a hora de início.';
         }
-        if(data.activityHourStart == data.activityHourEnd){
+        if(data.activityHourStart === data.activityHourEnd){
             newErrors.activityHourEnd = 'A hora de fim deve ser diferente da hora de início.';
         }
         setErrors(newErrors);
@@ -70,23 +71,28 @@ export default function MultiStepActivityForm({ onSubmit }) {
     const onSelectFile = (e) => {
         const file = e.target.files?.[0];
         if(!file) return;
-        const newImgErrors = {};
+
         const reader = new FileReader();
         reader.addEventListener("load", () => {
             const imageElement = new Image();
             const imageUrl = reader.result?.toString() || "";
             imageElement.src = imageUrl;
 
-            imageElement.addEventListener("load", (e) => {
-                if(error) newErrors.ImageLoading = "Falha no upload";
-                const {naturalHeight, naturalWidth} = e.currentTarget;
+            imageElement.addEventListener("load", (event) => {
+                const { naturalHeight, naturalWidth } = event.currentTarget;
                 if (naturalWidth < MIN_SIZE || naturalHeight < MIN_SIZE) {
-                    newErrors.ImageSize = ("Imagem muito pequena (tamanho mínimo: 150x150)");
-                    return setImgSrc("");
+                    setErrors((prevErrors) => ({
+                        ...prevErrors,
+                        activityThumbnail: 'Imagem muito pequena (tamanho mínimo: 150x150)',
+                    }));
+                    setImgSrc(''); // Limpa a imagem
+                    return;
                 }
-            })
 
-            setData('activityThumbnail', e.target.files[0])
+                // Se a imagem for válida, atualiza o estado
+                setImgSrc(imageUrl);
+                setData('activityThumbnail', file); // Salva o arquivo no estado do formulário
+            });
         });
 
         reader.readAsDataURL(file);
@@ -106,18 +112,19 @@ export default function MultiStepActivityForm({ onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         // Validação final antes de enviar
         if (data.activityThumbnail) {
-            // Aqui você pode fazer o envio dos dados
             post(route('activity.store'), {
                 data: data,
-                onFinish: () => reset(),
+                onFinish: () => {
+                    setImgSrc(''); // Limpa o estado da imagem
+                }
             });
         } else {
             setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
         }
     };
-
 
     return (
         <form onSubmit={handleSubmit}>
@@ -215,27 +222,23 @@ export default function MultiStepActivityForm({ onSubmit }) {
 
             {step === 3 && (
                 <>
+                    {/* Step 3: Upload da Imagem */}
                     <div className="mb-4">
-                        <div>
-                            <label className="block mb-3 w-full">
+                        <label className="block mb-3">
                             <span className="sr-only">Escolha uma foto para Thumbnail</span>
                             <input
                                 type="file"
                                 accept="image/*"
                                 onChange={onSelectFile}
-                                className="block w-full  text-sm text-neutralcolors-500 border-2 border-neutralcolors-200 rounded-md py-3 px-4 cursor-pointer file:min-w-32 file:bg-neutralcolors-700 file:mr-4 file:py-3 file:px-4 file:rounded-md file:border-0 file:text-xs file:text-white file:cursor-pointer hover:file:bg-primary dark:text-gray-300"
+                                className="block w-full text-sm"
                             />
-                            </label>
-                        </div>
-                        {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
+                        </label>
+                        {imgSrc && <img src={imgSrc} alt="Preview da Imagem" className="w-32 h-32 object-cover"/>}
+                        {errors.activityThumbnail && <p className="text-red-500">{errors.activityThumbnail}</p>}
                     </div>
                     <div className="flex justify-between">
-                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12'>
-                            Anterior
-                        </SecondaryButton>
-                        <PrimaryButton center type="submit" disabled={processing} className='!h-12'>
-                            Enviar
-                        </PrimaryButton>
+                        <SecondaryButton onClick={handlePreviousStep}>Anterior</SecondaryButton>
+                        <PrimaryButton type="submit" disabled={processing}>Enviar</PrimaryButton>
                     </div>
                 </>
             )}

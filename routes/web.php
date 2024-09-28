@@ -64,8 +64,13 @@ Route::get('/myuploads', function () {
 })->middleware(['auth'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
+Route::get('/activityhub', function () {
+    return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
+})->middleware(['auth'])->name('activityhub');
+// ->middleware(['auth', 'verified'])->name('axishub');
+
 Route::controller(ActivityController::class)->group(function(){
-    Route::get('/taskhub','index')->middleware(['auth'])->name('taskhub');
+    Route::get('/activityhub','index')->middleware(['auth'])->name('activityhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
 
@@ -77,6 +82,8 @@ Route::get('/axishub', function () {
     return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
 })->middleware(['auth'])->name('axishub');
 // ->middleware(['auth', 'verified'])->name('axishub');
+
+
 
 Route::get('/timeline', function () {
     return Inertia::render('VelaSocialLab/Timeline/Timeline');
