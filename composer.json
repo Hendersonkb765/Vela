@@ -13,7 +13,7 @@
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
         "tightenco/ziggy": "^2.0"
-    
+
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -52,8 +52,8 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "pre-autoload-dump": ["Google\\Task\\Composer::cleanup"]    
-        
+        "pre-autoload-dump": ["Google\\Task\\Composer::cleanup"]
+
     },
     "extra": {
         "laravel": {
@@ -64,7 +64,7 @@
             "YouTube",
             "Calendar"
         ]
-        
+
     },
     "config": {
         "optimize-autoloader": true,

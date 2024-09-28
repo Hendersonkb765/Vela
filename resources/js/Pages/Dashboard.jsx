@@ -7,68 +7,56 @@ import RecordActivity from './VelaSocialLab/Dashboard/RecordActivity';
 import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 import AllTasks from './VelaSocialLab/Dashboard/AllTasks';
 import { FaArrowRight } from "react-icons/fa6";
+import DriveInfo from './VelaSocialLab/Dashboard/DriveInfo';
 
 export default function Dashboard({ user,osc,level,tasks }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
     const Fails = tasks.requirementsFailed;
     const imageUrlOsc = osc.imageUrl;
-    const imageUrlUser = user.imageUrl;
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual
-    const OscLevel = level.current_level;
-    const OscName = osc.fantasy_name;
-    const Progress = tasks.completed.total / tasks.tasks_max; // (tasks feitas / total de tasks do level
+    const OscLevel = level.currentLevel;
+    const OscName = osc.fantasyName;
+    const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
+
+    const usedSpace = 12;
+    const totalSpace = 15;
 
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
-            <div className={`w-96 sm:w-3/5 fullhd:w-2/3 sm:min-w-fit  bg-white flex flex-col sm:flex-row items-center justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
-                <div className='flex items-center'>
-                    <div className='w-12 h-12 rounded-full flex  items-center justify-center'>
+            <Link href={route('taskhub')} className={`h-16 sm:h-full sm:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
+                <div className='flex items-center sm:scale-100 scale-90 space-x-2'>
+                    <div className='sm:w-12 h-12 rounded-full flex items-center justify-center '>
                         {(NumberOfFails > 0) ? <GoAlertFill className='w-6 h-6 text-danger'/> : <GoAlert className='w-6 h-6 text-neutralcolors-300 dark:text-gray-300'/>}
                     </div>
-                    <h4 className='font-headers text-neutralcolors-400 text-base sm:text-lg sm:h-6 dark:text-gray-300'> <span className='font-bold'>{NumberOfFails}</span> Envios Reprovados </h4>
+                    <h4 className='font-headers text-neutralcolors-400 text-sm sm:text-lg sm:h-6 dark:text-gray-300'> <span className='font-bold'>{NumberOfFails}</span> Envios Reprovados </h4>
                 </div>
 
-                <PrimaryIconButton rounded="true" className={`${(NumberOfFails > 0) ? '!bg-neutralcolors-400  hover:!bg-danger' : '!bg-neutralcolors-200 dark:!bg-slate-800 dark:opacity-20 pointer-events-none'} ml-auto sm:block`}><FaArrowRight className='w-4 h-4'/></PrimaryIconButton>
-            </div>
+                <PrimaryIconButton rounded="true" className={`${(NumberOfFails > 0) ? '!bg-neutralcolors-400  hover:!bg-danger' : '!bg-neutralcolors-200 dark:!bg-slate-800 dark:opacity-20 pointer-events-none'} ml-auto hidden sm:block`}><FaArrowRight className='w-2 h-2 sm:w-4 sm:h-4'/></PrimaryIconButton>
+            </Link>
         );
     }
 
     return (
 
         <VelaSocialLayout
-            profilePicture
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard"/>
             <DashboardPath titleTask={currentTask.title}/>
-            <section className='p-4 gap-4 flex flex-col sm:flex-row [&>*]:rounded-lg [&>*]:shado'>
-                <div className='flex flex-col gap-4 [&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
+            <section className=' sm:p-4 gap-4 flex flex-col sm:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 '>
+                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
                     <OscProfileCard OscProfilePicture={imageUrlOsc}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
-                    <div className='w-full sm:min-w-fit flex flex-row justify-between fullhd:justify-start sm:space-x-4 [&>*]:rounded-lg'>
+                    <div className='w-full sm:min-w-fit flex flex-row justify-center sm:justify-between fullhd:justify-start space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
                         <SubmissionFailed NumberOfFails={Fails} />
                         <RecordActivity />
                     </div>
                 </div>
-                <AllTasks tasks={tasks}/>
-                <Link className='w-full sm:w-72 h-52 min-w-fit bg-white p-4 overflow-hidden relative group cursor-pointer dark:bg-slate-800' href={route('taskhub')}>
-                    <div  className='flex space-x-2 items-center' >
-                        <img src="storage/Images/Target.png" alt="" className='w-16 h-16'/>
-                        <h3 className='font-headers text-primary-300 font-semibold flex flex-col dark:text-gray-300'>
-                            Todas as tarefas
-                            <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasksMax}  tarefas concluídas </span>
-                        </h3>
-                    </div>
-                    <p className='font-headers text-xs mt-2 w-72 text-wrap truncate dark:text-gray-300'> Veja todas as tarefas que sua organização precisa concluir para avançar </p>
-                    <div rounded className='w-16 h-16 text-primary absolute -bottom-2 -right-3 flex justify-center items-center rounded-full border-2 border-primary group-hover:bg-primary group-hover:text-white transition-colors delay-150 '>
-                        <FaArrowRight className='w-4 h-4'/>
-                    </div>
-
-                </Link>
-                <div className='w-full bg-white p-4 dark:bg-slate-800'>
-
+                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
+                    <AllTasks tasks={tasks} className="hidden sm:block"/>
+                    <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/>
+                    <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>
-
             </section>
         </VelaSocialLayout>
     );
