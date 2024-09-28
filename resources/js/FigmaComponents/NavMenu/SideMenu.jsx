@@ -62,7 +62,7 @@ const SideMenu = ({className}) => {
                 </ul>
             </div>
             <div>
-                <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm z-50">
+                <nav className="lg:hidden  fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm z-50">
                     <ul className='flex w-full justify-evenly space-x-2 items-center '>
                         {MobileMenusOptions.map((menu, index) => (
                             <Link

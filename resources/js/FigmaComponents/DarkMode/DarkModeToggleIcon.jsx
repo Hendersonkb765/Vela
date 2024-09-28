@@ -23,7 +23,6 @@ const DarkModeToggleIcon = () => {
     return (
         <button
             onClick={toggleDarkMode}
-            lege
             className="block px-2 py-2 rounded-full bg-neutralcolors-100 text-gray-700 dark:text-yellow-300 hover:bg-gray-100 dark:bg-slate-700 focus:outline-none transition-all  "
         >
             {isDarkMode ? <GoMoon /> : <GoSun />}
