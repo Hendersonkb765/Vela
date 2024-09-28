@@ -23,11 +23,12 @@ class GoogleDrive{
             $this->client->setAccessToken($token->access_token);
             
             if($this->client->isAccessTokenExpired()){
+                
                 if($token->refresh_token){
                     $newToken = $this->client->fetchAccessTokenWithRefreshToken($token->refresh_token);
                     $token->update([
                         'access_token' => $newToken['access_token'],
-                        'expires_at' => now()->addSeconds($newToken['expires_in'])
+                        //'expires_at' => now()->addSeconds($newToken['expires_in'])
                     ]);
                     $this->client->setAccessToken($newToken['access_token']);
                 }else{
@@ -40,6 +41,15 @@ class GoogleDrive{
 
         }
     }
+    function getUserStorageQuota(){
+        $service = new \Google\Service\Drive($this->client);
+        $about = $service->about->get(['fields' => 'storageQuota']);
+
+        $limitInGb = $about->getStorageQuota()->limit / (1024 ** 3);
+        $usageInGb = $about->getStorageQuota()->usage / (1024 ** 3);
+        return ['storageLimit'=>number_format($limitInGb,2),'storageUsage'=>number_format($usageInGb,2)];
+    }
+    
 
    
 }
