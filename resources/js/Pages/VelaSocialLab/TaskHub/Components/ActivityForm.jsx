@@ -33,7 +33,7 @@ export default function ActivityForm({ onSubmit }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} method="POST">
             
             {!processing ?
             <>
