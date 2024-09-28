@@ -14,14 +14,13 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
     const Fails = tasks.requirementsFailed;
     const imageUrlOsc = osc.imageUrl;
-    console.log(tasks.pending);
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual
     const OscLevel = level.currentLevel;
     const OscName = osc.fantasyName;
     const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
 
-    const usedSpace = storageDrive['storageUsage'];
-    const totalSpace = storageDrive['storageLimit'];
+    const usedSpace = 5//storageDrive['storageUsage'];
+    const totalSpace = 10//storageDrive['storageLimit'];
     
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
