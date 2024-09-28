@@ -6320,6 +6320,14 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 60
+      },
+      {
+        "date": "2024-09-28T02:44:00.308Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
       }
     ],
     "resources\\js\\Components\\Checkbox.jsx.git": [
@@ -10814,6 +10822,46 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 8
+      },
+      {
+        "date": "2024-09-28T02:29:43.802Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T04:35:27.451Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 31
+      },
+      {
+        "date": "2024-09-28T04:35:31.603Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 4
+      },
+      {
+        "date": "2024-09-28T04:35:48.689Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
+      },
+      {
+        "date": "2024-09-28T04:36:21.650Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 33
       }
     ],
     "resources\\js\\FigmaComponents\\PrimaryButton.jsx": [
@@ -17398,6 +17446,22 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 116
+      },
+      {
+        "date": "2024-09-28T02:26:07.679Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 15
+      },
+      {
+        "date": "2024-09-28T02:42:39.204Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 8
       }
     ],
     "resources\\js\\Layouts\\ProfileSetupLayout.jsx.git": [
@@ -30794,6 +30858,14 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 66
+      },
+      {
+        "date": "2024-09-28T04:25:02.100Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 10
       }
     ],
     "app\\Http\\Middleware\\HandleInertiaRequests.php.git": [
@@ -33184,6 +33256,54 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 39
+      },
+      {
+        "date": "2024-09-28T02:20:48.871Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 20
+      },
+      {
+        "date": "2024-09-28T02:21:38.569Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 50
+      },
+      {
+        "date": "2024-09-28T03:24:01.800Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 21
+      },
+      {
+        "date": "2024-09-28T03:25:04.500Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 63
+      },
+      {
+        "date": "2024-09-28T03:28:25.052Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 201
+      },
+      {
+        "date": "2024-09-28T03:28:49.417Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 24
       }
     ],
     "resources\\js\\FigmaComponents\\DarkMode\\DarkModeToggleIcon.jsx.git": [
@@ -34250,6 +34370,766 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 53
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\ActivityHub.jsx.git": [
+      {
+        "date": "2024-09-28T02:26:39.827Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 3
+      },
+      {
+        "date": "2024-09-28T02:30:33.013Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 29
+      },
+      {
+        "date": "2024-09-28T02:31:06.375Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 33
+      },
+      {
+        "date": "2024-09-28T02:31:40.777Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T02:31:42.061Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 1
+      },
+      {
+        "date": "2024-09-28T02:31:44.811Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 3
+      },
+      {
+        "date": "2024-09-28T02:32:05.064Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 3
+      },
+      {
+        "date": "2024-09-28T02:43:19.952Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
+      },
+      {
+        "date": "2024-09-28T02:43:26.093Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 6
+      },
+      {
+        "date": "2024-09-28T02:43:43.764Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 18
+      },
+      {
+        "date": "2024-09-28T02:44:49.503Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 12
+      },
+      {
+        "date": "2024-09-28T02:45:17.423Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 28
+      },
+      {
+        "date": "2024-09-28T02:45:33.741Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 16
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\Components\\Filter.jsx.git": [
+      {
+        "date": "2024-09-28T02:31:51.992Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 2
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityUploadModal.jsx": [
+      {
+        "date": "2024-09-28T02:31:55.385Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 0
+      },
+      {
+        "date": "2024-09-28T02:31:57.310Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 2
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityUpload.jsx.git": [
+      {
+        "date": "2024-09-28T02:32:35.967Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
+      },
+      {
+        "date": "2024-09-28T02:33:09.193Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 33
+      },
+      {
+        "date": "2024-09-28T02:33:27.718Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 19
+      },
+      {
+        "date": "2024-09-28T02:33:41.015Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 13
+      },
+      {
+        "date": "2024-09-28T02:34:01.290Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 20
+      },
+      {
+        "date": "2024-09-28T02:36:32.518Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 39
+      },
+      {
+        "date": "2024-09-28T02:36:45.391Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 13
+      },
+      {
+        "date": "2024-09-28T02:36:54.180Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 9
+      },
+      {
+        "date": "2024-09-28T02:37:11.605Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
+      },
+      {
+        "date": "2024-09-28T02:38:20.529Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 69
+      },
+      {
+        "date": "2024-09-28T02:38:44.757Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 24
+      },
+      {
+        "date": "2024-09-28T02:38:51.890Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 7
+      },
+      {
+        "date": "2024-09-28T02:38:56.715Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T02:39:12.056Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 15
+      },
+      {
+        "date": "2024-09-28T02:39:59.411Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 3
+      },
+      {
+        "date": "2024-09-28T02:40:55.364Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 26
+      },
+      {
+        "date": "2024-09-28T03:28:52.931Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 0
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\Filter.jsx.git": [
+      {
+        "date": "2024-09-28T02:35:38.723Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 1
+      },
+      {
+        "date": "2024-09-28T02:39:15.281Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 2
+      },
+      {
+        "date": "2024-09-28T02:39:33.192Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 18
+      },
+      {
+        "date": "2024-09-28T03:10:29.271Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 13
+      },
+      {
+        "date": "2024-09-28T03:11:22.553Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 53
+      },
+      {
+        "date": "2024-09-28T03:12:12.626Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 50
+      },
+      {
+        "date": "2024-09-28T03:12:53.649Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 41
+      },
+      {
+        "date": "2024-09-28T03:18:19.242Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 8
+      },
+      {
+        "date": "2024-09-28T03:19:13.486Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 30
+      },
+      {
+        "date": "2024-09-28T03:19:48.477Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 35
+      },
+      {
+        "date": "2024-09-28T03:21:08.193Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 45
+      },
+      {
+        "date": "2024-09-28T03:21:24.420Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 16
+      },
+      {
+        "date": "2024-09-28T03:21:39.550Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 15
+      },
+      {
+        "date": "2024-09-28T03:37:15.029Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 24
+      },
+      {
+        "date": "2024-09-28T03:38:20.238Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 65
+      },
+      {
+        "date": "2024-09-28T03:38:56.155Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 36
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityCard.jsx.git": [
+      {
+        "date": "2024-09-28T03:22:37.108Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 7
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityUploadModal\\ActivityUploadModal.jsx.git": [
+      {
+        "date": "2024-09-28T03:29:03.235Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 6
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityUploadModal\\ActivityForm.jsx.git": [
+      {
+        "date": "2024-09-28T03:29:34.648Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 19
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityForm\\Step1.jsx.git": [
+      {
+        "date": "2024-09-28T03:30:22.023Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 4
+      },
+      {
+        "date": "2024-09-28T03:31:05.083Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 43
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityForm\\ActivityForm.jsx.git": [
+      {
+        "date": "2024-09-28T03:39:29.124Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 15
+      },
+      {
+        "date": "2024-09-28T03:40:06.124Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 37
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\AddActivity\\ActivityForm.jsx.git": [
+      {
+        "date": "2024-09-28T03:41:27.993Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T03:42:14.578Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 47
+      },
+      {
+        "date": "2024-09-28T03:42:19.155Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T03:43:44.983Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 25
+      },
+      {
+        "date": "2024-09-28T03:43:54.601Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 10
+      },
+      {
+        "date": "2024-09-28T03:44:25.572Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 31
+      },
+      {
+        "date": "2024-09-28T03:46:35.011Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 12
+      },
+      {
+        "date": "2024-09-28T03:49:52.555Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 29
+      },
+      {
+        "date": "2024-09-28T03:50:33.009Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 40
+      },
+      {
+        "date": "2024-09-28T03:56:24.388Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 351
+      },
+      {
+        "date": "2024-09-28T03:57:09.815Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 45
+      },
+      {
+        "date": "2024-09-28T03:57:31.204Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T03:57:32.993Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 2
+      },
+      {
+        "date": "2024-09-28T04:02:47.083Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 14
+      },
+      {
+        "date": "2024-09-28T04:04:15.212Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 2
+      },
+      {
+        "date": "2024-09-28T04:05:46.378Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 91
+      },
+      {
+        "date": "2024-09-28T04:06:43.760Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
+      },
+      {
+        "date": "2024-09-28T04:07:14.646Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 31
+      },
+      {
+        "date": "2024-09-28T04:08:11.707Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 57
+      },
+      {
+        "date": "2024-09-28T04:08:16.573Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 5
+      },
+      {
+        "date": "2024-09-28T04:09:07.781Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 51
+      },
+      {
+        "date": "2024-09-28T04:09:40.707Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 33
+      },
+      {
+        "date": "2024-09-28T04:10:26.607Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 46
+      },
+      {
+        "date": "2024-09-28T04:10:59.251Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 33
+      },
+      {
+        "date": "2024-09-28T04:18:36.435Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 31
+      },
+      {
+        "date": "2024-09-28T04:19:20.697Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 44
+      },
+      {
+        "date": "2024-09-28T04:23:59.956Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 97
+      },
+      {
+        "date": "2024-09-28T04:25:42.813Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 21
+      },
+      {
+        "date": "2024-09-28T04:30:50.203Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 69
+      },
+      {
+        "date": "2024-09-28T04:30:56.388Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 6
+      },
+      {
+        "date": "2024-09-28T04:31:31.428Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 35
+      },
+      {
+        "date": "2024-09-28T04:32:24.666Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 9
+      },
+      {
+        "date": "2024-09-28T04:32:34.314Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 10
+      },
+      {
+        "date": "2024-09-28T04:32:43.666Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 9
+      },
+      {
+        "date": "2024-09-28T04:33:28.328Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 45
+      }
+    ],
+    "app\\Http\\Controllers\\ActivityController.php.git": [
+      {
+        "date": "2024-09-28T03:45:43.040Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 17
       }
     ]
   },

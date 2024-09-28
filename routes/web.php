@@ -68,7 +68,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::get('/taskhub','index')->middleware(['auth'])->name('taskhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
-        
+
 });
 
 // ->middleware(['auth', 'verified'])->name('taskhub');

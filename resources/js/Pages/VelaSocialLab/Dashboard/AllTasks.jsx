@@ -8,7 +8,7 @@ const AllTasks = ({tasks, className=''}) => {
                 <img src="storage/Images/Target.png" alt="" className='w-20 h-20 sm:w-16 sm:h-16'/>
                 <h3 className='font-headers text-primary-300 font-semibold flex flex-col dark:text-gray-300'>
                     Todas as tarefas
-                    <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasks_max}  tarefas concluídas </span>
+                    <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasksMax}  tarefas concluídas </span>
                 </h3>
             </div>
             <p className='hidden sm:block font-headers text-xs mt-2 w-72 text-wrap truncate dark:text-gray-300'> Veja todas as tarefas que sua organização precisa concluir para avançar </p>
