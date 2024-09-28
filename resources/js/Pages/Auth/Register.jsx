@@ -35,7 +35,7 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('register.store'), {
+        post(route('activity.store'), {
             onError: (errors) => {
                 alert('Ocorreu um erro no registro. Verifique os dados e tente novamente!');
                 setPasswordValidations({minLength: false, uppercase: false, specialChar: false})

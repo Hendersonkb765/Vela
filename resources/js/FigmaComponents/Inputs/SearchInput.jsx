@@ -1,3 +1,20 @@
+/*
+        "id" => 3
+        "title" => "Numquam possimus aspernatur vitae quia molestias illum omnis autem."
+        "hour_start" => "18:38:04"
+        "hour_end" => "04:06:25"
+        "date" => "2006-10-17"
+        "audience" => 58432
+        "send_by" => "Larissa Leal D'ávila Sobrinho"
+        "description" => "Earum et voluptas rerum qui quae. Mollitia esse odio soluta quo corporis. Qui et enim reiciendis architecto. Vel et sed debitis aut saepe voluptatibus."
+        "img_url" => "https://via.placeholder.com/640x480.png/000022?text=quo"
+        "thumbnail_photos_url" => "https://via.placeholder.com/640x480.png/0011cc?text=maiores"
+        "photos_url" => "https://via.placeholder.com/640x480.png/00cccc?text=quod"
+        "osc_id" => 1
+        "user_id" => 12
+        "created_at" => "2024-09-28 04:24:40"
+        "updated_at" => "2024-09-28 04:24:40"
+*/
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
@@ -42,6 +59,7 @@ export default function SearchInput({ placeholder = 'Search...', searchRoute, cl
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
             >
+            
                 <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -64,9 +64,13 @@ Route::get('/myuploads', function () {
 })->middleware(['auth'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
-Route::get('/taskhub', [ActivityController::class,'index'])->middleware(['auth'])->name('taskhub');
-Route::post('/registrar-atividade', [ActivityController::class,'store'])->name('activity.store');
-    
+Route::controller(ActivityController::class)->group(function(){
+    Route::get('/taskhub','index')->middleware(['auth'])->name('taskhub');
+    Route::post('/registrar-atividade', 'store')->name('activity.store');
+    Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
+        
+});
+
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {

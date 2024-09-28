@@ -21,6 +21,8 @@ class Activity extends Model
         'img_url',
         'thumbnail_photos_url',
         'photos_url',
+        'osc_id',
+        'user_id',
     ];
 
     // muitos para um

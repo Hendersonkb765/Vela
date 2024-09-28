@@ -28,12 +28,19 @@ export default function ActivityForm({ onSubmit }) {
     // Função para enviar o formulário
     const handleSubmit = (e) => {
         e.preventDefault();
+        post(route('activity.store'), {
+            onError: (errors) => {
+                alert('Ocorreu um erro no registro. Verifique os dados e tente novamente!');
+            },
+            //onFinish: () => reset('activityTitle', 'activityDescription', 'activityDate', 'activityStatus'),
+        });
+       
         // onSubmit(data); // Chama a função onSubmit passada como prop
 
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
             
             {!processing ?
             <>
@@ -91,7 +98,7 @@ export default function ActivityForm({ onSubmit }) {
                         </select>
                     </div>
                 </div>
-                <PrimaryButton type={"submit"} className='h-12 w-full' disabled={processing}  href={route('activity.store')} center >
+                <PrimaryButton type={"submit"} className='h-12 w-full'  center >
                     Registrar Atividade
                 </PrimaryButton>
             </>
