@@ -65,11 +65,14 @@ class ProviderAuthController extends Controller
             
             
             $socialUser = Socialite::driver('google')->user();
-            GoogleToken::create([
+            GoogleToken::updateOrcreate(
+                ['osc_id'=> Auth::user()->osc->first()->id],
+                [
                 'access_token' => $socialUser->token,
                 'refresh_token' => $socialUser->refreshToken,
-                'osc_id' => Auth::user()->osc->first()->id,
-            ]);
+                //'osc_id' => Auth::user()->osc->first()->id,
+                ]
+        );
             return redirect()->route('dashboard'); 
            
                  
