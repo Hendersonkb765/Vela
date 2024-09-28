@@ -11,42 +11,48 @@ class File extends GoogleDrive
     public function create(string $name,$fileDatabase, string $folderId )
     {
   
-        try{
-            $file = $fileDatabase;
+       // try{
+            $folderId = GoogleDriveFolder::where('folder_id',$folderId)->first()->id;
+            if(!$folderId){
+                return response()->json(['error'=>"Pasta não encontrada"],404);
+            }
+            else{
+                $file = $fileDatabase;
         
-            if($fileDatabase){
-                $drive = new Drive($this->client);
-                $fileMetadata = new DriveFile([
-                    'name' => $name,
-                    'mimeType' => $fileDatabase->getMimeType(),
-                    'parents' => [$folderId]
-                ]);
-                $content = file_get_contents($fileDatabase);
-
-                $file = $drive->files->create($fileMetadata, [
-                    'data' => $content,
-                    'mimeType' => $fileDatabase->getMimeType(),
-                    'uploadType' => 'multipart',
-                    'fields' => 'id,id,createdTime,name,modifiedTime'
-                ]);
-                
-                GoogleDriveFile::create([
-                    'name' => $name,
-                    'file_id' => $file->id,
-                    'folder_id' => 1,
-                    'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
-                    'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s')
-                ]);
-
-                return $file;  
+                if($fileDatabase){
+                    $drive = new Drive($this->client);
+                    $fileMetadata = new DriveFile([
+                        'name' => $name,
+                        'mimeType' => $fileDatabase->getMimeType(),
+                        'parents' => [$folderId]
+                    ]);
+                    $content = file_get_contents($fileDatabase);
+    
+                    $file = $drive->files->create($fileMetadata, [
+                        'data' => $content,
+                        'mimeType' => $fileDatabase->getMimeType(),
+                        'uploadType' => 'multipart',
+                        'fields' => 'id,createdTime,name,modifiedTime,webViewLink'
+                    ]);
+                    GoogleDriveFile::create([
+                        'name' => $name,
+                        'file_id' => $file->id,
+                        'folder_id' => $folderId,
+                        'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
+                        'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s')
+                    ]);
+    
+                    return $file;  
+            }
+            
 
             }
-
+/*
         }
         catch(\Exception $e){
             return response()->json(['error'=>"Erro ao criar arquivo no Google Drive"],500);
         }
-        
+        */
         
     }
     public function delete(string $fileId)
