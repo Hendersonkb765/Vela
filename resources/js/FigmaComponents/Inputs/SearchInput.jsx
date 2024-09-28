@@ -1,38 +1,24 @@
-import { useForm } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function SearchInput({ placeholder = 'Search...', searchRoute, className = '' }) {
-    const [isTyping, setIsTyping] = useState(false); // Estado para rastrear se o usuário está digitando
-
-    const { data, setData, get } = useForm({
-        search: ''
-    });
+export default function SearchInput({ placeholder = 'Search...', onSearchChange, className = '' }) {
+    const [search, setSearch] = useState(''); // Estado local para o valor de pesquisa
 
     const handleChange = (e) => {
-        setData('search', e.target.value);
-        setIsTyping(e.target.value.length > 0); // Atualiza o estado de digitação
+        const value = e.target.value;
+        setSearch(value); // Atualiza o estado local
+        onSearchChange(value); // Passa o valor para o componente pai
     };
-
-    useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            if (isTyping) {
-                get(searchRoute, { preserveState: true, only: ['search'] });
-            }
-        }, 300); // Aguarda 300ms antes de enviar a requisição (debounce)
-
-        return () => clearTimeout(delayDebounceFn);
-    }, [data.search, isTyping]); // Adiciona isTyping às dependências
 
     return (
         <div className="relative">
             <input
                 type="text"
                 className={
-                    'h-10 min-w-56 w-full rounded-md border-2 border-neutralcolors text-sm text-neutralcolors-600 placeholder-neutralcolors-400 focus:outline-none focus:border-blue-500 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400 dark:placeholder-gray-500 py-2 px-4  cursor-pointer' +
+                    'h-10 min-w-80 w-full rounded-md border-2 border-neutralcolors text-sm text-neutralcolors-600 placeholder-neutralcolors-400 focus:outline-none focus:border-blue-500 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400 dark:placeholder-gray-500 py-2 px-4 cursor-pointer ' +
                     className
                 }
                 placeholder={placeholder}
-                value={data.search}
+                value={search}
                 onChange={handleChange}
             />
             <svg

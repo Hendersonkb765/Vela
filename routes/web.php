@@ -64,9 +64,16 @@ Route::get('/myuploads', function () {
 })->middleware(['auth'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
+Route::get('/activityhub', function () {
+    return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
+})->middleware(['auth'])->name('activityhub');
+// ->middleware(['auth', 'verified'])->name('myuploads');
+
+
+
 Route::get('/taskhub', [ActivityController::class,'index'])->middleware(['auth'])->name('taskhub');
 Route::post('/registrar-atividade', [ActivityController::class,'store'])->name('activity.store');
-    
+
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {
