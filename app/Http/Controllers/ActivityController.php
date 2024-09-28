@@ -23,30 +23,38 @@ class ActivityController extends Controller
     }
     public function store(Request $request){
 
-        dd($request);
+        
         $request->validate([
             'activityTitle' => 'required',
             'activityDescription' => 'required',
             'activityDate'=> 'required|date',
+            'activityHourStart' => 'required|date_format:H:i|before:activityHourEnd',
+            'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'hour_start' => 'required|date_format:H:i|before:hour_end',
             //'hour_end' => 'required|date_format:H:i|after:hour_start',
         ]);
         try{
             
-            Activity::create([
+            $activity =Activity::create([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
-                'start_date' => $request->activityDate,
-                'end_date' => '2021-10-10',
+                'date' => $request->activityDate,
+                'hour_start' => '00:00', 
+                'hour_end' => '00:00',
                 'status' => $request->activityStatus,
+                'audience' => 333,
+                'img_url' => 'https://via.placeholder.com/150',
+                'thumbnail_photos_url' => 'https://via.placeholder.com/150',
+                'photos_url' => 'https://via.placeholder.com/150',
+                'send_by' => Auth::user()->name,
                 'user_id' => Auth::user()->id,
                 'osc_id' => Auth::user()->osc->first()->id
             ]);
-    
             return response()->json(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
            
         }
         catch(\Exception $e){
+            dd($e);
             return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
         }
        
