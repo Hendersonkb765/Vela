@@ -70,8 +70,8 @@ class ActivityController extends Controller
                 'status' => $request->activityStatus,
                 'audience' => 333,
                 'img_url' => 'https://via.placeholder.com/150',
-                'thumbnail_photos_url' => 'https://via.placeholder.com/150',
-                'photos_url' => 'https://via.placeholder.com/150',
+                'thumbnail_photos_url' => $request->activityThumbnailPhotosUrl,
+                'photos_url' => $request->activityPhotosUrl,
                 'send_by' => Auth::user()->name,
                 'user_id' => Auth::user()->id,
                 'osc_id' => Auth::user()->osc->first()->id
