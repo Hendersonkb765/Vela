@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoAddCircleOutline } from "react-icons/io5";
 import ActivityUploadModal from "./ActivityUploadModal";
-import ActivityForm from "./ActivityForm";
+import ActivityForm from "./AddActivity/ActivityForm";
 
 
 export default function ActivityUpload({ }){

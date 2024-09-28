@@ -38,7 +38,7 @@ export default function Filter() {
                             id="startDate"
                             name="startDate"
                             value={data.startDate}
-                            className="mt-1 block !min-w-48"
+                            className="mt-1 block !min-w-48 h-10"
                             autoComplete="startDate"
                             isFocused={true}
                             onChange={(e) => setData('startDate', e.target.value)}
@@ -53,7 +53,7 @@ export default function Filter() {
                             id="endDate"
                             name="endDate"
                             value={data.endDate}
-                            className="mt-1 block !min-w-48"
+                            className="mt-1 block !min-w-48 h-10"
                             autoComplete="endDate"
                             isFocused={true}
                             onChange={(e) => setData('endDate', e.target.value)}
