@@ -149,16 +149,18 @@ Route::get('/criar-arquivo',function(){
     return response()->json(['status'=>200,'message' => 'Arquivo criado com sucesso']);
 });
 Route::get('/formulario',function(){
+    /*
     $driveFolder = new Folder(Auth::user()->osc->first()->id);
     $driveFolder->createDefaultDirectories();
     return response()->json(['status'=>200,'message' => 'Pastas criadas com sucesso']);
+    */
     return view('Formulario');
 });
 Route::post('/drive',function(Request $request){
     $fileDatabase = $request->file('database');
     $driveFile = new File(Auth::user()->osc->first()->id);
-    $driveFile->update("1B2idd4NaTyc7vT4RzIbh_QOUq-q6cvfm",$fileDatabase);
-
+    $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1V9TzwnG7qqhXf1lYWTJnzTjamsa8g_-a');
+    dd($arquivo);
 })->name('formulario');
 
 
