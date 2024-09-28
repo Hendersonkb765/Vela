@@ -1,18 +1,20 @@
 <?php
 namespace App\Services\Google\Drive;
+use App\Models\GoogleDriveFile;
+use App\Models\GoogleDriveFolder;
 use Carbon\Carbon;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
-use App\Models\GoogleDriveFile;
+
 
 class File extends GoogleDrive
 {
 
-    public function create(string $name,$fileDatabase, string $folderId )
+    public function create(string $name,$fileDatabase, string $folderId, bool $isPublic = false)
     {
   
        // try{
-            $folderId = GoogleDriveFolder::where('folder_id',$folderId)->first()->id;
+            $dataBasefolderId = GoogleDriveFolder::where('folder_id',$folderId)->first()->id;
             if(!$folderId){
                 return response()->json(['error'=>"Pasta não encontrada"],404);
             }
@@ -32,14 +34,27 @@ class File extends GoogleDrive
                         'data' => $content,
                         'mimeType' => $fileDatabase->getMimeType(),
                         'uploadType' => 'multipart',
-                        'fields' => 'id,createdTime,name,modifiedTime,webViewLink'
+                        'fields' => 'id,createdTime,name,modifiedTime,webContentLink'
                     ]);
+                    if($isPublic){
+                        $permission = new \Google\Service\Drive\Permission();
+                        $permission->type = 'anyone';
+                        $permission->role = 'reader';
+                        $drive->permissions->create($file->id, $permission);
+                    }
+                   
+                    
+                    
+                    $webViewLink = 'https://drive.google.com/thumbnail?id='.$file->id.'&sz=w1000';
                     GoogleDriveFile::create([
                         'name' => $name,
                         'file_id' => $file->id,
-                        'folder_id' => $folderId,
+                        'folder_id' => $dataBasefolderId,
                         'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
-                        'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s')
+                        'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
+                        'file_extension' => $fileDatabase->getClientOriginalExtension(),
+                        'web_content_link' => $file->webContentLink,
+                        'web_view_link' => $webViewLink
                     ]);
     
                     return $file;  
