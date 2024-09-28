@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('file_id');
             $table->foreignId('folder_id')->constrained('google_drive_folders');
+            $table->string('file_extension')->nullable();
+            $table->string('web_content_link')->nullable();
+            $table->string('web_view_link')->nullable();
             $table->dateTime('creation_file_date');
             $table->dateTime('modification_file_date')->nullable();
         });
