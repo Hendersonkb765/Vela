@@ -36,7 +36,7 @@ class HandleInertiaRequests extends Middleware
                         $request->user()->only('id', 'name', 'email'), // Apenas os campos essenciais (Talvez tirar Email)
                         [
 
-                            'role' => $this->getRoleFromId($request->user()->role_id), // Envia apenas o nome da role, não o role_id
+                            'role' => $this->getRoleFromId($request->user()->role_id ?? 0), // Envia apenas o nome da role, não o role_id
                             'profilePicture' => $request->user()->image_url ?? null, // Usei o operador null coalesce para simplificar
                         ]
                     )

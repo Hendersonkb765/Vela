@@ -88,6 +88,7 @@ export default function({ baseInfo, maxStep, data, setData, errors }) {
                 <ProfileUploadInput
                     firstletter={data.user.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
+                    savedAvatar={imageUrl}
                 />
 
             </div>
