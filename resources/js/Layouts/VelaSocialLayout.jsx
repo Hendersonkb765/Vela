@@ -5,9 +5,10 @@ import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
 export default function VelaSocialLayout({children}) {
+
     const { auth } = usePage().props;
     const { user } = auth;
-
+    console.log(user);
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
@@ -23,7 +24,7 @@ export default function VelaSocialLayout({children}) {
     }, [isDarkMode]);
 
     return (
-
+       
         <div className='flex overflow-x-hidden'>
             <NavBar className="pr-8 z-50" imgUrl={user.profilePicture} userName={user.name} role={user.roleInOrganization} email={user.email} />
             <SideMenu  />

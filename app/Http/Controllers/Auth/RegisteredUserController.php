@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'password' => 'required|confirmed|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*?&#]/',
         
         ]);
-
+       
         try{
             $user = User::create([
                 'name' => $request->name,

@@ -9,7 +9,7 @@ import AllTasks from './VelaSocialLab/Dashboard/AllTasks';
 import { FaArrowRight } from "react-icons/fa6";
 import DriveInfo from './VelaSocialLab/Dashboard/DriveInfo';
 
-export default function Dashboard({ user,osc,level,tasks }) {
+export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
     const Fails = tasks.requirementsFailed;
@@ -19,9 +19,9 @@ export default function Dashboard({ user,osc,level,tasks }) {
     const OscName = osc.fantasyName;
     const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
 
-    const usedSpace = 12;
-    const totalSpace = 15;
-
+    const usedSpace = 5//storageDrive['storageUsage'];
+    const totalSpace = 10//storageDrive['storageLimit'];
+    console.log(user);
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
             <Link href={route('taskhub')} className={`h-16 sm:h-full sm:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
@@ -41,6 +41,7 @@ export default function Dashboard({ user,osc,level,tasks }) {
 
         <VelaSocialLayout
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
+            profilePicture={user.profilePicture}v
         >
             <Head title="Dashboard"/>
             <DashboardPath titleTask={currentTask.title}/>

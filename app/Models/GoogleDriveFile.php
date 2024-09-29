@@ -16,6 +16,9 @@ class GoogleDriveFile extends Model
         'file_id',
         'folder_id',
         'creation_file_date',
-        'modification_file_date'
+        'modification_file_date',
+        'file_extension',
+        'web_content_link',
+        'web_view_link'
     ];
 }

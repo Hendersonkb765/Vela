@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB; // Add this line
 use Inertia\Inertia;
+use App\Services\Google\Drive\GoogleDrive; // Add this line
 
 class DashboardController extends Controller
 {
@@ -27,12 +28,10 @@ class DashboardController extends Controller
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
      
         $currentLevel = $osc->axis->first()->pivot->current_level;
-       
         $level = $axis->level->where('position',$currentLevel)->first();
         $tasks = $level->task;
         //$tasks = $axis->level->first()->with(['task','task.step'])->where('position', $level->id)->first();
-        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasks_max'=>0,'requirementsFailed'=>0];
-
+        $arrayTasks = ['axis'=>$axis->name,'completed'=>['total'=>0],'pending'=>['total'=>0],'tasksMax'=>0,'requirementsFailed'=>0];
 
         foreach ($tasks as $task) {
 
@@ -77,7 +76,9 @@ class DashboardController extends Controller
         //$arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
         $arrayTasks['tasksCompleted'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasksMax'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
-       
+
+        //$googleDrive = new GoogleDrive($osc->id);
+        
         return Inertia::render('Dashboard',[
             'user' =>[
                         'id'=> $user->id,
@@ -96,6 +97,7 @@ class DashboardController extends Controller
                         'currentLevel'=>$currentLevel,
                     ],
             'tasks' => $arrayTasks,
+            //'storageDrive'=> $googleDrive->getUserStorageQuota(), 
         ]);
        }
        catch(\Exception $e){
