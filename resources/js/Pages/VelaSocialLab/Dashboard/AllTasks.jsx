@@ -3,12 +3,12 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const AllTasks = ({tasks, className=''}) => {
     return (
-        <Link className={`w-full sm:w-72 sm:h-52 min-w-fit fullhd:w-96 bg-white p-4 overflow-hidden relative group cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-800/85 ${className}`} href={route('taskhub')}>
+        <Link className={`w-full sm:w-72 sm:h-52 min-w-fit fullhd:w-96 bg-white p-4 overflow-hidden relative group cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-800/85 ${className}`} href={route('axishub')}>
             <div  className='flex space-x-2 items-center' >
                 <img src="storage/Images/Target.png" alt="" className='w-20 h-20 sm:w-16 sm:h-16'/>
                 <h3 className='font-headers text-primary-300 font-semibold flex flex-col dark:text-gray-300'>
                     Todas as tarefas
-                    <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasks_max}  tarefas concluídas </span>
+                    <span  className='font-normal text-xs'> {tasks.completed.total} / {tasks.tasksMax}  tarefas concluídas </span>
                 </h3>
             </div>
             <p className='hidden sm:block font-headers text-xs mt-2 w-72 text-wrap truncate dark:text-gray-300'> Veja todas as tarefas que sua organização precisa concluir para avançar </p>
