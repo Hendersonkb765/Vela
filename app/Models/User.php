@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'sex',
         'birthday',
         'image_url',
-        
+
     ];
 
     /**
@@ -51,12 +51,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-   
+
     public function osc() : BelongsToMany
     {
         return $this->belongsToMany(Osc::class);
     }
-    public function phone() 
+    public function phone()
     {
         return $this->morphMany(Phone::class,'phoneable');
     }
@@ -64,5 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Role::class);
     }
-    
+
+
+
 }

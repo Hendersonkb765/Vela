@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+
 class HandleInertiaRequests extends Middleware
 {
     /**
@@ -33,7 +34,11 @@ public function share(Request $request)
             'user' => fn () => $request->user()
                 ?
                 array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
-                ['profilePicture' => $request->user()->image_url ?? null ] )       
+                [
+                    'profilePicture' => $request->user()->image_url ? $request->user()->image_url : null,
+                     'role'=>$this->getRoleFromId($request->user()->role_id)
+                    
+                ] )       
                 : null,
           
         ],
@@ -46,5 +51,22 @@ public function share(Request $request)
 
     ]);
 }
-}
 
+ /**
+     * Função que converte role_id para o nome da role.
+     *
+     * @param int $role_id
+     * @return string
+     */
+    protected function getRoleFromId(int $role_id): string
+    {
+        $roles = [
+            1 => 'Presidente',
+            2 => 'Membro',
+            3 => 'Voluntário',
+            // Adicione mais roles conforme necessário
+        ];
+
+        return $roles[$role_id] ?? 'Nenhum';
+    }
+}
