@@ -76,8 +76,9 @@ class DashboardController extends Controller
         //$arrayTasks['pending']['total'] = Level::where('id',$currentLevel)->first()->task->where('status','pending')->count();
         $arrayTasks['tasksCompleted'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasksMax'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
-        
+
         //$googleDrive = new GoogleDrive($osc->id);
+        
         return Inertia::render('Dashboard',[
             'user' =>[
                         'id'=> $user->id,
