@@ -33,7 +33,7 @@ public function share(Request $request)
             'user' => fn () => $request->user()
                 ?
                 array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
-                ['profilePicture' => $request->user()->image_url ? $request->user()->image_url : null ] )       
+                ['profilePicture' => $request->user()->image_url ?? null ] )       
                 : null,
           
         ],
