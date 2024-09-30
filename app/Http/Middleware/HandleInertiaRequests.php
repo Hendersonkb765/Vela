@@ -36,7 +36,7 @@ public function share(Request $request)
                 array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
                 [
                     'profilePicture' => $request->user()->image_url ? $request->user()->image_url : null,
-                     'role'=>$this->getRoleFromId($request->user()->role_id)
+                     'role'=> $request->user()->role_id ? $this->getRoleFromId($request->user()->role_id) : null
                     
                 ] )       
                 : null,
