@@ -27,7 +27,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
             </div>
             <div className="flex flex-col space-y-2">
                 <div>
-                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Nome da sua Organização</h3>
+                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Nome da sua Organização*</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700  dark:text-gray-400">Esse nome vai ser aquele apresentado para outros usuários que querem encontrar sua organização</p>
                 </div>
                 <div>

@@ -40,7 +40,7 @@ export default function({ baseInfo, maxStep, data, setData, errors, onNameValida
             </div>
             <div className="flex space-x-12">
                 <div className="flex flex-col space-y-2">
-                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Seu Nome</h3>
+                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Seu Nome*</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-400">Qual é o seu nome completo?</p>
                     <TextInput
                         id="name"
@@ -56,7 +56,7 @@ export default function({ baseInfo, maxStep, data, setData, errors, onNameValida
                     <InputError message={nameError || errors.name} className="mt-2 text-danger" />
                 </div>
                 <div className="flex flex-col space-y-2">
-                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Quando é seu aniversário?</h3>
+                    <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Quando é seu aniversário?*</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-400">Queremos saber sua idade</p>
                     <DateInput
                         id="birthday"
