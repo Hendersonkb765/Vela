@@ -6,7 +6,6 @@ import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
-import Stage5 from "./Stage5";
 
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(() => {
@@ -68,8 +67,6 @@ export default function ProfileSetup() {
                 return <Stage3 baseInfo={steps[2]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
             case 4:
                 return <Stage4 baseInfo={steps[3]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 5:
-                return <Stage5 baseInfo={steps[4]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
             default:
                 return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
         }
