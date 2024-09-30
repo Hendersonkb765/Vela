@@ -30,21 +30,21 @@ class Folder extends GoogleDrive
 
     public function createDefaultDirectories(){
         try{
-            $oscId = Auth::user()->osc->first()->id;
-            $velaFolder = $this->create('Velaae_Social_lab',null,$oscId);      
-            $this->create('Atividades', $velaFolder->id,$oscId);
+            
+            $velaFolder = $this->create('Velaae_Social_lab',null);      
+            $this->create('Atividades', $velaFolder->id);
          
-            $axesFolder = $this->create('Eixos', $velaFolder->id,$oscId);
+            $axesFolder = $this->create('Eixos', $velaFolder->id);
           
             $axes=Axis::all();
             
             foreach($axes as $axis){
                 $levels = $axis->level;
     
-                $axisFolder = $this->create($axis->name,$axesFolder->id,$oscId);
+                $axisFolder = $this->create($axis->name,$axesFolder->id);
               
                 foreach($levels as $level){
-                    $levelFolder = $this->create($level->name,$axisFolder->id,$oscId);
+                    $levelFolder = $this->create($level->name,$axisFolder->id);
                    
                 }
             }
@@ -56,7 +56,7 @@ class Folder extends GoogleDrive
         
         
     }
-    public function create(string $name,string $parentFolderId = null,int $oscId){ 
+    public function create(string $name,string $parentFolderId = null){ 
         try{
             $drive = new Drive($this->client);
             $folderMetadata = new DriveFile([
@@ -71,7 +71,7 @@ class Folder extends GoogleDrive
             GoogleDriveFolder::create([
                 'name' => $folder->name,
                 'folder_id' => $folder->id,
-                'osc_id' => $oscId,
+                'osc_id' => $this->oscId,
                 'folder_type'=>'level',
                 'creation_folder_date' => Carbon::parse($folder->createdTime)->format('Y-m-d H:i:s')
             ]);
