@@ -9,7 +9,7 @@ import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
 
-export default function MultiStepActivityForm({ onSubmit }) {
+export default function ActivityForm({ onSubmit }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
     const [imgSrc, setImgSrc] = useState('');

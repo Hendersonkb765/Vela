@@ -118,14 +118,14 @@ export default function ProfileSetup() {
                 </form>
             ) : (
                 <div className="h-full flex flex-col items-center justify-center space-y-8">
-                    <div className="rounded-full w-40 h-40 bg-neutralcolors-100/50 flex justify-center items-center p-8 ">
+                    <div className="rounded-full w-40 h-40 bg-neutralcolors-100/50 dark:bg-slate-900 flex justify-center items-center p-8 ">
                         <FaFlagCheckered className="w-32 h-32 text-green-400"/>
                     </div>
                     <div className="flex flex-col text-center space-y-4">
-                        <h1 className="text-4xl font-bold font-headers capitalize">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
-                        <p className="font-body text-base">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
+                        <h1 className="text-4xl font-bold font-headers capitalize dark:text-white">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
+                        <p className="font-body text-base dark:text-gray-300">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
                     </div>
-                    <PrimaryButton href={route("dashboard")}></PrimaryButton>
+                    <PrimaryButton href={route("dashboard")} center={true} >OK</PrimaryButton>
                 </div>
 
             )}
