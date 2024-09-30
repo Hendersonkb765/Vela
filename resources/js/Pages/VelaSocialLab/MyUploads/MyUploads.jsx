@@ -26,14 +26,14 @@ export default function Myuploads({ auth }) {
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Meus Uploads</h2>}
         >
             <Head title="Meus Uploads" />
-            <section className='flex flex-col min-h-fit overflow-x-hidden pb-8 relative'>
-                <form className="relative flex flex-col justify-center items-center min-h-64 bg-primary dark:bg-primary-200 fullhd:h-3/4">
+            <section className='flex flex-col min-h-fit overflow-x-hidden pb-8 relative fullhd:h-full'>
+                <form className="relative flex flex-col justify-center items-center min-h-64 bg-primary dark:bg-primary-200 fullhd:h-2/4">
                     <FileUploadDragDrop />
                 </form>
                 <Filter />
                 {/* Efeito de blur */}
-                <div className="absolute inset-0 flex flex-col  justify-center items-center text-2xl font-bold text-gray-900 dark:text-gray-200 z-20 backdrop-blur-sm opacity-50"></div>
-                <div className="absolute inset-0 flex flex-col  justify-center items-center text-2xl font-bold text-gray-900 dark:text-gray-200 z-20 backdrop-blur-sm ">
+                <div className="absolute h-full inset-0 flex flex-col bg-black justify-center items-center text-2xl font-bold text-gray-900 dark:text-gray-200 z-20 backdrop-blur-sm opacity-50"></div>
+                <div className="absolute inset-0 flex flex-col text-center justify-center items-center text-2xl font-bold text-neutralcolors-600 dark:text-gray-200 z-20 backdrop-blur-sm ">
                     {/* Estamos Aperfeiçoando Esta Seção! */}
                     {/* "Em Breve, Novidades!" */}
                     Novas Funcionalidades em Desenvolvimento!

@@ -11,7 +11,7 @@ import Stage5 from "./Stage5";
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
-
+    const [isNameValid, setIsNameValid] = useState(false);
     const { data, setData, post, patch, processing, errors, reset } = useForm({
 
         user: {
@@ -43,7 +43,7 @@ export default function ProfileSetup() {
     const RenderStepContent = (step) => {
         switch (step) {
             case 1:
-                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors}/>;
+                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} onNameValidation={setIsNameValid} />;
             case 2:
                 return <Stage2 baseInfo={steps[1]} maxStep={maxStep} data={data} setData={setData} errors={errors}/>;
             case 3:
@@ -65,6 +65,7 @@ export default function ProfileSetup() {
     const handleNextStep = (e) => {
         e.preventDefault();
         // Solução provisória para evitar avanço do stage2 sem selecionar role
+        if (currentStep === 1 && !isNameValid) return alert("Por favor, insira um nome válido.");
         if (currentStep === maxStep) handleSubmit();
         if(currentStep == 2 && !data.user.roleInOrganization) return alert("Selecione uma das opções");
         if (currentStep === 2 && !data.hasOrganization) handleSubmit();
@@ -90,7 +91,7 @@ export default function ProfileSetup() {
             {!complete ? (
                 <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col " encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
-                    <div className="flex justify-between mt-auto ">
+                    <div className="flex justify-end mt-auto space-x-4">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">
                             Voltar
                         </PrimaryButton>

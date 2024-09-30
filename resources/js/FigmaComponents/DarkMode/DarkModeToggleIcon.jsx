@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoSun, GoMoon } from "react-icons/go";
 
-const DarkModeToggleIcon = () => {
+const DarkModeToggleIcon = (className) => {
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
@@ -16,6 +16,8 @@ const DarkModeToggleIcon = () => {
         }
     }, [isDarkMode]);
 
+
+
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
     };
@@ -23,7 +25,7 @@ const DarkModeToggleIcon = () => {
     return (
         <button
             onClick={toggleDarkMode}
-            className="block px-2 py-2 rounded-full bg-neutralcolors-100 text-gray-700 dark:text-yellow-300 hover:bg-gray-100 dark:bg-slate-700 focus:outline-none transition-all  "
+            className={`block px-2 py-2 rounded-full bg-neutralcolors-100 text-gray-700 dark:text-yellow-300 hover:bg-gray-100 dark:bg-slate-700 focus:outline-none transition-all ${className}`}
         >
             {isDarkMode ? <GoMoon /> : <GoSun />}
         </button>
