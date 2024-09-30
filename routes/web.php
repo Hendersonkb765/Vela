@@ -74,6 +74,10 @@ Route::get('/axishub', function () {
 })->middleware(['auth'])->name('axishub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
+Route::get('/axis', function () {
+    return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
+})->middleware(['auth'])->name('axis');
+
 Route::get('/timeline', function () {
     return Inertia::render('VelaSocialLab/Timeline/Timeline');
 })->middleware(['auth'])->name('timeline');
