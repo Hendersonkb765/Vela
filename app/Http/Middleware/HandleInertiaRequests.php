@@ -27,32 +27,30 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-public function share(Request $request)
-{
-    return array_merge(parent::share($request), [
-        'auth' => [
-            'user' => fn () => $request->user()
-                ?
-                array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
-                [
-                    'profilePicture' => $request->user()->image_url ? $request->user()->image_url : null,
-                     'role'=>$this->getRoleFromId($request->user()->role_id)
-                    
-                ] )       
+    public function share(Request $request)
+    {
+        return array_merge(parent::share($request), [
+            'auth' => [
+                'user' => fn () => $request->user()
+                    ?
+                    array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
+                    [
+                        'role' => $this->getRoleFromId($request->user()->role_id ?? 0), // Envia apenas o nome da role, não o role_id
+                        'profilePicture' => $request->user()->image_url ?? null, // Usei o operador null coalesce para simplificar
+                    ]
+                )
                 : null,
-          
-        ],
 
+            ],
+        ]);
+    }
         // Dados diferentes para a página de 'settings'
         // 'settingsData' => $request->routeIs('settings')
         //     ? [
         //         'preferences' => $request->user() ? $request->user()->preferences : [],
         //     ] : null,
 
-    ]);
-}
-
- /**
+    /**
      * Função que converte role_id para o nome da role.
      *
      * @param int $role_id

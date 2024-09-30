@@ -2,7 +2,7 @@ import { IoCloseOutline  } from "react-icons/io5";
 import ImageCropper from "./ImageCropper";
 
 
-const ImageModal = ({closeModal, updateAvatar}) => {
+const ImageModal = ({closeModal, updateAvatar, savedAvatar}) => {
     return (
         <div
           className="relative z-50"
@@ -23,7 +23,7 @@ const ImageModal = ({closeModal, updateAvatar}) => {
                             <IoCloseOutline  className="w-8 h-8"/>
                             <span className="sr-only">Close menu</span>
                         </button> */}
-                        <ImageCropper closeModal={closeModal} updateAvatar={updateAvatar}/>
+                        <ImageCropper closeModal={closeModal} updateAvatar={updateAvatar} savedAvatar={savedAvatar}/>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ import setCanvasPreview from "./setCanvasPreview";
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
 
-const ImageCropper = ({closeModal, updateAvatar}) => {
+const ImageCropper = ({closeModal, updateAvatar, savedAvatar}) => {
     const imgRef = useRef(null);
     const previewCanvasRef = useRef(null);
 
@@ -19,7 +19,6 @@ const ImageCropper = ({closeModal, updateAvatar}) => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const savedAvatar = localStorage.getItem('savedAvatar');
         if (savedAvatar) {
             setImgSrc(savedAvatar);
         }

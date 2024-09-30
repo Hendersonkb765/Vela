@@ -225,20 +225,20 @@ export default function MultiStepActivityForm({ onSubmit }) {
                     {/* Step 3: Upload da Imagem */}
                     <div className="mb-4">
                         <label className="block mb-3">
-                            <span className="sr-only">Escolha uma foto para Thumbnail</span>
+                            <span className="sr-only ">Escolha uma foto para Thumbnail</span>
                             <input
                                 type="file"
                                 accept="image/*"
                                 onChange={onSelectFile}
-                                className="block w-full text-sm"
+                                className="block w-full text-sm dark:text-gray-200"
                             />
                         </label>
                         {imgSrc && <img src={imgSrc} alt="Preview da Imagem" className="w-32 h-32 object-cover"/>}
                         {errors.activityThumbnail && <p className="text-red-500">{errors.activityThumbnail}</p>}
                     </div>
                     <div className="flex justify-between">
-                        <SecondaryButton onClick={handlePreviousStep}>Anterior</SecondaryButton>
-                        <PrimaryButton type="submit" disabled={processing}>Enviar</PrimaryButton>
+                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12'>Anterior</SecondaryButton>
+                        <PrimaryButton center type="submit" disabled={processing} className='!h-12'>Enviar</PrimaryButton>
                     </div>
                 </>
             )}

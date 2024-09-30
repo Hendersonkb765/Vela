@@ -45,6 +45,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <ProfileUploadInput
                     firstletter={data.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
+                    savedAvatar={data.profilePicture}
                 />
                 <div>
                     <InputLabel htmlFor="name" value="Nome" />
@@ -101,7 +102,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing} className='justify-center'>Salvar</PrimaryButton>
+                    <PrimaryButton disabled={processing} className='justify-center h-12'>Salvar</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}

@@ -57,6 +57,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                 <ProfileUploadInput
                     firstletter={data.organization.organizationName?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
+                    savedAvatar={imageUrl}
                 />
             </div>
             <div>
