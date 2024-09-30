@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useForm } from '@inertiajs/react';
 import PrimaryButton from "@/FigmaComponents/Button/PrimaryButton";
 import ProfileSetupLayout from "@/Layouts/ProfileSetupLayout";
+import { FaFlagCheckered } from "react-icons/fa";
+
 import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
@@ -115,7 +117,17 @@ export default function ProfileSetup() {
                     </div>
                 </form>
             ) : (
-                <h1 className="h-full flex justify-center items-center text-4xl font-bold">Formulário Completo</h1>
+                <div className="h-full flex flex-col items-center justify-center space-y-8">
+                    <div className="rounded-full w-40 h-40 bg-neutralcolors-100/50 flex justify-center items-center p-8 ">
+                        <FaFlagCheckered className="w-32 h-32 text-green-400"/>
+                    </div>
+                    <div className="flex flex-col text-center space-y-4">
+                        <h1 className="text-4xl font-bold font-headers capitalize">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
+                        <p className="font-body text-base">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
+                    </div>
+                    <PrimaryButton href={route("dashboard")}></PrimaryButton>
+                </div>
+
             )}
         </ProfileSetupLayout>
     );
