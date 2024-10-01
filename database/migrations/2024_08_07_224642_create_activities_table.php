@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('audience');
             $table->string('send_by');
             $table->text('description');
-            $table->string('img_url');
             $table->string('thumbnail_photos_url');
             $table->string('photos_url');
             $table->foreignId('osc_id')->constrained();

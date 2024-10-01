@@ -26,6 +26,7 @@ use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
 use App\Models\Activity;
+use App\Models\GoogleDriveFolder;
 use App\Models\GoogleDriveFile;
 use App\Services\Google\Drive\File;
 use App\Services\Google\Drive\Folder;
@@ -167,14 +168,15 @@ Route::post('/drive',function(Request $request){
     $oscId = Auth::user()->osc->first()->id;
     $fileDatabase = $request->file('database');
     $driveFile = new File($oscId);
-    $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NTjlyUNibzvecJ2LgUbsRl7Idc7Qo6lh',true);
+    $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1W6iAOJRQeiYTDuJqZMYR-TyEiUT6jKTz',true);
     dd($arquivo);
 })->name('formulario');
 Route::get('/drive2',function(){
+    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
+    dd($fileDrive);
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);
     $folder->createDefaultDirectories();
-    return response()->json(['status'=>200,'message' => 'Arquivo criado com sucesso']);
 });
 
 

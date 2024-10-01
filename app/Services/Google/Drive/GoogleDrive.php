@@ -9,9 +9,11 @@ use App\Models\GoogleToken;
 class GoogleDrive{
 
     protected $client;
+    protected $oscId;
 
     function __construct($oscId)
     {
+        $this->oscId = $oscId;
         $this->client = new Client();
         $this->client->setApplicationName('Vela_Social_Lab');
         $this->client->setClientId(env('GOOGLE_CLIENT_ID'));

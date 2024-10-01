@@ -119,6 +119,10 @@ export default function MultiStepActivityForm({ onSubmit }) {
                 data: data,
                 onFinish: () => {
                     setImgSrc(''); // Limpa o estado da imagem
+
+                },
+                onAfter: () => {
+                    window.location.reload();
                 }
             });
         } else {
@@ -229,6 +233,7 @@ export default function MultiStepActivityForm({ onSubmit }) {
                             <input
                                 type="file"
                                 accept="image/*"
+                                name = "activityThumbnail"
                                 onChange={onSelectFile}
                                 className="block w-full text-sm dark:text-gray-200"
                             />

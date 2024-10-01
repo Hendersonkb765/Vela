@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Osc;
 use App\Models\User; // Import the User class
 use App\Models\GoogleToken; // Import the TokenGoogle class
+use App\Models\GoogleDrivefolder; // Import the Googlefolder class
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Services\Google\Drive\Folder;
 
 class ProviderAuthController extends Controller
 {
@@ -71,11 +73,16 @@ class ProviderAuthController extends Controller
                 'access_token' => $socialUser->token,
                 'refresh_token' => $socialUser->refreshToken,
                 //'osc_id' => Auth::user()->osc->first()->id,
-                ]
-        );
-            return redirect()->route('dashboard'); 
+                ]);
+            $oscId = Auth::user()->osc->first()->id;
+            $oscRecodExists = GoogleDrivefolder::where('osc_id',$oscId);
+
+            if(!empty($oscRecodExists)){
+                $folderDrive = new Folder($oscId);
+                $folderDrive->createDefaultDirectories();
+            }
            
-                 
+            return redirect()->route('dashboard');     
         }
         catch (\Exception $e){
             dd($e);

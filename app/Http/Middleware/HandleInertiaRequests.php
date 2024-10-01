@@ -27,18 +27,18 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-    public function share(Request $request)
-    {
-        return array_merge(parent::share($request), [
-            'auth' => [
-                'user' => fn () => $request->user()
-                    ?
-                    array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
-                    [
-                        'role' => $this->getRoleFromId($request->user()->role_id ?? 0), // Envia apenas o nome da role, não o role_id
-                        'profilePicture' => $request->user()->image_url ?? null, // Usei o operador null coalesce para simplificar
-                    ]
-                )
+public function share(Request $request)
+{
+    return array_merge(parent::share($request), [
+        'auth' => [
+            'user' => fn () => $request->user()
+                ?
+                array_merge( $request->user()->only('id', 'name', 'email', 'roleInOrganization'),
+                [
+                    'profilePicture' => $request->user()->image_url ? $request->user()->image_url : null,
+                     'role'=> $request->user()->role_id ? $this->getRoleFromId($request->user()->role_id) : null
+                    
+                ] )       
                 : null,
 
             ],

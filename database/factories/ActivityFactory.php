@@ -28,7 +28,6 @@ class ActivityFactory extends Factory
             'audience' => $this->faker->randomNumber(5),
             'send_by' => $user->name,
             'description' => $this->faker->text(),
-            'img_url' => $this->faker->imageUrl(),
             'thumbnail_photos_url' => $this->faker->imageUrl(),
             'photos_url' => $this->faker->imageUrl(),
             'osc_id' => Osc::inRandomOrder()->first()->id,

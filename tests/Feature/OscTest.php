@@ -31,7 +31,6 @@ class OscTest extends TestCase
             'presidents_name' => $user->name,
             'foundation_date' => '2000-01-01',
             'banner_url' => 'http://example.com/banner.jpg',
-            'img_url' => 'http://example.com/img.jpg',
             'legal_nature' => 'Associação',
             'statute_url' => 'http://example.com/statute.pdf',
             'cnae_main' => '1234567',

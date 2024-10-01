@@ -5,10 +5,8 @@ import ActivityCard from './Components/ActivityCard';
 import Filter from './Components/Filter';
 
 
-export default function ActivityHub({ auth, activities}) {
+export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}) {
     // console.log(activities)
-
-
 
     return (
         <VelaSocialLayout

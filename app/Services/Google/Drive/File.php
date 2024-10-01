@@ -10,13 +10,13 @@ use Google\Service\Drive\DriveFile;
 class File extends GoogleDrive
 {
 
-    public function create(string $name,$fileDatabase, string $folderId, bool $isPublic = false)
+
+    public function create(string $name,$fileDatabase, string $folderId, bool $isPublic = false, string $typeFile='image')
     {
   
        // try{
-            $dataBasefolderId = GoogleDriveFolder::where('folder_id',$folderId)->first()->id;
             if(!$folderId){
-                return response()->json(['error'=>"Pasta não encontrada"],404);
+                return response()->json(['error'=>"Local da pasta esta em branco"],404);
             }
             else{
                 $file = $fileDatabase;
@@ -42,22 +42,19 @@ class File extends GoogleDrive
                         $permission->role = 'reader';
                         $drive->permissions->create($file->id, $permission);
                     }
-                   
-                    
-                    
-                    $webViewLink = 'https://drive.google.com/thumbnail?id='.$file->id.'&sz=w1000';
+                    $localFolderId = GoogleDriveFolder::where('folder_id',$folderId)->where('osc_id',$this->oscId)->first()->id;
                     GoogleDriveFile::create([
                         'name' => $name,
                         'file_id' => $file->id,
-                        'folder_id' => $dataBasefolderId,
+                        'folder_id' => $localFolderId,
                         'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
                         'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
                         'file_extension' => $fileDatabase->getClientOriginalExtension(),
                         'web_content_link' => $file->webContentLink,
-                        'web_view_link' => $webViewLink
+                        'web_view_link' => $this->createUrlView($file->id,$fileDatabase)
                     ]);
     
-                    return $file;  
+                    return ['driveFileData'=>$file,'webViewLink'=>$this->createUrlView($file->id,$typeFile)];  
             }
             
 
@@ -108,6 +105,15 @@ class File extends GoogleDrive
         }
         catch(\Exception $e){
             return response()->json(['error'=>"Erro ao atualizar arquivo no Google Drive"],500);
+        }
+    }
+    private function createUrlView (string $fileId,string $typeFile){
+
+        if($typeFile == 'image'){
+            return 'https://drive.google.com/thumbnail?id='.$fileId.'&sz=w1000';
+        }
+        else if($typeFile == 'document'){
+            return 'https://drive.google.com/file/d/'.$fileId.'/preview';
         }
     }
     
