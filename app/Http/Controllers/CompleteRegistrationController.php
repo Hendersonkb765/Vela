@@ -20,7 +20,6 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\ConnectionException;
-
 class CompleteRegistrationController extends Controller
 {
 
@@ -131,7 +130,11 @@ class CompleteRegistrationController extends Controller
                 $osc->targetAudience()->attach($i);
             }
         }
+        
         $osc->save();
+
+        
+
         
         }
         catch(\Exception $e){
