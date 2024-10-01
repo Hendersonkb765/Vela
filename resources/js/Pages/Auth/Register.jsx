@@ -55,7 +55,7 @@ export default function Register() {
                 <div className='absolute right-5 scale-125'>
                     <DarkModeToggleIcon/>
                 </div>
-                <h2 className='font-headers font-bold text-3xl  -mt-12 text-neutralcolors-600 dark:text-neutralcolors-200 text-center'>Crie sua onta</h2>
+                <h2 className='font-headers font-bold text-3xl  -mt-12 text-neutralcolors-600 dark:text-neutralcolors-200 text-center'>Crie sua Conta</h2>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                    {/*
                     <a
