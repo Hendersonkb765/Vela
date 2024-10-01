@@ -9,6 +9,8 @@ import TextInput from '@/FigmaComponents/Inputs/TextInput';
 
 import { FcGoogle } from "react-icons/fc";
 import { MdCheckBoxOutlineBlank , MdCheckBox   } from "react-icons/md";
+import DarkModeToggleIcon from '@/FigmaComponents/DarkMode/DarkModeToggleIcon';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 
 export default function Register() {
@@ -46,10 +48,14 @@ export default function Register() {
 
 
     return (
-        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-center justify-center sm:py-8 pt-60'>
+        <section className='bg-primary dark:bg-primary-300 h-screen overflow-hidden  flex flex-col items-center justify-center'>
             <Head title="Cadastro" />
-            <div className='min-w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center px-4 py-8 rounded-xl bg-white dark:bg-gray-900 dark:text-neutral-400'>
-                <h2 className='font-headers font-bold text-3xl mb-6 text-neutralcolors-200'>Crie Sua Conta</h2>
+            <div className='w-screen sm:min-w-fit sm:w-2/5 md:w-3/5 h-full sm:h-auto flex flex-col items-center px-4 py-8 sm:rounded-xl bg-white dark:bg-gray-900 dark:text-neutralcolors-200 relative '>
+                <ApplicationLogo className="w-48 h-48" />
+                <div className='absolute right-5 scale-125'>
+                    <DarkModeToggleIcon/>
+                </div>
+                <h2 className='font-headers font-bold text-3xl  -mt-12 text-neutralcolors-600 dark:text-neutralcolors-200 text-center'>Crie sua Conta</h2>
                 <form onSubmit={submit} className='flex flex-col space-y-4'>
                    {/*
                     <a
@@ -77,7 +83,7 @@ export default function Register() {
                             onChange={(e) => setData('email', e.target.value)}
                             required
                         />
-                        <InputError message={errors.email} className="mt-2" />
+                        <InputError message={errors.email} className="mt-2 text-danger" />
                     </div>
                     <div className="">
                         <InputLabel htmlFor="password" value="Senha" />
@@ -117,7 +123,7 @@ export default function Register() {
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             required
                         />
-                        <InputError message={errors.password_confirmation} className="mt-2" />
+                        <InputError message={errors.password_confirmation} className="mt-2 text-danger" />
                     </div>
 
                     <div className="flex flex-col justify-center space-y-4 pt-3 mb-4">

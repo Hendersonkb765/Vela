@@ -16,8 +16,6 @@ export default function ActivityCard({data}) {
                                 {data.description}
                             </p>
                         </div>
-
-
                     </div>
                 </div>
             </div>

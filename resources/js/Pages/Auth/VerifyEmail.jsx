@@ -1,6 +1,8 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
+import NavBar from '@/FigmaComponents/NavMenu/NavBar';
+import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 
 export default function VerifyEmail({ status }) {
     const { post, processing } = useForm({});
@@ -12,10 +14,11 @@ export default function VerifyEmail({ status }) {
     };
 
     return (
-        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-start sm:items-center justify-center sm:py-8 pt-60 '>
+        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-start sm:items-center justify-center sm:py-8  '>
             <Head title="Email Verification" />
 
-            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-start bg-white px-4 py-8 rounded-xl dark:bg-gray-900 '>
+            <div className=' sm:w-2/5 w-11/12 sm:h-auto flex flex-col items-start justify-center bg-white px-4 py-8 rounded-xl dark:bg-gray-900 '>
+
                 <div className='text-neutralcolors-700 dark:text-neutralcolors-200 font-body'>
                     <div className="mb-4 text-sm ">
                         Obrigado por se inscrever! Antes de começar, poderia verificar seu endereço de e-mail clicando no link que acabamos de enviar para você? Se você não recebeu o e-mail, ficaremos felizes em enviar outro.
@@ -30,16 +33,16 @@ export default function VerifyEmail({ status }) {
 
                 <form onSubmit={submit}>
                     <div className="mt-4 flex items-center justify-start space-x-4">
-                        <PrimaryButton disabled={processing} type='submit' className='h-12'>Resend Verification Email</PrimaryButton>
+                        <PrimaryButton disabled={processing} type='submit' className='h-12'>Reenviar E-mail de Verificação</PrimaryButton>
 
-                        <Link
+                        <SecondaryButton
                             href={route('logout')}
                             method="post"
                             as="button"
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            className="h-12  !text-danger border-danger hover:bg-danger hover:!text-white transition-colors"
                         >
-                            Log Out
-                        </Link>
+                            Sair
+                        </SecondaryButton>
                     </div>
                 </form>
             </div>

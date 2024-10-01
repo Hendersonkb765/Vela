@@ -6,6 +6,7 @@ import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FcGoogle } from "react-icons/fc";
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import DarkModeToggleIcon from '@/FigmaComponents/DarkMode/DarkModeToggleIcon';
 
 
 export default function Login({ status, canResetPassword }) {
@@ -24,13 +25,17 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <section className='bg-primary dark:bg-primary-300 h-screen  flex flex-col items-center justify-center sm:py-8 pt-60'>
+        <section className='bg-primary dark:bg-primary-300 h-screen overflow-hidden  flex flex-col items-center justify-center'>
             <Head title="Entrar"/>
-
-            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-center px-4 py-8 rounded-xl bg-white  dark:bg-gray-900 dark:text-neutralcolors-200'>
-                <h2 className='font-headers font-bold text-3xl mb-6  text-neutralcolors-600 dark:text-neutralcolors-200'>Bem vindo de volta!</h2>
+            <div className='w-screen sm:min-w-fit sm:w-2/5 md:w-3/5 h-full sm:h-auto flex flex-col  items-center px-4 py-8 sm:rounded-xl bg-white dark:bg-gray-900 dark:text-neutralcolors-200 relative '>
+                <ApplicationLogo className="w-48 h-48" />
+                <div className='absolute right-5 scale-125'>
+                    <DarkModeToggleIcon/>
+                </div>
+                <h2 className='font-headers font-bold text-3xl mb-12 -mt-12 text-neutralcolors-600 dark:text-neutralcolors-200 text-center'>Bem vindo de volta!</h2>
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-                <form onSubmit={submit} className='flex flex-col space-y-4'>
+
+                <form onSubmit={submit} className='flex flex-col space-y-4 sm:p-8 w-11/12 md:w-auto'>
                     <div className="">
                         <InputLabel htmlFor="email" value="Email" />
 
@@ -39,7 +44,7 @@ export default function Login({ status, canResetPassword }) {
                             type="email"
                             name="email"
                             value={data.email}
-                            className="mt-1 block w-full"
+                            className="mt-1 block  w-full"
                             autoComplete="username"
                             placeholder={"Digite seu email"}
                             onChange={(e) => setData('email', e.target.value)}
@@ -57,7 +62,7 @@ export default function Login({ status, canResetPassword }) {
                             type="password"
                             name="password"
                             value={data.password}
-                            className="mt-1 block w-full"
+                            className="mt-1 block  w-full"
                             autoComplete="new-password"
                             placeholder={"Digite sua senha"}
                             onChange={(e) => setData('password', e.target.value)}
@@ -67,7 +72,7 @@ export default function Login({ status, canResetPassword }) {
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
-                    <div className="flex justify-between mt-4">
+                    <div className="flex justify-between mt-4 px-4 sm:px-0">
                         <label className="flex items-center">
                             <Checkbox
                                 name="remember"
@@ -80,7 +85,7 @@ export default function Login({ status, canResetPassword }) {
                         {canResetPassword && (
                             <Link
                                 href={route('password.request')}
-                                className="underline text-sm text-gray-600  hover:text-gray-900 dark:hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                className="underline text-sm text-gray-600  dark:text-gray-400 hover:text-gray-900 dark:hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                             >
                                 Esqueceu sua senha?
                             </Link>
@@ -107,7 +112,7 @@ export default function Login({ status, canResetPassword }) {
                             <span className='text-neutralcolors-200'>Ou</span>
                             <div className='w-full h-0.5 bg-neutralcolors-100' />
                         </div>
-                        
+
                        <a className='flex px-4 py-2 gap-2 items-center min-w-32 min-h-8 rounded-md bg-neutralcolors-100 hover:bg-neutralcolors-200 text-sm  font-body hover:bg-primary-500 transition-colors duration-300 ease-out dark:bg-gray-800 dark:hover:bg-gray-800/50 dark:text-neutralcolors-200' href={route('redirect',['google'])}>
                             <FcGoogle className='w-8 h-8'></FcGoogle>Entrar com o Google
                         </a>*/}
