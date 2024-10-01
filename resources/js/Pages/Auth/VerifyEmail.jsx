@@ -14,10 +14,10 @@ export default function VerifyEmail({ status }) {
     };
 
     return (
-        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-start sm:items-center justify-center sm:py-8 pt-60 '>
+        <section className='bg-primary dark:bg-primary-300 h-screen flex flex-col items-start sm:items-center justify-center sm:py-8  '>
             <Head title="Email Verification" />
 
-            <div className='w-fit sm:w-2/5 h-full sm:h-auto flex flex-col items-start bg-white px-4 py-8 rounded-xl dark:bg-gray-900 '>
+            <div className=' sm:w-2/5 w-11/12 sm:h-auto flex flex-col items-start justify-center bg-white px-4 py-8 rounded-xl dark:bg-gray-900 '>
 
                 <div className='text-neutralcolors-700 dark:text-neutralcolors-200 font-body'>
                     <div className="mb-4 text-sm ">
@@ -39,7 +39,7 @@ export default function VerifyEmail({ status }) {
                             href={route('logout')}
                             method="post"
                             as="button"
-                            className="h-12 !text-danger border-danger hover:bg-danger hover:!text-white transition-colors"
+                            className="h-12  !text-danger border-danger hover:bg-danger hover:!text-white transition-colors"
                         >
                             Sair
                         </SecondaryButton>

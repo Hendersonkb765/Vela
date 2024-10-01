@@ -16,7 +16,7 @@ export default forwardRef(function TextInput({value='', type = 'text', className
             type={type}
             placeholder={placeholder}
             className={
-                'h-10 min-w-96 rounded-md text-sm border-2  border-neutralcolors text-neutralcolors-600  dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400  ' +
+                'h-10 sm:min-w-96 rounded-md text-sm border-2  border-neutralcolors text-neutralcolors-600  dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400  ' +
                 className
             }
             ref={input}
