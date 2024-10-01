@@ -31,13 +31,13 @@ class Folder extends GoogleDrive
     public function createDefaultDirectories(){
         try{
             
-            $velaFolder = $this->create('Velaae_Social_lab',null);      
+            $velaFolder = $this->create('Velaae_Social_lab',null);
+            
             $this->create('Atividades', $velaFolder->id);
          
             $axesFolder = $this->create('Eixos', $velaFolder->id);
           
             $axes=Axis::all();
-            
             foreach($axes as $axis){
                 $levels = $axis->level;
     
