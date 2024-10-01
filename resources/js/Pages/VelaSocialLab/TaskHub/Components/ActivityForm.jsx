@@ -14,6 +14,9 @@ export default function ActivityForm({ onSubmit }) {
         activityDescription: '',
         activityDate: '',
         activityStatus: '',
+        activityHourStart: '',
+        activityHourEnd: '',
+        activityThumbnail: '',
     });
 
     // Função para lidar com mudanças nos inputs
