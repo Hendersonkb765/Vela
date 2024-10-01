@@ -77,7 +77,6 @@ class ActivityController extends Controller
                 'hour_end' => $request->activityHourEnd,
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'img_url' => 'https://via.placeholder.com/150',
                 'thumbnail_photos_url' => $webViewLink,
                 'photos_url' => '$request->activityPhotosUr',
                 'send_by' => Auth::user()->name,
