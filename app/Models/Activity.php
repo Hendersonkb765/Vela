@@ -18,7 +18,6 @@ class Activity extends Model
         'audience',
         'send_by',
         'description',
-        'img_url',
         'thumbnail_photos_url',
         'photos_url',
         'osc_id',
