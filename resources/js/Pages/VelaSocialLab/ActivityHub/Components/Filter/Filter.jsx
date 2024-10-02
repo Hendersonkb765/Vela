@@ -4,6 +4,7 @@ import { useForm } from "@inertiajs/react";
 import FilterModal from "./FilterModal";
 import PrimaryButton from "@/FigmaComponents/Button/PrimaryButton";
 import { GoFilter } from "react-icons/go";
+import SecondaryButton from "@/FigmaComponents/Button/SecondaryButton";
 
 
 export default function Filter() {
@@ -38,15 +39,19 @@ export default function Filter() {
                     />
                 </div>
 
-                <div className='w-11/12 sm:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center jus p-4 space-x-16 fullhd:h-28'>
+                <div className='w-11/12 sm:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center justify-between p-4  fullhd:h-28'>
                     <PrimaryButton
                         type="button"
                         onClick={openModal}
-                        className="px-4 py-2 w-32 justify-between"
+                        className="px-4 py-2 w-32 h-12 justify-between"
                     >
                         Filtros <GoFilter className="w-8 h-8"/>
                     </PrimaryButton>
-
+                    <SecondaryButton
+                        className="px-4 py-2 w-32 h-12 border-danger !text-black dark:!text-gray-100  "
+                    >
+                        Limpar
+                    </SecondaryButton>
                 </div>
             </form>
 

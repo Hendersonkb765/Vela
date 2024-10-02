@@ -55,7 +55,7 @@ export default function FilterModal({ isOpen, onClose, data, setData, minDate, m
                         />
                     </div>
 
-                    <PrimaryButton center className='!text-lg'>
+                    <PrimaryButton center className='!text-lg h-12'>
                             Filtrar
                     </PrimaryButton>
                 </div>
