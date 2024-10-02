@@ -2,7 +2,7 @@ import VelaSocialLayout from '@/Layouts/VelaSocialLayout';
 import { Head } from '@inertiajs/react';
 import ActivityUpload from './Components/ActivityUpload';
 import ActivityCard from './Components/ActivityCard';
-import Filter from './Components/Filter';
+import Filter from './Components/Filter/Filter';
 
 
 export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}) {
