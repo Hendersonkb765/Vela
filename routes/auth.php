@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
     /*
     Route::get('/auth/redirect/{provider}/', [ProviderAuthController::class, 'redirect'])
                 ->name('redirect');
-    
+
     Route::get('/auth/callback/{provider}', [ProviderAuthController::class, 'callback'])
                 ->name('callback');
     */
@@ -30,7 +30,7 @@ Route::middleware('guest')->group(function () {
                 ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register.store');
-    
+
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -72,20 +72,20 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-    
+
 
 });
-Route::middleware(['auth',CheckPresident::class])->group(function () {
+Route::middleware(['auth', CheckPresident::class])->group(function () {
     Route::get('auth/osc/redirect/google', function () {
-        return Socialite::driver('google')->with(['prompt' => 'select_account','access_type' => 'offline'])->scopes(['https://www.googleapis.com/auth/drive'])->redirect();
-                    
-        });
-        Route::get('/auth/callback/google', [ProviderAuthController::class, 'callbackOscGoogle'])
-        ->name('callback');
-                    
-    });
-//Route::get('/criar/novo-usuario', [RegisteredUserController::class, 'create'])->name('completeRegistration.create');
+        return Socialite::driver('google')
+            ->with(['prompt' => 'select_account', 'access_type' => 'offline'])
+            ->scopes(['https://www.googleapis.com/auth/drive'])
+            ->redirect();
+    })->name('osc.redirect');
 
-Route::post('/novo/presidente',[RegisteredUserController::class, 'registeredPresident']);
+    Route::get('/auth/callback/google', [ProviderAuthController::class, 'callbackOscGoogle'])
+        ->name('osc.callback');
+});
+
 
 

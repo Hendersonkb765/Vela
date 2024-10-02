@@ -44,7 +44,7 @@ export default function DeleteUserForm({ className = '' }) {
 
     return (
         <section className={`space-y-6 ${className}`}>
-            <header>
+            <header className='sm:px-4'>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Excluir Conta</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -53,8 +53,9 @@ export default function DeleteUserForm({ className = '' }) {
                     manter.
                 </p>
             </header>
-
-            <DangerButton onClick={confirmUserDeletion} className='h-12'>Excluir Conta</DangerButton>
+            <div className='flex items-center gap-4 sm:px-4 pb-4'>
+                <DangerButton onClick={confirmUserDeletion} className='justify-center h-12 w-full sm:w-56 text-lg sm:!text-base'>Excluir Conta</DangerButton>
+            </div>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
@@ -67,7 +68,7 @@ export default function DeleteUserForm({ className = '' }) {
                         Por favor, insira sua senha para confirmar que você gostaria de excluir sua conta permanentemente.
                     </p>
 
-                    <div className="mt-6">
+                    <div className="mt-6 ">
                         <InputLabel htmlFor="password" value="Senha" className="sr-only" />
 
                         <TextInput
@@ -77,7 +78,7 @@ export default function DeleteUserForm({ className = '' }) {
                             ref={passwordInput}
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-full"
                             isFocused
                             placeholder="Senha"
                         />
@@ -85,7 +86,7 @@ export default function DeleteUserForm({ className = '' }) {
                         <InputError message={errors.password} className="mt-2" />
                     </div>
 
-                    <div className="mt-6 flex justify-end">
+                    <div className="mt-6 flex justify-end ">
                         <SecondaryButton onClick={closeModal} className='h-12'>Cancelar</SecondaryButton>
 
                         <DangerButton className="ms-3 h-12" disabled={processing}>

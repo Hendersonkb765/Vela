@@ -7,10 +7,10 @@ import RecordActivity from './VelaSocialLab/Dashboard/RecordActivity';
 import DashboardPath from '@/FigmaComponents/Dashboard/DashboardPath';
 import AllTasks from './VelaSocialLab/Dashboard/AllTasks';
 import { FaArrowRight } from "react-icons/fa6";
-import DriveInfo from './VelaSocialLab/Dashboard/DriveInfo';
+import DriveInfo from '../FigmaComponents/GoogleDrive/DriveInfo';
 
 
-export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
+export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
     const Fails = tasks.requirementsFailed;
@@ -19,10 +19,9 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
     const OscLevel = level.currentLevel;
     const OscName = osc.fantasyName;
     const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
-
     const usedSpace = 5//storageDrive['storageUsage'];
     const totalSpace = 10//storageDrive['storageLimit'];
-    console.log(user);
+
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
             <Link href={route('axishub')} className={`h-16 sm:h-full sm:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
@@ -38,21 +37,6 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
         );
     }
 
-    const googleLoginComponent = (storageDrive) =>{
-        
-        if(storageDrive){
-            return (
-                <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/>
-            )
-        }
-        else{
-            return(
-                <div className='flex flex-col space-y-4 mt-12'>
-                   
-                </div>
-            )
-        }
-    }
     return (
 
         <VelaSocialLayout
@@ -71,7 +55,7 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
                 </div>
                 <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
                     <AllTasks tasks={tasks} className="hidden sm:block"/>
-                    {googleLoginComponent()}
+                    <DriveInfo storageDrive={!storageDrive} usedSpace={usedSpace} totalSpace={totalSpace}/>
                     {/* <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/> */}
                     <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>
