@@ -61,7 +61,12 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0, totalSpace=0 }) => {
                         <GoLock className='w-6 h-6'/>
                     </div>
 
-                    <Link href={route('osc.redirect')} className='flex px-4 py-2 text-lg items-center justify-start rounded-lg h-12 w-full bg-neutral-300 text-neutral-800 hover:bg-neutral-300/80  gap-4 dark:bg-slate-700 dark:!text-gray-200 dark:hover:bg-slate-900 group'>
+                    <Link
+                        as='button'
+                        method='GET'
+                        href={route('osc.redirect')}
+                        className='flex px-4 py-2 text-lg items-center justify-start rounded-lg h-12 w-full bg-neutral-300 text-neutral-800 hover:bg-neutral-300/80  gap-4 dark:bg-slate-700 dark:!text-gray-200 dark:hover:bg-slate-900 group'
+                    >
                         Entrar com o Google <FcGoogle className='w-6 h-6 rounded-full '></FcGoogle>
                     </Link>
                 </>
