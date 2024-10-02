@@ -39,7 +39,7 @@ export default function Filter() {
                     />
                 </div>
 
-                <div className='w-11/12 sm:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center justify-between p-4  fullhd:h-28'>
+                <div className='w-11/12 sm:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center justify-between p-4 gap-2  fullhd:h-28'>
                     <PrimaryButton
                         type="button"
                         onClick={openModal}

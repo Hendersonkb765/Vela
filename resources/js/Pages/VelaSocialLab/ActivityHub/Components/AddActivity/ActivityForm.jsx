@@ -141,6 +141,7 @@ export default function ActivityForm({ onSubmit }) {
                             value={data.activityTitle}
                             onChange={handleChange}
                             required
+                            className='mt-2 sm:mt-1 w-full sm:w-auto'
                             placeholder='Dê um título especial para sua atividade'
                         />
                         {errors.activityTitle && <p className="text-body text-sm text-red-500">{errors.activityTitle}</p>}
@@ -151,7 +152,7 @@ export default function ActivityForm({ onSubmit }) {
                             name="activityDescription"
                             value={data.activityDescription}
                             onChange={handleChange}
-                            className="mt-1 block w-full h-20 min-w-96 rounded-md text-sm border-2 border-neutralcolors text-neutralcolors-600 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400"
+                            className="mt-2 sm:mt-1 block w-full h-20 sm:min-w-96 rounded-md text-sm border-2 border-neutralcolors text-neutralcolors-600 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400"
                             required
                             placeholder='Escreva uma pequena descrição da atividade'
                         />
@@ -160,15 +161,17 @@ export default function ActivityForm({ onSubmit }) {
                     <div className="mb-4">
                         <InputLabel>Audiencia</InputLabel>
                         <TextInput
+                            type='number'
                             name="activityAudience"
                             value={data.activityAudience}
                             onChange={handleChange}
                             required
+                            className='mt-2 sm:mt-1 w-full sm:w-auto'
                             placeholder='Diga quantas pessoas participaram da atividade'
                         />
                         {errors.activityAudience && <p className="text-red-500 text-body text-sm">{errors.activityAudience}</p>}
                     </div>
-                    <PrimaryButton center onClick={handleNextStep} className='!ml-auto !h-12'>
+                    <PrimaryButton center onClick={handleNextStep} className='w-32 sm:w-40 !ml-auto !h-12 '>
                         Próximo
                     </PrimaryButton>
                 </>
@@ -185,39 +188,43 @@ export default function ActivityForm({ onSubmit }) {
                             onChange={(e) => setData('activityDate', e.target.value)}
                             minDate={minDate}
                             maxDate={maxDate}
+                            className='mt-2 sm:mt-1 w-full sm:w-auto'
                             required
                         />
                         {errors.activityDate && <p className="text-red-500 text-body text-sm">{errors.activityDate}</p>}
                     </div>
-                    <div className="mb-4">
-                        <InputLabel>Hora de Início</InputLabel>
-                        <TextInput
-                            type="time"
-                            name="activityHourStart"
-                            value={data.activityHourStart}
-                            onChange={handleChange}
-                            className="dark:[color-scheme:dark]"
-                            required
-                        />
-                        {errors.activityHourStart && <p className="text-red-500 text-body text-sm">{errors.activityHourStart}</p>}
+                    <div className='flex flex-row justify-between sm:flex-col '>
+                        <div className="mb-4">
+                            <InputLabel>Hora de Início</InputLabel>
+                            <TextInput
+                                type="time"
+                                name="activityHourStart"
+                                value={data.activityHourStart}
+                                onChange={handleChange}
+                                className="mt-2 w-36 dark:[color-scheme:dark]"
+                                required
+                            />
+                            {errors.activityHourStart && <p className="text-red-500 text-body text-sm">{errors.activityHourStart}</p>}
+                        </div>
+                        <div className="mb-4">
+                            <InputLabel>Hora de Fim</InputLabel>
+                            <TextInput
+                                type="time"
+                                name="activityHourEnd"
+                                value={data.activityHourEnd}
+                                className="mt-2 w-36 dark:[color-scheme:dark]"
+                                onChange={handleChange}
+                                required
+                            />
+                            {errors.activityHourEnd && <p className="text-red-500 text-body text-sm">{errors.activityHourEnd}</p>}
+                        </div>
                     </div>
-                    <div className="mb-4">
-                        <InputLabel>Hora de Fim</InputLabel>
-                        <TextInput
-                            type="time"
-                            name="activityHourEnd"
-                            value={data.activityHourEnd}
-                            className="dark:[color-scheme:dark]"
-                            onChange={handleChange}
-                            required
-                        />
-                        {errors.activityHourEnd && <p className="text-red-500 text-body text-sm">{errors.activityHourEnd}</p>}
-                    </div>
-                    <div className="flex justify-between">
-                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12'>
+
+                    <div className="flex justify-between mt-12">
+                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>
                             Anterior
                         </SecondaryButton>
-                        <PrimaryButton center onClick={handleNextStep} className='!h-12'>
+                        <PrimaryButton center onClick={handleNextStep} className='!h-12 w-32 sm:w-40'>
                             Próximo
                         </PrimaryButton>
                     </div>
@@ -241,9 +248,9 @@ export default function ActivityForm({ onSubmit }) {
                         {imgSrc && <img src={imgSrc} alt="Preview da Imagem" className="w-32 h-32 object-cover"/>}
                         {errors.activityThumbnail && <p className="text-red-500">{errors.activityThumbnail}</p>}
                     </div>
-                    <div className="flex justify-between">
-                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12'>Anterior</SecondaryButton>
-                        <PrimaryButton center type="submit" disabled={processing} className='!h-12'>Enviar</PrimaryButton>
+                    <div className="flex justify-between mt-12">
+                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>Anterior</SecondaryButton>
+                        <PrimaryButton center type="submit" disabled={processing} className='!h-12 w-32 sm:w-40'>Enviar</PrimaryButton>
                     </div>
                 </>
             )}

@@ -39392,6 +39392,46 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 51
+      },
+      {
+        "date": "2024-10-02T23:45:21.329Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 111
+      },
+      {
+        "date": "2024-10-02T23:51:30.001Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 45
+      },
+      {
+        "date": "2024-10-02T23:51:52.732Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 23
+      },
+      {
+        "date": "2024-10-02T23:52:27.219Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 34
+      },
+      {
+        "date": "2024-10-02T23:52:35.259Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 8
       }
     ],
     "app\\Http\\Controllers\\ActivityController.php.git": [
@@ -40988,6 +41028,24 @@
           "email": "167939364+Gustavorfatec476@users.noreply.github.com"
         },
         "timeSpent": 4
+      },
+      {
+        "date": "2024-10-02T23:42:07.825Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 48
+      }
+    ],
+    "resources\\js\\Pages\\VelaSocialLab\\ActivityHub\\Components\\ActivityUploadModal.jsx.git": [
+      {
+        "date": "2024-10-02T23:43:22.991Z",
+        "user": {
+          "name": "Gustavorfatec476",
+          "email": "167939364+Gustavorfatec476@users.noreply.github.com"
+        },
+        "timeSpent": 24
       }
     ]
   },
