@@ -51,7 +51,6 @@ export default function Login({ status, canResetPassword }) {
                             required
                         />
 
-
                         <InputError message={errors.email} className="mt-2" />
                     </div>
                     <div className="">

@@ -11,9 +11,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name,
-        email: user.email,
-        profilePicture: user.profilePicture,
+        user: {
+            name: user.name,
+            profilePicture: user.profilePicture,
+        }
     });
 
     const submit = (e) => {
@@ -43,9 +44,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <ProfileUploadInput
-                    firstletter={data.name?.charAt(0).toUpperCase()}
+                    firstletter={data.user.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
-                    savedAvatar={data.profilePicture}
+                    savedAvatar={data.user.profilePicture}
                 />
                 <div>
                     <InputLabel htmlFor="name" value="Nome" />
@@ -53,13 +54,14 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
-                        value={data.name}
+                        value={data.user.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
                         isFocused
                         autoComplete="name"
                     />
-
+                    
+                        {/* errors.user.name */}
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 

@@ -37,9 +37,9 @@ export default function VerifyEmail({ status }) {
 
                         <SecondaryButton
                             href={route('logout')}
-                            method="post"
+                            method="POST"
                             as="button"
-                            className="h-12  !text-danger border-danger hover:bg-danger hover:!text-white transition-colors"
+                            className="h-12  !text-danger !border-danger hover:!bg-danger hover:!text-white transition-colors"
                         >
                             Sair
                         </SecondaryButton>

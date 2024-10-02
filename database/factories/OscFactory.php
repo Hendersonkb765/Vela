@@ -22,7 +22,7 @@ class OscFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     protected $model = Osc::class;
 
 
@@ -30,7 +30,7 @@ class OscFactory extends Factory
     {
 
         return [
-            
+
             'fantasy_name' => fake()->company(),
             'cnpj' => fake()->unique()->cnpj(),
             'institutional_email' => fake()->unique()->safeEmail(),
@@ -47,7 +47,7 @@ class OscFactory extends Factory
         ];
     }
     public function configure(){
-        
+
         return $this->afterCreating(function(Osc $osc){
 
             $users = User::inRandomOrder()->limit(10)->get();
@@ -59,11 +59,11 @@ class OscFactory extends Factory
             $osc->cnae()->attach(Cnae::inRandomOrder()->limit(10)->get());
 
             $osc->targetAudience()->attach(TargetAudience::inRandomOrder()->limit(10)->get());
-        
+
             $osc->typePerformance()->attach(TypePerformance::inRandomOrder()->limit(10)->get());
 
             $osc->address()->create(Address::factory(['addressable_id'=>$osc->id,'addressable_type'=>$osc->getMorphClass()])->make()->toArray());
-        
+
             $osc->phone()->create(Phone::factory(['phoneable_id'=>$osc->id,'phoneable_type'=>$osc->getMorphClass()])->make()->toArray());
         });
     }

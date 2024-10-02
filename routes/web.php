@@ -84,8 +84,6 @@ Route::get('/axishub', function () {
 })->middleware(['auth'])->name('axishub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-
-
 Route::get('/timeline', function () {
     return Inertia::render('VelaSocialLab/Timeline/Timeline');
 })->middleware(['auth'])->name('timeline');
@@ -94,6 +92,11 @@ Route::get('/timeline', function () {
 Route::get('/resources/test', function () {
     return Inertia::render('Resources');
 })->name('resources');
+
+Route::get('/designtest', function () {
+    return Inertia::render('VelaSocialLab/GuestUser/GuestUser');
+})->name('designtest');
+// ->middleware(['auth', 'verified'])->name('axishub');
 
 
 Route::middleware('auth')->group(function () {
@@ -171,7 +174,7 @@ Route::post('/drive',function(Request $request){
     dd($arquivo);
 })->name('formulario');
 Route::get('/drive2',function(){
-    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
+    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
     dd($fileDrive);
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);

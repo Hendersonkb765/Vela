@@ -5,7 +5,7 @@ import DarkModeToggleicon from '../DarkMode/DarkModeToggleIcon';
 import DarkModeToggle from '../DarkMode/DarkModeToggle';
 import Notification from '../Notification/Notification';
 
-const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName, role="Nenhum", email="Nenhum"}) => {
+const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName="UserName", role="Nenhum", email="Nenhum"}) => {
 
     return (
         <div className={`fixed h-16 sm:h-14 w-full py-2 sm:pr-4 bg-white dark:bg-gray-900 flex items-center z-40 shadow-sm  ${className}`}>
