@@ -48,7 +48,7 @@ class Folder extends GoogleDrive
                    
                 }
             }
-            return response()->json(['message' => 'Pastas criadas com sucesso']);
+            return response()->json(['message' => 'Pastars criadas com sucesso']);
         }
         catch(\Exception $e){
             return response()->json(['error' => 'Ocorreu algum erro ao criar as pastas']);
@@ -68,6 +68,7 @@ class Folder extends GoogleDrive
             $folder = $drive->files->create($folderMetadata, [
                 'fields' => 'id,createdTime,name'
             ]);
+    
             GoogleDriveFolder::create([
                 'name' => $folder->name,
                 'folder_id' => $folder->id,

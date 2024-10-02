@@ -9,6 +9,7 @@ import AllTasks from './VelaSocialLab/Dashboard/AllTasks';
 import { FaArrowRight } from "react-icons/fa6";
 import DriveInfo from './VelaSocialLab/Dashboard/DriveInfo';
 
+
 export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
     // informacoes
     // numero de requisitos reprovados está em ( tasks.requirements_failed )
@@ -37,6 +38,21 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
         );
     }
 
+    const googleLoginComponent = (storageDrive) =>{
+        
+        if(storageDrive){
+            return (
+                <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/>
+            )
+        }
+        else{
+            return(
+                <div className='flex flex-col space-y-4 mt-12'>
+                   
+                </div>
+            )
+        }
+    }
     return (
 
         <VelaSocialLayout
@@ -55,7 +71,8 @@ export default function Dashboard({ user,osc,level,tasks,storageDrive }) {
                 </div>
                 <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
                     <AllTasks tasks={tasks} className="hidden sm:block"/>
-                    <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/>
+                    {googleLoginComponent()}
+                    {/* <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/> */}
                     <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>
             </section>

@@ -63,7 +63,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
-                <div>
+                {/* <div>
                     <InputLabel htmlFor="email" value="E-mail" />
 
                     <TextInput
@@ -77,7 +77,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     />
 
                     <InputError className="mt-2" message={errors.email} />
-                </div>
+                </div> */}
 
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
@@ -102,7 +102,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing} className='justify-center h-12'>Salvar</PrimaryButton>
+                    <PrimaryButton disabled={processing} className='justify-center h-12' type={'submit'}>Salvar</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
