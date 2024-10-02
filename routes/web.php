@@ -153,8 +153,7 @@ Route::get('/teste',function(){
 Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');
 Route::get('/criar-arquivo',function(){
     $driveFile = new Folder(Auth::user()->osc->first()->id);
-    $driveFile->createDefaultDirectories();
-    return response()->json(['status'=>200,'message' => 'Arquivo criado com sucesso']);
+    $driveFile->create('OlhAOTESTE AI',null);
 });
 Route::get('/formulario',function(){
     /*
