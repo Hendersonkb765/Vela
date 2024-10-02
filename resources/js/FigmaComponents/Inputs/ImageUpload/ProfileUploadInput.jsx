@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoX } from "react-icons/go";
 import ImageModal from "./ImageModal"
 
-const ProfileUploadInput = ({updateAvatarUrl, savedAvatar }) => {
+const ProfileUploadInput = ({updateAvatarUrl, savedAvatar, className='' }) => {
     const [ModalOpen, setModalOpen] = useState(false);
     let avatarUrl =  useRef();
 
@@ -14,7 +14,7 @@ const ProfileUploadInput = ({updateAvatarUrl, savedAvatar }) => {
 
     return (
         <div>
-            <div className='flex items-center space-x-4 '>
+            <div className={`flex items-center space-x-4 ${className}`}>
                 <img
                     src={savedAvatar ?? avatarUrl}
                     className="w-[150px] h-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"

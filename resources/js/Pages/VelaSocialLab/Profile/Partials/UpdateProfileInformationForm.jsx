@@ -34,33 +34,34 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     return (
         <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Informações de Perfil</h2>
+            <header className='sm:px-4'>
+                <h2 className="sm:px-0 text-lg font-medium text-gray-900 dark:text-gray-100">Informações de Perfil</h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     Atualize suas informações de perfil
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="sm:px-0 mt-6 space-y-6 ">
                 <ProfileUploadInput
                     firstletter={data.user.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
                     savedAvatar={data.user.profilePicture}
+                    className="px-4"
                 />
-                <div>
+                <div className='sm:px-4'>
                     <InputLabel htmlFor="name" value="Nome" />
 
                     <TextInput
                         id="name"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full h-12 sm:h-auto"
                         value={data.user.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
                         isFocused
                         autoComplete="name"
                     />
-                    
+
                         {/* errors.user.name */}
                     <InputError className="mt-2" message={errors.name} />
                 </div>
@@ -103,8 +104,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing} className='justify-center h-12' type={'submit'}>Salvar</PrimaryButton>
+                <div className="flex items-center gap-4 sm:px-4">
+                    <PrimaryButton disabled={processing} className='justify-center h-12 w-full sm:w-56 text-lg sm:!text-base ' type={'submit'}>Salvar</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
