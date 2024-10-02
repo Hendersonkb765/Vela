@@ -64,7 +64,7 @@ class ProviderAuthController extends Controller
     }
     function callbackOscGoogle(){
         try{
-            
+    
             
             $socialUser = Socialite::driver('google')->user();
             GoogleToken::updateOrcreate(
@@ -77,7 +77,7 @@ class ProviderAuthController extends Controller
             $oscId = Auth::user()->osc->first()->id;
             $oscRecodExists = GoogleDrivefolder::where('osc_id',$oscId);
 
-            if(!empty($oscRecodExists)){
+            if($oscRecodExists){
                 $folderDrive = new Folder($oscId);
                 $folderDrive->createDefaultDirectories();
             }
