@@ -64,6 +64,13 @@ Route::get('/myuploads', function () {
 })->middleware(['auth'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
+
+Route::get('/axis', function () {
+    return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
+})->middleware(['auth'])->name('axis');
+// ->middleware(['auth', 'verified'])->name('myuploads');
+
+
 Route::get('/activityhub', function () {
     return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
 })->middleware(['auth'])->name('activityhub');
