@@ -46,10 +46,7 @@ class ActivityController extends Controller
 
 
     }
-    public function edit($Id){
 
-
-    }
     public function store(Request $request){
 
 

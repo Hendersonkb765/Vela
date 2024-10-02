@@ -77,7 +77,8 @@ class DashboardController extends Controller
         $arrayTasks['tasksCompleted'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasksMax'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
 
-        //$googleDrive = new GoogleDrive($osc->id);
+        $googleDrive = new GoogleDrive($osc->id);
+        empty($googleDrive) ? $googleDrive->createDefaultDirectories() : null;
         
         return Inertia::render('Dashboard',[
             'user' =>[
@@ -97,7 +98,7 @@ class DashboardController extends Controller
                         'currentLevel'=>$currentLevel,
                     ],
             'tasks' => $arrayTasks,
-            //'storageDrive'=> $googleDrive->getUserStorageQuota(), 
+            'storageDrive'=> $googleDrive, 
         ]);
        }
        catch(\Exception $e){
