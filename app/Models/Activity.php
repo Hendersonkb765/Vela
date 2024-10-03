@@ -19,7 +19,7 @@ class Activity extends Model
         'send_by',
         'description',
         'thumbnail_photos_url',
-        'photos_url',
+        'folder_photos_id',
         'osc_id',
         'user_id',
     ];

@@ -7,7 +7,8 @@ import Filter from './Components/Filter';
 
 export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}) {
     // console.log(activities)
-
+   
+   
     return (
         <VelaSocialLayout
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Minhas Atividades</h2>}
@@ -27,6 +28,7 @@ export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}
                         ))}
                     </div>
                 </section>
+               
             </section>
         </VelaSocialLayout>
     );

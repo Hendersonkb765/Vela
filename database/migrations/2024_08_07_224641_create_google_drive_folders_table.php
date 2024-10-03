@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->dateTime('creation_folder_date');
             $table->foreignId('osc_id')->constrained();
-            $table->string('folder_type');
             $table->string('folder_id');
         });
         
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('folders');
+        Schema::dropIfExists('google_drive_folders');
     }
 };

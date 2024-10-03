@@ -33,5 +33,11 @@ return [
         'client_id' => env('GOOGLE_DRIVE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
         'redirect' => 'http://127.0.0.1:8000/auth/drive/callback/google'
-    ]
+    ],
+    'openai' => [
+        'api_key' => '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',
+        'base_uri' => 'https://api.openai.com/v1',
+        'organization_id' =>'org-R3T2zzvXlq15Ht6Mfqzri5eL',
+        'project_id' =>'proj_ou8E9xh5bT1XPP0fYL0RuKii'
+    ],
 ];

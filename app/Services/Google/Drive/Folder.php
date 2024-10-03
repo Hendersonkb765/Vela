@@ -31,7 +31,7 @@ class Folder extends GoogleDrive
     public function createDefaultDirectories(){
         try{
             
-            $velaFolder = $this->create('Velaae_Social_lab',null);
+            $velaFolder = $this->create('⚠️NÃO APAGUE OU ALTERE (Velaae)⚠️',null);
             
             $this->create('Atividades', $velaFolder->id);
          
@@ -44,7 +44,7 @@ class Folder extends GoogleDrive
                 $axisFolder = $this->create($axis->name,$axesFolder->id);
               
                 foreach($levels as $level){
-                    $levelFolder = $this->create($level->name,$axisFolder->id);
+                    $this->create($level->name,$axisFolder->id);
                    
                 }
             }
@@ -73,7 +73,6 @@ class Folder extends GoogleDrive
                 'name' => $folder->name,
                 'folder_id' => $folder->id,
                 'osc_id' => $this->oscId,
-                'folder_type'=>'level',
                 'creation_folder_date' => Carbon::parse($folder->createdTime)->format('Y-m-d H:i:s')
             ]);
           

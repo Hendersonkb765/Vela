@@ -33,6 +33,9 @@ use App\Services\Google\Drive\Folder;
 use App\Services\Google\Drive\GoogleDrive;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; // Add this line
+
+use App\Services\ChatGPT\OpenAi;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -41,6 +44,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -174,20 +179,29 @@ Route::get('/formulario',function(){
     return view('Formulario');
 });
 Route::post('/drive',function(Request $request){
-    $oscId = Auth::user()->osc->first()->id;
-    $fileDatabase = $request->file('database');
-    $driveFile = new File($oscId);
-    $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1W6iAOJRQeiYTDuJqZMYR-TyEiUT6jKTz',true);
-    dd($arquivo);
+    
+        $oscId = Auth::user()->osc->first()->id;
+        foreach($request->file('database') as $fileDatabase){
+        $driveFile = new File($oscId);
+        $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+        }
+
+    //$driveFile = new File($oscId);
+   // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+    //dd($arquivo);
 })->name('formulario');
 Route::get('/drive2',function(){
-    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
+    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
     dd($fileDrive);
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);
-    $folder->createDefaultDirectories();
+    $folder->create('⚠️teste⚠️');
 });
-
+Route::get('openai',function(){
+    $openai = new OpenAi();
+    $message = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
+    dd($message);
+});
 
 
 require __DIR__.'/auth.php';
