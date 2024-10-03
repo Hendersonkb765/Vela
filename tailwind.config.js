@@ -45,6 +45,18 @@ export default {
                 headers: ['Poppins'],
                 body: ['Open Sans'],
             },
+            
+            keyframes: {
+                fade: {
+                  '0%, 100%': { opacity: '0.2' }, // Opacidade mínima
+                  '50%': { opacity: '1' }, // Opacidade máxima
+                },
+              },
+              // Associando a keyframe com a animação
+              animation: {
+                fade: 'fade 2s ease-in-out infinite', // 2s de duração, ease-in-out, repetição infinita
+            },
+
         },
     },
 
