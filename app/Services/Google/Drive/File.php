@@ -14,7 +14,7 @@ class File extends GoogleDrive
     public function create(string $name,$fileDatabase, string $folderId, bool $isPublic = false, string $typeFile='image')
     {
   
-       // try{
+        try{
             if(!$folderId){
                 return response()->json(['error'=>"Local da pasta esta em branco"],404);
             }
@@ -36,35 +36,45 @@ class File extends GoogleDrive
                         'uploadType' => 'multipart',
                         'fields' => 'id,createdTime,name,modifiedTime,webContentLink'
                     ]);
+                  
+
                     if($isPublic){
                         $permission = new \Google\Service\Drive\Permission();
                         $permission->type = 'anyone';
                         $permission->role = 'reader';
                         $drive->permissions->create($file->id, $permission);
                     }
-                    $localFolderId = GoogleDriveFolder::where('folder_id',$folderId)->where('osc_id',$this->oscId)->first()->id;
-                    GoogleDriveFile::create([
-                        'name' => $name,
-                        'file_id' => $file->id,
-                        'folder_id' => $localFolderId,
-                        'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
-                        'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
-                        'file_extension' => $fileDatabase->getClientOriginalExtension(),
-                        'web_content_link' => $file->webContentLink,
-                        'web_view_link' => $this->createUrlView($file->id,$fileDatabase)
-                    ]);
-    
+                    $localFolder = GoogleDriveFolder::where('folder_id',$folderId)->first();
+                    
+                    if($localFolder){
+                        GoogleDriveFile::create([
+                            'name' => $name,
+                            'file_id' => $file->id,
+                            'folder_id' => $localFolder->id,
+                            'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
+                            'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
+                            'file_extension' => $fileDatabase->getClientOriginalExtension(),
+                            'web_content_link' => $file->webContentLink,
+                            'web_view_link' => $this->createUrlView($file->id,$fileDatabase)
+                        ]);
+                    }
+                    else{
+                        return response()->json(['error'=>"Pasta não encontrada"],404);
+                    }
+                    
                     return ['driveFileData'=>$file,'webViewLink'=>$this->createUrlView($file->id,$typeFile)];  
+                   
+                    
             }
             
 
             }
-/*
+
         }
         catch(\Exception $e){
             return response()->json(['error'=>"Erro ao criar arquivo no Google Drive"],500);
         }
-        */
+        
         
     }
     public function delete(string $fileId)

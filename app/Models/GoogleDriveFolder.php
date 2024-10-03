@@ -15,6 +15,5 @@ class GoogleDriveFolder extends Model
         'folder_id',
         'osc_id',
         'creation_folder_date',
-        'folder_type'
     ];
 }
