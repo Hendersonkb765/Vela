@@ -3,6 +3,7 @@ import LevelBox from "./Components/LevelBox"
 import CardAxis from "./Components/CardAxis"
 import Targets from './Components/Targets';
 import CardTask from './Components/CardTask';
+import { GoMegaphone } from "react-icons/go";
 
 
 export default function Axis(){
@@ -19,7 +20,7 @@ export default function Axis(){
 
                     <div className="flex gap-3">
 
-                        <CardAxis/>
+                        <CardAxis axisIcon={[<GoMegaphone />,"bg-violet-600"]}/>
 
                         <Targets/>
                         
@@ -27,15 +28,18 @@ export default function Axis(){
 
                 </div>
 
-                <div className="h-5 w-5 px-5 gap-6 flex flex-col">
+                <div className="h-5 px-5 gap-6 flex flex-col">
 
                     <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">Tarefas</h2>
 
 
-                    <div>
+                    <div className="w-full flex flex-row gap-4 flex-wrap ">
 
                         <CardTask/>
-
+                        <CardTask/>
+                        <CardTask/>
+                        <CardTask/>
+                        <CardTask/>
                     </div>
 
 
