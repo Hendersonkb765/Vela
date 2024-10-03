@@ -29,7 +29,7 @@ class ActivityFactory extends Factory
             'send_by' => $user->name,
             'description' => $this->faker->text(),
             'thumbnail_photos_url' => $this->faker->imageUrl(),
-            'photos_url' => $this->faker->imageUrl(),
+            'folder_photos_id' => $this->faker->numberBetween(1, 5),
             'osc_id' => Osc::inRandomOrder()->first()->id,
             'user_id' => $user->id,
         ];
