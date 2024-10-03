@@ -62,10 +62,20 @@ class ActivityController extends Controller
         try{
 
             $oscId = Auth::user()->osc->first();
+       
+
+            
             $fileDrive = new File($oscId->id);
             $folderDrive =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$oscId->id)->first();
          
             $webViewLink = $fileDrive->create($request->activityDate,$request->file('activityThumbnail'),$folderDrive->folder_id,true)['webViewLink'];
+            /* 
+            MULTIPLOS ARQUIVOS
+            foreach($request->file('database') as $fileDatabase){
+            $driveFile = new File($oscId);
+            $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+            }
+            */
             Activity::create([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
