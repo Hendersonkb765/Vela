@@ -20,7 +20,7 @@ export default function Filter() {
     };
 
     return (
-        <form action="" className='w-full px-8 -translate-y-5 '>
+        <form action="" className='w-full px-8 -translate-y-5 '>        
             <div className='bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center p-4 space-x-16 fullhd:h-28'>
 
                 {/* Campo de busca por nome */}
