@@ -164,20 +164,24 @@ Route::get('/formulario',function(){
     return view('Formulario');
 });
 Route::post('/drive',function(Request $request){
-    $oscId = Auth::user()->osc->first()->id;
-    $fileDatabase = $request->file('database');
-    $driveFile = new File($oscId);
-    $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1W6iAOJRQeiYTDuJqZMYR-TyEiUT6jKTz',true);
-    dd($arquivo);
+    
+        $oscId = Auth::user()->osc->first()->id;
+        foreach($request->file('database') as $fileDatabase){
+        $driveFile = new File($oscId);
+        $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+        }
+
+    //$driveFile = new File($oscId);
+   // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+    //dd($arquivo);
 })->name('formulario');
 Route::get('/drive2',function(){
-    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
-    dd($fileDrive);
+    //$fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
+    //dd($fileDrive);
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);
-    $folder->createDefaultDirectories();
+    $folder->create('⚠️teste⚠️');
 });
-
 
 
 require __DIR__.'/auth.php';
