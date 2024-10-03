@@ -10,6 +10,7 @@ use App\Models\Address;
 use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
+use App\Services\Google\Drive\Folder;
 
 class ActivityController extends Controller
 {
@@ -62,13 +63,15 @@ class ActivityController extends Controller
         try{
 
             $oscId = Auth::user()->osc->first();
-       
 
-            
             $fileDrive = new File($oscId->id);
-            $folderDrive =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$oscId->id)->first();
-         
-            $webViewLink = $fileDrive->create($request->activityDate,$request->file('activityThumbnail'),$folderDrive->folder_id,true)['webViewLink'];
+            $folder = new Folder($oscId->id);
+
+            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$oscId->id)->first();
+            
+            $folder = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
+
+            $webViewLink = $fileDrive->create($request->activityDate,$request->file('activityThumbnail'),$folder->id,true)['webViewLink'];
             /* 
             MULTIPLOS ARQUIVOS
             foreach($request->file('database') as $fileDatabase){
@@ -85,7 +88,7 @@ class ActivityController extends Controller
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
                 'thumbnail_photos_url' => $webViewLink,
-                'photos_url' => '$request->activityPhotosUr',
+                'folder_photos_id' => 1,
                 'send_by' => Auth::user()->name,
                 'user_id' => Auth::user()->id,
                 'osc_id' => Auth::user()->osc->first()->id
@@ -95,7 +98,6 @@ class ActivityController extends Controller
 
         }
         catch(\Exception $e){
-            dd($e);
             return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
         }
 
@@ -113,9 +115,10 @@ class ActivityController extends Controller
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
                 'thumbnail_photos_url' => $request->activityThumbnailPhotosUrl,
-                'photos_url' => $request->activityPhotosUrl,
+                'folder_photos_id' => 1//$request->activityPhotosUrl,
             ]);
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
+            
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);
