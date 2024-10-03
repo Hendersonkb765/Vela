@@ -13,11 +13,12 @@ export default function ActivityForm({ onSubmit }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
     const [imgSrc, setImgSrc] = useState('');
+    const [showPopup, setShowPopup] = useState(false); 
 
     const minDate = "1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
-    const { data, setData, processing, post} = useForm({
+    const { data, setData, processing, post } = useForm({
         activityTitle: '',
         activityDescription: '',
         activityAudience: '',
@@ -61,7 +62,7 @@ export default function ActivityForm({ onSubmit }) {
         if (data.activityHourStart >= data.activityHourEnd) {
             newErrors.activityHourEnd = 'A hora de fim deve ser após a hora de início.';
         }
-        if(data.activityHourStart === data.activityHourEnd){
+        if (data.activityHourStart === data.activityHourEnd) {
             newErrors.activityHourEnd = 'A hora de fim deve ser diferente da hora de início.';
         }
         setErrors(newErrors);
@@ -70,7 +71,7 @@ export default function ActivityForm({ onSubmit }) {
 
     const onSelectFile = (e) => {
         const file = e.target.files?.[0];
-        if(!file) return;
+        if (!file) return;
 
         const reader = new FileReader();
         reader.addEventListener("load", () => {
@@ -119,11 +120,11 @@ export default function ActivityForm({ onSubmit }) {
                 data: data,
                 onFinish: () => {
                     setImgSrc(''); // Limpa o estado da imagem
-
                 },
                 onAfter: () => {
                     window.location.reload();
-                }
+                    setShowPopup(true); // Exibe o popup
+                },
             });
         } else {
             setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
@@ -233,26 +234,40 @@ export default function ActivityForm({ onSubmit }) {
 
             {step === 3 && (
                 <>
-                    {/* Step 3: Upload da Imagem */}
                     <div className="mb-4">
-                        <label className="block mb-3">
-                            <span className="sr-only ">Escolha uma foto para Thumbnail</span>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                name = "activityThumbnail"
-                                onChange={onSelectFile}
-                                className="block w-full text-sm dark:text-gray-200"
-                            />
-                        </label>
-                        {imgSrc && <img src={imgSrc} alt="Preview da Imagem" className="w-32 h-32 object-cover"/>}
-                        {errors.activityThumbnail && <p className="text-red-500">{errors.activityThumbnail}</p>}
+                        <InputLabel>Foto Thumbnail</InputLabel>
+                        <span className="sr-only ">Escolha uma foto para Thumbnail</span>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={onSelectFile}
+                            className="mt-2 sm:mt-1 w-full sm:w-auto block dark:text-gray-200"
+                        />
+                        {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
                     </div>
+                    {imgSrc && <img src={imgSrc} alt="Preview" className="h-40 w-40 object-cover mt-4" />}
+
                     <div className="flex justify-between mt-12">
-                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>Anterior</SecondaryButton>
-                        <PrimaryButton center type="submit" disabled={processing} className='!h-12 w-32 sm:w-40'>Enviar</PrimaryButton>
+                        <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>
+                            Anterior
+                        </SecondaryButton>
+                        <PrimaryButton center type='submit' disabled={processing} className='!h-12 w-32 sm:w-40'>
+                            Enviar
+                        </PrimaryButton>
                     </div>
                 </>
+            )}
+
+            {!showPopup && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg">
+                        <h2 className="text-xl font-semibold">Sucesso!</h2>
+                        <p>A atividade foi criada com sucesso.</p>
+                        <button onClick={() => setShowPopup(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
             )}
         </form>
     );

@@ -7,19 +7,20 @@ import { FaTools } from "react-icons/fa";
 
 export default function Myuploads({ auth }) {
     //Obs.: Talves adicionar informações de quem fez o upload...(Foto e nome)
-    const files = [
-        { id: 1, name: 'Image 1.jpg', fileType: 'image/jpeg', uploadDate: '2024-09-01' },
-        { id: 2, name: 'Document 1.pdf', fileType: 'application/pdf', uploadDate: '2024-09-02' },
-        { id: 3, name: 'Image 2.png', fileType: 'image/png', uploadDate: '2024-09-03' },
-        { id: 4, name: 'Spreadsheet.xlsx', fileType: 'application/vnd.ms-excel', uploadDate: '2024-09-04' },
-        { id: 5, name: 'Presentation.pptx', fileType: 'application/vnd.ms-powerpoint', uploadDate: '2024-09-05' },
-        { id: 6, name: 'Image 3.gif', fileType: 'image/gif', uploadDate: '2024-09-06' },
-        { id: 7, name: 'Text File.txt', fileType: 'text/plain', uploadDate: '2024-09-07' },
-        { id: 8, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
-        { id: 9, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
-        { id: 10, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
+    const files = [];
+    // const files = [
+    //     { id: 1, name: 'Image 1.jpg', fileType: 'image/jpeg', uploadDate: '2024-09-01' },
+    //     { id: 2, name: 'Document 1.pdf', fileType: 'application/pdf', uploadDate: '2024-09-02' },
+    //     { id: 3, name: 'Image 2.png', fileType: 'image/png', uploadDate: '2024-09-03' },
+    //     { id: 4, name: 'Spreadsheet.xlsx', fileType: 'application/vnd.ms-excel', uploadDate: '2024-09-04' },
+    //     { id: 5, name: 'Presentation.pptx', fileType: 'application/vnd.ms-powerpoint', uploadDate: '2024-09-05' },
+    //     { id: 6, name: 'Image 3.gif', fileType: 'image/gif', uploadDate: '2024-09-06' },
+    //     { id: 7, name: 'Text File.txt', fileType: 'text/plain', uploadDate: '2024-09-07' },
+    //     { id: 8, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
+    //     { id: 9, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
+    //     { id: 10, name: 'Video.mp4', fileType: 'video/mp4', uploadDate: '2024-09-08' },
 
-    ];
+    // ];
 
     return (
         <VelaSocialLayout
@@ -44,7 +45,7 @@ export default function Myuploads({ auth }) {
                 </div>
 
                 <section className='w-full px-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 '>
-                    {files.map((file) => (
+                    {files && files.map((file) => (
                         <FileCard key={file.id} file={file} />
                     ))}
                 </section>
