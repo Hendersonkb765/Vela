@@ -33,6 +33,9 @@ use App\Services\Google\Drive\Folder;
 use App\Services\Google\Drive\GoogleDrive;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; // Add this line
+
+use App\Services\ChatGPT\OpenAi;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -41,6 +44,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -181,6 +186,11 @@ Route::get('/drive2',function(){
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);
     $folder->create('⚠️teste⚠️');
+});
+Route::get('openai',function(){
+    $openai = new OpenAi();
+    $message = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
+    dd($message);
 });
 
 
