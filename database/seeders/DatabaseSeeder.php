@@ -17,8 +17,11 @@ use Illuminate\Database\Seeder;
 use App\Models\TypePerformance;
 use Database\Factories\FeedbackFactory;
 use App\Models\Answer;
+use App\Models\GoogleDriveFolder;
 use App\Models\RecurringActivity;
 use App\Models\Role;
+use App\Services\Google\Drive\GoogleDrive;
+use Database\Factories\GoogleDriveFolderFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -68,7 +71,7 @@ class DatabaseSeeder extends Seeder
         TargetAudience::factory()->create(['name'=>'Habitação']);
         TargetAudience::factory()->create(['name'=>'Educação e Pequisa']);
         TargetAudience::factory()->create(['name'=>'Cultura']);
-        
+        GoogleDriveFolder::factory(5)->create();
         Activity::factory(4)->create();
         Step::factory(10)->create();
         Requirement::factory(3)->create();
