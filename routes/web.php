@@ -89,7 +89,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/reformular/{description}','rephraseDescription')->name('activity.rephraseDescription');
 
 });
-
+// route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {

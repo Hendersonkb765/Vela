@@ -12,10 +12,10 @@ export default function CardTask({
     tags = ["Importante", "Urgente"],
     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur...",
     taskStarted = false,
-    stepsTaken = [0, 5],
+    stepsTaken = [1, 5],
     lastReviewNote = 2,
     news = false,
-    brandNew = true
+    brandNew = true,
 
 
 }){
@@ -42,7 +42,7 @@ export default function CardTask({
 
             <div className="flex justify-between items-center">
                 
-                <SecondaryButton className=' rounded-full dark:border-primary border-primary'>Começar Tarefa</SecondaryButton>
+                <SecondaryButton className=' rounded-full dark:border-primary border-primary'>{stepsTaken[0] > 0 ? "Começar Tarefa":"Continuar Tarefa"}</SecondaryButton>
 
                 <p className="text-xl text-gray-800 dark:text-gray-200 font-semibold">{stepsTaken[0]}/{stepsTaken[1]}</p>
 
