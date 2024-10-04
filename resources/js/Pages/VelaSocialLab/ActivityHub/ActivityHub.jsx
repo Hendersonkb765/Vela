@@ -4,9 +4,31 @@ import ActivityUpload from './Components/ActivityUpload';
 import ActivityCard from './Components/ActivityCard';
 import Filter from './Components/Filter/Filter';
 
-
-export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}) {
-    // console.log(activities)
+export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive }) {
+    // Exemplo de array com várias atividades
+    const activityData = [
+        {
+            id: 1,
+            date: "02/10/2024",
+            thumbnail_photos_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvda6OBiGDTsLKTPrGKjtgas7neAJ6orS-w&s",
+            title: "Título da Atividade 1 ",
+            description: "Essa é uma descrição de exemplo para a atividade 1."
+        },
+        {
+            id: 2,
+            date: "03/10/2024",
+            thumbnail_photos_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvda6OBiGDTsLKTPrGKjtgas7neAJ6orS-w&s",
+            title: "Título da Atividade 2",
+            description: "Essa é uma descrição de exemplo para a atividade 2."
+        },
+        {
+            id: 3,
+            date: "04/10/2024",
+            thumbnail_photos_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHvda6OBiGDTsLKTPrGKjtgas7neAJ6orS-w&s",
+            title: "Título da Atividade 3",
+            description: "Essa é uma descrição de exemplo para a atividade 3.."
+        }
+    ];
 
     return (
         <VelaSocialLayout
@@ -21,8 +43,8 @@ export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}
                 <section className='w-full px-4 mx-4 grid grid-cols-1 gap-6 relative'>
                     <Filter />
                     <aside className='flex h-full absolute mx-4 border-l-2 border-primary dark:border-primary-200 '></aside>
-                    <div className='px-12 flex flex-col space-y-12 pb-8'>
-                        {activities.map((activity) => (
+                    <div className='px-4 lg:px-12 flex flex-col space-y-12 pb-8'>
+                        {activityData.map((activity) => (
                             <ActivityCard key={activity.id} data={activity}/>
                         ))}
                     </div>
@@ -31,4 +53,3 @@ export default function ActivityHub({ auth, activities,isConnectedToGoogleDrive}
         </VelaSocialLayout>
     );
 }
-

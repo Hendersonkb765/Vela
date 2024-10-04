@@ -5,6 +5,8 @@ import InputLabel from '@/FigmaComponents/Inputs/InputLabel';
 import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { useForm } from '@inertiajs/react';
 import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
+import { GoTrash } from "react-icons/go";
+import PrimaryIconButton from '@/FigmaComponents/Button/PrimaryIconButton';
 
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
@@ -13,12 +15,13 @@ export default function ActivityForm({ onSubmit }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
     const [imgSrc, setImgSrc] = useState('');
-    const [showPopup, setShowPopup] = useState(false); 
+    const [activityImages, setPreviewImages] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
 
     const minDate = "1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
-    const { data, setData, processing, post } = useForm({
+    const { data, setData, processing, post, progress } = useForm({
         activityTitle: '',
         activityDescription: '',
         activityAudience: '',
@@ -26,6 +29,7 @@ export default function ActivityForm({ onSubmit }) {
         activityHourStart: '06:00',
         activityHourEnd: '07:00',
         activityThumbnail: '',
+        activityImages: [],
     });
 
     const handleChange = (e) => {
@@ -99,6 +103,53 @@ export default function ActivityForm({ onSubmit }) {
         reader.readAsDataURL(file);
     };
 
+    const onSelectFiles = (e) => {
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
+
+        const fileArray = Array.from(files); // Converte FileList para array
+        const validImages = []; // Array para armazenar URLs de imagens válidas
+        const invalidImages = []; // Array para armazenar mensagens de erro
+
+        fileArray.forEach((file) => {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", () => {
+                const imageElement = new Image();
+                const imageUrl = reader.result?.toString() || "";
+                imageElement.src = imageUrl;
+
+                imageElement.addEventListener("load", (event) => {
+                    const { naturalHeight, naturalWidth } = event.currentTarget;
+                    if (naturalWidth < MIN_SIZE || naturalHeight < MIN_SIZE) {
+                        invalidImages.push(`Imagem '${file.name}' muito pequena (tamanho mínimo: 150x150)`);
+                    } else {
+                        validImages.push(imageUrl); // Adiciona a URL da imagem válida ao array
+                    }
+
+                    // Atualiza o estado uma vez que todas as imagens foram processadas
+                    if (validImages.length + invalidImages.length === fileArray.length) {
+                        if (invalidImages.length > 0) {
+                            setErrors((prevErrors) => ({
+                                ...prevErrors,
+                                activityThumbnail: invalidImages.join(', '),
+                            }));
+                        }
+                        setPreviewImages(validImages); // Armazena as URLs das imagens válidas no estado
+                        setData('activityImages', fileArray); // Salva todos os arquivos no estado do formulário
+                    }
+                });
+            });
+
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const removeImage = (index) => {
+        setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+        setData('activityImages', (prevImages) => prevImages.filter((_, i) => i !== index));
+    };
+
     const handleNextStep = () => {
         if (step === 1 && validateStep1()) {
             setStep(step + 1);
@@ -153,7 +204,7 @@ export default function ActivityForm({ onSubmit }) {
                             name="activityDescription"
                             value={data.activityDescription}
                             onChange={handleChange}
-                            className="mt-2 sm:mt-1 block w-full h-20 sm:min-w-96 rounded-md text-sm border-2 border-neutralcolors text-neutralcolors-600 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400"
+                            className="mt-2 sm:mt-1 block w-full sm:w-auto h-20 sm:min-w-96 rounded-md text-sm border-2 border-neutralcolors text-neutralcolors-600 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400"
                             required
                             placeholder='Escreva uma pequena descrição da atividade'
                         />
@@ -235,17 +286,65 @@ export default function ActivityForm({ onSubmit }) {
             {step === 3 && (
                 <>
                     <div className="mb-4">
-                        <InputLabel>Foto Thumbnail</InputLabel>
+                        <InputLabel>Foto para Thumbnail</InputLabel>
                         <span className="sr-only ">Escolha uma foto para Thumbnail</span>
                         <input
+                            id="thumbnail_input"
                             type="file"
                             accept="image/*"
                             onChange={onSelectFile}
-                            className="mt-2 sm:mt-1 w-full sm:w-auto block dark:text-gray-200"
+                            className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
                         />
+
                         {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
                     </div>
-                    {imgSrc && <img src={imgSrc} alt="Preview" className="h-40 w-40 object-cover mt-4" />}
+                    {imgSrc &&
+                        <div className='mt-4 relative flex items-end hover:items-center  justify-center w-fit group cursor-pointer transition-all' >
+                            <img src={imgSrc} alt="Preview" className="h-24 w-24 object-cover rounded-lg  group-hover:brightness-50" />
+                            <PrimaryIconButton
+                                onClick={() => {
+                                    setImgSrc('');
+                                    setData({ activityThumbnail: null });
+                                }}
+                                className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'
+                            >
+                                <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                            </PrimaryIconButton>
+                        </div>
+                    }
+                    <div className="my-4">
+                        <InputLabel>Fotos da Atividade</InputLabel>
+                        <span className="sr-only ">Escolha fotos para galeria</span>
+                        <input
+                            id="thumbnail_input"
+                            type="file"
+                            accept="image/*"
+                            onChange={onSelectFiles}
+                            multiple
+                            className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
+                        />
+
+                        {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
+                    </div>
+                    {activityImages.length > 0 && (
+                        <div className='mt-4 max-w-96 flex flex-wrap gap-4'>
+                            {activityImages.slice(0, 3).map((file, index) => (
+                                <div key={index} className='relative flex items-end flex-wrap hover:items-center justify-center w-fit group cursor-pointer transition-all'>
+                                    <img src={file} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                    <PrimaryIconButton onClick={() => removeImage(index)} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
+                                        <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                                    </PrimaryIconButton>
+                                </div>
+                            ))}
+                            {activityImages.length > 2 && (
+                                <div className='flex items-center justify-center text-neutral-700 dark:text-white mt-2'>
+                                    +{activityImages.length - 3}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+
 
                     <div className="flex justify-between mt-12">
                         <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>
@@ -258,9 +357,9 @@ export default function ActivityForm({ onSubmit }) {
                 </>
             )}
 
-            {!showPopup && (
+            {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                    <div className="bg-white p-6 rounded shadow-lg">
+                    <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
                         <h2 className="text-xl font-semibold">Sucesso!</h2>
                         <p>A atividade foi criada com sucesso.</p>
                         <button onClick={() => setShowPopup(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">

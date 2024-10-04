@@ -13,8 +13,8 @@ export default function FilterModal({ isOpen, onClose, data, setData, minDate, m
     };
 
     return (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center px-4">
-            <div className="bg-white p-8 rounded-lg sm:w-1/3 relative overflow-hidden dark:bg-slate-800 ">
+        <div className=" fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center px-4">
+            <div className="min-w-fit bg-white p-8 rounded-lg sm:w-1/3 relative overflow-hidden dark:bg-slate-800 px-2">
             <div className={`flex flex-col p-4 space-y-6`}>
                 <h3 className='text-xl font-bold font-headers dark:text-white text-neutral-800'>Filtros</h3>
                 <div className="flex flex-col space-y-3">

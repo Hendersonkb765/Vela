@@ -74,7 +74,6 @@ Route::controller(ActivityController::class)->group(function(){
     Route::get('/activityhub','index')->middleware(['auth'])->name('activityhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
-
 });
 
 // ->middleware(['auth', 'verified'])->name('taskhub');
@@ -117,8 +116,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
 
-
-
 });
 
 Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
@@ -150,7 +147,6 @@ Route::get('/teste',function(){
     //dd($osc->first()->task->first()->pivot->status);
     //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
     //$osc->save();
-
 })->name('teste');
 
 Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');

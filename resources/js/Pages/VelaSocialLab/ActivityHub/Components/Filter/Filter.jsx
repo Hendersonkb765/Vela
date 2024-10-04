@@ -29,8 +29,8 @@ export default function Filter() {
 
     return (
         <>
-            <form action="" className='w-full px-4 sm:px-8 -translate-y-5'>
-                <div className="hidden sm:block">
+            <form action="" className='min-w-fit w-full px-4 sm:px-8 -translate-y-5'>
+                <div className="hidden lg:block">
                     <FilterForm
                         data={data}
                         setData={setData}
@@ -39,7 +39,7 @@ export default function Filter() {
                     />
                 </div>
 
-                <div className='w-11/12 sm:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center justify-between p-4 gap-2  fullhd:h-28'>
+                <div className='w-11/12 lg:hidden bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center justify-between p-4 gap-2  fullhd:h-28'>
                     <PrimaryButton
                         type="button"
                         onClick={openModal}
