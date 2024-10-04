@@ -199,8 +199,9 @@ Route::get('/drive2',function(){
 });
 Route::get('openai',function(){
     $openai = new OpenAi();
-    $message = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-    dd($message);
+    $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
+    
+    return response()->json($response);
 });
 
 
