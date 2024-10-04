@@ -8,6 +8,7 @@ export default function cardAxis({
     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor amet, consectetur adipiscing elit.",
     tasks = [0, 5],
     reprovedTasks = 0,
+    axisIcon = [],
     pendingTasks = 0,
 
 }){
@@ -23,7 +24,7 @@ export default function cardAxis({
             <div className="absolute w-4 h-4 bottom-[-8px] left-[172px] dark:bg-gray-950 bg-neutralcolors-100"></div>
             <div className="flex p-4 gap-3">
 
-                <div className="min-w-28 h-22 bg-violet-600 rounded-md"></div>
+            <div className={` h-24 min-h-24 w-24 min-w-24 flex ${axisIcon[1]} justify-center items-center rounded-full text-white text-6xl transform transition-transform duration-300 group-hover:-rotate-12 `}>{axisIcon[0]}</div>
 
                 <div className="flex flex-col gap-2">
                     <h1 className="text-gray-800 dark:text-gray-200 font-bold text-4xl">{title}</h1>

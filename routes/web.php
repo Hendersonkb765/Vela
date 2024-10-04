@@ -77,9 +77,9 @@ Route::get('/axis', function () {
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
-Route::get('/activityhub', function () {
-    return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
-})->middleware(['auth'])->name('activityhub');
+// Route::get('/activityhub', function () {
+//     return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
+// })->middleware(['auth'])->name('activityhub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 Route::controller(ActivityController::class)->group(function(){

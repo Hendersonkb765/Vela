@@ -33,7 +33,7 @@ export default function ReviewStars({
             </div>
         )
 
-    }else{
+    }else if(qtStars == 0){
 
         return(
 
