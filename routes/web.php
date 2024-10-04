@@ -86,6 +86,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::get('/activityhub','index')->middleware(['auth'])->name('activityhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
+    Route::post('/reformular/{description}','rephraseDescription')->name('activity.rephraseDescription');
 
 });
 
@@ -203,6 +204,5 @@ Route::get('openai',function(){
     
     return response()->json($response);
 });
-
 
 require __DIR__.'/auth.php';

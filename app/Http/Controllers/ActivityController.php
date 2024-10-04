@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\activity;
+use App\Services\ChatGPT\OpenAi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -11,6 +12,7 @@ use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
+ // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
 {
@@ -29,6 +31,17 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
 
+    }
+    public function rephraseDescription(Request $request){
+        //reformular descrição da atividade
+        try{
+            $openAi = new OpenAi();
+            $response = $openAi->chatGPT('Reformule a descrição da atividade',$request->description);
+            return response()->json($response);
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao reformular descrição!']);
+        }
     }
     public function filterByName($title){
         //detalhes da atividade
