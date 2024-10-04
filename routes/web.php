@@ -87,7 +87,6 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
     Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
-
 });
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
@@ -130,8 +129,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
 
-
-
 });
 
 Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
@@ -163,7 +160,6 @@ Route::get('/teste',function(){
     //dd($osc->first()->task->first()->pivot->status);
     //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
     //$osc->save();
-
 })->name('teste');
 
 Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');
@@ -180,7 +176,7 @@ Route::get('/formulario',function(){
     return view('Formulario');
 });
 Route::post('/drive',function(Request $request){
-    
+
         $oscId = Auth::user()->osc->first()->id;
         foreach($request->file('database') as $fileDatabase){
         $driveFile = new File($oscId);
@@ -192,7 +188,7 @@ Route::post('/drive',function(Request $request){
     //dd($arquivo);
 })->name('formulario');
 Route::get('/drive2',function(){
-    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();  
+    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
     dd($fileDrive);
     $oscId = Auth::user()->osc->first()->id;
     $folder = new Folder($oscId);
@@ -201,7 +197,7 @@ Route::get('/drive2',function(){
 Route::get('openai',function(){
     $openai = new OpenAi();
     $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-    
+
     return response()->json($response);
 });
 
