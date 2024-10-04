@@ -57,6 +57,30 @@ export default {
                 fade: 'fade 2s ease-in-out infinite', // 2s de duração, ease-in-out, repetição infinita
             },
 
+            backgroundImage: {
+                'custom-gradient': 'linear-gradient(to right top, #057ee8, #3786e8, #4f8de8, #6295e7, #729de7, #6da9ee, #69b4f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
+              },
+              animation: {
+                'gradient-move': 'gradient-move 3s ease infinite',
+              },
+              keyframes: {
+                'gradient-move': {
+                  '0%': {
+                    'background-position': '0% 50%',
+                  },
+                  '50%': {
+                    'background-position': '100% 50%',
+                  },
+                  '100%': {
+                    'background-position': '0% 50%',
+                  },
+                },
+              },
+              backgroundSize: {
+                '200%': '200%',
+              },
+            
+
         },
     },
 

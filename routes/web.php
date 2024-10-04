@@ -88,7 +88,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
 
 });
-
+// route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {

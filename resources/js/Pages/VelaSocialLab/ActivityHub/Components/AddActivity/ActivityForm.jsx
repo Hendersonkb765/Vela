@@ -2,9 +2,11 @@ import { useState } from 'react';
 import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import DateInput from '@/FigmaComponents/Inputs/DateInput';
 import InputLabel from '@/FigmaComponents/Inputs/InputLabel';
+import IAEnhancer from '@/FigmaComponents/Inputs/IAEnhancer';
 import TextInput from '@/FigmaComponents/Inputs/TextInput';
 import { useForm } from '@inertiajs/react';
 import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
+import { GoZap } from "react-icons/go";
 
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
@@ -13,6 +15,7 @@ export default function ActivityForm({ onSubmit }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
     const [imgSrc, setImgSrc] = useState('');
+    const [loadingIa, setLoadingIa] = useState(false)
 
     const minDate = "1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
@@ -26,6 +29,30 @@ export default function ActivityForm({ onSubmit }) {
         activityHourEnd: '07:00',
         activityThumbnail: '',
     });
+
+    const handleTextIa = async () => {
+
+        setLoadingIa(true);
+        const response = await fetch(`/reformular/${data.activityDescription}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                description: data.activityDescription
+            }),
+        });
+    
+        if (response.ok) {
+            const result = await response.json();
+            setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
+        } else {
+            console.error('Erro ao reformular descrição.');
+        }
+    
+        setLoadingIa(false); // Para o carregamento
+
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -146,7 +173,13 @@ export default function ActivityForm({ onSubmit }) {
                         {errors.activityTitle && <p className="text-body text-sm text-red-500">{errors.activityTitle}</p>}
                     </div>
                     <div className="mb-4">
-                        <InputLabel>Descrição</InputLabel>
+                        <div className="flex justify-between">
+                            <InputLabel>Descrição</InputLabel>
+                            <p onClick={handleTextIa} className={` flex gap-1 items-center text-primary cursor-pointer text-sm font-medium ${loadingIa && "bg-clip-text text-transparent bg-[length:200%_200%] bg-gradient-to-r from-blue-500 via-teal-400 to-purple-700 animate-gradient-move"}`} > <GoZap strokeWidth="0.7" className={`transition duration-1500 ${loadingIa&&"hidden"}`}/>{loadingIa?"Carregando...":"Melhorar com IA"}</p>
+
+
+                        </div>
+                        
                         <textarea
                             name="activityDescription"
                             value={data.activityDescription}
