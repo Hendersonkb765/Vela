@@ -33,22 +33,45 @@ export default function ActivityForm({ onSubmit }) {
     const handleTextIa = async () => {
 
         setLoadingIa(true);
-        const response = await fetch(`/reformular/${data.activityDescription}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                description: data.activityDescription
-            }),
-        });
+
+        try {
+            const response = await fetch(`/reformular/${data.activityDescription}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Pega o token CSRF da meta tag
+                },
+                body: JSON.stringify({
+                    description: data.activityDescription
+                }),
+            });
     
-        if (response.ok) {
-            const result = await response.json();
-            setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
-        } else {
-            console.error('Erro ao reformular descrição.');
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result)
+                setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
+            } else {
+                console.error('Erro ao reformular descrição.');
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
         }
+        // const response = await fetch(`/reformular/${data.activityDescription}`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         description: data.activityDescription
+        //     }),
+        // });
+    
+        // if (response.ok) {
+        //     const result = await response.json();
+        //     setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
+        // } else {
+        //     console.error('Erro ao reformular descrição.');
+        // }
     
         setLoadingIa(false); // Para o carregamento
 
@@ -176,7 +199,6 @@ export default function ActivityForm({ onSubmit }) {
                         <div className="flex justify-between">
                             <InputLabel>Descrição</InputLabel>
                             <p onClick={handleTextIa} className={` flex gap-1 items-center text-primary cursor-pointer text-sm font-medium ${loadingIa && "bg-clip-text text-transparent bg-[length:200%_200%] bg-gradient-to-r from-blue-500 via-teal-400 to-purple-700 animate-gradient-move"}`} > <GoZap strokeWidth="0.7" className={`transition duration-1500 ${loadingIa&&"hidden"}`}/>{loadingIa?"Carregando...":"Melhorar com IA"}</p>
-
 
                         </div>
                         

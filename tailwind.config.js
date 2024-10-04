@@ -78,7 +78,7 @@ export default {
               },
               backgroundSize: {
                 '200%': '200%',
-              },
+            },
             
 
         },
