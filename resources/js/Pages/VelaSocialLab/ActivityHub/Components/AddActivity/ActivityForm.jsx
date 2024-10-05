@@ -276,8 +276,9 @@ export default function ActivityForm({ onSubmit }) {
                     </div>
                     <div className="mb-4">
                         <div className="flex justify-between">
-                            <InputLabel>Descrição</InputLabel>
-                            <p onClick={handleTextIa} className={` flex gap-1 items-center text-primary cursor-pointer text-sm font-medium ${loadingIa && "bg-clip-text text-transparent bg-[length:200%_200%] bg-gradient-to-r from-blue-500 via-teal-400 to-purple-700 animate-gradient-move"}`} > <GoZap strokeWidth="0.7" className={`transition duration-1500 ${loadingIa&&"hidden"}`}/>{loadingIa?"Carregando...":"Melhorar com IA"}</p>
+                            <InputLabel onClick={handleNextStep}>Descrição</InputLabel>
+                            {/* <p onClick={handleTextIa} className={`transition-colors flex gap-1 items-center text-primary hover:text-primary-100 cursor-pointer text-sm font-medium ${loadingIa && "bg-clip-text text-transparent bg-[length:200%_200%] bg-gradient-to-r from-blue-500 via-teal-400 to-purple-700 animate-gradient-move"}`} > <GoZap strokeWidth="0.7" className={` ${loadingIa&&"hidden"}`}/>{loadingIa?"Carregando...":"Melhorar com IA"}</p> */}
+                            <IAEnhancer onClick={handleTextIa} loading={loadingIa}/>
 
                         </div>
 
@@ -287,7 +288,7 @@ export default function ActivityForm({ onSubmit }) {
                             onChange={handleChange}
                             className="mt-2 sm:mt-1 block w-full sm:w-auto h-20 sm:min-w-96 rounded-md text-sm border-2 border-neutralcolors text-neutralcolors-600 dark:border-slate-500 dark:bg-gray-900 dark:text-neutral-400"
                             required
-                            placeholder='Escreva uma pequena descrição da atividade'
+                            placeholder='Descreva a atividade, não esqueça de citar os principais pontos como: objetivo, desenvolvimento da atividade e público alvo.'
                         />
                         {errors.activityDescription && <p className="text-red-500 text-body text-sm">{errors.activityDescription}</p>}
                     </div>
@@ -300,7 +301,7 @@ export default function ActivityForm({ onSubmit }) {
                             onChange={handleChange}
                             required
                             className='mt-2 sm:mt-1 w-full sm:w-auto'
-                            placeholder='Diga quantas pessoas participaram da atividade'
+                            placeholder='Quantas pessoas participaram (beneficiários e voluntários)'
                         />
                         {errors.activityAudience && <p className="text-red-500 text-body text-sm">{errors.activityAudience}</p>}
                     </div>
