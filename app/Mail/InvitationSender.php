@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Address;
+use Illuminate\Mail\Mailables\Address;
 
 class InvitationSender extends Mailable
 {
@@ -37,8 +37,8 @@ class InvitationSender extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            
-            subject: 'Invitation Code',
+            from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
+            subject: 'Presidente '.$this->presidentName.' convida você para participar da organização social '.$this->oscName,
         );
     }
 
@@ -49,10 +49,12 @@ class InvitationSender extends Mailable
     {
         return new Content(
             view: 'mail.invitationOsc',
+            
             with: ['linkInvitation' => $this->linkInvitation,
                     'oscName' => $this->oscName,
                     'imgUrl' => $this->imgUrl,
                     'presidentName' => $this->presidentName]
+            
         );
     }
 
