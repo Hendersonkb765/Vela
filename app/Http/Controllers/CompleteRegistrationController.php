@@ -19,7 +19,12 @@ use App\Models\Requirement; // Add this line
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Database\ConnectionException;
+use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Http\JsonResponse;
+
+
 class CompleteRegistrationController extends Controller
 {
 
@@ -37,18 +42,23 @@ class CompleteRegistrationController extends Controller
             : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         
-
         try {
-            /*
+            
             $request->validate([
-                'name' => 'required|string|max:255',
-                'birthday' => 'required|date|before:today',
+                'user.name' => 'required|string|max:255',
+                'user.birthday' => 'required|date|before:today',
                 //'roleInOrganization' => 'required|string|enum:Presidente,Gerente,Administrador,Membro',
+            ],[
+                'user.name.required' => 'O campo nome é obrigatório.',
+                'user.name.max' => 'O campo nome deve ter no máximo 255 caracteres.',
+                'user.birthday.required' => 'O campo data de nascimento é obrigatório.',
+                'user.birthday.date' => 'O campo data de nascimento deve ser uma data.',
+                'user.birthday.before' => 'A data de nascimento deve ser anterior a data atual.',
             ]);
-        */
+            
         
             $userRequest = $request['user'];
             if (isset($userRequest['profilePicture'])) {
@@ -74,9 +84,13 @@ class CompleteRegistrationController extends Controller
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
-            return redirect()->route('dashboard');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao completar o registro.');
+            //return response()->json(['status' => 200, 'message' => 'Registro completado com sucesso!']);
+        }
+        catch(ValidationException $e){
+            return response()->json(['status'=>500,'error' => $e->errors()]);
+        }
+         catch (\Exception $e) {
+            return redirect()->back()->json(['status'=>500,'error' => 'Erro ao completar o registro.']);
             //return response()->json(['error' => 'Erro ao completar o registro.'], 500);
 
         }
@@ -85,6 +99,19 @@ class CompleteRegistrationController extends Controller
     {
         try{
 
+        $request->validate([
+            'organization.CNPJ' => 'required|string|max:18',
+            'organization.organizationName' => 'required|string|max:255',
+            'organization.focusAreas' => 'required',
+            
+        ],[
+            'organization.CNPJ.required' => 'O campo CNPJ é obrigatório.',
+            'organization.CNPJ.max' => 'O campo CNPJ deve ter no máximo 14 caracteres.',
+            'organization.organizationName.required' => 'O campo nome da organização é obrigatório.',
+            'organization.organizationName.max' => 'O campo nome da organização deve ter no máximo 255 caracteres.',
+            'organization.focusAreas.required' => 'O campo áreas de atuação é obrigatório.',
+           
+        ]);
         $image = $request->input('organization.organizationProfilePicture');
         
         if (isset($image)) {
