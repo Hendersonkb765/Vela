@@ -56,9 +56,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth', 'verified',CheckUserRegistration::class,
-    CheckOsc::class
-])->name('dashboard');
+    ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class])->name('dashboard');
 
 Route::get('/settings', function () {
     return Inertia::render('VelaSocialLab/Profile/Settings');
@@ -131,8 +129,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation']);
-Route::get('validacao/{code}', [InvitationOscController::class,'validateInvitation']);
+Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation'])->middleware('auth');
+Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware('auth');
 
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
@@ -182,7 +180,6 @@ Route::post('/drive',function(Request $request){
         $driveFile = new File($oscId);
         $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
         }
-
     //$driveFile = new File($oscId);
    // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
     //dd($arquivo);
@@ -197,7 +194,7 @@ Route::get('/drive2',function(){
 Route::get('openai',function(){
     $openai = new OpenAi();
     $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-
+    
     return response()->json($response);
 });
 
