@@ -38,6 +38,8 @@ export default function ActivityForm({ onSubmit }) {
 
         setLoadingIa(true);
 
+
+
         try {
             const response = await fetch(`/reformular`, {
                 method: 'POST',
@@ -48,18 +50,43 @@ export default function ActivityForm({ onSubmit }) {
                 body: JSON.stringify({
                     description: data.activityDescription
                 }),
-            });
-
+            });  
             if (response.ok) {
                 const result = await response.json();
-                console.log(result)
-                setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
+                console.log(result);
+                // Supondo que o campo certo seja "message" ao invés de "rephrasedDescription"
+                setData('activityDescription', result.message); // Atualiza a descrição com a resposta da IA
             } else {
                 console.error('Erro ao reformular descrição.');
             }
         } catch (error) {
             console.error('Erro na requisição:', error);
         }
+
+
+
+        // try {
+        //     const response = await fetch(`/reformular`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Pega o token CSRF da meta tag
+        //         },
+        //         body: JSON.stringify({
+        //             description: data.activityDescription
+        //         }),
+        //     });
+
+        //     if (response.ok) {
+        //         const result = await response.json();
+        //         console.log(result)
+        //         setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
+        //     } else {
+        //         console.error('Erro ao reformular descrição.');
+        //     }
+        // } catch (error) {
+        //     console.error('Erro na requisição:', error);
+        // }
         // const response = await fetch(`/reformular/${data.activityDescription}`, {
         //     method: 'POST',
         //     headers: {
