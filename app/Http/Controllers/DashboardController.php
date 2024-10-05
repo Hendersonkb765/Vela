@@ -78,12 +78,12 @@ class DashboardController extends Controller
         $arrayTasks['tasksCompleted'] =$osc->task(); //$level->task->taskPending()->count();//Level::where('id',$currentLevel)->first()->task->where('status','completed')->count();
         $arrayTasks['tasksMax'] = $level->task->count(); //Level::where('id',$currentLevel)->first()->task->count();
         $googleToken = GoogleToken::where('osc_id',$osc->id);
-        if(!empty($googleToken)){
+        if(empty($googleToken)){
             $googleDrive = new GoogleDrive($osc->id);
-            empty($googleDrive) ? $googleDrive->createDefaultDirectories() : null;
+            $googleDrive = $googleDrive->getUserStorageQuota();
         }
         else{
-            $googleDrive = null;
+            $googleDrive = false;
         }
         
 
