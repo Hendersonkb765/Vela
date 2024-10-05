@@ -62,7 +62,6 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
         <div className='bg-gray-200 text-neutral-800 dark:text-gray-100 dark:bg-slate-900 p-2 rounded-full '>
             <GoLock className='w-6 h-6'/>
         </div>
-
         <a
             //as='button'
             //method='GET'
@@ -72,20 +71,8 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
             Entrar com o Google <FcGoogle className='w-6 h-6 rounded-full '></FcGoogle>
         </a>
         </>
-    }
-    return (
-        <div
-            className={`w-full h-16 sm:w-80 min-w-fit fullhd:w-96 sm:rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85`}
-        >
-            
-        {storageDrive ?
-            statusStorageDrive()
-            :
-            isPresident && logarDrive()
+
         }
-        
-        </div>
-    );
 };
 
 export default DriveInfo;
