@@ -71,10 +71,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
-
-
-
 });
+
 Route::middleware(['auth', CheckPresident::class])->group(function () {
     Route::get('auth/osc/redirect/google', function () {
         return Socialite::driver('google')

@@ -18,9 +18,11 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
     const currentTask = tasks.pending[0]; // array das informações da tarefa atual
     const OscLevel = level.currentLevel;
     const OscName = osc.fantasyName;
-    const Progress = tasks.completed.total / tasks.tasksMax; // (tasks feitas / total de tasks do level
-    const usedSpace = 5//storageDrive['storageUsage'];
-    const totalSpace = 10//storageDrive['storageLimit'];
+    const Progress = tasks.completed.total / tasks.tasksMax;
+
+    // (tasks feitas / total de tasks do level
+    //const usedSpace = 5//storageDrive['storageUsage'];
+    //const totalSpace = 10//storageDrive['storageLimit'];
 
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
@@ -36,7 +38,6 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
             </Link>
         );
     }
-
     return (
 
         <VelaSocialLayout
@@ -55,7 +56,8 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
                 </div>
                 <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
                     <AllTasks tasks={tasks} className="hidden sm:block"/>
-                    <DriveInfo storageDrive={!storageDrive} usedSpace={usedSpace} totalSpace={totalSpace}/>
+                    
+                    <DriveInfo storageDrive={storageDrive}  isPresident={user.roleInOrganization=='Presidente'?true :false}/>
                     {/* <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/> */}
                     <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>

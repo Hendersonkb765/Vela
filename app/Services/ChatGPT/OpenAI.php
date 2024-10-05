@@ -23,7 +23,7 @@ class OpenAI{
 
     }
 
-    public function chatGPT(string $systemMessage,string $userMessage,string $model='gpt-4o-mini'){
+    public function chatGPT(string $systemMessage,string $userMessage,string $model='gpt-3.5-turbo-0125'){
         try{
             $responde = $this->client->post('completions',[
                 'json' => [
