@@ -36,7 +36,7 @@ class ActivityController extends Controller
         //reformular descrição da atividade
         try{
             $openAi = new OpenAi();
-            $response = $openAi->chatGPT('Reformule a descrição da atividade',$request->description);
+            $response = $openAi->chatGPT('Reformule o seguinte texto:',$request->description);
             return response()->json($response);
         }
         catch(\Exception $e){

@@ -35,7 +35,7 @@ export default function ActivityForm({ onSubmit }) {
         setLoadingIa(true);
 
         try {
-            const response = await fetch(`/reformular/${data.activityDescription}`, {
+            const response = await fetch(`/reformular`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
