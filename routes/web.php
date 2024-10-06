@@ -85,6 +85,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
     Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
+    Route::get('/atividades/filtro-data={dateFrom}/{dateTo}','filterByDate')->name('activity.filterByDate');
 });
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
@@ -139,8 +140,6 @@ Route::get('/dashboardtest', function () {
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-Route::get('/registrar-atividade', [ActivityController::class,'create'])->name('activity.create');
-Route::post('/registrar-atividade', [ActivityController::class,'store'])->name('activity.store');
 
 /////////////// ROTAS PARA TESTES //////////////////////////
 Route::get('/teste',function(){
