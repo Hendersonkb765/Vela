@@ -17,7 +17,7 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
         >
             <Head title="Profile" />
 
-            <section className="w-screen sm:w-full pb-8 overflow-y-auto items-start flex flex-col-reverse sm:flex-row sm:justify-start sm:space-x-12 sm:py-8 sm:pb-0 sm:px-5">
+            <section className="mt-10 mb-16 lg:mb-0 lg:mt-0 w-screen sm:w-full pb-8 overflow-y-auto items-start flex flex-col-reverse sm:flex-row sm:justify-start sm:space-x-12 sm:py-8 sm:pb-0 sm:px-5">
                 <div className="w-screen mb-5 sm:w-2/3 h-fit sm:rounded-lg bg-white dark:bg-gray-800 space-y-6 sm:space-y-0 divide-y-2 divide-neutral-300/20 dark:divide-gray-200/5">  {/*// max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 */}
                     <div className="p-4 sm:p-8">
                         <UpdateProfileInformationForm
@@ -39,7 +39,7 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
                 <aside className='h-40 w-screen sm:w-1/3 sm:ml-auto pt-6 sm:pt-0'>
                     <div>
                         <h3 className='font-headers text-neutral-800 dark:text-gray-100 mb-2 px-4'>Meu armazenamento</h3>
-                        <DriveInfo storageDrive={false} usedSpace={usedSpace} totalSpace={totalSpace} />
+                        <DriveInfo storageDrive={true} usedSpace={usedSpace} totalSpace={totalSpace} />
                     </div>
 
                 </aside>

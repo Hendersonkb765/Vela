@@ -20,6 +20,7 @@ const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => 
                     style={{
                         position: 'absolute',
                         inset: 0,
+
                         borderRadius: '50%',
                         background: `conic-gradient(from 150deg, ${isDarkMode ? "#111827" : "#f0efed"} 0% 100%)`,
                     }}
