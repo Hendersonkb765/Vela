@@ -31,17 +31,21 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
-        if (isset($request['profilePicture'])) {
-            $imageData = $request['profilePicture'];
+        $profilePictureName = basename(Auth::user()->image_url);
+        if (isset( $request->user['profilePicture'])) {
+            $imageData = $request->user['profilePicture'];
             list($type, $imageData) = explode(';', $imageData);
             list(, $imageData) = explode(',', $imageData);
             $imageData = base64_decode($imageData);
-            $imageName = uniqid() . '.png';
-            Auth::user()->image_url = asset('storage/profile-photos/'.$imageName);
+
+            if(empty($profilePictureName)){
+                $profilePictureName = uniqid() . '.png';
+            }
             if (!Storage::disk('public')->exists('profile-photos')) {
                 Storage::disk('public')->makeDirectory('profile-photos');
             }
-            Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
+            Auth::user()->image_url = asset('storage/profile-photos/' . $profilePictureName);   
+            Storage::disk('public')->put('profile-photos/' . $profilePictureName, $imageData);
         }
 
         $request->user()->save();
