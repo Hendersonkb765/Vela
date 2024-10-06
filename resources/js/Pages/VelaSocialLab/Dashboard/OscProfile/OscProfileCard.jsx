@@ -2,6 +2,7 @@ import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import React, { useState } from 'react';
 import { IoMdMore, IoIosAdd} from "react-icons/io";
 import { CiImageOn } from "react-icons/ci";
+import AddMember from '@/FigmaComponents/AddMember/AddMember';
 
 
 
@@ -57,11 +58,11 @@ const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => 
 
 
             <div className='flex flex-col space-y-2'>
-                <h2 className='text-sm truncate font-headers sm:text-lg text-uppercase max-w-96 dark:text-gray-200 '>{OscName}</h2>
+                <h2 className='text-sm truncate font-headers sm:text-lg text-uppercase max-w-96 dark:text-gray-200'>{OscName}</h2>
                 <div className='flex space-x-2'>
-                    <PrimaryButton gray rounded className='sm:h-8 text-sm '><span className='hidden sm:block'>Editar Perfil</span> <IoMdMore className='w-6 h-6 sm:w-4 sm:h-4 text-sm'/></PrimaryButton>
+                    {/* <PrimaryButton  href={route('settings')} gray rounded className='sm:h-8 text-sm '><IoMdMore className='w-6 h-6 sm:w-4 sm:h-4 text-sm'/><span className='hidden sm:block'>Editar Perfil</span> </PrimaryButton> */}
                     {/* Provisorio */}
-                    <PrimaryButton gray rounded className='sm:!h-8 text-sm'><span className='hidden sm:block'>Adicionar Membro</span> <IoIosAdd className='w-6 h-6 sm:w-4 sm:h-4 text-sm'/></PrimaryButton>
+                    <AddMember />
                 </div>
             </div>
         </div>

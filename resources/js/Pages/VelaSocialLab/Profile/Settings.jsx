@@ -4,6 +4,7 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import DriveInfo from '../../../FigmaComponents/GoogleDrive/DriveInfo';
+import AddMemberCard from './Partials/AddMemberCard';
 
 export default function Settings({ auth, mustVerifyEmail, status }) {
     const usedSpace = 5//storageDrive['storageUsage'];
@@ -17,7 +18,7 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
         >
             <Head title="Profile" />
 
-            <section className="w-screen sm:w-full pb-8 overflow-y-scroll items-start flex flex-col-reverse sm:flex-row sm:justify-start sm:space-x-12 sm:py-8 sm:pb-0 sm:px-5">
+            <section className="w-screen sm:w-full  py-12 overflow-y-scroll items-start flex flex-col-reverse sm:flex-row sm:justify-start sm:space-x-12 sm:py-8 sm:pb-0 sm:px-5">
                 <div className="w-screen sm:w-2/3 h-fit sm:rounded-lg bg-white dark:bg-gray-800 space-y-6 sm:space-y-0 divide-y-2 divide-neutral-300/20 dark:divide-gray-200/5">  {/*// max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 */}
                     <div className="p-4 sm:p-8">
                         <UpdateProfileInformationForm
@@ -36,12 +37,12 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
                     </div>
                 </div>
 
-                <aside className='h-40 w-screen sm:w-1/3 sm:ml-auto pt-6 sm:pt-0'>
+                <aside className='h-40 flex-col space-y-4 w-screen sm:w-1/3 sm:ml-auto pt-6 sm:pt-0'>
                     <div>
                         <h3 className='font-headers text-neutral-800 dark:text-gray-100 mb-2 px-4'>Meu armazenamento</h3>
                         <DriveInfo storageDrive={false} usedSpace={usedSpace} totalSpace={totalSpace} />
                     </div>
-
+                    <AddMemberCard />
                 </aside>
             </section>
         </VelaSocialLayout>
