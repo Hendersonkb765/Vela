@@ -14,13 +14,14 @@ const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => 
 
 
     return (
-        <div className='sm:h-52 bg-white flex items-center p-4 space-x-4  fullhd:p-8 fullhd:space-x-12 cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-800/85 '>
+        <div className='rounded-md sm:h-52 bg-white flex items-center p-4 space-x-4  fullhd:p-8 fullhd:space-x-12 cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-800/85 '>
             <div className="w-20 h-20 sm:w-28 sm:h-28 relative flex items-center justify-center rounded-full cursor-pointer fullhd:scale-125">
                 {/* Fundo do círculo sem o glow */}
                 <div
                     style={{
                         position: 'absolute',
                         inset: 0,
+
                         borderRadius: '50%',
                         background: `conic-gradient(from 150deg, ${isDarkMode ? "#111827" : "#f0efed"} 0% 100%)`,
                     }}

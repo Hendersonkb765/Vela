@@ -46,10 +46,10 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
         >
             <Head title="Dashboard"/>
             <DashboardPath titleTask={currentTask.title}/>
-            <section className='h-screen sm:p-4 gap-4 flex flex-col sm:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 px-2 '>
-                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
+            <section className='w-full h-screen p-4 gap-4 flex flex-col md:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 px-2 '>
+                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full md:w-1/2 sm:min-w-fit '>
                     <OscProfileCard OscProfilePicture={imageUrlOsc}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
-                    <div className='w-full sm:min-w-fit flex flex-row justify-center sm:justify-between fullhd:justify-start space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
+                    <div className='w-full md:min-w-fit flex flex-row justify-between fullhd:justify-start space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
                         <SubmissionFailed NumberOfFails={Fails} />
                         <RecordActivity />
                     </div>
