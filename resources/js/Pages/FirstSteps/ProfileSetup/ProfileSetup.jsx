@@ -125,7 +125,7 @@ export default function ProfileSetup() {
                         <h1 className="text-4xl font-bold font-headers capitalize dark:text-white">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
                         <p className="font-body text-base dark:text-gray-300">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
                     </div>
-                    <PrimaryButton href={route("dashboard")} center={true} >OK</PrimaryButton>
+                    <PrimaryButton href={route("dashboard")} center={true}>OK</PrimaryButton>
                 </div>
 
             )}
