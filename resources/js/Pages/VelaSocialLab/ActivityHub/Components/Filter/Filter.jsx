@@ -15,6 +15,7 @@ export default function Filter() {
     const { data, setData } = useForm({
         name: '',
         startDate: '',
+        
         endDate: '',
     });
 
