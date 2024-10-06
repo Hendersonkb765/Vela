@@ -30,9 +30,9 @@ class OscTest extends TestCase
             'fantasy_name' => 'Nome Fantasia',
             'presidents_name' => $user->name,
             'foundation_date' => '2000-01-01',
-            'banner_url' => 'http://example.com/banner.jpg',
+            'banner_url' => 'https://example.com/banner.jpg',
             'legal_nature' => 'Associação',
-            'statute_url' => 'http://example.com/statute.pdf',
+            'statute_url' => 'https://example.com/statute.pdf',
             'cnae_main' => '1234567',
         ]);
         

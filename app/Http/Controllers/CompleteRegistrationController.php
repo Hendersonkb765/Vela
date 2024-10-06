@@ -157,12 +157,7 @@ class CompleteRegistrationController extends Controller
                 $osc->targetAudience()->attach($i);
             }
         }
-        
-        $osc->save();
-
-        
-
-        
+        $osc->save();   
         }
         catch(\Exception $e){
             dd($e);

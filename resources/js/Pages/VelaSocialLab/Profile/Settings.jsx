@@ -21,7 +21,7 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
             <section className="mt-10 mb-16 lg:mb-0 lg:mt-0 w-screen sm:w-full pb-8 overflow-y-auto items-start flex flex-col-reverse sm:flex-row sm:justify-start sm:space-x-12 sm:py-8 sm:pb-0 sm:px-5">
                 <div className="w-screen mb-5 sm:w-2/3 h-fit sm:rounded-lg bg-white dark:bg-gray-800 space-y-6 sm:space-y-0 divide-y-2 divide-neutral-300/20 dark:divide-gray-200/5">  {/*// max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 */}
                     <div className="p-4 sm:p-8">
-                        <UpdateProfileInformationForm
+                        <UpdateProfileInformationForm rofileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
                             className="max-w-xl"

@@ -27,12 +27,12 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/auth/callback/google',
+        'redirect' => env('GOOGLE_DRIVE_CLIENT_SECRET').'/auth/callback/google',
     ],
     'google_drive' => [
         'client_id' => env('GOOGLE_DRIVE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/auth/drive/callback/google'
+        'redirect' => env('APP_URL').'/auth/drive/callback/google'
     ],
     'openai' => [
         'api_key' => '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',

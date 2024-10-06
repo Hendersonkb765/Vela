@@ -43,6 +43,19 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao reformular descrição!']);
         }
     }
+    public function filterByDate($dateFrom,$dateTo){
+        //detalhes da atividade
+        try{
+            if(!empty($dateFrom) && !empty($dateTo)){
+                $activities = Auth::user()->osc->first()->activities();
+                $activitiesFilterDate =$activities->whereBetween('date',[$dateFrom,$dateTo])->get();
+                return response()->json(['status'=> 200,'activities' => $activitiesFilterDate]);
+            }
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
+        }
+    }
     public function filterByName($title){
         //detalhes da atividade
 
@@ -71,51 +84,57 @@ class ActivityController extends Controller
             'activityHourStart' => 'required|date_format:H:i|before:activityHourEnd',
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
-
         ]);
-        try{
+       // try{
 
-            $oscId = Auth::user()->osc->first();
+            $osc = Auth::user()->osc->first();
 
-            $fileDrive = new File($oscId->id);
-            $folder = new Folder($oscId->id);
+            $fileDrive = new File($osc->id);
+            $folder = new Folder($osc->id);
 
-            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$oscId->id)->first();
+            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$osc->id)->first();
             
-            $folder = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
+            if(!empty($googleDriveFolder)){
 
-            $webViewLink = $fileDrive->create($request->activityDate,$request->file('activityThumbnail'),$folder->id,true)['webViewLink'];
-            /* 
-            MULTIPLOS ARQUIVOS
-            foreach($request->file('database') as $fileDatabase){
-            $driveFile = new File($oscId);
-            $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
+                $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
+                $webViewLink = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true)['webViewLink'];
+                foreach($request->file('activityImages') as $fileDatabase){
+                $driveFile = new File($osc->id);
+                $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
+                }
+                $folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
+                !empty($folderActivityId) ? $folderActivityId = $folderActivityId->id : $folderActivityId = null; 
+                
+                Activity::create([
+                    'title' => $request->activityTitle,
+                    'description' => $request->activityDescription,
+                    'date' => $request->activityDate,
+                    'hour_start' => $request->activityHourStart,
+                    'hour_end' => $request->activityHourEnd,
+                    'status' => $request->activityStatus,
+                    'audience' => $request->activityAudience,
+                    'thumbnail_photos_url' => $webViewLink,
+                    'folder_photos_id' => $folderActivityId,
+                    'send_by' => Auth::user()->name,
+                    'user_id' => Auth::user()->id,
+                    'osc_id' => Auth::user()->osc->first()->id
+                ]);
+         
             }
-            */
-            Activity::create([
-                'title' => $request->activityTitle,
-                'description' => $request->activityDescription,
-                'date' => $request->activityDate,
-                'hour_start' => $request->activityHourStart,
-                'hour_end' => $request->activityHourEnd,
-                'status' => $request->activityStatus,
-                'audience' => $request->activityAudience,
-                'thumbnail_photos_url' => $webViewLink,
-                'folder_photos_id' => 1,
-                'send_by' => Auth::user()->name,
-                'user_id' => Auth::user()->id,
-                'osc_id' => Auth::user()->osc->first()->id
-            ]);
+            else{
+                return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
+            }
             
             return response()->json(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-
+/*
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
         }
-
-
+*/
     }
+   
+
     public function update(Request $request,$id){
         try{
             $activity = Activity::find($id);

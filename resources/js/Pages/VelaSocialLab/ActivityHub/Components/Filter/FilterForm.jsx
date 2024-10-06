@@ -1,12 +1,35 @@
 // FilterForm.jsx
 import DateInput from "@/FigmaComponents/Inputs/DateInput";
 import SearchInput from "@/FigmaComponents/Inputs/SearchInput";
-
+import axios from "axios";
 export default function FilterForm({ data, setData, minDate, maxDate, className='' }) {
+
+    console.log(data);
     const handleSearchChange = (value) => {
         setData('name', value);
-    };
 
+    };
+    const filterDateFrom = (e) => {
+        setData('startDate', e.target.value);
+        if(data.startDate!='' && data.startDate!=''){
+            fetchData(data.startDate, data.endDate);
+        }
+    };
+    const filterDateTo = (e) => {
+        setData('endDate', e.target.value);
+        if(data.endDate!='' && data.endDate!=''){
+            fetchData(data.startDate, data.endDate);
+        }
+    };
+    const fetchData = async(startDate,endDate) => {
+        try{
+            const response = await axios.get(route('activity.filterByDate', {startDate: startDate, endDate: endDate}));
+            alert(response.status);
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
     return (
         <div className={`bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center p-4 space-x-16 fullhd:h-28 ${className}`}>
             <div className="flex flex-col space-y-1">
@@ -26,7 +49,7 @@ export default function FilterForm({ data, setData, minDate, maxDate, className=
                         className="mt-1 block !min-w-48 h-10"
                         autoComplete="startDate"
                         isFocused={true}
-                        onChange={(e) => setData('startDate', e.target.value)}
+                        onChange={filterDateFrom}
                         minDate={minDate}
                         maxDate={maxDate}
                     />
@@ -41,7 +64,7 @@ export default function FilterForm({ data, setData, minDate, maxDate, className=
                         className="mt-1 block !min-w-48 h-10"
                         autoComplete="endDate"
                         isFocused={true}
-                        onChange={(e) => setData('endDate', e.target.value)}
+                        onChange={filterDateTo}
                         minDate={minDate}
                         maxDate={maxDate}
                     />

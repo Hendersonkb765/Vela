@@ -20,7 +20,7 @@ export default function ActivityForm({ onSubmit }) {
     const [activityImages, setPreviewImages] = useState('');
     const [showPopup, setShowPopup] = useState(false);
 
-    const minDate = "1900-01-01";
+    const minDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];//"1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
     const { data, setData, processing, post, progress } = useForm({
