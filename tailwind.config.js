@@ -80,6 +80,16 @@ export default {
                 '200%': '200%',
             },
             
+            keyframes: {
+              fly: {
+                '0%': { transform: 'translate(0, 0) rotate(0deg)' },
+                '50%': { transform: 'translate(50px, -30px) rotate(10deg)' },
+                '100%': { transform: 'translate(100px, 0) rotate(20deg)' },
+              },
+            },
+            animation: {
+              fly: 'fly 3s ease-in-out infinite',
+            },
 
         },
     },
