@@ -51,18 +51,20 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 />
                 <div className='sm:px-4'>
                     <InputLabel htmlFor="name" value="Nome" />
-
                     <TextInput
                         id="name"
                         className="mt-1 block w-full h-12 sm:h-auto"
                         value={data.user.name}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('user', {
+                            ...data.user,
+                            name: e.target.value
+                        })}
                         required
                         isFocused
                         autoComplete="name"
                     />
 
-                        {/* errors.user.name */}
+                    {/* errors.user.name */}
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
@@ -74,7 +76,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData('user.email', e.target.value)}
                         required
                         autoComplete="username"
                     />
