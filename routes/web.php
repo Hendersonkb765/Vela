@@ -134,7 +134,7 @@ Route::middleware('auth')->group(function () {
 
 Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
 Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
-
+Route::get('membros/convites', [InvitationOscController::class,'invitationList'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
 })->name('dashboardtest');
