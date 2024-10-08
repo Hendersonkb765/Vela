@@ -13,7 +13,7 @@ const AddMemberModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('invitation.send', {
+        post(route('invitation.send'), {
             onSuccess: () => {
                 setData('Invitemail', '');
             },
