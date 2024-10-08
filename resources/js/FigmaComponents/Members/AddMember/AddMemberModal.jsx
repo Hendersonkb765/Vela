@@ -1,10 +1,10 @@
 import { useForm } from "@inertiajs/react";
 import PrimaryButton from "../../Button/PrimaryButton";
 import { GoPersonAdd, GoX, GoPaperAirplane  } from "react-icons/go";
-import InputLabel from "../../Inputs/InputLabel";
-import TextInput from "../../Inputs/TextInput";
-import InputError from "../../Inputs/InputError";
 import SecondaryIconButton from "../../Button/SecondaryIconButton";
+import TextInput from "@/FigmaComponents/Inputs/TextInput";
+import InputLabel from "@/FigmaComponents/Inputs/InputLabel";
+import InputError from "@/FigmaComponents/Inputs/InputError";
 
 const AddMemberModal = ({ isOpen, onClose }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -37,7 +37,7 @@ const AddMemberModal = ({ isOpen, onClose }) => {
                     </p>
                     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                         <div>
-                            <InputLabel htmlFor="Invitemail" value="" />
+                            <InputLabel htmlFor="Invitemail" />
                             <TextInput
                                 id="Invitemail"
                                 type="email"
