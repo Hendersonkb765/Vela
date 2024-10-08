@@ -85,15 +85,17 @@ class CompleteRegistrationController extends Controller
                 $this->createFirstOsc($request);
             }
             //return response()->json(['status' => 200, 'message' => 'Registro completado com sucesso!']);
+       
         }
         catch(ValidationException $e){
             return response()->json(['status'=>500,'error' => $e->errors()]);
         }
          catch (\Exception $e) {
-            return redirect()->back()->json(['status'=>500,'error' => 'Erro ao completar o registro.']);
+            return response()->json(['status'=>500,'error' => 'Erro ao completar o registro.']);
             //return response()->json(['error' => 'Erro ao completar o registro.'], 500);
 
         }
+        
     }
     public function createFirstOsc(Request $request)
     {

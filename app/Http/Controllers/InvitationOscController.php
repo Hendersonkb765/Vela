@@ -7,45 +7,51 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Mail\InvitationSender; // Import the InvitationSender class
+use App\Models\InvitationOsc;
 use Illuminate\Support\Facades\Mail; // Import the Mail facade
 use Illuminate\Support\Str; // Import the Str class
+use Inertia\Inertia; // Import the Inertia facade
 
 class InvitationOscController extends Controller
 {
     //
 
-    public function sendInvitation($mail){
-        
-        $user = Auth::user();
+    public function sendInvitation(Request $request){
 
+        $user = Auth::user();
         $osc = $user->osc->first();
-        $randomcode = Str::random(32);
+        $randomcode = hash('sha256', Str::random(60));
         $linkInvitation = url('/validacao/'.$randomcode.'/'.'id='.$osc->id);
-        Cache::put('invitation_code', [$randomcode,$osc->id], now()->addMinutes(30));
+        InvitationOsc::updateOrCreate(
+            ['email'=>$request->Invitemail,],
+            [
+            'email'=>$request->Invitemail,
+            'token' => $randomcode, 
+            'osc_id' =>$osc->id,
+            'status' => 'pending',
+            'expires_at' => now()->addMinutes(100)
+        ]);
            
-        Mail::to($mail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+        Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
 
          
 
         return response()->json(['status'=> 200,'message' => 'Convite enviado com sucesso!']);
         
-
-
     }
     public function validateInvitation($code,$oscId){
 
         try{
-            $invitationCode = Cache::get('invitation_code')[0];
+            if(InvitationOsc::where('token',$code)){
 
-            if($code == $invitationCode){
-
-                $osc = Osc::find($oscId);
-                $osc->user()->attach(Auth::user()->id);
-                return redirect()->route('dashboard');
+                    $osc = Osc::find($oscId);
+                    $osc->user()->attach(Auth::user()->id);
+                    return redirect()->route('dashboard');               
             }
             else{
-                echo 'Código de convite inválido';
+                return response()->json(['status'=> 500,'message' => 'Convite inválido!']);
             }
+            
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao validar convite!']);
