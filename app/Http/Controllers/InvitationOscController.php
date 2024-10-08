@@ -59,4 +59,8 @@ class InvitationOscController extends Controller
         
         
     }
+     public function invitationList(){
+        $invitaionOsc = InvitationOsc::where('osc_id',Auth::user()->osc->first()->id)->get();
+        return redirect()->route('invitation.list',['invitations' => $invitaionOsc]); 
+    }
 }

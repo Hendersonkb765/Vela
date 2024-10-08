@@ -16,7 +16,7 @@ class DeleteExpiredInvitations
      */
     public function handle(Request $request, Closure $next): Response
     {
-        DB::table('invitation_oscs')->where('expires_at','<',now())->delete();
+        DB::table('invitation_oscs')->where('expires_at','<',now())->update(['status'=>'expired']);
         return $next($request);
     }
 }
