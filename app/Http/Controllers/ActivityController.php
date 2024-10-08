@@ -85,7 +85,7 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
-        try{
+      //  try{
 
             $osc = Auth::user()->osc->first();
 
