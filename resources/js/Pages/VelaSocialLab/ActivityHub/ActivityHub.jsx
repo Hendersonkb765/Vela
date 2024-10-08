@@ -44,7 +44,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
                     <Filter />
                     <aside className='flex h-full absolute mx-4 border-l-2 border-primary dark:border-primary-200 '></aside>
                     <div className='px-4 lg:px-12 flex flex-col space-y-12 pb-8'>
-                        {activityData.map((activity) => (
+                        {activities.map((activity) => (
                             <ActivityCard key={activity.id} data={activity}/>
                         ))}
                     </div>
