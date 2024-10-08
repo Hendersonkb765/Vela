@@ -85,7 +85,7 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
-       // try{
+        try{
 
             $osc = Auth::user()->osc->first();
 
@@ -97,28 +97,33 @@ class ActivityController extends Controller
             if(!empty($googleDriveFolder)){
 
                 $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
-                $webViewLink = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true)['webViewLink'];
-                foreach($request->file('activityImages') as $fileDatabase){
-                $driveFile = new File($osc->id);
-                $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
+                $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
+                if($fileCreated ){
+                    $fileCreated = $fileCreated['webViewLink'];
+                    foreach($request->file('activityImages') as $fileDatabase){
+                        $driveFile = new File($osc->id);
+                        $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
+                        }
+                        $folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
+                        !empty($folderActivityId) ? $folderActivityId = $folderActivityId->id : $folderActivityId = null; 
+                        
+                        Activity::create([
+                            'title' => $request->activityTitle,
+                            'description' => $request->activityDescription,
+                            'date' => $request->activityDate,
+                            'hour_start' => $request->activityHourStart,
+                            'hour_end' => $request->activityHourEnd,
+                            'status' => $request->activityStatus,
+                            'audience' => $request->activityAudience,
+                            'thumbnail_photos_url' => $webViewLink,
+                            'folder_photos_id' => $folderActivityId,
+                            'send_by' => Auth::user()->name,
+                            'user_id' => Auth::user()->id,
+                            'osc_id' => Auth::user()->osc->first()->id
+                        ]);
+
                 }
-                $folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
-                !empty($folderActivityId) ? $folderActivityId = $folderActivityId->id : $folderActivityId = null; 
-                
-                Activity::create([
-                    'title' => $request->activityTitle,
-                    'description' => $request->activityDescription,
-                    'date' => $request->activityDate,
-                    'hour_start' => $request->activityHourStart,
-                    'hour_end' => $request->activityHourEnd,
-                    'status' => $request->activityStatus,
-                    'audience' => $request->activityAudience,
-                    'thumbnail_photos_url' => $webViewLink,
-                    'folder_photos_id' => $folderActivityId,
-                    'send_by' => Auth::user()->name,
-                    'user_id' => Auth::user()->id,
-                    'osc_id' => Auth::user()->osc->first()->id
-                ]);
+
          
             }
             else{
