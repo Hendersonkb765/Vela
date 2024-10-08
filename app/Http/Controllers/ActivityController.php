@@ -64,7 +64,7 @@ class ActivityController extends Controller
 
                 $activities = Auth::user()->osc->first()->activities();
                 $activitiesFilter =$activities->where('title','like',$title . '%')->get();
-                return response()->json(['status'=> 200,'activities' => $activitiesFilter]);
+                return redirect()->back()->with(['status'=> 200,'activities' => $activitiesFilter]);
             }
         }
         catch(\Exception $e){
@@ -98,8 +98,9 @@ class ActivityController extends Controller
 
                 $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
                 $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
-                if($fileCreated ){
+                if($fileCreated){
                     $webViewLink = $fileCreated['webViewLink'];
+                    if(!empty($request->file('activityImages'))){
                     foreach($request->file('activityImages') as $fileDatabase){
                         $driveFile = new File($osc->id);
                         $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
@@ -121,6 +122,7 @@ class ActivityController extends Controller
                             'user_id' => Auth::user()->id,
                             'osc_id' => Auth::user()->osc->first()->id
                         ]);
+                    }
 
                 }
 
@@ -130,7 +132,7 @@ class ActivityController extends Controller
                 return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
             }
             
-            return response()->json(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
+            return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
 /*
         }
         catch(\Exception $e){

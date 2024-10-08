@@ -266,6 +266,7 @@ export default function ActivityForm({ onSubmit }) {
                         setTimeout(() => {
                             setShowPopup(false); // Fecha o modal
                         }, 1900);
+                        window.location.reload();
                     },
                     onError: (errors) => {
                         if (errors.response) {
