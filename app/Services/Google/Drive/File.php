@@ -55,7 +55,7 @@ class File extends GoogleDrive
                             'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
                             'file_extension' => $fileDatabase->getClientOriginalExtension(),
                             'web_content_link' => $file->webContentLink,
-                            'web_view_link' => $this->createUrlView($file->id,$fileDatabase)
+                            'web_view_link' => $this->createUrlView($file->id,$typeFile)
                         ]);
                     }
                     else{
