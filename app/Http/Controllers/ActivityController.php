@@ -99,7 +99,7 @@ class ActivityController extends Controller
                 $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
                 $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
                 if($fileCreated ){
-                    $fileCreated = $fileCreated['webViewLink'];
+                    $webViewLink = $fileCreated['webViewLink'];
                     foreach($request->file('activityImages') as $fileDatabase){
                         $driveFile = new File($osc->id);
                         $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
