@@ -13,7 +13,7 @@ const AddMemberModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post();
+        post(route('invitation.send'));
     };
 
     return (
