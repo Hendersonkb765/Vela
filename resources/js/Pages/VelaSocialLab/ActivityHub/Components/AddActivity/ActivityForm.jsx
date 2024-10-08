@@ -28,7 +28,7 @@ export default function ActivityForm({ onSubmit }) {
     const [showPopup, setShowPopup] = useState(false);
     const [loadingActivity, setLoadingActivity] = useState(false);
 
-    const minDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];//"1900-01-01";
+    const minDate = "1900-01-01"; //"1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
     const { data, setData, processing, post, progress } = useForm({
@@ -58,7 +58,7 @@ export default function ActivityForm({ onSubmit }) {
                 body: JSON.stringify({
                     description: data.activityDescription
                 }),
-            });  
+            });
             if (response.ok) {
                 const result = await response.json();
                 console.log(result);

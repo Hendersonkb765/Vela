@@ -1,4 +1,4 @@
-import PrimaryButton from "../Button/PrimaryButton";
+import PrimaryButton from "../../Button/PrimaryButton";
 import { GoPersonAdd } from "react-icons/go";
 import AddMemberModal from "./AddMemberModal";
 import { useState } from "react";

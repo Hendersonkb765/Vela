@@ -1,10 +1,10 @@
 import { useForm } from "@inertiajs/react";
-import PrimaryButton from "../Button/PrimaryButton";
+import PrimaryButton from "../../Button/PrimaryButton";
 import { GoPersonAdd, GoX, GoPaperAirplane  } from "react-icons/go";
-import InputLabel from "../Inputs/InputLabel";
-import TextInput from "../Inputs/TextInput";
-import InputError from "../Inputs/InputError";
-import SecondaryIconButton from "../Button/SecondaryIconButton";
+import InputLabel from "../../Inputs/InputLabel";
+import TextInput from "../../Inputs/TextInput";
+import InputError from "../../Inputs/InputError";
+import SecondaryIconButton from "../../Button/SecondaryIconButton";
 
 const AddMemberModal = ({ isOpen, onClose }) => {
     const { data, setData, post, processing, errors } = useForm({
@@ -13,7 +13,11 @@ const AddMemberModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('invitation.send'));
+        post('invitation.send', {
+            onSuccess: () => {
+                setData('Invitemail', '');
+            },
+        });
     };
 
     return (
