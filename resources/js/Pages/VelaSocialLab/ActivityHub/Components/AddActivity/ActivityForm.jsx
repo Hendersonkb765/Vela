@@ -8,6 +8,13 @@ import { useForm } from '@inertiajs/react';
 import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 import { GoZap, GoTrash } from "react-icons/go";
 import PrimaryIconButton from '@/FigmaComponents/Button/PrimaryIconButton';
+import { FaRegPaperPlane } from "react-icons/fa";
+import { GoCheckCircleFill } from "react-icons/go";
+import { GoXCircleFill } from "react-icons/go";
+
+
+
+
 
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
@@ -19,6 +26,7 @@ export default function ActivityForm({ onSubmit }) {
     const [loadingIa, setLoadingIa] = useState(false)
     const [activityImages, setPreviewImages] = useState('');
     const [showPopup, setShowPopup] = useState(false);
+    const [loadingActivity, setLoadingActivity] = useState(false);
 
     const minDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];//"1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
@@ -238,24 +246,63 @@ export default function ActivityForm({ onSubmit }) {
         setStep(step - 1);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validação final antes de enviar
         if (data.activityThumbnail) {
-            post(route('activity.store'), {
-                data: data,
-                onFinish: () => {
-                    setImgSrc(''); // Limpa o estado da imagem
-                },
-                onAfter: () => {
-                    window.location.reload();
-                    setShowPopup(true); // Exibe o popup
-                },
-            });
+            setLoadingActivity(true); // Ativa o efeito de loading
+
+            try {
+                // Faz a requisição usando post (Inertia.js ou seu método específico)
+                await post(route('activity.store'), {
+                    data: data,
+                    onFinish: () => {
+                        setImgSrc(''); // Limpa o estado da imagem
+                        setLoadingActivity(false); // Desativa o efeito de loading
+                    },
+                    onSuccess: () => {
+                        setShowPopup(true); // Exibe o popup se deu certo
+
+                        setTimeout(() => {
+                            setShowPopup(false); // Fecha o modal
+                        }, 1900);
+                    },
+                    onError: (errors) => {
+                        if (errors.response) {
+                            // Se houver uma resposta JSON com erro
+                            const errorData = errors.response.data;
+                            console.error('Erro do servidor:', errorData);
+                            setErrors(errorData); // Exibe o erro na tela (se necessário)
+                        } else {
+                            console.error('Erro desconhecido:', errors);
+                        }
+                        // setErrors(errors); // Define os erros se houver
+                        setLoadingActivity(false); // Desativa o loading ao receber o erro
+                    },
+                });
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
+                setLoadingActivity(false); // Desativa o loading em caso de erro
+            }
         } else {
             setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
         }
+
+        // Validação final antes de enviar
+        // if (data.activityThumbnail) {
+        //     post(route('activity.store'), {
+        //         data: data,
+        //         onFinish: () => {
+        //             setImgSrc(''); // Limpa o estado da imagem
+        //         },
+        //         onAfter: () => {
+        //             window.location.reload();
+        //             setShowPopup(true); // Exibe o popup
+        //         },
+        //     });
+        // } else {
+        //     setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
+        // }
     };
 
     return (
@@ -438,15 +485,74 @@ export default function ActivityForm({ onSubmit }) {
                     </div>
                 </>
             )}
+            {loadingActivity &&(
+                <>
+                
+                    <div className="absolute flex justify-center items-center top-0 right-0 z-10 w-full h-full bg-gray-800 bg-opacity-50 dark:bg-opacity-70 ">
+
+                    <div className="flex flex-col gap-2 items-center justify-center h-screen">
+                        <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
+                        <p className="text-primary font-medium ">Carregando...</p>
+                    </div>
+
+                    </div>
+
+                </>
+            )}
+
+            {Object.keys(errors).length > 0 && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
+                    <strong className="font-bold">Erro:</strong>
+                    <ul className="mt-2 list-disc list-inside">
+                    {Object.entries(errors).map(([field, errorMessages]) => (
+                        <li key={field}>
+                        {field}: {Array.isArray(errorMessages) ? errorMessages.join(', ') : errorMessages}
+                        </li>
+                    ))}
+                    </ul>
+                </div>
+            )}
+
+            {Object.keys(errors).length > 0 && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
+                        <div className="flex gap-2 items-center">
+
+                            <GoXCircleFill className="text-6xl text-danger"/>
+                            <h2 className="text-3xl font-semibold">Erro</h2>
+
+                        </div>
+                        <p>Erro ao enviar atividade:</p>
+                        <ul className="mt-2 list-disc list-inside">
+                            {Object.entries(errors).map(([field, errorMessages]) => (
+                                <li key={field}>
+                                {field}: {Array.isArray(errorMessages) ? errorMessages.join(', ') : errorMessages}
+                                </li>
+                            ))}
+                        </ul>
+
+                        
+                        <button onClick={() => setErrors({})} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
-                        <h2 className="text-xl font-semibold">Sucesso!</h2>
-                        <p>A atividade foi criada com sucesso.</p>
-                        <button onClick={() => setShowPopup(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+                        <div className="flex gap-2 items-center">
+
+                            <GoCheckCircleFill className="text-6xl text-success"/>
+                            <h2 className="text-3xl font-semibold">Sucesso!</h2>
+
+                        </div>
+
+                        
+                        {/* <button onClick={() => setShowPopup(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
                             Fechar
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             )}
