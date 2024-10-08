@@ -324,7 +324,7 @@ export default function ActivityForm({ onSubmit }) {
                     </div>
                     <div className="mb-4">
                         <div className="flex justify-between">
-                            <InputLabel onClick={handleNextStep}>Descrição</InputLabel>
+                            <InputLabel>Descrição</InputLabel>
                             {/* <p onClick={handleTextIa} className={`transition-colors flex gap-1 items-center text-primary hover:text-primary-100 cursor-pointer text-sm font-medium ${loadingIa && "bg-clip-text text-transparent bg-[length:200%_200%] bg-gradient-to-r from-blue-500 via-teal-400 to-purple-700 animate-gradient-move"}`} > <GoZap strokeWidth="0.7" className={` ${loadingIa&&"hidden"}`}/>{loadingIa?"Carregando...":"Melhorar com IA"}</p> */}
                             <IAEnhancer onClick={handleTextIa} loading={loadingIa}/>
 
