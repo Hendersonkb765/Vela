@@ -10,6 +10,7 @@ const AddMemberCard = () => {
     // Função para abrir e fechar o modal
     const openModal = () => {
         setIsModalOpen(true);
+        get(route('invitation.list'));
     };
 
     // Função para fechar o modal

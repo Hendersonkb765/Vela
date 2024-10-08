@@ -15,7 +15,6 @@ const ManageTeamMembers = ({ isOpen, onClose, children }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("batata")
         post(route('invitation.send'), {
             onSuccess: () => {
                 setData('Invitemail', '');
