@@ -6,7 +6,7 @@ import { GoLock } from 'react-icons/go';
 
 const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=false }) => {
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
-    
+
     if(storageDrive){
         usedSpace = storageDrive.storageUsage;
         totalSpace = storageDrive.storageLimit;
@@ -28,11 +28,11 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
     }
     console.log(storageDrive);
 
-    
+
     const statusStorageDrive = ()=>{
-        return( 
+        return(
         <div
-        className="{w-full h-16 sm:w-80 min-w-fit fullhd:w-96 sm:rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85}"
+        className="{w-full h-16 lg:w-80 min-w-fit fullhd:w-96 rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85 }"
     >
         <>
         <img src="../storage/Images/google-drive.png" alt="Drive Icon" className='w-8 h-8' />
@@ -65,7 +65,7 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
     }
     const logarDrive = ()=>{
         return (<div
-        className="{w-full h-16 sm:w-80 min-w-fit fullhd:w-96 sm:rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85}"
+        className="{w-full h-16 lg:w-80 min-w-fit fullhd:w-96 rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85}"
     ><>
         <div className='bg-gray-200 text-neutral-800 dark:text-gray-100 dark:bg-slate-900 p-2 rounded-full '>
             <GoLock className='w-6 h-6'/>
@@ -85,8 +85,8 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
     return <>
         { storageDrive ? statusStorageDrive() : logarDrive()  };
     </>
-  
-    
+
+
 };
 
 export default DriveInfo;

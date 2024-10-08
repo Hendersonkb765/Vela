@@ -2,7 +2,7 @@ import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import React, { useState } from 'react';
 import { IoMdMore, IoIosAdd} from "react-icons/io";
 import { CiImageOn } from "react-icons/ci";
-import AddMember from '@/FigmaComponents/AddMember/AddMember';
+import AddMember from '@/FigmaComponents/Members/AddMember/AddMember';
 
 
 
