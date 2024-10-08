@@ -25,6 +25,7 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Http\Middleware\DeleteExpiredInvitations;
 use App\Models\Activity;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleDriveFile;
@@ -35,6 +36,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; // Add this line
 
 use App\Services\ChatGPT\OpenAi;
+use Faker\Guesser\Name;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -130,8 +132,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('convite/{mail}', [InvitationOscController::class,'sendInvitation'])->middleware('auth');
-Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware('auth');
+Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
+Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
 
 Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
@@ -183,6 +185,12 @@ Route::post('/drive',function(Request $request){
    // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
     //dd($arquivo);
 })->name('formulario');
+Route::get('/views',function(){
+    $oscid = Auth::user()->osc->first()->id;
+    $driveFile = new File($oscid);
+    $arquivos = $driveFile->create('teste',null,false);
+    dd($arquivos);
+});
 Route::get('/drive2',function(){
     $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
     dd($fileDrive);
