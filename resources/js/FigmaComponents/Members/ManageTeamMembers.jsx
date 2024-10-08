@@ -21,7 +21,7 @@ const ManageTeamMembers = ({ isOpen, onClose, children }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('invitation.send', {
+        post(route('invitation.send'), {
             onSuccess: () => {
                 setData('Invitemail', '');
             },
