@@ -27,6 +27,7 @@ export default function ActivityForm({ onSubmit }) {
     const [activityImages, setPreviewImages] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [loadingActivity, setLoadingActivity] = useState(false);
+    const [registerError, setRegisterError] = useState(false);
 
     const minDate = "1900-01-01"; //"1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
@@ -45,8 +46,6 @@ export default function ActivityForm({ onSubmit }) {
     const handleTextIa = async () => {
 
         setLoadingIa(true);
-
-
 
         try {
             const response = await fetch(`/reformular`, {
@@ -274,6 +273,7 @@ export default function ActivityForm({ onSubmit }) {
                             const errorData = errors.response.data;
                             console.error('Erro do servidor:', errorData);
                             setErrors(errorData); // Exibe o erro na tela (se necessário)
+                            setRegisterError(true)
                         } else {
                             console.error('Erro desconhecido:', errors);
                         }
@@ -501,7 +501,7 @@ export default function ActivityForm({ onSubmit }) {
                 </>
             )}
 
-            {Object.keys(errors).length > 0 && (
+            {/* {Object.keys(errors).length > 0 && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
                     <strong className="font-bold">Erro:</strong>
                     <ul className="mt-2 list-disc list-inside">
@@ -512,9 +512,9 @@ export default function ActivityForm({ onSubmit }) {
                     ))}
                     </ul>
                 </div>
-            )}
+            )} */}
 
-            {Object.keys(errors).length > 0 && (
+            {(Object.keys(errors).length > 0 && registerError) && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
                         <div className="flex gap-2 items-center">
