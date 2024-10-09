@@ -40,7 +40,7 @@ export default function Settings({ auth, mustVerifyEmail, status }) {
                 <aside className='w-full h-40 flex-col items-center space-y-4 xl:w-1/3 mb-36 xl:mb-0 lg:ml-auto pt-8 lg:pt-0 px-4 '>
                     <div>
                         <h3 className='font-headers text-neutral-800 dark:text-gray-100 mb-2 lg:px-4'>Meu armazenamento</h3>
-                        <DriveInfo storageDrive={false} usedSpace={usedSpace} totalSpace={totalSpace} />
+                        <DriveInfo storageDrive={false} usedSpace={usedSpace} totalSpace={totalSpace}/>
                         <AddMemberCard />
                     </div>
                 </aside>

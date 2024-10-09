@@ -7,12 +7,11 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.jsx',
-                'images/Logotipo V. Azul.svg',
-                'images/Welcome-amico.svg'
+                
             ],
             refresh: true,
         }),
         react(),
     ],
-  
+
 });

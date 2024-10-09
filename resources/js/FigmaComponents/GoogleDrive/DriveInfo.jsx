@@ -83,7 +83,7 @@ const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=fa
         }
 
     return <>
-        { storageDrive ? statusStorageDrive() : logarDrive()  };
+        { storageDrive ? statusStorageDrive() : logarDrive() }
     </>
 
 
