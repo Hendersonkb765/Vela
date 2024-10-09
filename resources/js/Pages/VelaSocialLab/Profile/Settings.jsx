@@ -37,8 +37,8 @@ export default function Settings({ auth, mustVerifyEmail, status,storageDrive })
                     </div>
                 </div>
 
-                <aside className='w-full h-40 flex-col items-center space-y-4 lg:w-fit mb-36 xl:mb-0 lg:ml-auto pt-8 lg:pt-0  '>
-                    <div>
+                <aside className='w-full h-40 flex-col items-center space-y-4 m lg:w-fit mb-36 xl:mb-0 lg:ml-auto pt-8 lg:pt-0  '>
+                    <div >
                         <h3 className='font-headers text-neutral-800 dark:text-gray-100 mb-2 lg:px-4'>Meu armazenamento</h3>
                         <DriveInfo storageDrive={storageDrive} isPresident={auth.user.role=='Presidente'?true :false} />
                         <AddMemberCard />
