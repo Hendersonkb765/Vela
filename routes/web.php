@@ -15,6 +15,7 @@ use App\Models\Osc;
 use App\Models\User; // Add this line
 use App\Models\Task; // Add this line
 use App\Models\Address; // Add this line
+use App\Models\GoogleToken; // Add this line
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Http\Middleware\CheckGoogleConnection;
 use App\Http\Middleware\DeleteExpiredInvitations;
 use App\Models\Activity;
 use App\Models\GoogleDriveFolder;
@@ -58,11 +60,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class])->name('dashboard');
+    ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class,CheckGoogleConnection::class])->name('dashboard');
 
-Route::get('/settings', function () {
-    return Inertia::render('VelaSocialLab/Profile/Settings');
-})->middleware(['auth'])->name('settings');
+Route::get('/settings', function (Request $request) {
+    return Inertia::render('VelaSocialLab/Profile/Settings',
+    ['storageDrive'=>$request->attributes->get('storageDrive')]);
+})->middleware(['auth',CheckGoogleConnection::class])->name('settings');
 // ->middleware(['auth', 'verified'])->name('Configurações');
 
 Route::get('/myuploads', function () {
