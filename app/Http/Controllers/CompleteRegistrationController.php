@@ -102,7 +102,7 @@ class CompleteRegistrationController extends Controller
         try{
 
         $request->validate([
-            'organization.CNPJ' => 'required|string|max:18',
+            'organization.CNPJ' => 'string|max:18',
             'organization.organizationName' => 'required|string|max:255',
             'organization.focusAreas' => 'required',
             
