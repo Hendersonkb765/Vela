@@ -5,7 +5,7 @@ import SearchInput from '@/FigmaComponents/Inputs/SearchInput';
 import React from 'react';
 import { GoX } from 'react-icons/go';
 
-export default function FilterModal({ isOpen, onClose, data, setData, minDate, maxDate }) {
+export default function FilterModal({ isOpen, onClose, data, setData, minDate, maxDate, filter }) {
     if (!isOpen) return null;
 
     const handleSearchChange = (value) => {
@@ -17,14 +17,14 @@ export default function FilterModal({ isOpen, onClose, data, setData, minDate, m
             <div className="min-w-fit bg-white p-8 rounded-lg sm:w-1/3 relative overflow-hidden dark:bg-slate-800 px-2">
             <div className={`flex flex-col p-4 space-y-6`}>
                 <h3 className='text-xl font-bold font-headers dark:text-white text-neutral-800'>Filtros</h3>
-                <div className="flex flex-col space-y-3">
+                {/* <div className="flex flex-col space-y-3">
                     <label className="text-sm dark:text-gray-300">Pesquise por Nome</label>
                     <SearchInput
                         onSearchChange={handleSearchChange}
                         placeholder="Busque por nome..."
                         className='min-w-64 h-12'
                     />
-                </div>
+                </div> */}
                 <div className="flex flex-col space-y-6">
                     <div className="flex flex-col space-y-3">
                         <label className="text-sm dark:text-gray-300">De: </label>
@@ -56,7 +56,7 @@ export default function FilterModal({ isOpen, onClose, data, setData, minDate, m
                         />
                     </div>
 
-                    <PrimaryButton center className='!text-lg h-12'>
+                    <PrimaryButton center onClick={filter} className='!text-lg h-12'>
                             Filtrar
                     </PrimaryButton>
                 </div>

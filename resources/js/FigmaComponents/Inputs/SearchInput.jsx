@@ -18,7 +18,7 @@
 import { useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
-export default function SearchInput({ placeholder = 'Search...', onSearchChange, className = '' }) {
+export default function SearchInput({ placeholder = 'Buscar...', onSearchChange, className = '' }) {
     const [search, setSearch] = useState(''); // Estado local para o valor de pesquisa
 
     const handleChange = (e) => {

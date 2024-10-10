@@ -57,6 +57,8 @@ export default {
                 fade: 'fade 2s ease-in-out infinite', // 2s de duração, ease-in-out, repetição infinita
             },
 
+
+
             backgroundImage: {
                 'custom-gradient': 'linear-gradient(to right top, #057ee8, #3786e8, #4f8de8, #6295e7, #729de7, #6da9ee, #69b4f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
               },
@@ -89,6 +91,19 @@ export default {
             },
             animation: {
               fly: 'fly 3s ease-in-out infinite',
+            },
+
+
+            keyframes: {
+              enter: {
+                '0%': { transform: 'scale(0)' }, // Opacidade mínima
+                '50%': { transform: 'scale(1.1)' }, // Opacidade máxima
+                '100%': { transform: 'scale(1)' },
+              },
+            },
+            // Associando a keyframe com a animação
+            animation: {
+              enter: 'enter 0.4s ease-in-out forwards', // 2s de duração, ease-in-out, repetição infinita
             },
 
         },
