@@ -88,9 +88,8 @@ Route::get('/axis', function () {
 Route::controller(ActivityController::class)->group(function(){
     Route::get('/activityhub','index')->middleware(['auth'])->name('activityhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
-    Route::get('/atividades/filtro={title}','filterByName')->name('activity.filterByName');
+    Route::post('/atividades/filtro={title}','filter')->name('activity.filter');
     Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
-    Route::get('/atividades/filtro-data={dateFrom}/{dateTo}','filterByDate')->name('activity.filterByDate');
 });
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
