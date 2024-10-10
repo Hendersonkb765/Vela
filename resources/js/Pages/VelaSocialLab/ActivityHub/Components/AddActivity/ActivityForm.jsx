@@ -70,8 +70,6 @@ export default function ActivityForm({ onSubmit }) {
             console.error('Erro na requisição:', error);
         }
 
-
-
         // try {
         //     const response = await fetch(`/reformular`, {
         //         method: 'POST',

@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import ActivityUpload from './Components/ActivityUpload';
 import ActivityCard from './Components/ActivityCard';
 import Filter from './Components/Filter/Filter';
-import React from 'react';
+import React, { useState } from 'react';
 import { usePage } from '@inertiajs/react';
 
 
@@ -12,6 +12,23 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
   
     const { props } = usePage();
     const { status, message } = props;
+    const [filteredActivitys, setFilteredActivitys] = useState({})
+
+    const fetchFiltredActivitys = async (filters) => {
+
+        try{
+
+            console.log("Consegui");
+            console.log(filters);
+            
+
+        }catch (error){
+
+            console.error("Erro: ", error)
+
+        }
+
+    }
     
     return (
         <VelaSocialLayout
@@ -24,7 +41,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
                     <ActivityUpload />
                 </div>
                 <section className='w-full px-4 mx-4 grid grid-cols-1 gap-6 relative'>
-                    <Filter />
+                    <Filter onFilter={fetchFiltredActivitys} />
                     <aside className='flex h-full absolute mx-4 border-l-2 border-primary dark:border-primary-200 '></aside>
                     <div className='px-4 lg:px-12 flex flex-col space-y-12 pb-8'>
                         {activities.map((activity) => (
