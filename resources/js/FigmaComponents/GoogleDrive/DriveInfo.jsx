@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { GoLock } from 'react-icons/go';
 
-const DriveInfo = ({ storageDrive=false ,usedSpace=0,totalSpace=0,isPresident=false }) => {
+const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false }) => {
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
 
     if(storageDrive){

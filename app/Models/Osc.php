@@ -78,8 +78,11 @@ class Osc extends Model
     public function activities(){
         return $this->hasMany(Activity::class);
     }
-    public function GoogledriveFolder(){
+    public function googledriveFolder(){
         return $this->hasMany(GoogleDriveFolder::class);
+    }
+    public function googleToken(){
+        return $this->hasMany(GoogleToken::class);
     }
 
   

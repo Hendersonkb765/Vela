@@ -33,8 +33,8 @@ export default function ProfileSetup() {
             focusAreas: [],
         }
     });
+    
     const isNameValid =  data.user.name.split(' ').length > 1;
-
 
 
     // Carrega os dados do formulário do localStorage, se disponíveis

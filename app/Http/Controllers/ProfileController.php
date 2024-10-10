@@ -30,9 +30,10 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        //dd($request->validated()['user']);
         //dd($request->user['profilePicture']);
         $imageData = $request->user['profilePicture'];
-        $request->user()->fill($request->validated());
+        $request->user()->fill($request->validated()['user']);
         $profilePictureName = basename(Auth::user()->image_url);
         if (isset( $imageData)) {
             //$imageData = $request->user['profilePicture'];
@@ -55,8 +56,9 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        
 
-        return Redirect::route('profile.edit');
+        return redirect()->back()->with(['status' => '200','message'=> 'Perfil atualizado com sucesso!']);
     }
     /**
      * Delete the user's account.
