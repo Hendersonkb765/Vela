@@ -61,14 +61,14 @@ class ActivityController extends Controller
 
         $activities = Auth::user()->osc->first()->activities();
         try{
-            if (!empty($title) && !empty($dateFrom) && !empty($dateTo)) {
+            if (!empty($title) && !empty($request->startDate) && !empty($request->endDate)) {
                 $activitiesFilter = $activities->where('title', 'like', $title . '%')
-                                               ->whereBetween('date', [$dateFrom, $dateTo])
+                                               ->whereBetween('date', [$request->startDate, $request->endDate])
                                                ->get();
             } elseif (!empty($title)) {
                 $activitiesFilter = $activities->where('title', 'like', $title . '%')->get();
-            } elseif (!empty($dateFrom) && !empty($dateTo)) {
-                $activitiesFilter = $activities->whereBetween('date', [$dateFrom, $dateTo])->get();
+            } elseif (!empty($request->startDate) && !empty($request->endDate)) {
+                $activitiesFilter = $activities->whereBetween('date', [$request->startDate, $request->endDate])->get();
             } else {
                 $activitiesFilter = $activities->get();
             }
