@@ -56,19 +56,28 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
     }
-    public function filterByName($title){
+    public function filter(Request $request,$title){
         //detalhes da atividade
 
+        $activities = Auth::user()->osc->first()->activities();
         try{
-            if(!empty($title)){
-
-                $activities = Auth::user()->osc->first()->activities();
-                $activitiesFilter =$activities->where('title','like',$title . '%')->get();
-                return redirect()->back()->with(['status'=> 200,'activities' => $activitiesFilter]);
+            if (!empty($title) && !empty($request->startDate) && !empty($request->endDate)) {
+                $activitiesFilter = $activities->where('title', 'like', $title . '%')
+                                               ->whereBetween('date', [$request->startDate, $request->endDate])
+                                               ->get();
+            } elseif (!empty($title)) {
+                $activitiesFilter = $activities->where('title', 'like', $title . '%')->get();
+            } elseif (!empty($request->startDate) && !empty($request->endDate)) {
+                $activitiesFilter = $activities->whereBetween('date', [$request->startDate, $request->endDate])->get();
+            } else {
+                $activitiesFilter = $activities->get();
             }
+            return redirect()->back()->with(['status' => 200, 'activities' => $activitiesFilter]);
+
+            
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
+            return redirect()->back()->with(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
 
 
