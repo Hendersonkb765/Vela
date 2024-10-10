@@ -104,15 +104,11 @@ Route::get('/timeline', function () {
 })->middleware(['auth'])->name('timeline');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/resources/test', function () {
-    return Inertia::render('Resources');
-})->name('resources');
-
-Route::get('/designtest', function () {
-    return Inertia::render('VelaSocialLab/GuestUser/GuestUser');
-})->name('designtest');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
+Route::get('/support', function () {
+    return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
+})->middleware(['auth'])->name('support');
 
 Route::middleware('auth')->group(function () {
 
@@ -203,8 +199,18 @@ Route::get('/drive2',function(){
 Route::get('openai',function(){
     $openai = new OpenAi();
     $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-    
+
     return response()->json($response);
 });
 
 require __DIR__.'/auth.php';
+
+
+
+// Route::get('/resources/test', function () {
+//     return Inertia::render('Resources');
+// })->name('resources');
+
+// Route::get('/designtest', function () {
+//     return Inertia::render('VelaSocialLab/GuestUser/GuestUser');
+// })->name('designtest');
