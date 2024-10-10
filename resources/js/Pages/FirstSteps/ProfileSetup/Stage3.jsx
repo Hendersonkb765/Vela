@@ -80,7 +80,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                                     autoComplete="CNPJ"
                                     isFocused={true}
                                     placeholder="99.999.999/9999-99"
-                                    required={!data.organization.doesNotHaveCNPJ}
+                                   
                                 />
                             )}
                         </InputMask>
