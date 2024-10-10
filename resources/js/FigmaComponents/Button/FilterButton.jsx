@@ -8,7 +8,7 @@ export default function FilterButton({hasParameters = false, className, onClickF
 
 
     return(
-        <PrimaryButton {...props} {...(!hasParameters && { center: true })} className={`!text-lg h-10 relative mb-2 ml-2 ${className}`} >
+        <PrimaryButton {...props} {...(!hasParameters && { center: true })} className={`!text-lg h-10 relative ${className}`} >
 
             <div onClick={onClickFunFilter} className="flex items-center gap-2">
 

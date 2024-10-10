@@ -109,7 +109,7 @@ export default function Filter({onFilter}) {
                         onChangeFun={handleDateParameters}
                         // onFilterSubmit={onFilter}
                     />
-                    <FilterButton onClickFunFilter={handleFilterSubmit} onClickClenParam={clenDateParametes} hasParameters={hasDateParameters}/>
+                    <FilterButton className={' mb-2 ml-2 fullhd:mb-6'}  onClickFunFilter={handleFilterSubmit} onClickClenParam={clenDateParametes} hasParameters={hasDateParameters}/>
                 </div>
 
                 <div className='w-11/12 lg:hidden bg-white md:h-20 p-4 rounded-lg dark:bg-slate-800 flex-col md:flex-row flex items-center justify-between gap-6 fullhd:h-28'>
