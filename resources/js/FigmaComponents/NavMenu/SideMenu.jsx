@@ -15,7 +15,7 @@ const SideMenu = ({className}) => {
         {title: "Atividades", icon: <GoCodeOfConduct className='w-6 h-6'/>, route: 'activityhub'},
         {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
         {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'settings'},
-        {title: "Suporte", icon: <GoQuestion className='w-6 h-6'/>, route: 'resources'},
+        {title: "Suporte", icon: <GoQuestion className='w-6 h-6'/>, route: 'support'},
         {title: "Sair", icon: <GoSignOut className='w-6 h-6 '/>, route: 'logout', method: "post"}
     ]
 
