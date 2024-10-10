@@ -27,7 +27,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_DRIVE_CLIENT_SECRET').'/auth/callback/google',
+        'redirect' => env('APP_URL').'/auth/callback/google',
     ],
     'google_drive' => [
         'client_id' => env('GOOGLE_DRIVE_CLIENT_ID'),
