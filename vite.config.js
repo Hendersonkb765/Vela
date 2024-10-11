@@ -13,5 +13,17 @@ export default defineConfig({
         }),
         react(),
     ],
+    build: {
+        outDir: 'public/build', // Certifique-se de que o diretório de saída está correto
+        manifest: true, // Gera um manifesto para mapeamento de arquivos
+        rollupOptions: {
+            output: {
+                // Ajusta os caminhos dos arquivos de saída
+                entryFileNames: 'assets/[name]-[hash].js',
+                chunkFileNames: 'assets/[name]-[hash].js',
+                assetFileNames: 'assets/[name]-[hash][extname]',
+            },
+        },
+    },
 
 });
