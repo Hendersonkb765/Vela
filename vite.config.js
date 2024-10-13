@@ -3,11 +3,11 @@ import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+    base: '/public/', // Define o prefixo para todas as URLs geradas
     plugins: [
         laravel({
             input: [
                 'resources/js/app.jsx',
-                
             ],
             refresh: true,
         }),
@@ -25,5 +25,4 @@ export default defineConfig({
             },
         },
     },
-
 });
