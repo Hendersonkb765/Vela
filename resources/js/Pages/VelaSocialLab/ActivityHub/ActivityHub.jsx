@@ -13,19 +13,57 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
     const { props } = usePage();
     const { status, message } = props;
     const [filteredActivitys, setFilteredActivitys] = useState({})
+    const [noMatchFilter, setNoMatchFilter] = useState(false)
 
-    const fetchFiltredActivitys = async (filters) => {
+    const fetchFiltredActivitys = async (name ='', startDate, endDate) => {
 
-        try{
+        const filters = {'startDate': '1990-01-01', 'endDate': new Date().toISOString().split('T')[0]}
+        
+        
+        if(startDate != ''){
 
-            console.log("Consegui");
-            console.log(filters);
+            filters.startDate = startDate
+
+        }
+        if(endDate != ''){
+
+            filters.endDate = endDate
+
+        }
+
+        console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))
+        try {
+            const response = await fetch(`/atividades/filtro=${name}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')                
+                },
+                body: JSON.stringify(filters),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Erro na requisição:", response.status, errorText);
+                throw new Error('Erro na requisição: ' + response.status);
+            }
+
+            const data = await response.json();
+
+            if(data.length === 0){
+
+                setNoMatchFilter(true)
+
+            }else{
+
+                setFilteredActivitys(data)
+
+            }
+
+            // Chame a função onSearch para passar os dados filtrados
             
-
-        }catch (error){
-
-            console.error("Erro: ", error)
-
+        } catch (error) {
+            console.error("Erro ao buscar atividades:", error);
         }
 
     }
@@ -44,9 +82,24 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
                     <Filter onFilter={fetchFiltredActivitys} />
                     <aside className='flex h-full absolute mx-4 border-l-2 border-primary dark:border-primary-200 '></aside>
                     <div className='px-4 lg:px-12 flex flex-col space-y-12 pb-8'>
-                        {activities.map((activity) => (
-                            <ActivityCard key={activity.id} data={activity}/>
-                        ))}
+                        {!(Object.keys(filteredActivitys).length > 0 || noMatchFilter) &&(
+                            activities.map((activity) => (
+                                <ActivityCard key={activity.id} data={activity}/>
+                            ))   
+                        )}
+                        {Object.keys(filteredActivitys).length > 0 &&(
+                            filteredActivitys.map((activity) => (
+                                <ActivityCard key={activity.id} data={activity}/>
+                            ))
+                        )}
+
+                        {noMatchFilter&&(
+
+                            <h3>Sem resultados</h3>
+
+                        )}
+
+                        
                     </div>
                 </section>
 
