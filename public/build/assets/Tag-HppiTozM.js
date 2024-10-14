@@ -1,1 +1,0 @@
-import{j as e}from"./app-CtPP1DNG.js";function a({text:t="texto"}){return e.jsx("div",{className:"text-gray-800 dark:text-gray-200 p-1 px-3 h-fit bg-neutral-100 dark:bg-slate-950 rounded-2xl text-xs",children:t})}export{a as default};
