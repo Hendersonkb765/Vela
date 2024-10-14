@@ -53,7 +53,6 @@ Route::get('/', function () {
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-<<<<<<< HEAD
 })->middleware(['auth'])->name('dashboard');
 // ->middleware(['auth', 'verified'])->name('dashboard');
 =======
@@ -62,8 +61,7 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
     ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class,CheckGoogleConnection::class])->name('dashboard');
 
-<<<<<<< HEAD
-=======
+
 Route::get('/settings', function (Request $request) {
     return Inertia::render('VelaSocialLab/Profile/Settings',
     ['storageDrive'=>$request->attributes->get('storageDrive')]);
@@ -112,7 +110,6 @@ Route::get('/support', function () {
     return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
 })->middleware(['auth'])->name('support');
 
->>>>>>> release/1.0.0-beta
 Route::middleware('auth')->group(function () {
 
     Route::get('/modeltest',function(){

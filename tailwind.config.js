@@ -15,10 +15,9 @@ export default {
 
     theme: {
         extend: {
-<<<<<<< HEAD
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-=======
+
             screens: {
                 'fullhd': '1920px', // Breakpoint para telas de 1920px ou maiores
             },
@@ -48,7 +47,6 @@ export default {
             fontFamily: {
                 headers: ['Poppins'],
                 body: ['Open Sans'],
->>>>>>> release/1.0.0-beta
             },
             
             keyframes: {
