@@ -2,17 +2,7 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Third Party Services
-    |--------------------------------------------------------------------------
-    |
-    | This file is for storing the credentials for third party services such
-    | as Mailgun, Postmark, AWS and more. This file provides the de facto
-    | location for this type of information, allowing packages to have
-    | a conventional file to locate the various service credentials.
-    |
-    */
+
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
@@ -34,5 +24,20 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('APP_URL').'/auth/callback/google',
+    ],
+    'google_drive' => [
+        'client_id' => env('GOOGLE_DRIVE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+        'redirect' => env('APP_URL').'/auth/drive/callback/google'
+    ],
+    'openai' => [
+        'api_key' => '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',
+        'base_uri' => 'https://api.openai.com/v1',
+        'organization_id' =>'org-R3T2zzvXlq15Ht6Mfqzri5eL',
+        'project_id' =>'proj_ou8E9xh5bT1XPP0fYL0RuKii'
+    ],
 ];

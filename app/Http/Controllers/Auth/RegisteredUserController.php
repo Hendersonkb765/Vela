@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
+use App\Models\Osc;
+use Exception;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -30,22 +37,41 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+       
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'password' => 'required|confirmed|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*?&#]/',
+        
         ]);
+       
+        try{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'provider' => 'email',
+                'password' => Hash::make($request->password),
+              
+            ]);
+            
+            //$user->sendVerifyEmailNotification();
+            //event(new Registered($user));
+    
+            Auth::login($user);
+    
+            return redirect()->route('completeRegistration.create');
+        }
+        catch(ConnectionException $e){
+            echo "Ops! Parece que você está sem conexão com a internet!";
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            echo "Ops! Não foi possivel realizar o cadastro, tente novamente mais tarde!";
+        }
+        catch(\Exception $e){
+            dd($e);
+            return redirect()->back();
+        }
     }
+
+   
 }

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -20,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'provider',
+        'role_id',
+        'sex',
+        'birthday',
+        'image_url',
+
     ];
 
     /**
@@ -44,4 +51,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function osc() : BelongsToMany
+    {
+        return $this->belongsToMany(Osc::class);
+    }
+    public function phone()
+    {
+        return $this->morphMany(Phone::class,'phoneable');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+
 }

@@ -9,18 +9,33 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ProviderAuthController;
+use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Socialite\Facades\Socialite; // Add this line
+use SebastianBergmann\CodeCoverage\Driver\Driver;
+use Google\Client as GoogleClient;
+use Google\Service\Drive as Google_Service_Drive;
+use App\Http\Middleware\CheckPresident;
 Route::middleware('guest')->group(function () {
+
+    /*
+    Route::get('/auth/redirect/{provider}/', [ProviderAuthController::class, 'redirect'])
+                ->name('redirect');
+
+    Route::get('/auth/callback/{provider}', [ProviderAuthController::class, 'callback'])
+                ->name('callback');
+    */
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register.store');
+
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('logar');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -57,3 +72,18 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+
+Route::middleware(['auth', CheckPresident::class])->group(function () {
+    Route::get('auth/osc/redirect/google', function () {
+        return Socialite::driver('google')
+            ->with(['prompt' => 'select_account', 'access_type' => 'offline'])
+            ->scopes(['https://www.googleapis.com/auth/drive'])
+            ->redirect();
+    })->name('osc.redirect');
+
+    Route::get('/auth/callback/google', [ProviderAuthController::class, 'callbackOscGoogle'])
+        ->name('osc.callback');
+});
+
+
+
