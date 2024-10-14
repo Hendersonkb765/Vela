@@ -23,12 +23,12 @@ class DashboardController extends Controller
     public function index(Request $request){
        try{
         $user = Auth::user();
-        $osc = $user->osc->first();
+        $osc = $user->osc()->with(['axis.level.task.step.requirement', 'task'])->first();
         $axis = $osc->axis->first();
        
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
      
-        $currentLevel = $osc->axis->first()->pivot->current_level;
+        $currentLevel = $axis->pivot->current_level;
         $level = $axis->level->where('position',$currentLevel)->first();
         $tasks = $level->task;
         //$tasks = $axis->level->first()->with(['task','task.step'])->where('position', $level->id)->first();
