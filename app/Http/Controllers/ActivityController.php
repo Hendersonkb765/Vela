@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ChatGPT\OpenAI;
 use App\Models\activity;
-use App\Services\ChatGPT\OpenAi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -12,7 +12,6 @@ use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
- // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
 {
@@ -35,8 +34,8 @@ class ActivityController extends Controller
     public function rephraseDescription(Request $request){
         //reformular descrição da atividade
         try{
-            $openAi = new OpenAi();
-            $response = $openAi->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto:',$request->description);
+            $openAI = new OpenAI();
+            $response = $openAI->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto:',$request->description);
             return response()->json($response);
         }
         catch(\Exception $e){
