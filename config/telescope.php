@@ -5,6 +5,8 @@ use Laravel\Telescope\Watchers;
 
 return [
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Telescope Master Switch
@@ -17,6 +19,8 @@ return [
     */
 
     'enabled' => env('TELESCOPE_ENABLED', true),
+
+    
 
     /*
     |--------------------------------------------------------------------------
