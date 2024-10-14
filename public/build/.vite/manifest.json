@@ -1,0 +1,1270 @@
+{
+  "_ApplicationLogo-jiC664LK.js": {
+    "file": "assets/ApplicationLogo-jiC664LK.js",
+    "name": "ApplicationLogo",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_DarkModeToggleIcon-Dcrx1BIv.js": {
+    "file": "assets/DarkModeToggleIcon-Dcrx1BIv.js",
+    "name": "DarkModeToggleIcon",
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "_DashboardPath-Cr5dAKHJ.js": {
+    "file": "assets/DashboardPath-Cr5dAKHJ.js",
+    "name": "DashboardPath",
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BZqMysfF.js",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "_DateInput-CaQdbuvS.js": {
+    "file": "assets/DateInput-CaQdbuvS.js",
+    "name": "DateInput",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_DriveInfo-A7qDnSPq.js": {
+    "file": "assets/DriveInfo-A7qDnSPq.js",
+    "name": "DriveInfo",
+    "imports": [
+      "resources/js/app.jsx",
+      "_iconBase-qlBafJIs.js",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "_Dropdown-B8gpms0Z.js": {
+    "file": "assets/Dropdown-B8gpms0Z.js",
+    "name": "Dropdown",
+    "imports": [
+      "resources/js/app.jsx",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "_InputError-BVD2qw8f.js": {
+    "file": "assets/InputError-BVD2qw8f.js",
+    "name": "InputError",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_InputLabel-DpcK_Rcy.js": {
+    "file": "assets/InputLabel-DpcK_Rcy.js",
+    "name": "InputLabel",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_Modal-C7EHUPgT.js": {
+    "file": "assets/Modal-C7EHUPgT.js",
+    "name": "Modal",
+    "imports": [
+      "resources/js/app.jsx",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "_NavBar-BRnHUvCp.js": {
+    "file": "assets/NavBar-BRnHUvCp.js",
+    "name": "NavBar",
+    "imports": [
+      "resources/js/app.jsx",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "_PrimaryButton-CgHh9L6v.js": {
+    "file": "assets/PrimaryButton-CgHh9L6v.js",
+    "name": "PrimaryButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_PrimaryButton-D5qC926Y.js": {
+    "file": "assets/PrimaryButton-D5qC926Y.js",
+    "name": "PrimaryButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_PrimaryIconButton-E5beE6gg.js": {
+    "file": "assets/PrimaryIconButton-E5beE6gg.js",
+    "name": "PrimaryIconButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_ProfileSetupLayout-BR4811Nf.js": {
+    "file": "assets/ProfileSetupLayout-BR4811Nf.js",
+    "name": "ProfileSetupLayout",
+    "imports": [
+      "resources/js/app.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_SideMenu-D3_MuqCz.js"
+    ]
+  },
+  "_ProfileUploadInput-LWgYRigi.js": {
+    "file": "assets/ProfileUploadInput-LWgYRigi.js",
+    "name": "ProfileUploadInput",
+    "imports": [
+      "resources/js/app.jsx",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "_SearchInput-D5yJ8gM0.js": {
+    "file": "assets/SearchInput-D5yJ8gM0.js",
+    "name": "SearchInput",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_SecondaryButton-CJd_1Wwq.js": {
+    "file": "assets/SecondaryButton-CJd_1Wwq.js",
+    "name": "SecondaryButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_SecondaryButton-DSQ4pxUs.js": {
+    "file": "assets/SecondaryButton-DSQ4pxUs.js",
+    "name": "SecondaryButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_SecondaryIconButton-Boak0Ywu.js": {
+    "file": "assets/SecondaryIconButton-Boak0Ywu.js",
+    "name": "SecondaryIconButton",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_SideMenu-D3_MuqCz.js": {
+    "file": "assets/SideMenu-D3_MuqCz.js",
+    "name": "SideMenu",
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "_TextInput-BK_jkj-f.js": {
+    "file": "assets/TextInput-BK_jkj-f.js",
+    "name": "TextInput",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_TextInput-BO1oMSBD.js": {
+    "file": "assets/TextInput-BO1oMSBD.js",
+    "name": "TextInput",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_VelaSocialLayout-D98UanQn.js": {
+    "file": "assets/VelaSocialLayout-D98UanQn.js",
+    "name": "VelaSocialLayout",
+    "imports": [
+      "resources/js/app.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_SideMenu-D3_MuqCz.js"
+    ]
+  },
+  "_iconBase-qlBafJIs.js": {
+    "file": "assets/iconBase-qlBafJIs.js",
+    "name": "iconBase",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-BZqMysfF.js": {
+    "file": "assets/index-BZqMysfF.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_index-Bx-jewI_.js": {
+    "file": "assets/index-Bx-jewI_.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_index-C7PkAq5T.js": {
+    "file": "assets/index-C7PkAq5T.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_index-D5XRLH4z.js": {
+    "file": "assets/index-D5XRLH4z.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_index-DZYEFDQs.js": {
+    "file": "assets/index-DZYEFDQs.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_index-Dh2FwS8Q.js": {
+    "file": "assets/index-Dh2FwS8Q.js",
+    "name": "index",
+    "imports": [
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "_transition-CzWNMDPU.js": {
+    "file": "assets/transition-CzWNMDPU.js",
+    "name": "transition",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/Auth/ConfirmPassword.jsx": {
+    "file": "assets/ConfirmPassword-Cesy2NCe.js",
+    "name": "ConfirmPassword",
+    "src": "resources/js/Pages/Auth/ConfirmPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-D5qC926Y.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ForgotPassword.jsx": {
+    "file": "assets/ForgotPassword-ReF-Wz9J.js",
+    "name": "ForgotPassword",
+    "src": "resources/js/Pages/Auth/ForgotPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-BVD2qw8f.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_TextInput-BO1oMSBD.js",
+      "_InputLabel-DpcK_Rcy.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-D6Dp3Kqf.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-BVD2qw8f.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_TextInput-BO1oMSBD.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Register.jsx": {
+    "file": "assets/Register-DjnPb8XF.js",
+    "name": "Register",
+    "src": "resources/js/Pages/Auth/Register.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_ApplicationLogo-jiC664LK.js",
+      "_InputError-BVD2qw8f.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_TextInput-BO1oMSBD.js",
+      "_index-D5XRLH4z.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_iconBase-qlBafJIs.js",
+      "_index-DZYEFDQs.js"
+    ]
+  },
+  "resources/js/Pages/Auth/ResetPassword.jsx": {
+    "file": "assets/ResetPassword-BiiR6T1i.js",
+    "name": "ResetPassword",
+    "src": "resources/js/Pages/Auth/ResetPassword.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-D5qC926Y.js"
+    ]
+  },
+  "resources/js/Pages/Auth/VerifyEmail.jsx": {
+    "file": "assets/VerifyEmail-B-PWdOWM.js",
+    "name": "VerifyEmail",
+    "src": "resources/js/Pages/Auth/VerifyEmail.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "resources/js/Pages/Dashboard.jsx": {
+    "file": "assets/Dashboard-ftx460Ao.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "_index-DZYEFDQs.js",
+      "resources/js/Pages/VelaSocialLab/Dashboard/OscProfile/OscProfileCard.jsx",
+      "_PrimaryIconButton-E5beE6gg.js",
+      "resources/js/Pages/VelaSocialLab/Dashboard/RecordActivity.jsx",
+      "_DashboardPath-Cr5dAKHJ.js",
+      "resources/js/Pages/VelaSocialLab/Dashboard/AllTasks.jsx",
+      "_index-C7PkAq5T.js",
+      "_DriveInfo-A7qDnSPq.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_iconBase-qlBafJIs.js",
+      "_index-Dh2FwS8Q.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_TextInput-BO1oMSBD.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_InputError-BVD2qw8f.js",
+      "_index-BZqMysfF.js"
+    ]
+  },
+  "resources/js/Pages/FirstSteps/ProfileSetup/ProfileSetup.jsx": {
+    "file": "assets/ProfileSetup-BL1saw4j.js",
+    "name": "ProfileSetup",
+    "src": "resources/js/Pages/FirstSteps/ProfileSetup/ProfileSetup.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_ProfileSetupLayout-BR4811Nf.js",
+      "_index-BZqMysfF.js",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage1.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage2.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage3.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage4.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputError-BVD2qw8f.js",
+      "_ProfileUploadInput-LWgYRigi.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_PrimaryIconButton-E5beE6gg.js",
+      "_TextInput-BO1oMSBD.js"
+    ]
+  },
+  "resources/js/Pages/FirstSteps/ProfileSetup/Stage1.jsx": {
+    "file": "assets/Stage1-Bo_h2JUg.js",
+    "name": "Stage1",
+    "src": "resources/js/Pages/FirstSteps/ProfileSetup/Stage1.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_DateInput-CaQdbuvS.js",
+      "_InputError-BVD2qw8f.js",
+      "_ProfileUploadInput-LWgYRigi.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_iconBase-qlBafJIs.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "resources/js/Pages/FirstSteps/ProfileSetup/Stage2.jsx": {
+    "file": "assets/Stage2-Dzi90Ajv.js",
+    "name": "Stage2",
+    "src": "resources/js/Pages/FirstSteps/ProfileSetup/Stage2.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/FirstSteps/ProfileSetup/Stage3.jsx": {
+    "file": "assets/Stage3-BoHhJvlr.js",
+    "name": "Stage3",
+    "src": "resources/js/Pages/FirstSteps/ProfileSetup/Stage3.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_InputError-BVD2qw8f.js",
+      "_ProfileUploadInput-LWgYRigi.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_iconBase-qlBafJIs.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "resources/js/Pages/FirstSteps/ProfileSetup/Stage4.jsx": {
+    "file": "assets/Stage4-Ckxm0jzE.js",
+    "name": "Stage4",
+    "src": "resources/js/Pages/FirstSteps/ProfileSetup/Stage4.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BO1oMSBD.js"
+    ]
+  },
+  "resources/js/Pages/InvitationPage.jsx": {
+    "file": "assets/InvitationPage-DrJgFIue.js",
+    "name": "InvitationPage",
+    "src": "resources/js/Pages/InvitationPage.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_ProfileSetupLayout-BR4811Nf.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Edit.jsx": {
+    "file": "assets/Edit-DBP57QDL.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/Profile/Edit.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "_transition-CzWNMDPU.js",
+      "_Modal-C7EHUPgT.js",
+      "_TextInput-BK_jkj-f.js",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "_PrimaryButton-D5qC926Y.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": {
+    "file": "assets/DeleteUserForm-RUNGHTdN.js",
+    "name": "DeleteUserForm",
+    "src": "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Modal-C7EHUPgT.js",
+      "_TextInput-BK_jkj-f.js",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": {
+    "file": "assets/UpdatePasswordForm-CoM6R0JZ.js",
+    "name": "UpdatePasswordForm",
+    "src": "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-D5qC926Y.js",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": {
+    "file": "assets/UpdateProfileInformationForm-0K0AWbYk.js",
+    "name": "UpdateProfileInformationForm",
+    "src": "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-D5qC926Y.js",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "resources/js/Pages/Resources.jsx": {
+    "file": "assets/Resources-DKQVpheJ.js",
+    "name": "Resources",
+    "src": "resources/js/Pages/Resources.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_PrimaryIconButton-E5beE6gg.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_index-BZqMysfF.js",
+      "_index-C7PkAq5T.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/Test.jsx": {
+    "file": "assets/Test-DoS6qr4B.js",
+    "name": "Test",
+    "src": "resources/js/Pages/Test.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_SideMenu-D3_MuqCz.js",
+      "_NavBar-BRnHUvCp.js",
+      "_DashboardPath-Cr5dAKHJ.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-BZqMysfF.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/ActivityHub.jsx": {
+    "file": "assets/ActivityHub-BF4-yBHd.js",
+    "name": "ActivityHub",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/ActivityHub.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUpload.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityCard.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/Filter.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_index-Bx-jewI_.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUploadModal.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/AddActivity/ActivityForm.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_PrimaryIconButton-E5beE6gg.js",
+      "_index-D5XRLH4z.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterForm.jsx",
+      "_SearchInput-D5yJ8gM0.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterModal.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityCard.jsx": {
+    "file": "assets/ActivityCard-B2erVO8Z.js",
+    "name": "ActivityCard",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-D5XRLH4z.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUpload.jsx": {
+    "file": "assets/ActivityUpload-VKYc0-mN.js",
+    "name": "ActivityUpload",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUpload.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-Bx-jewI_.js",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUploadModal.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/AddActivity/ActivityForm.jsx",
+      "_iconBase-qlBafJIs.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-DZYEFDQs.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUploadModal.jsx": {
+    "file": "assets/ActivityUploadModal-D0KPVTuC.js",
+    "name": "ActivityUploadModal",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUploadModal.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/AddActivity/ActivityForm.jsx": {
+    "file": "assets/ActivityForm-B2SRlQBV.js",
+    "name": "ActivityForm",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/AddActivity/ActivityForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_index-DZYEFDQs.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_PrimaryIconButton-E5beE6gg.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/Filter.jsx": {
+    "file": "assets/Filter-YbWm_Uz-.js",
+    "name": "Filter",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/Filter.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterForm.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterModal.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_index-DZYEFDQs.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_SearchInput-D5yJ8gM0.js",
+      "_DateInput-CaQdbuvS.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterForm.jsx": {
+    "file": "assets/FilterForm-1Y-hDv8a.js",
+    "name": "FilterForm",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_DateInput-CaQdbuvS.js",
+      "_SearchInput-D5yJ8gM0.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterModal.jsx": {
+    "file": "assets/FilterModal-DvmPmW60.js",
+    "name": "FilterModal",
+    "src": "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterModal.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_DateInput-CaQdbuvS.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Axis.jsx": {
+    "file": "assets/Axis-MUJwBqnh.js",
+    "name": "Axis",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Axis.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/LevelBox.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardAxis.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Targets.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardTask.jsx",
+      "_index-DZYEFDQs.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_SideMenu-D3_MuqCz.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Target.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/ReviewStars.jsx",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardAxis.jsx": {
+    "file": "assets/CardAxis-CmC1Run1.js",
+    "name": "CardAxis",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardAxis.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardTask.jsx": {
+    "file": "assets/CardTask-YX2GHpJR.js",
+    "name": "CardTask",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardTask.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/ReviewStars.jsx",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/LevelBox.jsx": {
+    "file": "assets/LevelBox-BY7ocsrK.js",
+    "name": "LevelBox",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/LevelBox.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/ReviewStars.jsx": {
+    "file": "assets/ReviewStars-DkRC6HJ7.js",
+    "name": "ReviewStars",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/ReviewStars.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx": {
+    "file": "assets/Tag-HppiTozM.js",
+    "name": "Tag",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Target.jsx": {
+    "file": "assets/Target-1bWudnFY.js",
+    "name": "Target",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Target.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Targets.jsx": {
+    "file": "assets/Targets-BZlUw_ko.js",
+    "name": "Targets",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Targets.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Target.jsx",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/AxisHub.jsx": {
+    "file": "assets/AxisHub-D019nGpu.js",
+    "name": "AxisHub",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/AxisHub.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "_index-DZYEFDQs.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisCard.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisSkeleton.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_iconBase-qlBafJIs.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/TaskPreview.jsx",
+      "_index-C7PkAq5T.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisCard.jsx": {
+    "file": "assets/AxisCard-BYub5Z_L.js",
+    "name": "AxisCard",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_index-DZYEFDQs.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/TaskPreview.jsx",
+      "_iconBase-qlBafJIs.js",
+      "_index-C7PkAq5T.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisSkeleton.jsx": {
+    "file": "assets/AxisSkeleton-DaRUfBUj.js",
+    "name": "AxisSkeleton",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisSkeleton.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/AxisHub/Components/TaskPreview.jsx": {
+    "file": "assets/TaskPreview-BvETKRSF.js",
+    "name": "TaskPreview",
+    "src": "resources/js/Pages/VelaSocialLab/AxisHub/Components/TaskPreview.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-C7PkAq5T.js",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Dashboard/AllTasks.jsx": {
+    "file": "assets/AllTasks-CPAAkYN_.js",
+    "name": "AllTasks",
+    "src": "resources/js/Pages/VelaSocialLab/Dashboard/AllTasks.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-C7PkAq5T.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Dashboard/OscProfile/OscProfileCard.jsx": {
+    "file": "assets/OscProfileCard-C7q177wB.js",
+    "name": "OscProfileCard",
+    "src": "resources/js/Pages/VelaSocialLab/Dashboard/OscProfile/OscProfileCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-Dh2FwS8Q.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_index-DZYEFDQs.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_TextInput-BO1oMSBD.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_InputError-BVD2qw8f.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Dashboard/RecordActivity.jsx": {
+    "file": "assets/RecordActivity-imiMLQdX.js",
+    "name": "RecordActivity",
+    "src": "resources/js/Pages/VelaSocialLab/Dashboard/RecordActivity.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/GuestUser/GuestUser.jsx": {
+    "file": "assets/GuestUser-DiX-wmhS.js",
+    "name": "GuestUser",
+    "src": "resources/js/Pages/VelaSocialLab/GuestUser/GuestUser.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/MyUploads/MyUploads.jsx": {
+    "file": "assets/MyUploads-Pht3nStq.js",
+    "name": "MyUploads",
+    "src": "resources/js/Pages/VelaSocialLab/MyUploads/MyUploads.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/FileUploadDragDrop.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/FileCard.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/Filter.jsx",
+      "_index-BZqMysfF.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_SecondaryIconButton-Boak0Ywu.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/MyUploads/components/FileCard.jsx": {
+    "file": "assets/FileCard-D_naRIGU.js",
+    "name": "FileCard",
+    "src": "resources/js/Pages/VelaSocialLab/MyUploads/components/FileCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BZqMysfF.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/MyUploads/components/FileUploadDragDrop.jsx": {
+    "file": "assets/FileUploadDragDrop-CaOkvguh.js",
+    "name": "FileUploadDragDrop",
+    "src": "resources/js/Pages/VelaSocialLab/MyUploads/components/FileUploadDragDrop.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "_index-BZqMysfF.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/MyUploads/components/Filter.jsx": {
+    "file": "assets/Filter-BpJZHEpp.js",
+    "name": "Filter",
+    "src": "resources/js/Pages/VelaSocialLab/MyUploads/components/Filter.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Profile/Partials/DeleteUserForm.jsx": {
+    "file": "assets/DeleteUserForm-CqEk2YGb.js",
+    "name": "DeleteUserForm",
+    "src": "resources/js/Pages/VelaSocialLab/Profile/Partials/DeleteUserForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Modal-C7EHUPgT.js",
+      "_TextInput-BK_jkj-f.js",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "_transition-CzWNMDPU.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdatePasswordForm.jsx": {
+    "file": "assets/UpdatePasswordForm-De0gzJ_J.js",
+    "name": "UpdatePasswordForm",
+    "src": "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdatePasswordForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_index-D5XRLH4z.js",
+      "_transition-CzWNMDPU.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdateProfileInformationForm.jsx": {
+    "file": "assets/UpdateProfileInformationForm-6zkdBAKn.js",
+    "name": "UpdateProfileInformationForm",
+    "src": "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdateProfileInformationForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_TextInput-BK_jkj-f.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_ProfileUploadInput-LWgYRigi.js",
+      "_transition-CzWNMDPU.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_iconBase-qlBafJIs.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Profile/Settings.jsx": {
+    "file": "assets/Settings-TZg63OgC.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/VelaSocialLab/Profile/Settings.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "_DriveInfo-A7qDnSPq.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_index-DZYEFDQs.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_InputError-BVD2qw8f.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_Modal-C7EHUPgT.js",
+      "_TextInput-BK_jkj-f.js",
+      "_SecondaryButton-DSQ4pxUs.js",
+      "_index-D5XRLH4z.js",
+      "_iconBase-qlBafJIs.js",
+      "_ProfileUploadInput-LWgYRigi.js",
+      "_SecondaryButton-CJd_1Wwq.js",
+      "_index-Dh2FwS8Q.js",
+      "_PrimaryIconButton-E5beE6gg.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/SupportPage/FAQCard.jsx": {
+    "file": "assets/FAQCard-DAJ6esh3.js",
+    "name": "FAQCard",
+    "src": "resources/js/Pages/VelaSocialLab/SupportPage/FAQCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/SupportPage/SupportPage.jsx": {
+    "file": "assets/SupportPage-DhNuPmtv.js",
+    "name": "SupportPage",
+    "src": "resources/js/Pages/VelaSocialLab/SupportPage/SupportPage.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/SupportPage/FAQCard.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/Components/ActivityForm.jsx": {
+    "file": "assets/ActivityForm-D42XJiHG.js",
+    "name": "ActivityForm",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/Components/ActivityForm.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/Components/Filter.jsx": {
+    "file": "assets/Filter-D-W0tB0b.js",
+    "name": "Filter",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/Components/Filter.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_DateInput-CaQdbuvS.js",
+      "_SearchInput-D5yJ8gM0.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskCard.jsx": {
+    "file": "assets/TaskCard-BnubGc3X.js",
+    "name": "TaskCard",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskCard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-D5XRLH4z.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUpload.jsx": {
+    "file": "assets/TaskUpload-BdsgdUfR.js",
+    "name": "TaskUpload",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUpload.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-Bx-jewI_.js",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUploadModal.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/ActivityForm.jsx",
+      "_iconBase-qlBafJIs.js",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-DZYEFDQs.js",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUploadModal.jsx": {
+    "file": "assets/TaskUploadModal-CU3HVOOy.js",
+    "name": "TaskUploadModal",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUploadModal.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/TaskHub/TaskHub.jsx": {
+    "file": "assets/TaskHub-DhpaA18b.js",
+    "name": "TaskHub",
+    "src": "resources/js/Pages/VelaSocialLab/TaskHub/TaskHub.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUpload.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/Filter.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskCard.jsx",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js",
+      "_index-Bx-jewI_.js",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUploadModal.jsx",
+      "_SecondaryIconButton-Boak0Ywu.js",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/ActivityForm.jsx",
+      "_PrimaryButton-CgHh9L6v.js",
+      "_DateInput-CaQdbuvS.js",
+      "_InputLabel-DpcK_Rcy.js",
+      "_TextInput-BO1oMSBD.js",
+      "_SearchInput-D5yJ8gM0.js",
+      "_index-D5XRLH4z.js"
+    ]
+  },
+  "resources/js/Pages/VelaSocialLab/Timeline/Timeline.jsx": {
+    "file": "assets/Timeline-Zg4l94ci.js",
+    "name": "Timeline",
+    "src": "resources/js/Pages/VelaSocialLab/Timeline/Timeline.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_VelaSocialLayout-D98UanQn.js",
+      "_NavBar-BRnHUvCp.js",
+      "_ApplicationLogo-jiC664LK.js",
+      "_Dropdown-B8gpms0Z.js",
+      "_transition-CzWNMDPU.js",
+      "_DarkModeToggleIcon-Dcrx1BIv.js",
+      "_index-DZYEFDQs.js",
+      "_iconBase-qlBafJIs.js",
+      "_SideMenu-D3_MuqCz.js"
+    ]
+  },
+  "resources/js/Pages/Welcome.jsx": {
+    "file": "assets/Welcome-BkRqK2vf.js",
+    "name": "Welcome",
+    "src": "resources/js/Pages/Welcome.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-CtPP1DNG.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Auth/ConfirmPassword.jsx",
+      "resources/js/Pages/Auth/ForgotPassword.jsx",
+      "resources/js/Pages/Auth/Login.jsx",
+      "resources/js/Pages/Auth/Register.jsx",
+      "resources/js/Pages/Auth/ResetPassword.jsx",
+      "resources/js/Pages/Auth/VerifyEmail.jsx",
+      "resources/js/Pages/Dashboard.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/ProfileSetup.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage1.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage2.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage3.jsx",
+      "resources/js/Pages/FirstSteps/ProfileSetup/Stage4.jsx",
+      "resources/js/Pages/InvitationPage.jsx",
+      "resources/js/Pages/Profile/Edit.jsx",
+      "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "resources/js/Pages/Resources.jsx",
+      "resources/js/Pages/Test.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/ActivityHub.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityCard.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUpload.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/ActivityUploadModal.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/AddActivity/ActivityForm.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/Filter.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterForm.jsx",
+      "resources/js/Pages/VelaSocialLab/ActivityHub/Components/Filter/FilterModal.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Axis.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardAxis.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/CardTask.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/LevelBox.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/ReviewStars.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Tag.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Target.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Axis/Components/Targets.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/AxisHub.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisCard.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/AxisSkeleton.jsx",
+      "resources/js/Pages/VelaSocialLab/AxisHub/Components/TaskPreview.jsx",
+      "resources/js/Pages/VelaSocialLab/Dashboard/AllTasks.jsx",
+      "resources/js/Pages/VelaSocialLab/Dashboard/OscProfile/OscProfileCard.jsx",
+      "resources/js/Pages/VelaSocialLab/Dashboard/RecordActivity.jsx",
+      "resources/js/Pages/VelaSocialLab/GuestUser/GuestUser.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/MyUploads.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/FileCard.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/FileUploadDragDrop.jsx",
+      "resources/js/Pages/VelaSocialLab/MyUploads/components/Filter.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/DeleteUserForm.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdatePasswordForm.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Partials/UpdateProfileInformationForm.jsx",
+      "resources/js/Pages/VelaSocialLab/Profile/Settings.jsx",
+      "resources/js/Pages/VelaSocialLab/SupportPage/FAQCard.jsx",
+      "resources/js/Pages/VelaSocialLab/SupportPage/SupportPage.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/ActivityForm.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/Filter.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskCard.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUpload.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/Components/TaskUploadModal.jsx",
+      "resources/js/Pages/VelaSocialLab/TaskHub/TaskHub.jsx",
+      "resources/js/Pages/VelaSocialLab/Timeline/Timeline.jsx",
+      "resources/js/Pages/Welcome.jsx"
+    ],
+    "css": [
+      "assets/app-Cii4elyu.css"
+    ]
+  }
+}
