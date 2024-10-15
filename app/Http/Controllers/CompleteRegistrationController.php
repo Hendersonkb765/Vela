@@ -102,13 +102,10 @@ class CompleteRegistrationController extends Controller
         try{
 
         $request->validate([
-            'organization.CNPJ' => 'string|max:18',
             'organization.organizationName' => 'required|string|max:255',
             'organization.focusAreas' => 'required',
             
         ],[
-            'organization.CNPJ.required' => 'O campo CNPJ é obrigatório.',
-            'organization.CNPJ.max' => 'O campo CNPJ deve ter no máximo 14 caracteres.',
             'organization.organizationName.required' => 'O campo nome da organização é obrigatório.',
             'organization.organizationName.max' => 'O campo nome da organização deve ter no máximo 255 caracteres.',
             'organization.focusAreas.required' => 'O campo áreas de atuação é obrigatório.',
