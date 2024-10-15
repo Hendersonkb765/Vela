@@ -36,9 +36,10 @@ use App\Services\Google\Drive\Folder;
 use App\Services\Google\Drive\GoogleDrive;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; // Add this line
-
+use Illuminate\Support\Facades\Mail; // Add this line
 use App\Services\ChatGPT\OpenAi;
 use Faker\Guesser\Name;
+use App\Mail\InvitationSender; // Add this line
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -201,6 +202,12 @@ Route::get('openai',function(){
     $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
 
     return response()->json($response);
+});
+route::get('/teste-mail/{email}',function($email){
+  
+    $dadosMail =Mail::to($email)->send(new InvitationSender('$linkInvitation', '$osc->name', 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg', '$osc->presidents_name'));
+    dd($dadosMail);
+    
 });
 
 require __DIR__.'/auth.php';
