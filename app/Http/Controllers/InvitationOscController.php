@@ -11,6 +11,7 @@ use App\Models\InvitationOsc;
 use Illuminate\Support\Facades\Mail; // Import the Mail facade
 use Illuminate\Support\Str; // Import the Str class
 use Inertia\Inertia; // Import the Inertia facade
+use Illuminate\Support\Facades\Log; // Import the Log facade
 
 class InvitationOscController extends Controller
 {
@@ -18,25 +19,31 @@ class InvitationOscController extends Controller
 
     public function sendInvitation(Request $request){
 
-        $user = Auth::user();
-        $osc = $user->osc->first();
-        $randomcode = hash('sha256', Str::random(60));
-        $linkInvitation = url('/validacao/'.$randomcode.'/'.'id='.$osc->id);
-        InvitationOsc::updateOrCreate(
-            ['email'=>$request->Invitemail,],
-            [
-            'email'=>$request->Invitemail,
-            'token' => $randomcode, 
-            'osc_id' =>$osc->id,
-            'status' => 'pending',
-            'expires_at' => now()->addMinutes(100)
-        ]);
-           
-        Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
-
-         
-
-        return response()->json(['status'=> 200,'message' => 'Convite enviado com sucesso!']);
+        try{
+            $user = Auth::user();
+            $osc = $user->osc->first();
+            $randomcode = hash('sha256', Str::random(60));
+            $linkInvitation = url('/validacao/'.$randomcode.'/'.'id='.$osc->id);
+            InvitationOsc::updateOrCreate(
+                ['email'=>$request->Invitemail,],
+                [
+                'email'=>$request->Invitemail,
+                'token' => $randomcode, 
+                'osc_id' =>$osc->id,
+                'status' => 'pending',
+                'expires_at' => now()->addMinutes(100)
+            ]);
+               
+            Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
+    
+            
+            return response()->json(['status'=> 200,'message' => 'Convite enviado com sucesso!']);
+        }
+        catch(\Exception $e){
+            Log::error('Erro no envio do e-mail', ['error' => $e->getMessage()]);
+            return response()->json(['status'=> 500,'message' => 'Erro ao enviar convite!']);
+        }
+        
         
     }
     public function validateInvitation($code,$oscId){
