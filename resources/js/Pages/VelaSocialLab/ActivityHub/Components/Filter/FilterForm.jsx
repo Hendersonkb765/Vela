@@ -4,7 +4,7 @@ import SearchInput from "@/FigmaComponents/Inputs/SearchInput";
 import axios from "axios";
 export default function FilterForm({ data, setData, minDate, maxDate, className='' }) {
 
-    console.log(data);
+
     const handleSearchChange = (value) => {
         setData('name', value);
 
