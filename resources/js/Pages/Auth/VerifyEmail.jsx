@@ -35,14 +35,14 @@ export default function VerifyEmail({ status }) {
                     <div className="mt-4 flex items-center justify-start space-x-4">
                         <PrimaryButton disabled={processing} type='submit' className='h-12'>Reenviar E-mail de Verificação</PrimaryButton>
 
-                        <SecondaryButton
+                        <Link
                             href={route('logout')}
                             method="POST"
                             as="button"
-                            className="h-12  !text-danger !border-danger hover:!bg-danger hover:!text-white transition-colors"
+                            className="min-w-32 h-12 !border-solid border-2 rounded-md !text-danger !border-danger hover:!bg-danger hover:!text-white transition-colors"
                         >
                             Sair
-                        </SecondaryButton>
+                        </Link>
                     </div>
                 </form>
             </div>

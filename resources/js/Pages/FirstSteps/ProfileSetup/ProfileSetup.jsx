@@ -33,7 +33,7 @@ export default function ProfileSetup() {
             focusAreas: [],
         }
     });
-    
+
     const isNameValid =  data.user.name.split(' ').length > 1;
 
 
@@ -93,11 +93,19 @@ export default function ProfileSetup() {
     const handleSubmit = () => {
         patch(route('completeRegistration.store'), {
             data: data,
-            onFinish: () => {
+            onSuccess: (page) => {
+                console.log('Registro completo com sucesso:', page);
                 reset();
-                setComplete(true); // Marca como completo
-                localStorage.removeItem('formData'); // Remove os dados do localStorage após a finalização
-                localStorage.removeItem('currentStep'); // Remove o step do localStorage após a finalização
+                setComplete(true);
+                localStorage.removeItem('formData');
+                localStorage.removeItem('currentStep');
+            },
+            onError: (errors) => {
+                console.error('Erro ao completar o registro:', errors);
+                alert('Ocorreu um erro ao tentar completar o registro. Por favor, tente novamente.');
+            },
+            onFinish: () => {
+                console.log('Requisição finalizada.');
             },
         });
     };
