@@ -21,18 +21,15 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
         const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
     
         try {
-            const response = await axios.post('/atividades/filterbydate', filters);
+            const response = await axios.post('/atividades/filter', filters);
             console.log(filters)
             const activitiesList = response.data.activities
-            const listaDivida = activitiesList.slice(0, 2)
-            console.log("primeiro item da lista: ", activitiesList[0])
-            console.log('Dentro de data.activites temos: ', activitiesList)
-            if (response.data.status == 666) {
+            if (response.data.status == 666){
                 setNoMatchFilter(true)
                 setFilteredActivitys([])
                 console.log("Status 666")
             } else if (response.data.status == 200){
-                setFilteredActivitys(listaDivida)
+                setFilteredActivitys(activitiesList)
                 console.log('Dentro de filteredactivitys temos: ', filteredActivitys)
                 setNoMatchFilter(false)
                 // console.log("Status 200: ", response.data.activities)
