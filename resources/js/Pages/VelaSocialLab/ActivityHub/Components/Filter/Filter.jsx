@@ -41,7 +41,6 @@ export default function Filter({onFilter}) {
     }
 
     const handleSearchChangeMobile = (value) =>{
-
         setData('name', value);
 
     }
@@ -81,6 +80,7 @@ export default function Filter({onFilter}) {
         setData(data.startDate = '', data.endDate='')
         onFilter(data);
         setHasDateParameters(false)
+        
 
     }
 

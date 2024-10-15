@@ -15,56 +15,29 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
     const [filteredActivitys, setFilteredActivitys] = useState({})
     const [noMatchFilter, setNoMatchFilter] = useState(false)
 
-    const fetchFiltredActivitys = async (name ='', startDate, endDate) => {
 
-        const filters = {'startDate': '1990-01-01', 'endDate': new Date().toISOString().split('T')[0]}
-        
-        
-        if(startDate != ''){
+    const fetchFiltredActivitys = async (title = '', startDate = '1990-01-01', endDate = new Date().toISOString().split('T')[0]) => {
 
-            filters.startDate = startDate
-
-        }
-        if(endDate != ''){
-
-            filters.endDate = endDate
-
-        }
-
-        console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))
+        const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
+    
         try {
-            const response = await fetch(`/atividades/filtro=${name}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')                
-                },
-                body: JSON.stringify(filters),
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error("Erro na requisição:", response.status, errorText);
-                throw new Error('Erro na requisição: ' + response.status);
-            }
-
-            const data = await response.json();
-
-            if(data.length === 0){
-
+            const response = await axios.post('/atividades/filtro', filters);
+            console.log(filters)
+            const activitiesList = response.data.activities
+            if (response.data.status == 404){
                 setNoMatchFilter(true)
-
-            }else{
-
-                setFilteredActivitys(data)
-
+                setFilteredActivitys([])
+                console.log("Status 404")
+            } else if (response.data.status == 200){
+                setFilteredActivitys(activitiesList)
+                console.log('Dentro de filteredactivitys temos: ', filteredActivitys)
+                setNoMatchFilter(false)
+                // console.log("Status 200: ", response.data.activities)
             }
-
-            // Chame a função onSearch para passar os dados filtrados
-            
         } catch (error) {
-            console.error("Erro ao buscar atividades:", error);
-        }
+            console.error("Erro ao buscar atividades: ", error);
+        }
+
 
     }
     
