@@ -28,7 +28,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
         const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
     
         try {
-            const response = await axios.post('/atividades/filter', filters);
+            const response = await axios.post('/atividades/filtro', filters);
             console.log(filters)
             const activitiesList = response.data.activities
             if (response.data.status == 404){
