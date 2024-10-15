@@ -5,68 +5,90 @@ import ActivityCard from './Components/ActivityCard';
 import Filter from './Components/Filter/Filter';
 import React, { useState } from 'react';
 import { usePage } from '@inertiajs/react';
+import axios from 'axios';
 
 
 export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive}) {
     // console.log(activities)
-  
+    // [texto](qualquerArquivo.md#<L1>)
     const { props } = usePage();
     const { status, message } = props;
-    const [filteredActivitys, setFilteredActivitys] = useState({})
+    const [filteredActivitys, setFilteredActivitys] = useState([])
     const [noMatchFilter, setNoMatchFilter] = useState(false)
 
-    const fetchFiltredActivitys = async (name ='', startDate, endDate) => {
 
-        const filters = {'startDate': '1990-01-01', 'endDate': new Date().toISOString().split('T')[0]}
-        
-        
-        if(startDate != ''){
-
-            filters.startDate = startDate
-
-        }
-        if(endDate != ''){
-
-            filters.endDate = endDate
-
-        }
-
-        console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))
+    const fetchFiltredActivitys = async (title = '', startDate = '1990-01-01', endDate = new Date().toISOString().split('T')[0]) => {
+        const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
+    
         try {
-            const response = await fetch(`/atividades/filtro=${name}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')                
-                },
-                body: JSON.stringify(filters),
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error("Erro na requisição:", response.status, errorText);
-                throw new Error('Erro na requisição: ' + response.status);
-            }
-
-            const data = await response.json();
-
-            if(data.length === 0){
-
+            const response = await axios.post('/atividades/filterbydate', filters);
+            console.log(filters)
+            const activitiesList = response.data.activities
+            const listaDivida = activitiesList.slice(0, 2)
+            console.log("primeiro item da lista: ", activitiesList[0])
+            console.log('Dentro de data.activites temos: ', activitiesList)
+            if (response.data.status == 666) {
                 setNoMatchFilter(true)
-
-            }else{
-
-                setFilteredActivitys(data)
-
+                setFilteredActivitys([])
+                console.log("Status 666")
+            } else if (response.data.status == 200){
+                setFilteredActivitys(listaDivida)
+                console.log('Dentro de filteredactivitys temos: ', filteredActivitys)
+                setNoMatchFilter(false)
+                // console.log("Status 200: ", response.data.activities)
             }
-
-            // Chame a função onSearch para passar os dados filtrados
-            
         } catch (error) {
-            console.error("Erro ao buscar atividades:", error);
+            console.error("Erro ao buscar atividades: ", error);
         }
 
-    }
+    };
+
+    
+    // const fetchFiltredActivitys = async (title ='', startDate ='1990-01-01', endDate= new Date().toISOString().split('T')[0]) => {
+
+    //     const filters = {'title': title, 'startDate': startDate, 'endDate': endDate}
+        
+    //     console.log(filters)
+    //     console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))
+    //     try{
+    //         const response = await fetch(`/atividades/filterbydate`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')                
+    //             },
+    //             body: JSON.stringify(filters),
+    //         });
+
+    //         if (!response.ok){
+    //             const errorText = await response.text();
+    //             console.error("Erro na requisição:", response.status, errorText);
+    //             throw new Error('Erro na requisição: ' + response.status);
+    //         }
+
+    //         const data = await response.json();
+
+    //         if(data.status == 666){
+
+    //             setNoMatchFilter(true)
+    //             setFilteredActivitys({})
+
+    //         }else if(data.status == 200){
+
+    //             setFilteredActivitys(data.activities)
+    //             console.log(data)
+    //             console.log(filteredActivitys)
+    //             setNoMatchFilter(false)
+
+    //         }
+
+    //         // Chame a função onSearch para passar os dados filtrados
+            
+    //     } catch (error) {
+    //         console.error("Erro ao buscar atividades:", error);
+    //     }
+
+    // }
     
     return (
         <VelaSocialLayout
@@ -85,13 +107,15 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
                         {!(Object.keys(filteredActivitys).length > 0 || noMatchFilter) &&(
                             activities.map((activity) => (
                                 <ActivityCard key={activity.id} data={activity}/>
-                            ))   
-                        )}
-                        {Object.keys(filteredActivitys).length > 0 &&(
-                            filteredActivitys.map((activity) => (
-                                <ActivityCard key={activity.id} data={activity}/>
                             ))
                         )}
+                        {Object.keys(filteredActivitys).length > 0 &&(
+
+                            filteredActivitys.map((activity) => (
+                                
+                                <ActivityCard key={activity.id} data={activity}/>
+                            ))
+                        )}  
 
                         {noMatchFilter&&(
 

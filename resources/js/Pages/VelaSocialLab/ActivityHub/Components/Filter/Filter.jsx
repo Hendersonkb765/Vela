@@ -25,11 +25,11 @@ export default function Filter({onFilter}) {
 
         const { startDate, endDate } = data;
         if(startDate != '' || endDate !=''){
-            onFilter(data);
+            onFilter(data.name, data.startDate, data.endDate);
             setHasDateParameters(true)
         }else{
 
-            onFilter(data);
+            onFilter(data.name, data.startDate, data.endDate);
             setHasDateParameters(false)
 
         }
@@ -79,7 +79,7 @@ export default function Filter({onFilter}) {
     const clenDateParametes = () =>{
         
         setData(data.startDate = '', data.endDate='')
-        onFilter(data);
+        onFilter();
         setHasDateParameters(false)
 
     }
