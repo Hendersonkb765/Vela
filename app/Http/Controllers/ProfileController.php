@@ -68,13 +68,12 @@ class ProfileController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
-
         $user = $request->user();
-
+        
         Auth::logout();
-
+        $user->activities()->update(['user_id' => null]);
         $user->delete();
-
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('thumbnail_photos_url');
             $table->foreignId('folder_photos_id')->constrained('google_drive_folders');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
 
