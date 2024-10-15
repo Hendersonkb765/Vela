@@ -17,17 +17,25 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
     const [noMatchFilter, setNoMatchFilter] = useState(false)
 
 
-    const fetchFiltredActivitys = async (title = '', startDate = '1990-01-01', endDate = new Date().toISOString().split('T')[0]) => {
+    const fetchFiltredActivitys = async (title='', startDate, endDate) => {
+        
+        if(!startDate){
+            startDate = '1990-01-01'
+        }
+        if(!endDate){
+            endDate = new Date().toISOString().split('T')[0]
+        }
+
         const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
     
         try {
             const response = await axios.post('/atividades/filter', filters);
             console.log(filters)
             const activitiesList = response.data.activities
-            if (response.data.status == 666){
+            if (response.data.status == 404){
                 setNoMatchFilter(true)
                 setFilteredActivitys([])
-                console.log("Status 666")
+                console.log("Status 404")
             } else if (response.data.status == 200){
                 setFilteredActivitys(activitiesList)
                 console.log('Dentro de filteredactivitys temos: ', filteredActivitys)
