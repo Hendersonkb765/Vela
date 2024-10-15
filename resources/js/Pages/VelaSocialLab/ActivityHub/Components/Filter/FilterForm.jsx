@@ -11,25 +11,20 @@ export default function FilterForm({ data, setData, minDate, maxDate, className=
     };
     const filterDateFrom = (e) => {
         setData('startDate', e.target.value);
-        if(data.startDate!='' && data.startDate!=''){
-            fetchData(data.startDate, data.endDate);
-        }
     };
     const filterDateTo = (e) => {
         setData('endDate', e.target.value);
-        if(data.endDate!='' && data.endDate!=''){
-            fetchData(data.startDate, data.endDate);
-        }
+
     };
-    const fetchData = async(startDate,endDate) => {
-        try{
-            const response = await axios.get(route('activity.filterByDate', {startDate: startDate, endDate: endDate}));
-            alert(response.status);
-        }
-        catch(error){
-            console.log(error);
-        }
-    };
+    // const fetchData = async(startDate,endDate) => {
+    //     try{
+    //         const response = await axios.get(route('activity.filterByDate', {startDate: startDate, endDate: endDate}));
+    //         alert(response.status);
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //     }
+    // };
     return (
         <div className={`bg-white h-20 rounded-lg dark:bg-slate-800 flex items-center p-4 space-x-16 fullhd:h-28 ${className}`}>
             <div className="flex flex-col space-y-1">
