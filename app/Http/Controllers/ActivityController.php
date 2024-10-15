@@ -12,6 +12,7 @@ use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
+use Illuminate\Support\Facades\Log;
  // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
@@ -56,31 +57,31 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
     }
-    public function filter(Request $request,$title){
-        //detalhes da atividade
 
+    public function filter(Request $request){
+        //detalhes da atividade
         $activities = Auth::user()->osc->first()->activities();
+
         try{
-            if (!empty($title) && !empty($request->startDate) && !empty($request->endDate)) {
-                $activitiesFilter = $activities->where('title', 'like', $title . '%')
+            if (!empty($request->title) && !empty($request->startDate) && !empty($request->endDate)) {
+                $activitiesFilter = $activities->where('title', 'like', $request->title . '%')
                                                ->whereBetween('date', [$request->startDate, $request->endDate])
                                                ->get();
-            } elseif (!empty($title)) {
-                $activitiesFilter = $activities->where('title', 'like', $title . '%')->get();
+            } elseif (!empty($request->title)) {
+                $activitiesFilter = $activities->where('title', 'like', $request->title . '%')->get();
             } elseif (!empty($request->startDate) && !empty($request->endDate)) {
                 $activitiesFilter = $activities->whereBetween('date', [$request->startDate, $request->endDate])->get();
-            } else {
+            }
+            else {
                 $activitiesFilter = $activities->get();
             }
-            return redirect()->back()->with(['status' => 200, 'activities' => $activitiesFilter]);
-
-            
+            return response()->json(['status'=> 200,'activities' => $activitiesFilter]);
+            return redirect()->with(['status' => 200, 'activities' => $activitiesFilter]);
         }
         catch(\Exception $e){
+            Log::error('Erro ao filtrar atividades: ' . $e->getMessage());
             return redirect()->back()->with(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
-
-
     }
 
     public function store(Request $request){
