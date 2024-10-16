@@ -26,7 +26,7 @@ export default function FAQCard({ title, text }) {
                 className="w-full"
             >
                 {isOpen && (
-                    <p className="text-gray-600 text-left">{text}</p>
+                    <p className="text-gray-600 text-left dark:text-gray-300">{text}</p>
                 )}
             </motion.div>
         </div>

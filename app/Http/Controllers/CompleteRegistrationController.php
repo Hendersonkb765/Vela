@@ -44,9 +44,9 @@ class CompleteRegistrationController extends Controller
 
     public function store(Request $request)
     {
-        
+
         try {
-            
+
             $request->validate([
                 'user.name' => 'required|string|max:255',
                 'user.birthday' => 'required|date|before:today',
@@ -58,8 +58,8 @@ class CompleteRegistrationController extends Controller
                 'user.birthday.date' => 'O campo data de nascimento deve ser uma data.',
                 'user.birthday.before' => 'A data de nascimento deve ser anterior a data atual.',
             ]);
-            
-        
+
+
             $userRequest = $request['user'];
             if (isset($userRequest['profilePicture'])) {
                 $imageData = $userRequest['profilePicture'];
@@ -79,13 +79,13 @@ class CompleteRegistrationController extends Controller
                 'role_id' => $userRequest['roleInOrganization'],
                 'birthday' => $userRequest['birthday'],
             ]);
-            
+
             $user->save();
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
             //return response()->json(['status' => 200, 'message' => 'Registro completado com sucesso!']);
-       
+
         }
         catch(ValidationException $e){
             return response()->json(['status'=>500,'error' => $e->errors()]);
@@ -95,7 +95,7 @@ class CompleteRegistrationController extends Controller
             //return response()->json(['error' => 'Erro ao completar o registro.'], 500);
 
         }
-        
+
     }
     public function createFirstOsc(Request $request)
     {
@@ -104,15 +104,20 @@ class CompleteRegistrationController extends Controller
         $request->validate([
             'organization.organizationName' => 'required|string|max:255',
             'organization.focusAreas' => 'required',
-            
+            'organization.CNPJ' => ['nullable', function ($attribute, $value, $fail) {
+                if (!$this->isValidCNPJ($value)) {
+                    $fail('O CNPJ informado é inválido.');
+                }
+            }]
         ],[
             'organization.organizationName.required' => 'O campo nome da organização é obrigatório.',
             'organization.organizationName.max' => 'O campo nome da organização deve ter no máximo 255 caracteres.',
             'organization.focusAreas.required' => 'O campo áreas de atuação é obrigatório.',
-           
+            'organization.CNPJ.cnpj' => 'O CNPJ informado é inválido.'
+
         ]);
         $image = $request->input('organization.organizationProfilePicture');
-        
+
         if (isset($image)) {
             $imageData = $image;
             list($type, $imageData) = explode(';', $imageData);
@@ -124,7 +129,7 @@ class CompleteRegistrationController extends Controller
             }
             Storage::disk('public')->put('profile-photos-osc/' . $imageName, $imageData);
             $imageUrl = asset('storage/profile-photos-osc/'.$imageName);
-            
+
         }
         else{
             $imageUrl = null;
@@ -149,18 +154,54 @@ class CompleteRegistrationController extends Controller
         foreach($level as $level){
             $osc->level()->attach($level->id);
         }
-      
+
         $focusAreas = $request->input('organization.focusAreas');
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){
                 $osc->targetAudience()->attach($i);
             }
         }
-        $osc->save();   
+        $osc->save();
         }
         catch(\Exception $e){
             dd($e);
         }
     }
 
+    // Função para validar CNPJ
+    // P.S: Em caso de bugs, não comunicar Gustavo, passar bem
+    private function isValidCNPJ($cnpj)
+    {
+        // Remover qualquer caractere que não seja número
+        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
+
+        // Verifica se o CNPJ tem 14 dígitos
+        if (strlen($cnpj) != 14) {
+            return false;
+        }
+
+        // Cálculo do dígito verificador
+        $firstCheckSum = 0;
+        $secondCheckSum = 0;
+        $multipliers1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $multipliers2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+        for ($i = 0; $i < 12; $i++) {
+            $firstCheckSum += $cnpj[$i] * $multipliers1[$i];
+        }
+
+        $firstDigit = $firstCheckSum % 11 < 2 ? 0 : 11 - ($firstCheckSum % 11);
+
+        if ($cnpj[12] != $firstDigit) {
+            return false;
+        }
+
+        for ($i = 0; $i < 13; $i++) {
+            $secondCheckSum += $cnpj[$i] * $multipliers2[$i];
+        }
+
+        $secondDigit = $secondCheckSum % 11 < 2 ? 0 : 11 - ($secondCheckSum % 11);
+
+        return $cnpj[13] == $secondDigit;
+    }
 }
