@@ -29,7 +29,6 @@ export default function ProfileSetup() {
             organizationProfilePicture: '',
             CNPJ: '',
             doesNotHaveCNPJ: false,
-            CPF: '',
             focusAreas: [],
         }
     });

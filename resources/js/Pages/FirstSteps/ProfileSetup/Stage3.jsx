@@ -80,11 +80,11 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                                     autoComplete="CNPJ"
                                     isFocused={true}
                                     placeholder="99.999.999/9999-99"
-                                   
+
                                 />
                             )}
                         </InputMask>
-                        <InputError message={errors.CNPJ} className="mt-2" />
+                        <InputError message={errors['organization.CNPJ']} className="mt-2" />
                     </div>
                 </div>
             </div>
