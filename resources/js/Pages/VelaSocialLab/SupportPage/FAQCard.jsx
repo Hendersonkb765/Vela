@@ -10,12 +10,12 @@ export default function FAQCard({ title, text }) {
     };
 
     return (
-        <div className="w-96 border border-gray-300 rounded-lg p-4 mb-2  cursor-pointer" onClick={toggleOpen}>
+        <div className="min-w-96 border border-gray-300 rounded-lg p-4 mb-2  cursor-pointer" onClick={toggleOpen}>
             <div className="flex justify-between items-center">
-                <h3 className="font-bold text-lg text-left">
+                <h3 className="font-bold text-lg text-left dark:text-gray-200">
                     {title}
                 </h3>
-                <GoChevronDown className={`w-6 h-6  transition duration-300 ${isOpen && "rotate-180"}`} />
+                <GoChevronDown className={`w-6 h-6  transition duration-300 dark:text-gray-200 ${isOpen && "rotate-180"}`} />
             </div>
 
             <motion.div
