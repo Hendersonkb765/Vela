@@ -71,13 +71,13 @@ Route::get('/settings', function (Request $request) {
 
 Route::get('/myuploads', function () {
     return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
-})->middleware(['auth'])->name('myuploads');
+})->middleware(['auth', 'verified'])->name('myuploads');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
 Route::get('/axis', function () {
     return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
-})->middleware(['auth'])->name('axis');
+})->middleware(['auth', 'verified'])->name('axis');
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
@@ -91,25 +91,25 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::post('/atividades/filtro','filter')->name('activity.filter');
     //Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
-})->middleware(['auth']);
+})->middleware(['auth', 'verified']);
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
 Route::get('/axishub', function () {
     return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
-})->middleware(['auth'])->name('axishub');
+})->middleware(['auth', 'verified'])->name('axishub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 Route::get('/timeline', function () {
     return Inertia::render('VelaSocialLab/Timeline/Timeline');
-})->middleware(['auth'])->name('timeline');
+})->middleware(['auth', 'verified'])->name('timeline');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 Route::get('/support', function () {
     return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
-})->middleware(['auth'])->name('support');
+})->middleware(['auth', 'verified'])->name('support');
 
 Route::middleware('auth')->group(function () {
 
@@ -204,10 +204,19 @@ Route::get('openai',function(){
     return response()->json($response);
 });
 route::get('/teste-mail/{email}',function($email){
-  
+
     $dadosMail =Mail::to($email)->send(new InvitationSender('$linkInvitation', '$osc->name', 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg', '$osc->presidents_name'));
     dd($dadosMail);
-    
+
+});
+
+
+Route::get('/not-found', function () {
+    abort(404);
+});
+
+Route::get('/server-error', function () {
+    abort(500);
 });
 
 require __DIR__.'/auth.php';
