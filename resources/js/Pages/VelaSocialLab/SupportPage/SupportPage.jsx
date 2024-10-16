@@ -43,7 +43,7 @@ export default function SupportPage() {
                             Navegue pelas categorias ou utilize a busca para encontrar rapidamente o que precisa. Estamos aqui para ajudar!
                         </h3>
                     </div>
-
+                    {/* Adicionar campo de pesquisa? */}
                     {FAQData.map((category, index) => (
                         <div key={index} className="w-full max-w-2xl mx-auto bg-white dark:bg-slate-800 p-4 rounded-md">
                             <h2 className="font-semibold text-xl  dark:text-gray-200 my-5">{category.category}</h2>
