@@ -211,6 +211,10 @@ route::get('/teste-mail/{email}',function($email){
 });
 
 
+Route::get('/isolado', function () {
+    return Inertia::render('InvitationPage');
+});
+
 Route::get('/not-found', function () {
     abort(404);
 });
