@@ -18,7 +18,7 @@ export default function SupportPage() {
             <section className='h-full flex flex-col min-h-fit  overflow-x-hidden '>
 
                 <div className="h-full flex flex-col  justify-center items-center space-y-4">
-                    <h1 className="text-center font-headers font-medium text-2xl">FAQ</h1>
+                    <h1 className="text-center font-headers font-medium text-2xl dark:text-gray-100">FAQ</h1>
                     <>
                         {FAQData.map((faq, index) => (
                             <FAQCard key={index} title={faq.title} text={faq.text} />

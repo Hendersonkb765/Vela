@@ -34,7 +34,6 @@ export default function VerifyEmail({ status }) {
                 <form onSubmit={submit} >
                     <div className="mt-4 flex items-center justify-start space-x-4">
                         <PrimaryButton disabled={processing} type='submit' className='h-12'>Reenviar E-mail de Verificação</PrimaryButton>
-
                         <Link
                             href={route('logout')}
                             method="POST"
