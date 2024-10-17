@@ -6,6 +6,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\DashboardUpdated;
 use App\Listeners\RefreshDashboardCache;
+use App\Listeners\SendVerificationEmail;
+use Illuminate\Auth\Events\Authenticated;
+use App\Events\VerificationEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,6 +16,13 @@ class EventServiceProvider extends ServiceProvider
         DashboardUpdated::class => [
             RefreshDashboardCache::class,
         ],
+        VerificationEmail::class => [
+            SendVerificationEmail::class,
+        ],
+        Authenticated::class => [
+            SendVerificationEmail::class,
+        ]
+       
     ];
 
     public function boot()

@@ -17,6 +17,8 @@ use SebastianBergmann\CodeCoverage\Driver\Driver;
 use Google\Client as GoogleClient;
 use Google\Service\Drive as Google_Service_Drive;
 use App\Http\Middleware\CheckPresident;
+use App\Http\Middleware\DeleteExpiredUrlValidateEmail;
+
 Route::middleware('guest')->group(function () {
 
     /*
@@ -50,13 +52,15 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 
+Route::get('verify-email/{id}/{hash}',VerifyEmailController::class)->middleware(['signed','throttle:6,1'])->name('verification.verify');
+
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
+    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+    //             ->middleware(['signed', 'throttle:6,1'])
+    //             ->name('verification.verify');
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
                 ->middleware('throttle:6,1')
