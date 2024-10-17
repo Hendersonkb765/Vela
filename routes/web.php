@@ -54,7 +54,6 @@ Route::get('/', function () {
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-<<<<<<< HEAD
 })->middleware(['auth'])->name('dashboard');
 // ->middleware(['auth', 'verified'])->name('dashboard');
 =======
@@ -62,6 +61,7 @@ Route::get('/dashboard', function () {
 */
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
     ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class,CheckGoogleConnection::class])->name('dashboard');
+
 
 Route::get('/settings', function (Request $request) {
     return Inertia::render('VelaSocialLab/Profile/Settings',

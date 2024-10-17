@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\activity;
 use App\Services\ChatGPT\OpenAI;
 use Illuminate\Http\Request;
@@ -12,7 +13,6 @@ use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
-use Illuminate\Support\Facades\Log;
  // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
