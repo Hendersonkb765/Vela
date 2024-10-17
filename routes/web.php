@@ -90,7 +90,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::get('/activityhub','index')->name('activityhub');
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::post('/atividades/filtro','filter')->name('activity.filter');
-    //Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
+    Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
 })->middleware(['auth', 'verified']);
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');

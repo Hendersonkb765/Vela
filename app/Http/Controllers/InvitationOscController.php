@@ -50,7 +50,6 @@ class InvitationOscController extends Controller
 
         try{
             if(InvitationOsc::where('token',$code)){
-
                     $osc = Osc::find($oscId);
                     $osc->user()->attach(Auth::user()->id);
                     return redirect()->route('dashboard');               

@@ -34,6 +34,7 @@ export default function TaskHub({ auth, }) {
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Meus Uploads</h2>}
         >
             <Head title="Eixos"/>
+            
             <div className="flex items-center justify-start p-5 h-72 bg-primary ">
                 <h1 className="text-5xl font-bold text-gray-200">Eixos SocialLab</h1>
                 {/* <div className="bg-primary-200 w-fit py-3 rounded-br-2xl px-5 font-semibold text-gray-800 dark:text-gray-200 text-3xl">Eixos da Aceleração</div> */}

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\activity;
-use App\Services\ChatGPT\OpenAi;
+use App\Services\ChatGPT\OpenAI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -36,8 +36,8 @@ class ActivityController extends Controller
     public function rephraseDescription(Request $request){
         //reformular descrição da atividade
         try{
-            $openAi = new OpenAi();
-            $response = $openAi->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto:',$request->description);
+            $openAi = new OpenAI();
+            $response = $openAi->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto (Caso o texto esteja vazio, retorne a seguinte frase "Porfavor escreva algo."):',$request->description);
             return response()->json($response);
         }
         catch(\Exception $e){
@@ -114,9 +114,9 @@ class ActivityController extends Controller
                     foreach($request->file('activityImages') as $fileDatabase){
                         $driveFile = new File($osc->id);
                         $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
-                        }
-                        $folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
-                        !empty($folderActivityId) ? $folderActivityId = $folderActivityId->id : $folderActivityId = null; 
+                        }    
+                    }
+                    //$folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
                         
                         Activity::create([
                             'title' => $request->activityTitle,
@@ -127,12 +127,11 @@ class ActivityController extends Controller
                             'status' => $request->activityStatus,
                             'audience' => $request->activityAudience,
                             'thumbnail_photos_url' => $webViewLink,
-                            'folder_photos_id' => $folderActivityId,
+                            'folder_photos_id' => $googleDriveFolder->id,
                             'send_by' => Auth::user()->name,
                             'user_id' => Auth::user()->id,
                             'osc_id' => Auth::user()->osc->first()->id
                         ]);
-                    }
 
                 }
 
