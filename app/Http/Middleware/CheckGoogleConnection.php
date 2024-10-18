@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\GoogleDrive;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class CheckGoogleConnection
 {
@@ -21,14 +22,20 @@ class CheckGoogleConnection
         
         $osc = $request->user()->osc->first();
         if(Auth::check()){
-            $googleToken = GoogleToken::where('osc_id',$osc->id)->first();
-            if($googleToken){  
-                $googleDrive = new GoogleDrive($osc->id);
-                $googleDrive = $googleDrive->getUserStorageQuota();
-            }
-            else{
-                $googleDrive = false;
-            }
+            $cacheKey = 'google_token_'.$osc->id;
+            $googleDrive = Cache::remember($cacheKey,60,function()use ($osc){
+                $googleToken = GoogleToken::where('osc_id', $osc->id)->first();
+                if($googleToken){  
+                    $googleDrive = new GoogleDrive($osc->id);
+                    $googleDrive = $googleDrive->getUserStorageQuota();
+                    return $googleDrive;
+                }
+                else{
+                    return false;
+                }
+                
+
+            });
             $request->attributes->set('storageDrive',$googleDrive);
        
         }
