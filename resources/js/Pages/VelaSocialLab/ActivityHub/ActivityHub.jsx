@@ -31,67 +31,22 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
             const response = await axios.post('/atividades/filtro', filters);
             console.log(filters)
             const activitiesList = response.data.activities
-            if (response.data.status == 404){
-                setNoMatchFilter(true)
-                setFilteredActivitys([])
-                console.log("Status 404")
-            } else if (response.data.status == 200){
+             if (response.data.status == 200 && activitiesList.length > 0){
                 setFilteredActivitys(activitiesList)
                 console.log('Dentro de filteredactivitys temos: ', filteredActivitys)
                 setNoMatchFilter(false)
                 // console.log("Status 200: ", response.data.activities)
+            } else{
+                setNoMatchFilter(true)
+                setFilteredActivitys([])
+                console.log("Status 404")
             }
         } catch (error) {
             console.error("Erro ao buscar atividades: ", error);
         }
     };
 
-    
-    // const fetchFiltredActivitys = async (title ='', startDate ='1990-01-01', endDate= new Date().toISOString().split('T')[0]) => {
 
-    //     const filters = {'title': title, 'startDate': startDate, 'endDate': endDate}
-        
-    //     console.log(filters)
-    //     console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))
-    //     try{
-    //         const response = await fetch(`/atividades/filterbydate`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')                
-    //             },
-    //             body: JSON.stringify(filters),
-    //         });
-
-    //         if (!response.ok){
-    //             const errorText = await response.text();
-    //             console.error("Erro na requisição:", response.status, errorText);
-    //             throw new Error('Erro na requisição: ' + response.status);
-    //         }
-
-    //         const data = await response.json();
-
-    //         if(data.status == 666){
-
-    //             setNoMatchFilter(true)
-    //             setFilteredActivitys({})
-
-    //         }else if(data.status == 200){
-
-    //             setFilteredActivitys(data.activities)
-    //             console.log(data)
-    //             console.log(filteredActivitys)
-    //             setNoMatchFilter(false)
-
-    //         }
-
-    //         // Chame a função onSearch para passar os dados filtrados
-            
-    //     } catch (error) {
-    //         console.error("Erro ao buscar atividades:", error);
-    //     }
-
-    // }
     
     return (
         <VelaSocialLayout
@@ -122,7 +77,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 
                         {noMatchFilter&&(
 
-                            <h3>Sem resultados</h3>
+                            <h3 className='text-gray-800 dark:text-gray-200 animate-enter text-2xl font-medium'>Sem resultados</h3>
 
                         )}
 

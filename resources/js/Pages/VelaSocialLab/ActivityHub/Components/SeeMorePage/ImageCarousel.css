@@ -1,0 +1,26 @@
+.slick-dots {
+    position: absolute;
+    bottom: 10px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .slick-dots li {
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+  }
+  
+  .slick-dots li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid transparent;
+  }
+  
+  .slick-dots li.slick-active img {
+    border: 2px solid #057EE8; /* Destaca a miniatura ativa */
+  }
+  

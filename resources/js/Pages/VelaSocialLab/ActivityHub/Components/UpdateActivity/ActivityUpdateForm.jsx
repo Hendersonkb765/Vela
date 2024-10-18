@@ -19,12 +19,12 @@ import { GoXCircleFill } from "react-icons/go";
 const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
 
-export default function ActivityForm({ onSubmit }) {
+export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
-    const [imgSrc, setImgSrc] = useState('');
+    const [imgSrc, setImgSrc] = useState(activityData.thumbnail_photos_url);
     const [loadingIa, setLoadingIa] = useState(false)
-    const [activityImages, setPreviewImages] = useState('');
+    const [activityImages, setPreviewImages] = useState(['https://www.eusemfronteiras.com.br/wp-content/uploads/2017/08/11-810x456.png', 'https://lirp.cdn-website.com/82e2ead5/dms3rep/multi/opt/happy-people-volunteering-special-causes-1920w.jpg', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png']);
     const [showPopup, setShowPopup] = useState(false);
     const [loadingActivity, setLoadingActivity] = useState(false);
     const [registerError, setRegisterError] = useState(false);
@@ -33,15 +33,31 @@ export default function ActivityForm({ onSubmit }) {
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
     const { data, setData, processing, post, progress } = useForm({
-        activityTitle: '',
-        activityDescription: '',
-        activityAudience: '',
-        activityDate: '',
-        activityHourStart: '06:00',
-        activityHourEnd: '07:00',
-        activityThumbnail: '',
+        activityTitle: activityData.title,
+        activityDescription: activityData.description,
+        activityAudience: activityData.audience,
+        activityDate: activityData.date,
+        activityHourStart: activityData.hour_start,
+        activityHourEnd: activityData.hour_end,
+        activityThumbnail: activityData.thumbnail_photos_url,
         activityImages: [],
     });
+
+
+
+
+
+
+
+    const [existingImages, setExistingImages] = useState([]);
+    const [newImages, setNewImages] = useState([]);
+
+
+
+
+
+
+
 
     const handleTextIa = async () => {
 
@@ -145,31 +161,110 @@ export default function ActivityForm({ onSubmit }) {
         reader.readAsDataURL(file);
     };
 
+    const middlewareImgs = (e) =>{
+
+        if(activityImages.length === 6){
+
+            onSelectFiles(e)
+
+        }else{
+
+            console.log("limite atingido")
+
+        }
+
+    }
+
+    // const onSelectFiles = (e) => {
+    //     const files = e.target.files;
+    //     if (!files || files.length === 0) return;
+
+    //     const fileArray = Array.from(files); // Converte FileList para array
+    //     const validImages = []; // Array para armazenar URLs de imagens válidas
+    //     const invalidImages = []; // Array para armazenar mensagens de erro
+
+        
+    //     fileArray.forEach((file) => {
+    //         const reader = new FileReader();
+
+    //         reader.addEventListener("load", () => {
+    //             const imageElement = new Image();
+    //             const imageUrl = reader.result?.toString() || "";
+    //             imageElement.src = imageUrl;
+
+    //             imageElement.addEventListener("load", (event) => {
+    //                 const { naturalHeight, naturalWidth } = event.currentTarget;
+    //                 if (naturalWidth < MIN_SIZE || naturalHeight < MIN_SIZE) {
+    //                     invalidImages.push(`Imagem '${file.name}' muito pequena (tamanho mínimo: 150x150)`);
+    //                 } else {
+    //                     validImages.push(imageUrl); // Adiciona a URL da imagem válida ao array
+    //                 }
+
+    //                 // Atualiza o estado uma vez que todas as imagens foram processadas
+    //                 if (validImages.length + invalidImages.length === fileArray.length) {
+    //                     if (invalidImages.length > 0) {
+    //                         setErrors((prevErrors) => ({
+    //                             ...prevErrors,
+    //                             activityThumbnail: invalidImages.join(', '),
+    //                         }));
+    //                     }
+    //                     setPreviewImages(validImages); // Armazena as URLs das imagens válidas no estado
+    //                     setData('activityImages', fileArray); // Salva todos os arquivos no estado do formulário
+    //                 }
+    //             });
+    //         });
+
+    //         reader.readAsDataURL(file);
+    //     });
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const onSelectFiles = (e) => {
         const files = e.target.files;
         if (!files || files.length === 0) return;
-
-        const fileArray = Array.from(files); // Converte FileList para array
-        const validImages = []; // Array para armazenar URLs de imagens válidas
-        const invalidImages = []; // Array para armazenar mensagens de erro
-
+    
+        const fileArray = Array.from(files); 
+        const validImages = [];
+        const invalidImages = [];
+    
         fileArray.forEach((file) => {
             const reader = new FileReader();
-
+    
             reader.addEventListener("load", () => {
                 const imageElement = new Image();
                 const imageUrl = reader.result?.toString() || "";
                 imageElement.src = imageUrl;
-
+    
                 imageElement.addEventListener("load", (event) => {
                     const { naturalHeight, naturalWidth } = event.currentTarget;
                     if (naturalWidth < MIN_SIZE || naturalHeight < MIN_SIZE) {
                         invalidImages.push(`Imagem '${file.name}' muito pequena (tamanho mínimo: 150x150)`);
                     } else {
-                        validImages.push(imageUrl); // Adiciona a URL da imagem válida ao array
+                        validImages.push(imageUrl); // Adiciona a nova imagem válida
                     }
-
-                    // Atualiza o estado uma vez que todas as imagens foram processadas
+    
                     if (validImages.length + invalidImages.length === fileArray.length) {
                         if (invalidImages.length > 0) {
                             setErrors((prevErrors) => ({
@@ -177,15 +272,52 @@ export default function ActivityForm({ onSubmit }) {
                                 activityThumbnail: invalidImages.join(', '),
                             }));
                         }
-                        setPreviewImages(validImages); // Armazena as URLs das imagens válidas no estado
-                        setData('activityImages', fileArray); // Salva todos os arquivos no estado do formulário
+                        setPreviewImages([...previewImages, ...validImages]); // Preserva as imagens existentes
+                        setData('activityImages', [...fileArray, ...newImages]); // Salva novos arquivos
                     }
                 });
             });
-
+    
             reader.readAsDataURL(file);
         });
     };
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const removeImage = (index) => {
         setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
@@ -404,20 +536,26 @@ export default function ActivityForm({ onSubmit }) {
                     <div className="my-4">
                         <InputLabel>Fotos da Atividade</InputLabel>
                         <span className="sr-only ">Escolha fotos para galeria</span>
-                        <input
-                            id="thumbnail_input"
-                            type="file"
-                            accept="image/*"
-                            onChange={onSelectFiles}
-                            multiple
-                            className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
-                        />
+                        {activityImages.length < 6 &&(
+                            <input
+                                id="thumbnail_input"
+                                type="file"
+                                accept="image/*"
+                                onChange={onSelectFiles}
+                                multiple
+                                className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
+                            />
+                        )}
+                        {activityImages.length >= 6&&(
+                            <p className='dark:text-gray-200 border-l-2 border-primary pl-1'>Limite de imagens atingido nesta atividade, você ainda pode trocar as imagens</p>
+                        )}
 
                         {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
+                        
                     </div>
                     {activityImages.length > 0 && (
-                        <div className='mt-4 max-w-96 flex flex-wrap gap-4'>
-                            {activityImages.slice(0, 3).map((file, index) => (
+                        <div className='mt-4 max-w-fit flex flex-wrap gap-4'>
+                            {activityImages.slice(0, 6).map((file, index) => (
                                 <div key={index} className='relative flex items-end flex-wrap hover:items-center justify-center w-fit group cursor-pointer transition-all'>
                                     <img src={file} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
                                     <PrimaryIconButton onClick={() => removeImage(index)} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
@@ -425,11 +563,11 @@ export default function ActivityForm({ onSubmit }) {
                                     </PrimaryIconButton>
                                 </div>
                             ))}
-                            {activityImages.length > 2 && (
+                            {/* {activityImages.length > 2 && (
                                 <div className='flex items-center justify-center text-neutral-700 dark:text-white mt-2'>
                                     +{activityImages.length - 3}
                                 </div>
-                            )}
+                            )} */}
                         </div>
                     )}
 
