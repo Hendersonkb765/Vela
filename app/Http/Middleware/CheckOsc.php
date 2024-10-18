@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CheckOsc
 {
@@ -14,11 +15,10 @@ class CheckOsc
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         if(!isset(Auth::user()->osc->first()->id)){
-            dd("Você não tem OSC");
-            //return redirect()->route('testesss');
+            return Inertia::render('InvitationPage');
         }
        return $next($request);
     }
