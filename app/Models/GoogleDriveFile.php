@@ -21,4 +21,8 @@ class GoogleDriveFile extends Model
         'web_content_link',
         'web_view_link'
     ];
+
+    public function folderDrive(){
+        return $this->belongsTo(GoogleDriveFolder::class);
+    }
 }

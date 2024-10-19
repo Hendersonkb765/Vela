@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\GoogleDriveFile;
 
 class GoogleDriveFolder extends Model
 {
@@ -16,4 +17,8 @@ class GoogleDriveFolder extends Model
         'osc_id',
         'creation_folder_date',
     ];
+
+    public function fileDrive(){
+        return $this->hasMany(GoogleDriveFile::class,'folder_id');
+    }
 }

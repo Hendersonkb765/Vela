@@ -20,8 +20,16 @@ class ActivityController extends Controller
 
     public function index(){
         //lista de atividades
+        // $activities = Auth::user()->osc->first()->activities()->get();
+        // dd($activities->with(['google_drive_folders','google_drive_folders']));
+        $activities = Auth::user()->osc->first()->activities()->with(['folderDrive.fileDrive'])->orderBy('date','desc')->get();
+            $activitiesArray = $activities->toArray();
+         
         try{
-            $activities = Auth::user()->osc->first()->activities()->orderBy('date','desc')->get();
+            $activities = Auth::user()->osc->first()->activities()->with(['folderDrive.fileDrive'])->orderBy('date','desc')->get();
+            $activitiesArray = $activities->toArray();
+         
+          
             $isConnectedToGoogleDrive = GoogleToken::where('osc_id',Auth::user()->osc->first()->id)->first();
             return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub',[
                 'activities' => $activities,
