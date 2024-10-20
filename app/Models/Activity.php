@@ -32,4 +32,7 @@ class Activity extends Model
     public function address(){
         return $this->morphMany(Address::class, 'addressable');
     }
+    public function folderDrive(){
+        return $this->belongsTo(GoogleDriveFolder::class,'folder_photos_id');
+    }
 }

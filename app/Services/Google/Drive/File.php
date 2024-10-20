@@ -23,13 +23,15 @@ class File extends GoogleDrive
         
                 if($fileDatabase){
                     $drive = new Drive($this->client);
+                    
                     $fileMetadata = new DriveFile([
                         'name' => $name,
                         'mimeType' => $fileDatabase->getMimeType(),
                         'parents' => [$folderId]
                     ]);
+                    
+
                     $content = file_get_contents($fileDatabase);
-    
                     $file = $drive->files->create($fileMetadata, [
                         'data' => $content,
                         'mimeType' => $fileDatabase->getMimeType(),
@@ -51,12 +53,13 @@ class File extends GoogleDrive
                             'name' => $name,
                             'file_id' => $file->id,
                             'folder_id' => $localFolder->id,
+                            'file_extension' => $fileDatabase->getClientOriginalExtension(),
                             'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
                             'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
-                            'file_extension' => $fileDatabase->getClientOriginalExtension(),
                             'web_content_link' => $file->webContentLink,
                             'web_view_link' => $this->createUrlView($file->id,$typeFile)
                         ]);
+                        
                     }
                     else{
                         return response()->json(['error'=>"Pasta não encontrada"],404);
@@ -72,7 +75,7 @@ class File extends GoogleDrive
 
         }
         catch(\Exception $e){
-            return response()->json(['error'=>"Erro ao criar arquivo no Google Drive"],500);
+            return response()->json(['error'=>"Erro ao criar arquivo no Google Drive",'message'=>$e],500);
         }
         
         

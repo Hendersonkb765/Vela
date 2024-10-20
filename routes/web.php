@@ -176,10 +176,11 @@ Route::get('/formulario',function(){
 Route::post('/drive',function(Request $request){
 
         $oscId = Auth::user()->osc->first()->id;
-        foreach($request->file('database') as $fileDatabase){
         $driveFile = new File($oscId);
-        $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
-        }
+        $sa = $driveFile->create('teste',$request->file('database')[0],'1Vx8Xild41Leq3FOYEPD8nmbPCuEav75W');
+      
+
+        
     //$driveFile = new File($oscId);
    // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
     //dd($arquivo);
@@ -187,7 +188,7 @@ Route::post('/drive',function(Request $request){
 Route::get('/views',function(){
     $oscid = Auth::user()->osc->first()->id;
     $driveFile = new File($oscid);
-    $arquivos = $driveFile->create('teste',null,false);
+    $arquivos = $driveFile->create('teste',null,false,false,'image');
     dd($arquivos);
 });
 Route::get('/drive2',function(){
@@ -222,6 +223,8 @@ Route::get('/not-found', function () {
 Route::get('/server-error', function () {
     abort(500);
 });
+
+
 
 require __DIR__.'/auth.php';
 
