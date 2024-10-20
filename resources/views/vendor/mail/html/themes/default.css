@@ -1,5 +1,6 @@
 /* Base */
-
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 body,
 body *:not(html):not(style):not(br):not(tr):not(code) {
     box-sizing: border-box;

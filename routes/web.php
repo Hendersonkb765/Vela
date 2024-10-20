@@ -101,6 +101,11 @@ Route::get('/axishub', function () {
 })->middleware(['auth', 'verified'])->name('axishub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
+Route::get('/seemore', function () {
+    return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
+})->middleware(['auth'])->name('seemore');
+// ->middleware(['auth', 'verified'])->name('axishub');
+
 Route::get('/timeline', function () {
     return Inertia::render('VelaSocialLab/Timeline/Timeline');
 })->middleware(['auth', 'verified'])->name('timeline');

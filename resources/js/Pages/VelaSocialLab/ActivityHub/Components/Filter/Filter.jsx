@@ -86,7 +86,7 @@ export default function Filter({onFilter}) {
     const clenDateParametes = () =>{
         
         setData(data.startDate = '', data.endDate='')
-        onFilter();
+        onFilter(data.name);
         setHasDateParameters(false)
         
 
