@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Mail; // Add this line
 use App\Services\ChatGPT\OpenAi;
 use Faker\Guesser\Name;
 use App\Mail\InvitationSender; // Add this line
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -224,7 +225,9 @@ Route::get('/server-error', function () {
     abort(500);
 });
 
-
+Route::get('/teste-storage',function(){
+    Storage::disk('s3')->put('teste.txt','teste');
+});
 
 require __DIR__.'/auth.php';
 
