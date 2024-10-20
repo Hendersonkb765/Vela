@@ -19,12 +19,10 @@ return new class extends Migration
             $table->time('hour_end');
             $table->date('date');
             $table->integer('audience');
-            $table->string('send_by');
             $table->text('description');
-            $table->string('thumbnail_photos_url');
-            $table->foreignId('folder_photos_id')->constrained('google_drive_folders');
+            $table->string('thumbnail_photo_url');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('send_by')->nullable()->constrained('users');
             $table->timestamps();
         });
 

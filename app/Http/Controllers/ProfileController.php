@@ -47,11 +47,18 @@ class ProfileController extends Controller
                 if(empty($profilePictureName)){
                     $profilePictureName = uniqid() . '.png';
                 }
-                if (!Storage::disk('public')->exists('profile-photos')) {
-                    Storage::disk('public')->makeDirectory('profile-photos');
+                // if (!Storage::disk('public')->exists('profile-photos')) {
+                //     Storage::disk('public')->makeDirectory('profile-photos');
+                // }
+                $profileStatus = Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
+                if($profileStatus){
+                    Auth::user()->image_url = Storage::disk('s3')->url('profile-users/' . $profilePictureName);
                 }
-                Auth::user()->image_url = asset('storage/profile-photos/' . $profilePictureName);   
-                Storage::disk('public')->put('profile-photos/' . $profilePictureName, $imageData);
+                else{
+                    return redirect()->back()->with(['status' => '500','message'=> 'Erro ao atualizar a imagem do perfil!']);
+                }
+                  
+                
             }
         }
 

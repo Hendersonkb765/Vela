@@ -67,11 +67,10 @@ class CompleteRegistrationController extends Controller
                 list(, $imageData) = explode(',', $imageData);
                 $imageData = base64_decode($imageData);
                 $imageName = uniqid() . '.png';
-                Auth::user()->image_url = asset('storage/profile-photos/'.$imageName);
-                if (!Storage::disk('public')->exists('profile-photos')) {
-                    Storage::disk('public')->makeDirectory('profile-photos');
+                $profileStatus= Storage::put('profile-users/'.$imageName, $imageData,'public');
+                if($profileStatus){
+                    Auth::user()->image_url = Storage::url('profile-users/' . $imageName);
                 }
-                Storage::disk('public')->put('profile-photos/' . $imageName, $imageData);
             }
             //$roleId = Role::where('name','=',$userRequest['roleInOrganization'])->first()->id;
             $user = $request->user()->fill([
@@ -116,30 +115,13 @@ class CompleteRegistrationController extends Controller
             'organization.CNPJ.cnpj' => 'O CNPJ informado é inválido.'
 
         ]);
-        $image = $request->input('organization.organizationProfilePicture');
-
-        if (isset($image)) {
-            $imageData = $image;
-            list($type, $imageData) = explode(';', $imageData);
-            list(, $imageData) = explode(',', $imageData);
-            $imageData = base64_decode($imageData);
-            $imageName = uniqid().'.png';
-            if (!Storage::disk('public')->exists('profile-photos-osc')) {
-                Storage::disk('public')->makeDirectory('profile-photos-osc');
-            }
-            Storage::disk('public')->put('profile-photos-osc/' . $imageName, $imageData);
-            $imageUrl = asset('storage/profile-photos-osc/'.$imageName);
-
-        }
-        else{
-            $imageUrl = null;
-        }
+        
         $osc = Osc::create([
             'cnpj' => $request->input('organization.CNPJ', null),
             'institutional_email' => $request->input('organization.institutional_email', null),
             'fantasy_name' => $request->input('organization.organizationName', null),
             'presidents_name' => Auth::user()->name,
-            'image_url' => $imageUrl,
+            
         ]);
         $osc->user()->attach(Auth::user()->id);
         $axes = Axis::all();
@@ -154,13 +136,34 @@ class CompleteRegistrationController extends Controller
         foreach($level as $level){
             $osc->level()->attach($level->id);
         }
-
+        
         $focusAreas = $request->input('organization.focusAreas');
+        
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){
                 $osc->targetAudience()->attach($i);
             }
         }
+        $image = $request->input('organization.organizationProfilePicture');
+
+        if (isset($image)) {
+        
+            $imageData = $image;
+            list($type, $imageData) = explode(';', $imageData);
+            list(, $imageData) = explode(',', $imageData);
+            $imageData = base64_decode($imageData);
+            $imageName =  uniqid() . '.png';
+           
+            Storage::put("oscs/{$osc->id}/{$imageName}", $imageData,'public');
+            $imageUrl = Storage::url("oscs/{$osc->id}/{$imageName}");
+            
+
+        }
+        else{
+            $imageUrl = null;
+        }
+
+        $osc->image_url = $imageUrl;
         $osc->save();
         }
         catch(\Exception $e){

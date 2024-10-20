@@ -18,10 +18,8 @@ class Activity extends Model
         'audience',
         'send_by',
         'description',
-        'thumbnail_photos_url',
-        'folder_photos_id',
+        'thumbnail_photo_url',
         'osc_id',
-        'user_id',
     ];
 
     // muitos para um
