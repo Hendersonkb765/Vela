@@ -231,7 +231,10 @@ Route::get('/server-error', function () {
 });
 
 Route::get('/teste-storage',function(){
-    Storage::disk('s3')->put('teste.txt','teste');
+    dd(Storage::url('profile-photos-osc/67148786776f4.png'));
+
+
+    
 });
 
 require __DIR__.'/auth.php';
