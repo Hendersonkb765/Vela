@@ -5,7 +5,8 @@ import { MdModeEditOutline, MdMoreHoriz  } from "react-icons/md";
 import { FiUsers, FiUser } from "react-icons/fi";
 import { GoClock, GoCalendar } from "react-icons/go";
 import { useEffect, useState } from 'react';
-import ImageCarousel from './ImageCarousel';
+import { useRef } from 'react';
+import ImageDisplayer from './ImageDisplayer';
 
 
 
@@ -29,6 +30,12 @@ export default function SeeMorePage({
     }
 
     const [data, setData] = useState({})
+    const divRef = useRef(null);
+    const [divWidth, setDivWidth] = useState()
+
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+ // O array vazio significa que esse efeito só será executado uma vez
 
     useEffect(() => {
         if (propData) {
@@ -49,6 +56,9 @@ export default function SeeMorePage({
             console.log(data.activityImgs)
         }
     }, [propData]); // Reage apenas quando `propData` muda
+
+   
+
 
     // if(propData){
 
@@ -124,15 +134,15 @@ export default function SeeMorePage({
 
     // }, [])
 
-    
+    console.log("teste",screenWidth)
 
     return(
 
         <VelaSocialLayout>
 
-            <div className='w-full flex justify-center p-5 text-slate-950 dark:text-gray-200'>
+            <div className='mt-14 lg:mt-0 mb-20 lg:mb-0 w-full flex justify-center p-5 text-slate-950 dark:text-gray-200'>
 
-                <div className='w-[700px] rounded-lg  bg-white dark:bg-slate-800 flex flex-col p-7 gap-6'>
+                <div id='main' className='lg:w-[700px] md:w-5/6 rounded-lg  bg-white dark:bg-slate-800 flex flex-col p-7 gap-6'>
 
                     <div className='flex justify-between'>
 
@@ -152,7 +162,7 @@ export default function SeeMorePage({
                             <h1 className=' font-medium text-4xl'>{data.title}</h1>
                         )}
                         
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between gap-4 flex-wrap'>
                             {!data.date&&(
                                 <div className='flex gap-2 items-center'>
                                     <div className='h-5 w-5 bg-gray-600 rounded-sm animate-pulse' />
@@ -212,13 +222,17 @@ export default function SeeMorePage({
 
                     </div>
 
-                    <div className='w-full'>
-                        <ImageCarousel imgs={data.activityImgs}/>
-                    </div>
+                    
+                        <div className='w-full'>
+                            {/* <ImageCarousel imgs={data.activityImgs}/> */}
+                            <ImageDisplayer />
+                        </div>
+                    
 
-                    <p className='text-justify'>{data.description}</p>
 
-                    <div className='flex gap-4'>
+                    <p className='sm:text-justify'>{data.description}</p>
+
+                    <div className='flex gap-4 flex-wrap'>
 
                             {!data.created_at&&(
                                 <div className='flex gap-2 items-center' >
