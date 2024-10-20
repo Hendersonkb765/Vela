@@ -73,5 +73,7 @@ return [
         public_path('storage/profile-photos') => storage_path('app/public/profile-photos'),
         public_path('storage/profile-photos-osc') => storage_path('app/public/profile-photos-osc')
     ],
+    'visibility' => \League\Flysystem\Visibility::PUBLIC,
+
 
 ];
