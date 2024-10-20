@@ -147,20 +147,22 @@ class CompleteRegistrationController extends Controller
         $image = $request->input('organization.organizationProfilePicture');
 
         if (isset($image)) {
+        
             $imageData = $image;
             list($type, $imageData) = explode(';', $imageData);
             list(, $imageData) = explode(',', $imageData);
             $imageData = base64_decode($imageData);
             $imageName =  uniqid() . '.png';
            
-            Storage::disk('public')->put("osc/{$osc->id}/{$imageName}", $imageData,'public');
-            $imageUrl = Storage::url("osc/{$osc->id}/{$imageName}");
+            Storage::put("oscs/{$osc->id}/{$imageName}", $imageData,'public');
+            $imageUrl = Storage::url("oscs/{$osc->id}/{$imageName}");
             
 
         }
         else{
             $imageUrl = null;
         }
+
         $osc->image_url = $imageUrl;
         $osc->save();
         }

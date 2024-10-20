@@ -28,10 +28,9 @@ class ActivityFactory extends Factory
             'audience' => $this->faker->randomNumber(5),
             'send_by' => $user->name,
             'description' => $this->faker->text(),
-            'thumbnail_photos_url' => $this->faker->imageUrl(),
-            'folder_photos_id' => $this->faker->numberBetween(1, 5),
+            'thumbnail_photo_url' => $this->faker->imageUrl(),
             'osc_id' => Osc::inRandomOrder()->first()->id,
-            'user_id' => $user->id,
+            'send_by' => $user->id,
         ];
     }
     public function configure(){

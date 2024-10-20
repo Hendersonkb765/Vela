@@ -12,7 +12,9 @@ use App\Services\Google\Drive\File;
 use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
+use Google\Service\YouTube\Thumbnail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
  // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
@@ -104,51 +106,37 @@ class ActivityController extends Controller
             //'activityThumbnail' => 'required'|'url',
         ]);
       //  try{
-
             $osc = Auth::user()->osc->first();
 
-            $fileDrive = new File($osc->id);
-            $folder = new Folder($osc->id);
+            $activity =Activity::create([
+                'title' => $request->activityTitle,
+                'description' => $request->activityDescription,
+                'date' => $request->activityDate,
+                'hour_start' => $request->activityHourStart,
+                'hour_end' => $request->activityHourEnd,
+                'status' => $request->activityStatus,
+                'audience' => $request->activityAudience,
+                'send_by' => Auth::user()->id,
+                'thumbnail_photo_url' => '',
+                'osc_id' => $osc->id
+            ]);
+            $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
+            $thumbnailName = 'thumbnail00.png'; 
+            Storage::put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
+            $thumbnailUrl = Storage::url($path.$thumbnailName);
 
-            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$osc->id)->first();
-            
-            if(!empty($googleDriveFolder)){
+            //Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
 
-                $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
-                $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
-                if($fileCreated){
-                    $webViewLink = $fileCreated['webViewLink'];
-                    if(!empty($request->file('activityImages'))){
-                    foreach($request->file('activityImages') as $fileDatabase){
-                        $driveFile = new File($osc->id);
-                        $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
-                        }    
-                    }
-                    //$folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
+            $activity->update(['thumbnail_photo_url' => $thumbnailUrl]);
+            $activity->save();
+
+            if(!empty($request->file('activityImages'))){
+                foreach($request->file('activityImages') as $fileDatabase){
+                    Storage::put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
+                }    
+            }
                         
-                        Activity::create([
-                            'title' => $request->activityTitle,
-                            'description' => $request->activityDescription,
-                            'date' => $request->activityDate,
-                            'hour_start' => $request->activityHourStart,
-                            'hour_end' => $request->activityHourEnd,
-                            'status' => $request->activityStatus,
-                            'audience' => $request->activityAudience,
-                            'thumbnail_photos_url' => $webViewLink,
-                            'folder_photos_id' => $googleDriveFolder->id,
-                            'send_by' => Auth::user()->name,
-                            'user_id' => Auth::user()->id,
-                            'osc_id' => Auth::user()->osc->first()->id
-                        ]);
 
-                }
-
-         
-            }
-            else{
-                return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
-            }
-            
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
 /*
         }
