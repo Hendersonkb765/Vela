@@ -94,7 +94,7 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
     Route::post('/atualizar-atividade','update')->name('activity.update');
     Route::get('/atividade/{id}','show')->name('activity.showMore');
-    Route::get('/deletar-atividade/{id}','destroy')->name('activity.destroy');
+    Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
 
 })->middleware(['auth', 'verified']);
 // route('activity.filter',)
