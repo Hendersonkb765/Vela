@@ -13,6 +13,7 @@ use App\Models\GoogleDriveFolder;
 use App\Models\GoogleToken;
 use App\Services\Google\Drive\Folder;
 use Google\Service\YouTube\Thumbnail;
+use Illuminate\Container\Attributes\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
  // Add this line to import the OpenAi class
@@ -24,22 +25,18 @@ class ActivityController extends Controller
         //lista de atividades
         // $activities = Auth::user()->osc->first()->activities()->get();
         // dd($activities->with(['google_drive_folders','google_drive_folders']));
-        $activities = Auth::user()->osc->first()->activities()->with(['folderDrive.fileDrive'])->orderBy('date','desc')->get();
-            $activitiesArray = $activities->toArray();
+        try{   
+            $activities = Auth::user()->osc->first()->activities()
+            ->select('id','title','description','date')
+            ->orderBy('date','asc')
+            ->get();
          
-        try{
-            $activities = Auth::user()->osc->first()->activities()->with(['folderDrive.fileDrive'])->orderBy('date','desc')->get();
-            $activitiesArray = $activities->toArray();
-         
-          
-            $isConnectedToGoogleDrive = GoogleToken::where('osc_id',Auth::user()->osc->first()->id)->first();
             return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub',[
                 'activities' => $activities,
-                'isConnectedToGoogleDrive' => !empty($isConnectedToGoogleDrive)
             ]);
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!','error' => $e->getMessage()]);
         }
 
     }
@@ -121,7 +118,7 @@ class ActivityController extends Controller
                 'osc_id' => $osc->id
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
-            $thumbnailName = 'thumbnail00.png'; 
+            $thumbnailName = 'thumbnail.png'; 
             Storage::put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
             $thumbnailUrl = Storage::url($path.$thumbnailName);
 
@@ -147,9 +144,26 @@ class ActivityController extends Controller
     }
    
 
-    public function update(Request $request,$id){
-        try{
-            $activity = Activity::find($id);
+    public function update(Request $request){
+        try{    
+            $idActivity = $request->idActivity;
+            $osc = Auth::user()->osc->fist();
+            $newImages = $request->file('newImages');
+            $deletedImages = $request->deletedFiles;
+
+            if(!empty($deletedImages)){
+                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+                foreach($deletedImages as $image){
+                    Storage::delete($path.$image);
+                }
+            }
+            if(!empty($newImages)){
+                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+                foreach($newImages as $image){
+                    Storage::put($path.uniqid().'.png',file_get_contents($image),'public');
+                }
+            }
+            $activity = Activity::find($idActivity);
             $activity->update([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
@@ -158,9 +172,9 @@ class ActivityController extends Controller
                 'hour_end' => $request->activityHourEnd,
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'thumbnail_photos_url' => $request->activityThumbnailPhotosUrl,
-                'folder_photos_id' => 1//$request->activityPhotosUrl,
+                'thumbnail_photo_url' => $request->activityThumbnailPhotosUrl,
             ]);
+            
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
             
         }
@@ -168,14 +182,42 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);
         }
     }
+
     public function destroy($id){
         try{
-            $activity = Activity::find($id);
-            $activity->delete();
+            $osc = Auth::user()->osc->first();
+            $activity = Activity::destroy($id);
+            $path ="oscs/{$osc->id}/activities/0{$id}";
+            Storage::deleteDirectory($path);
+            
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao deletar atividade!']);
         }
     }
+    public function showMore($id){
+        try{
+            $activity = Activity::find($id);
+            $osc= Auth::user()->osc->first();
+            $path = "oscs/{$osc->id}/activities/0{$activity->id}/";
+            $allImages =Storage::allFiles($path);
+            $images = [];
+            foreach ($allImages as $image) {
+                $fileUrl = Storage::url($image);
+                $fileType = Storage::mimeType($image);
+                array_push($images, [
+                    'name' => basename($image),
+                    'url' => $fileUrl,
+                    'type' => $fileType,
+                ]);
+                
+            }
+            response()->json(['status'=> 200,['activity' => $activity],['images' => $images]]);
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
+        }
+    }
+
 }
