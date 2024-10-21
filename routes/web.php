@@ -92,6 +92,8 @@ Route::controller(ActivityController::class)->group(function(){
     Route::post('/registrar-atividade', 'store')->name('activity.store');
     Route::post('/atividades/filtro','filter')->name('activity.filter');
     Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
+    Route::post('/atualizar-atividade','update')->name('activity.update');
+    Route::get('/atividade/{id}','show')->name('activity.showMore');
 })->middleware(['auth', 'verified']);
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
@@ -198,11 +200,11 @@ Route::get('/views',function(){
     dd($arquivos);
 });
 Route::get('/drive2',function(){
-    $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
-    dd($fileDrive);
-    $oscId = Auth::user()->osc->first()->id;
-    $folder = new Folder($oscId);
-    $folder->create('⚠️teste⚠️');
+    // $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
+    // dd($fileDrive);
+    // $oscId = Auth::user()->osc->first()->id;
+    // $folder = new Folder($oscId);
+    // $folder->create('⚠️teste⚠️');
 });
 Route::get('openai',function(){
     $openai = new OpenAi();
@@ -232,10 +234,15 @@ Route::get('/server-error', function () {
 
 Route::get('/teste-storage',function(){
     dd(Storage::url('profile-photos-osc/67148786776f4.png'));
-
-
-    
 });
+
+Route::get('/deletar-atividade/{id}',function($id){
+    $osc = Auth::user()->osc->first();
+    $activity =Activity::destroy($id);
+    $path ="oscs/{$osc->id}/activities/0{$id}";
+    Storage::deleteDirectory($path);
+});
+Route::get('/s3={id}',[ActivityController::class,'showMore'])->name('s3');
 
 require __DIR__.'/auth.php';
 
