@@ -46,24 +46,24 @@ class File extends GoogleDrive
                         $permission->role = 'reader';
                         $drive->permissions->create($file->id, $permission);
                     }
-                    $localFolder = GoogleDriveFolder::where('folder_id',$folderId)->first();
+                    // $localFolder = GoogleDriveFolder::where('folder_id',$folderId)->first();
                     
-                    if($localFolder){
-                        GoogleDriveFile::create([
-                            'name' => $name,
-                            'file_id' => $file->id,
-                            'folder_id' => $localFolder->id,
-                            'file_extension' => $fileDatabase->getClientOriginalExtension(),
-                            'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
-                            'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
-                            'web_content_link' => $file->webContentLink,
-                            'web_view_link' => $this->createUrlView($file->id,$typeFile)
-                        ]);
+                    // if($localFolder){
+                    //     GoogleDriveFile::create([
+                    //         'name' => $name,
+                    //         'file_id' => $file->id,
+                    //         'folder_id' => $localFolder->id,
+                    //         'file_extension' => $fileDatabase->getClientOriginalExtension(),
+                    //         'creation_file_date' => Carbon::parse($file->createdTime)->format('Y-m-d H:i:s'),
+                    //         'modification_file_date' => Carbon::parse($file->modifiedTime)->format('Y-m-d H:i:s'),
+                    //         'web_content_link' => $file->webContentLink,
+                    //         'web_view_link' => $this->createUrlView($file->id,$typeFile)
+                    //     ]);
                         
-                    }
-                    else{
-                        return response()->json(['error'=>"Pasta não encontrada"],404);
-                    }
+                    // }
+                    // else{
+                    //     return response()->json(['error'=>"Pasta não encontrada"],404);
+                    // }
                     
                     return ['driveFileData'=>$file,'webViewLink'=>$this->createUrlView($file->id,$typeFile)];  
                    
@@ -85,7 +85,7 @@ class File extends GoogleDrive
         try{
             $drive = new Drive($this->client);
             $drive->files->delete($fileId);
-            GoogleDriveFile::where('file_id',$fileId)->delete();
+            //GoogleDriveFile::where('file_id',$fileId)->delete();
         }
         catch(\Exception $e){
             return response()->json(['error'=>"Erro ao deletar arquivo no Google Drive"],500);
@@ -109,9 +109,9 @@ class File extends GoogleDrive
             'fields' => 'id,createdTime,name,modifiedTime'
         ]);
        
-        GoogleDriveFile::where('file_id',$fileId)->update([
-                'modification_file_date' => Carbon::parse($updatedFile->modifiedTime)->format('Y-m-d H:i:s')
-        ]);
+        // GoogleDriveFile::where('file_id',$fileId)->update([
+        //         'modification_file_date' => Carbon::parse($updatedFile->modifiedTime)->format('Y-m-d H:i:s')
+        // ]);
             
         return $updatedFile;  
 

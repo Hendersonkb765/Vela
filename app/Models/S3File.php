@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\GoogleDriveFile;
 
-class GoogleDriveFolder extends Model
+use function PHPSTORM_META\type;
+
+class S3Files extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
+    
     protected $fillable = [
         'name',
-        'folder_id',
-        'osc_id',
-        'creation_folder_date',
+        'url',
+        'type',
     ];
 
-    public function fileDrive(){
-        return $this->hasMany(GoogleDriveFile::class,'folder_id');
+    public function fileable(){
+        return $this->morphTo();
     }
 }
