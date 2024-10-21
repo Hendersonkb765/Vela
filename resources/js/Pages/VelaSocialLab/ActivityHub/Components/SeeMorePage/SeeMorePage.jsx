@@ -31,9 +31,6 @@ export default function SeeMorePage({
 
     const [data, setData] = useState({})
     const divRef = useRef(null);
-    const [divWidth, setDivWidth] = useState()
-
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
  // O array vazio significa que esse efeito só será executado uma vez
 
@@ -134,7 +131,7 @@ export default function SeeMorePage({
 
     // }, [])
 
-    console.log("teste",screenWidth)
+
 
     return(
 
