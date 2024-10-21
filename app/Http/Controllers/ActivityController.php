@@ -38,7 +38,6 @@ class ActivityController extends Controller
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!','error' => $e->getMessage()]);
         }
-
     }
     public function rephraseDescription(Request $request){
         //reformular descrição da atividade
