@@ -41,6 +41,7 @@ use App\Services\ChatGPT\OpenAi;
 use Faker\Guesser\Name;
 use App\Mail\InvitationSender; // Add this line
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -121,27 +122,21 @@ Route::get('/support', function () {
     return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
 })->middleware(['auth', 'verified'])->name('support');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth',CheckOsc::class,CheckUserRegistration::class])->group(function () {
 
-    Route::get('/modeltest',function(){
-        $axis = Auth::user()->osc->first()->axis->first();
-        dd($axis->currentLevel());
-    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/osc/criar', [OscController::class, 'store'])->name('osc.store');
-
-
     Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
 
+    Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
+
 });
 
-Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
 Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
 Route::get('membros/convites', [InvitationOscController::class,'invitationList'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
 Route::get('/dashboardtest', function () {
@@ -151,76 +146,6 @@ Route::get('/dashboardtest', function () {
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-
-/////////////// ROTAS PARA TESTES //////////////////////////
-Route::get('/teste',function(){
-    $osc = Osc::find(2);
-    $address = new Address([
-        'counties' => 'Example City',
-        'neighborhood' => 'Example Neighborhood',
-        'state' => 'Example State',
-        'cep' => '12345-678',
-        'street' => 'Example Street',
-        'number' => '123',
-        'complement' => 'Apt 456',
-    ]);
-    dd($osc->address()->save($address));
-    //dd($osc->first()->task->first()->pivot->status);
-    //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
-    //$osc->save();
-})->name('teste');
-
-Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');
-Route::get('/criar-arquivo',function(){
-    $driveFile = new Folder(Auth::user()->osc->first()->id);
-    $driveFile->create('OlhAOTESTE AI',null);
-});
-Route::get('/formulario',function(){
-    /*
-    $driveFolder = new Folder(Auth::user()->osc->first()->id);
-    $driveFolder->createDefaultDirectories();
-    return response()->json(['status'=>200,'message' => 'Pastas criadas com sucesso']);
-    */
-    return view('Formulario');
-});
-Route::post('/drive',function(Request $request){
-
-        $oscId = Auth::user()->osc->first()->id;
-        $driveFile = new File($oscId);
-        $sa = $driveFile->create('teste',$request->file('database')[0],'1Vx8Xild41Leq3FOYEPD8nmbPCuEav75W');
-      
-
-        
-    //$driveFile = new File($oscId);
-   // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
-    //dd($arquivo);
-})->name('formulario');
-Route::get('/views',function(){
-    $oscid = Auth::user()->osc->first()->id;
-    $driveFile = new File($oscid);
-    $arquivos = $driveFile->create('teste',null,false,false,'image');
-    dd($arquivos);
-});
-Route::get('/drive2',function(){
-    // $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
-    // dd($fileDrive);
-    // $oscId = Auth::user()->osc->first()->id;
-    // $folder = new Folder($oscId);
-    // $folder->create('⚠️teste⚠️');
-});
-Route::get('openai',function(){
-    $openai = new OpenAi();
-    $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-
-    return response()->json($response);
-});
-route::get('/teste-mail/{email}',function($email){
-
-    $dadosMail =Mail::to($email)->send(new InvitationSender('$linkInvitation', '$osc->name', 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg', '$osc->presidents_name'));
-    dd($dadosMail);
-
-});
-
 
 Route::get('/isolado', function () {
     return Inertia::render('InvitationPage');
@@ -234,14 +159,11 @@ Route::get('/server-error', function () {
     abort(500);
 });
 
-Route::get('/teste-storage',function(){
-    dd(Storage::url('profile-photos-osc/67148786776f4.png'));
-});
 
-Route::get('/s3={id}',[ActivityController::class,'showMore'])->name('s3');
+
 
 require __DIR__.'/auth.php';
-
+require __DIR__.'/test.php';
 
 
 // Route::get('/resources/test', function () {
