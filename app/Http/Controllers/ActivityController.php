@@ -172,10 +172,8 @@ class ActivityController extends Controller
     public function destroy(Request $request){
         try{
             $osc = Auth::user()->osc->first();
-
-            $activity = Activity::destroy($request->ActivityId);
+            Activity::destroy($request->ActivityId);
             $path ="oscs/{$osc->id}/activities/0{$request->ActivityId}";
-
             Storage::deleteDirectory($path);
             
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);
