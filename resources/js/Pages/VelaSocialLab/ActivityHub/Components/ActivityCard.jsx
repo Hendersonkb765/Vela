@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import ActivityUploadModal from "./ActivityUploadModal";
 import ActivityUpdateForm from "./UpdateActivity/ActivityUpdateForm";
 
-export default function ActivityCard({data}) {
+export default function ActivityCard({data, ...props}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Função para abrir o modal
@@ -23,10 +23,10 @@ export default function ActivityCard({data}) {
 
     return (
         <>
-            <div className="w-full flex flex-col space-y-4 md:space-x-4 md:space-y-0 sm:flex-row items-start md:items-center justify-start group scale-100 xl:hover:scale-[1.2] transition-all xl:hover:pl-28 fullhd:hover:pl-40">
+            <div  className="w-full flex flex-col space-y-4 md:space-x-4 md:space-y-0 sm:flex-row items-start md:items-center justify-start group scale-100 xl:hover:scale-[1.2] transition-all xl:hover:pl-28 fullhd:hover:pl-40">
                 <div className="w-11/12 sm:w-fit">
                     <p className="font-body text-sm dark:text-gray-300">{data.date}</p>
-                    <div className=" min-w-fit flex flex-col md:flex-row bg-white rounded-lg relative md:before:content-[''] before:absolute lg:before:w-8 before:h-2 before:mr-2  before:border-t-4 before:border-dotted  before:border-primary  before:top-1/2 before:right-full  md:before:translate-x-1   dark:bg-slate-800 dark:before:border-primary-200 cursor-pointer border-2 border-white dark:border-slate-800 group-hover:!border-primary ">
+                    <div {...props} className=" min-w-fit flex flex-col md:flex-row bg-white rounded-lg relative md:before:content-[''] before:absolute lg:before:w-8 before:h-2 before:mr-2  before:border-t-4 before:border-dotted  before:border-primary  before:top-1/2 before:right-full  md:before:translate-x-1   dark:bg-slate-800 dark:before:border-primary-200 cursor-pointer border-2 border-white dark:border-slate-800 group-hover:!border-primary ">
                         <div className="sm:min-h-52 sm:max-h-52 sm:w-80 sm:min-w-80 sm:max-w-80 md:w-44 md:h-44 md:min-w-44 md:min-h-44">
                             <img src={data.thumbnail_photo_url} alt="" className="max-h-52 min-h-52 w-full md:w-44 md:h-44 md:min-w-44 md:min-h-44 object-cover rounded-l-lg brightness-50 md:brightness-100"/>
 
@@ -85,10 +85,7 @@ export default function ActivityCard({data}) {
 //                 <SecondaryIconButton rounded icon={<MdModeEditOutline className="h-8 w-8"/>} className="w-16 h-16 "><span className="hidden group-hover:block">Editar</span></SecondaryIconButton>
 //                 <SecondaryIconButton rounded icon={<MdMoreHoriz className="h-8 w-8"/>} className="w-16 h-16 "><span className="hidden group-hover:block">Ver mais</span></SecondaryIconButton>
 //             </div>
-
 //         </div>
-
-
 //     )
 // }
 

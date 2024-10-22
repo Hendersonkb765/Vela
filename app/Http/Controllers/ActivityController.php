@@ -50,19 +50,6 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao reformular descrição!']);
         }
     }
-    public function filterByDate($dateFrom,$dateTo){
-        //detalhes da atividade
-        try{
-            if(!empty($dateFrom) && !empty($dateTo)){
-                $activities = Auth::user()->osc->first()->activities();
-                $activitiesFilterDate =$activities->whereBetween('date',[$dateFrom,$dateTo])->get();
-                return response()->json(['status'=> 200,'activities' => $activitiesFilterDate]);
-            }
-        }
-        catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
-        }
-    }
 
     public function filter(Request $request){
         //detalhes da atividade
@@ -148,7 +135,7 @@ class ActivityController extends Controller
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->fist();
             $newImages = $request->file('newImages');
-            $deletedImages = $request->deletedFiles;
+            $deletedImages = $request->deletedImages;
 
             if(!empty($deletedImages)){
                 $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
@@ -185,8 +172,10 @@ class ActivityController extends Controller
     public function destroy(Request $request){
         try{
             $osc = Auth::user()->osc->first();
+
             $activity = Activity::destroy($request->ActivityId);
             $path ="oscs/{$osc->id}/activities/0{$request->ActivityId}";
+
             Storage::deleteDirectory($path);
             
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);

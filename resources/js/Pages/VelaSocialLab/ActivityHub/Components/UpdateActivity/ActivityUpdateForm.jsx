@@ -29,7 +29,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const [loadingActivity, setLoadingActivity] = useState(false);
     const [registerError, setRegisterError] = useState(false);
 
-    const minDate = "1900-01-01"; //"1900-01-01";
+    const minDate = "1900-01-01"; 
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
     const { data, setData, processing, post, progress } = useForm({
@@ -40,7 +40,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         activityHourStart: activityData.hour_start,
         activityHourEnd: activityData.hour_end,
         activityThumbnail: activityData.thumbnail_photos_url,
-        activityImages: [],
+        // activityImages: activityImages,
     });
 
 
@@ -49,7 +49,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
 
 
-    const [existingImages, setExistingImages] = useState([]);
+    const [existingImages, setExistingImages] = useState(activityImages);
     const [newImages, setNewImages] = useState([]);
 
 
@@ -161,19 +161,6 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         reader.readAsDataURL(file);
     };
 
-    const middlewareImgs = (e) =>{
-
-        if(activityImages.length === 6){
-
-            onSelectFiles(e)
-
-        }else{
-
-            console.log("limite atingido")
-
-        }
-
-    }
 
     // const onSelectFiles = (e) => {
     //     const files = e.target.files;
@@ -245,11 +232,10 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         const files = e.target.files;
         if (!files || files.length === 0) return;
     
-        const fileArray = Array.from(files); 
         const validImages = [];
         const invalidImages = [];
     
-        fileArray.forEach((file) => {
+        Array.from(files).forEach((file) => {
             const reader = new FileReader();
     
             reader.addEventListener("load", () => {
@@ -260,20 +246,17 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                 imageElement.addEventListener("load", (event) => {
                     const { naturalHeight, naturalWidth } = event.currentTarget;
                     if (naturalWidth < MIN_SIZE || naturalHeight < MIN_SIZE) {
-                        invalidImages.push(`Imagem '${file.name}' muito pequena (tamanho mínimo: 150x150)`);
+                        invalidImages.push(`Imagem '${file.name}' muito pequena`);
                     } else {
-                        validImages.push(imageUrl); // Adiciona a nova imagem válida
+                        validImages.push(imageUrl);
+                        setNewImages((prev) => [...prev, file]); // Adiciona o arquivo real
                     }
     
-                    if (validImages.length + invalidImages.length === fileArray.length) {
-                        if (invalidImages.length > 0) {
-                            setErrors((prevErrors) => ({
-                                ...prevErrors,
-                                activityThumbnail: invalidImages.join(', '),
-                            }));
-                        }
-                        setPreviewImages([...previewImages, ...validImages]); // Preserva as imagens existentes
-                        setData('activityImages', [...fileArray, ...newImages]); // Salva novos arquivos
+                    if (invalidImages.length > 0) {
+                        setErrors((prevErrors) => ({
+                            ...prevErrors,
+                            activityThumbnail: invalidImages.join(', '),
+                        }));
                     }
                 });
             });
@@ -282,6 +265,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         });
     };
     
+    
 
 
 
@@ -316,13 +300,21 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
 
 
-
-
-
-    const removeImage = (index) => {
-        setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
-        setData('activityImages', (prevImages) => prevImages.filter((_, i) => i !== index));
+    const removeImage = (index, type) => {
+        if (type === 'existing') {
+            setExistingImages((prevImages) => prevImages.filter((_, i) => i !== index));
+            // Adicione lógica para excluir do banco caso necessário
+        } else {
+            setNewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+        }
     };
+    
+
+
+    // const removeImage = (index) => {
+    //     setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    //     setData('activityImages', (prevImages) => prevImages.filter((_, i) => i !== index));
+    // };
 
     const handleNextStep = () => {
         if (step === 1 && validateStep1()) {
@@ -339,62 +331,50 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (data.activityThumbnail) {
-            setLoadingActivity(true); // Ativa o efeito de loading
+        console.log(newImages)
 
-            try {
-                // Faz a requisição usando post (Inertia.js ou seu método específico)
-                await post(route('activity.store'), {
-                    data: data,
-                    onFinish: () => {
-                        setImgSrc(''); // Limpa o estado da imagem
-                        setLoadingActivity(false); // Desativa o efeito de loading
-                    },
-                    onSuccess: () => {
-                        setShowPopup(true); // Exibe o popup se deu certo
-
-                        setTimeout(() => {
-                            setShowPopup(false); // Fecha o modal
-                        }, 5000);
-                        window.location.reload();
-                    },
-                    onError: (errors) => {
-                        if (errors.response) {
-                            // Se houver uma resposta JSON com erro
-                            const errorData = errors.response.data;
-                            console.error('Erro do servidor:', errorData);
-                            setErrors(errorData); // Exibe o erro na tela (se necessário)
-                            setRegisterError(true)
-                        } else {
-                            console.error('Erro desconhecido:', errors);
-                        }
-                        // setErrors(errors); // Define os erros se houver
-                        setLoadingActivity(false); // Desativa o loading ao receber o erro
-                    },
-                });
-            } catch (error) {
-                console.error('Erro ao enviar o formulário:', error);
-                setLoadingActivity(false); // Desativa o loading em caso de erro
-            }
-        } else {
-            setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
-        }
-
-        // Validação final antes de enviar
         // if (data.activityThumbnail) {
-        //     post(route('activity.store'), {
-        //         data: data,
-        //         onFinish: () => {
-        //             setImgSrc(''); // Limpa o estado da imagem
-        //         },
-        //         onAfter: () => {
-        //             window.location.reload();
-        //             setShowPopup(true); // Exibe o popup
-        //         },
-        //     });
+        //     setLoadingActivity(true); // Ativa o efeito de loading
+
+        //     try {
+        //         // Faz a requisição usando post (Inertia.js ou seu método específico)
+        //         await post(route('activity.store'), {
+        //             data: data,
+        //             onFinish: () => {
+        //                 setImgSrc(''); // Limpa o estado da imagem
+        //                 setLoadingActivity(false); // Desativa o efeito de loading
+        //             },
+        //             onSuccess: () => {
+        //                 setShowPopup(true); // Exibe o popup se deu certo
+
+        //                 setTimeout(() => {
+        //                     setShowPopup(false); // Fecha o modal
+        //                 }, 5000);
+        //                 window.location.reload();
+        //             },
+        //             onError: (errors) => {
+        //                 if (errors.response) {
+        //                     // Se houver uma resposta JSON com erro
+        //                     const errorData = errors.response.data;
+        //                     console.error('Erro do servidor:', errorData);
+        //                     setErrors(errorData); // Exibe o erro na tela (se necessário)
+        //                     setRegisterError(true)
+        //                 } else {
+        //                     console.error('Erro desconhecido:', errors);
+        //                 }
+        //                 // setErrors(errors); // Define os erros se houver
+        //                 setLoadingActivity(false); // Desativa o loading ao receber o erro
+        //             },
+        //         });
+        //     } catch (error) {
+        //         console.error('Erro ao enviar o formulário:', error);
+        //         setLoadingActivity(false); // Desativa o loading em caso de erro
+        //     }
         // } else {
         //     setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
         // }
+
+
     };
 
     return (
@@ -536,7 +516,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                     <div className="my-4">
                         <InputLabel>Fotos da Atividade</InputLabel>
                         <span className="sr-only ">Escolha fotos para galeria</span>
-                        {activityImages.length < 6 &&(
+                        {(newImages.length + existingImages.length ) < 6 &&(
                             <input
                                 id="thumbnail_input"
                                 type="file"
@@ -546,30 +526,36 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                                 className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
                             />
                         )}
-                        {activityImages.length >= 6&&(
+                        {(newImages.length + existingImages.length ) >= 6&&(
                             <p className='dark:text-gray-200 border-l-2 border-primary pl-1'>Limite de imagens atingido nesta atividade, você ainda pode trocar as imagens</p>
                         )}
 
                         {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}
                         
                     </div>
-                    {activityImages.length > 0 && (
-                        <div className='mt-4 max-w-fit flex flex-wrap gap-4'>
-                            {activityImages.slice(0, 6).map((file, index) => (
-                                <div key={index} className='relative flex items-end flex-wrap hover:items-center justify-center w-fit group cursor-pointer transition-all'>
-                                    <img src={file} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
-                                    <PrimaryIconButton onClick={() => removeImage(index)} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
-                                        <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
-                                    </PrimaryIconButton>
-                                </div>
-                            ))}
-                            {/* {activityImages.length > 2 && (
-                                <div className='flex items-center justify-center text-neutral-700 dark:text-white mt-2'>
-                                    +{activityImages.length - 3}
-                                </div>
-                            )} */}
-                        </div>
-                    )}
+
+                    <div className='mt-4 max-w-fit flex flex-wrap gap-4'>
+                        {existingImages.map((image, index) => (
+                            <div key={index} className='relative flex items-end hover:items-center justify-center w-fit group cursor-pointer transition-all'>
+                                <img src={image} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                <PrimaryIconButton onClick={() => removeImage(index, 'existing')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
+                                    <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                                </PrimaryIconButton>
+                            </div>
+                        ))}
+
+                        {newImages.map((file, index) => (
+                            <div key={index} className='relative flex items-end hover:items-center justify-center w-fit group cursor-pointer transition-all'>
+                                <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                <PrimaryIconButton onClick={() => removeImage(index, 'new')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
+                                    <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                                </PrimaryIconButton>
+                            </div>
+                        ))}
+                    </div>
+
+
+
 
 
 
