@@ -120,7 +120,7 @@ class ActivityController extends Controller
                 'audience' => $request->activityAudience,
                 'send_by' => Auth::user()->id,
                 'thumbnail_photo_url' => '',
-                'osc_id' => $osc->id
+                'send_by_id' => $osc->id
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
             $thumbnailName = 'thumbnail.png'; 
@@ -153,20 +153,23 @@ class ActivityController extends Controller
         try{    
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->fist();
+            $thumbnailName = $request->thumbnailName;
             $newImages = $request->file('newImages');
             $deletedImages = $request->deletedImages;
-
+            $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             if(!empty($deletedImages)){
-                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+             
                 foreach($deletedImages as $image){
                     Storage::delete($path.$image);
                 }
             }
             if(!empty($newImages)){
-                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
                 foreach($newImages as $image){
                     Storage::put($path.uniqid().'.png',file_get_contents($image),'public');
                 }
+            }
+            if(!empty($thumbnailName)){
+                Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
             }
             $activity = Activity::find($idActivity);
             $activity->update([
