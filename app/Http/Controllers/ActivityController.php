@@ -107,9 +107,11 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
-      //  try{
+        try{
+            
+           
+            $user = Auth::user();
             $osc = Auth::user()->osc->first();
-
             $activity =Activity::create([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
@@ -118,9 +120,10 @@ class ActivityController extends Controller
                 'hour_end' => $request->activityHourEnd,
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'send_by' => Auth::user()->id,
+                'send_by' => $user->name,
                 'thumbnail_photo_url' => '',
-                'send_by_id' => $osc->id
+                'send_by_id' => $user->id,
+                'osc_id' => $osc->id,
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
             $thumbnailName = 'thumbnail.png'; 
@@ -140,12 +143,12 @@ class ActivityController extends Controller
                         
 
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-/*
+
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
+            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!','error' => $e->getMessage()]);
         }
-*/
+
     }
    
 
