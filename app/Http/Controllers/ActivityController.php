@@ -108,8 +108,11 @@ class ActivityController extends Controller
             //'activityThumbnail' => 'required'|'url',
         ]);
         try{
-            $osc = Auth::user()->osc->first();
 
+            
+           
+            $user = Auth::user();
+            $osc = Auth::user()->osc->first();
             $activity =Activity::create([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
@@ -118,9 +121,10 @@ class ActivityController extends Controller
                 'hour_end' => $request->activityHourEnd,
                 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'send_by' => Auth::user()->id,
+                'send_by' => $user->name,
                 'thumbnail_photo_url' => '',
-                'osc_id' => $osc->id
+                'send_by_id' => $user->id,
+                'osc_id' => $osc->id,
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
             $thumbnailName = 'thumbnail.png'; 
@@ -143,7 +147,7 @@ class ActivityController extends Controller
 
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!','error'=>$e->getMessage()]);
+            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
         }
 
     }
@@ -153,20 +157,23 @@ class ActivityController extends Controller
         try{    
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->fist();
+            $thumbnailName = $request->thumbnailName;
             $newImages = $request->file('newImages');
             $deletedImages = $request->deletedImages;
-
+            $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             if(!empty($deletedImages)){
-                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+             
                 foreach($deletedImages as $image){
                     Storage::delete($path.$image);
                 }
             }
             if(!empty($newImages)){
-                $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
                 foreach($newImages as $image){
                     Storage::put($path.uniqid().'.png',file_get_contents($image),'public');
                 }
+            }
+            if(!empty($thumbnailName)){
+                Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
             }
             $activity = Activity::find($idActivity);
             $activity->update([

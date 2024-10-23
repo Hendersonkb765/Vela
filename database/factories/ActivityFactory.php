@@ -30,7 +30,7 @@ class ActivityFactory extends Factory
             'description' => $this->faker->text(),
             'thumbnail_photo_url' => $this->faker->imageUrl(),
             'osc_id' => Osc::inRandomOrder()->first()->id,
-            'send_by' => $user->id,
+            'send_by_id' => $user->id,
         ];
     }
     public function configure(){
