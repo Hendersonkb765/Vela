@@ -1,22 +1,38 @@
 import React, { useState, useRef } from 'react';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import './ImageDisplayer.css';
+import { useEffect } from 'react';
 
-export default function ImageDisplayer() {
+export default function ImageDisplayer( images) {
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sliderRef = useRef(null);
+  const [acImages, setAcImages] = useState([])
 
-  const images = [
-    'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
-    'https://objectstorage.sa-saopaulo-1.oraclecloud.com/n/grrxwvt1bpmm/b/wp-extraclasse-uploads/o/uploads/2024/05/A-cultura-do-trabalho-voluntario-precisa-ser-permanente.webp',
-    'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
-    'https://i.pinimg.com/236x/a9/3e/91/a93e91dd2e6c9ab577afcbff3da98dc3.jpg',
-    'https://abituranet.ru/sites/default/files/shutterstock_76496956.jpg',
-    'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
-  ];
+  // const images = [
+  //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
+  //   'https://objectstorage.sa-saopaulo-1.oraclecloud.com/n/grrxwvt1bpmm/b/wp-extraclasse-uploads/o/uploads/2024/05/A-cultura-do-trabalho-voluntario-precisa-ser-permanente.webp',
+  //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
+  //   'https://i.pinimg.com/236x/a9/3e/91/a93e91dd2e6c9ab577afcbff3da98dc3.jpg',
+  //   'https://abituranet.ru/sites/default/files/shutterstock_76496956.jpg',
+  //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
+  // ];
+
+  useEffect(() => {
+
+    
+    if(images){
+
+      setAcImages(images.images)
+
+    }
+
+    console.log("AC", acImages)
+
+
+  }, [])
 
   // Função para abrir o modal com a imagem clicada
   const openModal = (index) => {
@@ -111,17 +127,18 @@ export default function ImageDisplayer() {
           onMouseLeave={handleMouseUp} // Finaliza o drag se o mouse sair do container
           style={{ cursor: isDragging ? 'grabbing' : 'grab', scrollSnapType: 'x mandatory' }}
         >
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Imagem ${index + 1}`}
-              className="h-full w-auto object-cover rounded-lg cursor-pointer"
-              onClick={() => openModal(index)} // Abre o modal ao clicar na imagem
-              onDragStart={handleDragStart} // Prevenir o arraste padrão da imagem
-              style={{ scrollSnapAlign: 'start' }}
-            />
-          ))}
+        {Object.values(acImages).map((image, index) => (
+          <img
+            key={index}
+            src={image.url}
+            alt={`Imagem ${index + 1}`}
+            className="h-full w-auto object-cover rounded-lg cursor-pointer"
+            onClick={() => openModal(index)} // Abre o modal ao clicar na imagem
+            onDragStart={handleDragStart} // Prevenir o arraste padrão da imagem
+            style={{ scrollSnapAlign: 'start' }}
+          />
+        ))}
+
         </div>
       </div>
 

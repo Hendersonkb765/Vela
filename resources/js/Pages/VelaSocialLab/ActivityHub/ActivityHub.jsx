@@ -64,11 +64,11 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
         alert(`Deletando a atividade: ${card.id}`);
     };
 
-    const handleContextMenu = (event, activity) => {
-        event.preventDefault();
-        setSelectedCard(activity); // Define o card selecionado
-        contextMenu.current.show(event); // Mostra o ContextMenu nas coordenadas do clique
-    };
+    // const handleContextMenu = (event, activity) => {
+    //     event.preventDefault();
+    //     setSelectedCard(activity); // Define o card selecionado
+    //     contextMenu.current.show(event); // Mostra o ContextMenu nas coordenadas do clique
+    // };
 
     const fetchFilteredActivities = async (title = '', startDate = '1990-01-01', endDate = new Date().toISOString().split('T')[0]) => {
         if (!startDate) {

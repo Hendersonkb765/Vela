@@ -22,12 +22,14 @@ const ASPECT_RATIO = 1;
 export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
-    const [imgSrc, setImgSrc] = useState(activityData.thumbnail_photos_url);
+    const [imgSrc, setImgSrc] = useState(activityData.thumbnail_photo_url);
     const [loadingIa, setLoadingIa] = useState(false)
     const [activityImages, setPreviewImages] = useState(['https://www.eusemfronteiras.com.br/wp-content/uploads/2017/08/11-810x456.png', 'https://lirp.cdn-website.com/82e2ead5/dms3rep/multi/opt/happy-people-volunteering-special-causes-1920w.jpg', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png']);
     const [showPopup, setShowPopup] = useState(false);
     const [loadingActivity, setLoadingActivity] = useState(false);
     const [registerError, setRegisterError] = useState(false);
+    const [changeThumb, setChangeThumb] = useState(false)
+    const [toRemoveImg, setToRemoveImg] = useState([])
 
     const minDate = "1900-01-01"; 
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
@@ -39,11 +41,11 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         activityDate: activityData.date,
         activityHourStart: activityData.hour_start,
         activityHourEnd: activityData.hour_end,
-        activityThumbnail: activityData.thumbnail_photos_url,
+        activityThumbnail: activityData.thumbnail_photo_url,
         // activityImages: activityImages,
     });
 
-
+    console.log(data.activityThumbnail)
 
 
 
@@ -154,6 +156,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
                 // Se a imagem for válida, atualiza o estado
                 setImgSrc(imageUrl);
+                setChangeThumb(true)
                 setData('activityThumbnail', file); // Salva o arquivo no estado do formulário
             });
         });
@@ -204,26 +207,6 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     //         reader.readAsDataURL(file);
     //     });
     // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -302,6 +285,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
     const removeImage = (index, type) => {
         if (type === 'existing') {
+            setToRemoveImg(toRemoveImg + existingImages[index])
             setExistingImages((prevImages) => prevImages.filter((_, i) => i !== index));
             // Adicione lógica para excluir do banco caso necessário
         } else {

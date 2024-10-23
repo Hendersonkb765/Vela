@@ -88,7 +88,7 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
-      //  try{
+        try{
             $osc = Auth::user()->osc->first();
 
             $activity =Activity::create([
@@ -121,12 +121,12 @@ class ActivityController extends Controller
                         
 
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-/*
+
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
+            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!','error'=>$e->getMessage()]);
         }
-*/
+
     }
    
 
@@ -199,7 +199,8 @@ class ActivityController extends Controller
                 ]);
                 
             }
-            response()->json(['status'=> 200,['activity' => $activity],['images' => $images]]);
+        
+            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$images]);
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
