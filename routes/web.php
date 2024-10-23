@@ -26,6 +26,7 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Http\Controllers\UsersListController;
 use App\Http\Middleware\CheckGoogleConnection;
 use App\Http\Middleware\DeleteExpiredInvitations;
 use App\Models\Activity;
@@ -62,24 +63,14 @@ Route::get('/dashboard', function () {
 =======
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class,CheckGoogleConnection::class])->name('dashboard');
 
-Route::get('/settings', function (Request $request) {
-    return Inertia::render('VelaSocialLab/Profile/Settings',
-    ['storageDrive'=>$request->attributes->get('storageDrive')]);
-})->middleware(['auth',CheckGoogleConnection::class])->name('settings');
 // ->middleware(['auth', 'verified'])->name('Configurações');
 
-Route::get('/myuploads', function () {
-    return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
-})->middleware(['auth', 'verified'])->name('myuploads');
+
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
-Route::get('/axis', function () {
-    return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
-})->middleware(['auth', 'verified'])->name('axis');
+
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
@@ -88,60 +79,95 @@ Route::get('/axis', function () {
 // })->middleware(['auth'])->name('activityhub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::controller(ActivityController::class)->group(function(){
-    Route::get('/activityhub','index')->name('activityhub');
-    Route::post('/registrar-atividade', 'store')->name('activity.store');
-    Route::post('/atividades/filtro','filter')->name('activity.filter');
-    Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
-    Route::post('/atualizar-atividade','update')->name('activity.update');
-    Route::get('/atividade/{id}','show')->name('activity.showMore');
-    Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
-
-})->middleware(['auth', 'verified']);
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
-Route::get('/axishub', function () {
-    return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
-})->middleware(['auth', 'verified'])->name('axishub');
+
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/seemore', function () {
-    return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
-})->middleware(['auth'])->name('seemore');
-// ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/timeline', function () {
-    return Inertia::render('VelaSocialLab/Timeline/Timeline');
-})->middleware(['auth', 'verified'])->name('timeline');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/support', function () {
-    return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
-})->middleware(['auth', 'verified'])->name('support');
-
-Route::middleware(['auth',CheckOsc::class,CheckUserRegistration::class])->group(function () {
+// ->middleware(['auth', 'verified'])->name('axishub');
 
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+
+Route::middleware(['auth','verified'])->group(function () {
+
+    // -----------------------------------------COMPLETANDO REGISTRO DE USUÁRIO------------------------------------------\\
     Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
+    
+    // ---------------------------------------------ACEITAR CONVITE DA OSC------------------------------------------\\
 
-    Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
+    Route::get('validar-convite/{code}/{oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
+    
+    Route::get('membros-osc', UsersListController::class)->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
 
+    
+    Route::middleware([CheckUserRegistration::class,CheckOsc::class])->group(function(){
+
+        // -----------------------------------------Enviar CONVITE DA OSC------------------------------------------\\
+
+        Route::post('enviar-convite/', [InvitationOscController::class,'sendInvitation'])->middleware([DeleteExpiredInvitations::class])->name('invitation.send');
+
+        // -----------------------------------------DASHBOARD DO USUÁRIO------------------------------------------\\
+
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+        
+        Route::get('/support', function () {
+            return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
+        })->name('support');
+    
+        Route::get('/timeline', function () {
+            return Inertia::render('VelaSocialLab/Timeline/Timeline');
+        })->name('timeline');
+        
+        Route::get('/seemore', function () {
+            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
+        })->name('seemore');
+    
+        Route::get('/axishub', function () {
+            return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
+        })->name('axishub');
+    
+        Route::get('/axis', function () {
+            return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
+        })->name('axis');
+    
+        Route::get('/myuploads', function () {
+            return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
+        })->name('myuploads');
+
+        Route::get('/settings', function (Request $request) {
+            return Inertia::render('VelaSocialLab/Profile/Settings',
+            ['storageDrive'=>$request->attributes->get('storageDrive')]);
+        })->name('settings');
+        // -------------------------------------------------------------------------------------------\\
+    
+
+        Route::controller(ActivityController::class)->group(function(){
+            Route::get('/activityhub','index')->name('activityhub');
+            Route::post('/registrar-atividade', 'store')->name('activity.store');
+            Route::post('/atividades/filtro','filter')->name('activity.filter');
+            Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
+            Route::post('/atualizar-atividade','update')->name('activity.update');
+            Route::get('/atividade/{id}','show')->name('activity.showMore');
+            Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
+        });
+
+        // -----------------------------------------EDITAR PERFIL DO USUÁRIO------------------------------------------\\
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    });
 });
-
-Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
-Route::get('membros/convites', [InvitationOscController::class,'invitationList'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
-Route::get('/dashboardtest', function () {
-    return Inertia::render('Test');
-})->name('dashboardtest');
 
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
