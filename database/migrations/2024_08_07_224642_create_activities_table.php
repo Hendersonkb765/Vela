@@ -22,7 +22,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('thumbnail_photo_url');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('send_by')->nullable()->constrained('users');
+            $table->foreignId('send_by_id')->nullable()->constrained('users');
+            $table->string('send_by');
             $table->timestamps();
         });
 
