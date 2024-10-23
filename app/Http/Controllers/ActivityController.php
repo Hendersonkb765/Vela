@@ -39,6 +39,25 @@ class ActivityController extends Controller
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!','error' => $e->getMessage()]);
         }
     }
+
+    public function edit($id){
+
+        $osc = Auth::user()->osc->first();
+        $path = "oscs/{$osc->id}/activities/0{$id}/";
+        $allImages = Storage::allFiles($path);
+        $images = [];
+            foreach ($allImages as $image) {
+                $fileUrl = Storage::url($image);
+                $fileType = Storage::mimeType($image);
+                array_push($images, [
+                    'name' => basename($image),
+                    'url' => $fileUrl,
+                    'type' => $fileType,
+                ]);
+            }
+        return response()->json(['status'=> 200,['images' => $images]]);
+    }
+
     public function rephraseDescription(Request $request){
         //reformular descrição da atividade
         try{

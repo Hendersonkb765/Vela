@@ -26,6 +26,7 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use App\Http\Controllers\Services\Google\DriveController;
+use App\Http\Controllers\UsersListController;
 use App\Http\Middleware\CheckGoogleConnection;
 use App\Http\Middleware\DeleteExpiredInvitations;
 use App\Models\Activity;
@@ -41,6 +42,7 @@ use App\Services\ChatGPT\OpenAi;
 use Faker\Guesser\Name;
 use App\Mail\InvitationSender; // Add this line
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -61,24 +63,14 @@ Route::get('/dashboard', function () {
 =======
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(
-    ['auth', 'verified',CheckUserRegistration::class,CheckOsc::class,CheckGoogleConnection::class])->name('dashboard');
 
-Route::get('/settings', function (Request $request) {
-    return Inertia::render('VelaSocialLab/Profile/Settings',
-    ['storageDrive'=>$request->attributes->get('storageDrive')]);
-})->middleware(['auth',CheckGoogleConnection::class])->name('settings');
 // ->middleware(['auth', 'verified'])->name('Configurações');
 
-Route::get('/myuploads', function () {
-    return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
-})->middleware(['auth', 'verified'])->name('myuploads');
+
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
-Route::get('/axis', function () {
-    return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
-})->middleware(['auth', 'verified'])->name('axis');
+
 // ->middleware(['auth', 'verified'])->name('myuploads');
 
 
@@ -87,140 +79,99 @@ Route::get('/axis', function () {
 // })->middleware(['auth'])->name('activityhub');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::controller(ActivityController::class)->group(function(){
-    Route::get('/activityhub','index')->name('activityhub');
-    Route::post('/registrar-atividade', 'store')->name('activity.store');
-    Route::post('/atividades/filtro','filter')->name('activity.filter');
-    Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
-    Route::post('/atualizar-atividade','update')->name('activity.update');
-    Route::get('/atividade/{id}','showMore')->name('activity.showMore');
-    Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
-
-})->middleware(['auth', 'verified']);
 // route('activity.filter',)
 // ->middleware(['auth', 'verified'])->name('taskhub');
 
-Route::get('/axishub', function () {
-    return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
-})->middleware(['auth', 'verified'])->name('axishub');
+
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/seemore', function () {
-    return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
-})->middleware(['auth'])->name('seemore');
-// ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/timeline', function () {
-    return Inertia::render('VelaSocialLab/Timeline/Timeline');
-})->middleware(['auth', 'verified'])->name('timeline');
 // ->middleware(['auth', 'verified'])->name('axishub');
 
 // ->middleware(['auth', 'verified'])->name('axishub');
 
-Route::get('/support', function () {
-    return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
-})->middleware(['auth', 'verified'])->name('support');
-
-Route::middleware('auth')->group(function () {
-
-    Route::get('/modeltest',function(){
-        $axis = Auth::user()->osc->first()->axis->first();
-        dd($axis->currentLevel());
-    });
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::post('/osc/criar', [OscController::class, 'store'])->name('osc.store');
+// ->middleware(['auth', 'verified'])->name('axishub');
 
 
+
+
+
+Route::middleware(['auth','verified'])->group(function () {
+
+    // -----------------------------------------COMPLETANDO REGISTRO DE USUÁRIO------------------------------------------\\
     Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
+    
+    // ---------------------------------------------ACEITAR CONVITE DA OSC------------------------------------------\\
 
+    Route::get('validar-convite/{code}/{oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
+    
+    Route::get('membros-osc', UsersListController::class)->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
+
+    
+    Route::middleware([CheckUserRegistration::class,CheckOsc::class])->group(function(){
+
+        // -----------------------------------------Enviar CONVITE DA OSC------------------------------------------\\
+
+        Route::post('enviar-convite/', [InvitationOscController::class,'sendInvitation'])->middleware([DeleteExpiredInvitations::class])->name('invitation.send');
+
+        // -----------------------------------------DASHBOARD DO USUÁRIO------------------------------------------\\
+
+        Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+        
+        Route::get('/support', function () {
+            return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
+        })->name('support');
+    
+        Route::get('/timeline', function () {
+            return Inertia::render('VelaSocialLab/Timeline/Timeline');
+        })->name('timeline');
+        
+        Route::get('/seemore', function () {
+            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
+        })->name('seemore');
+    
+        Route::get('/axishub', function () {
+            return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
+        })->name('axishub');
+    
+        Route::get('/axis', function () {
+            return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
+        })->name('axis');
+    
+        Route::get('/myuploads', function () {
+            return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
+        })->name('myuploads');
+
+        Route::get('/settings', function (Request $request) {
+            return Inertia::render('VelaSocialLab/Profile/Settings',
+            ['storageDrive'=>$request->attributes->get('storageDrive')]);
+        })->name('settings');
+        // -------------------------------------------------------------------------------------------\\
+    
+
+        Route::controller(ActivityController::class)->group(function(){
+            Route::get('/activityhub','index')->name('activityhub');
+            Route::post('/registrar-atividade', 'store')->name('activity.store');
+            Route::post('/atividades/filtro','filter')->name('activity.filter');
+            Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
+            Route::post('/atualizar-atividade','update')->name('activity.update');
+            Route::get('/atividade/{id}','show')->name('activity.showMore');
+            Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
+        });
+
+        // -----------------------------------------EDITAR PERFIL DO USUÁRIO------------------------------------------\\
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    });
 });
-
-Route::post('enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.send');
-Route::get('validacao/{code}/id={oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
-Route::get('membros/convites', [InvitationOscController::class,'invitationList'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
-Route::get('/dashboardtest', function () {
-    return Inertia::render('Test');
-})->name('dashboardtest');
 
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
 })->name('profilesetup');
-
-/////////////// ROTAS PARA TESTES //////////////////////////
-Route::get('/teste',function(){
-    $osc = Osc::find(2);
-    $address = new Address([
-        'counties' => 'Example City',
-        'neighborhood' => 'Example Neighborhood',
-        'state' => 'Example State',
-        'cep' => '12345-678',
-        'street' => 'Example Street',
-        'number' => '123',
-        'complement' => 'Apt 456',
-    ]);
-    dd($osc->address()->save($address));
-    //dd($osc->first()->task->first()->pivot->status);
-    //$osc->task()->updateExistingPivot($osc->task->first()->id,['status'=>'concluído']);
-    //$osc->save();
-})->name('teste');
-
-Route::get('/teste2',[ActivityController::class,'index'])->name('teste2');
-Route::get('/criar-arquivo',function(){
-    $driveFile = new Folder(Auth::user()->osc->first()->id);
-    $driveFile->create('OlhAOTESTE AI',null);
-});
-Route::get('/formulario',function(){
-    /*
-    $driveFolder = new Folder(Auth::user()->osc->first()->id);
-    $driveFolder->createDefaultDirectories();
-    return response()->json(['status'=>200,'message' => 'Pastas criadas com sucesso']);
-    */
-    return view('Formulario');
-});
-Route::post('/drive',function(Request $request){
-
-        $oscId = Auth::user()->osc->first()->id;
-        $driveFile = new File($oscId);
-        $sa = $driveFile->create('teste',$request->file('database')[0],'1Vx8Xild41Leq3FOYEPD8nmbPCuEav75W');
-      
-
-        
-    //$driveFile = new File($oscId);
-   // $arquivo = $driveFile->create($fileDatabase->getClientOriginalName(),$fileDatabase,'1NQ2Uo-jsJeZuEJB5udJHFyJBSY8QnD0I',true);
-    //dd($arquivo);
-})->name('formulario');
-Route::get('/views',function(){
-    $oscid = Auth::user()->osc->first()->id;
-    $driveFile = new File($oscid);
-    $arquivos = $driveFile->create('teste',null,false,false,'image');
-    dd($arquivos);
-});
-Route::get('/drive2',function(){
-    // $fileDrive = GoogleDriveFolder::where('name','Atividades')->where('osc_id',Auth::user()->osc->first()->id)->first();
-    // dd($fileDrive);
-    // $oscId = Auth::user()->osc->first()->id;
-    // $folder = new Folder($oscId);
-    // $folder->create('⚠️teste⚠️');
-});
-Route::get('openai',function(){
-    $openai = new OpenAi();
-    $response = $openai->chatGPT('Você é um facilitador de uma aceleradora de ONGs, atua ajudando diretores de organização a melhorar os seus processos','Me faça uma descrição de um projeto de esportes diversos para crianças ressaltando a importância dele','gpt-3.5-turbo-0125');
-
-    return response()->json($response);
-});
-route::get('/teste-mail/{email}',function($email){
-
-    $dadosMail =Mail::to($email)->send(new InvitationSender('$linkInvitation', '$osc->name', 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg', '$osc->presidents_name'));
-    dd($dadosMail);
-
-});
-
 
 Route::get('/isolado', function () {
     return Inertia::render('InvitationPage');
@@ -234,14 +185,11 @@ Route::get('/server-error', function () {
     abort(500);
 });
 
-Route::get('/teste-storage',function(){
-    dd(Storage::url('profile-photos-osc/67148786776f4.png'));
-});
 
-Route::get('/s3={id}',[ActivityController::class,'showMore'])->name('s3');
+
 
 require __DIR__.'/auth.php';
-
+require __DIR__.'/test.php';
 
 
 // Route::get('/resources/test', function () {
