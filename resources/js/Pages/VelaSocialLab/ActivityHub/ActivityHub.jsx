@@ -4,11 +4,14 @@ import ActivityUpload from './Components/ActivityUpload';
 import ActivityCard from './Components/ActivityCard';
 import Filter from './Components/Filter/Filter';
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { ContextMenu } from 'primereact/contextmenu'; // Importando o ContextMenu do PrimeReact
 import './CustomUl.css'
 import { GoClock, GoCalendar } from "react-icons/go";
+// import { Inertia } from '@inertiajs/inertia';
+
 
 export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive }) {
     const { props } = usePage();
@@ -27,8 +30,30 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
         { label: 'Deletar', className: '', icon: 'pi pi-times', command: () => deleteCard(selectedCard) }
     ];
 
+    // const navigate = useNavigate();
+
+    // const handleSeeMoreClick = async (activityId) => {
+       
+    //     try {
+    //         const response = await axios.get(`/showMore/${activityId}`);
+            
+    //         if (response.status === 200) {
+    //         const activityData = response.data.activity;
+    //         const images = response.data.images;
+            
+    //         // Redireciona para a página SeeMorePage com os dados
+    //         // navigate('/seemore', { state: { activityData, images } });
+    //         } else {
+    //         console.error('Erro ao buscar a atividade');
+    //         }
+    //     } catch (error) {
+    //         console.error('Erro na requisição:', error.message);
+    //     }
+    // };
+
     const viewDetails = (card) => {
         alert(`Exibindo detalhes da atividade: ${card.id}`);
+        // handleSeeMoreClick(card.id)
     };
 
     const editCard = (card) => {
