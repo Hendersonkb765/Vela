@@ -187,7 +187,7 @@ class ActivityController extends Controller
             $activity = Activity::find($id);
             $osc= Auth::user()->osc->first();
             $path = "oscs/{$osc->id}/activities/0{$activity->id}/";
-            $allImages =Storage::allFiles($path);
+            $allImages = Storage::allFiles($path);
             $images = [];
             foreach ($allImages as $image) {
                 $fileUrl = Storage::url($image);

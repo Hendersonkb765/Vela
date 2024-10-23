@@ -11,7 +11,8 @@ import ImageDisplayer from './ImageDisplayer';
 
 
 export default function SeeMorePage({
-    propData
+    activity,
+    images
 }){
 
     const sampleData = {
@@ -35,24 +36,25 @@ export default function SeeMorePage({
  // O array vazio significa que esse efeito só será executado uma vez
 
     useEffect(() => {
-        if (propData) {
+        if (activity) {
             const modifiedPropData = {
-                ...propData,
-                created_at: propData.created_at.slice(0, 10).split('-'),
-                updated_at: propData.updated_at.slice(0, 10).split('-'),
-                date: propData.date.split('-'),
-                hour_end: propData.hour_end.slice(0, 5),
-                hour_start: propData.hour_start.slice(0, 5),
-                send_by: propData.send_by.split(' ')
+                ...activity,
+                created_at: activity.created_at.slice(0, 10).split('-'),
+                updated_at: activity.updated_at.slice(0, 10).split('-'),
+                date: activity.date.split('-'),
+                hour_end: activity.hour_end.slice(0, 5),
+                hour_start: activity.hour_start.slice(0, 5),
+                send_by: activity.send_by.split(' ')
             };
             console.log(modifiedPropData)
 
             setData(modifiedPropData);
         } else {
+            console.log(activity)
             setData(sampleData);
             console.log(data.activityImgs)
         }
-    }, [propData]); // Reage apenas quando `propData` muda
+    }, [activity]); // Reage apenas quando `propData` muda
 
    
 
@@ -143,7 +145,7 @@ export default function SeeMorePage({
 
                     <div className='flex justify-between'>
 
-                        <SecondaryIconButton rounded icon={<RiArrowGoBackLine className="sm:h-6 sm:w-6"/>} className="md:!w-32 xl:!w-fit h-9 "><span className=" group-hover:block">Voltar</span></SecondaryIconButton>
+                        <SecondaryIconButton href={route('activityhub')} rounded icon={<RiArrowGoBackLine className="sm:h-6 sm:w-6"/>} className="md:!w-32 xl:!w-fit h-9 "><span className=" group-hover:block">Voltar</span></SecondaryIconButton>
 
                         <SecondaryIconButton rounded icon={<MdModeEditOutline className="sm:h-6 sm:w-6"/>} className="md:!w-32 xl:!w-fit h-9 "><span className=" group-hover:block">Editar</span></SecondaryIconButton>
 

@@ -378,7 +378,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='lg:max-w-[435px]' onSubmit={handleSubmit}>
             {step === 1 && (
                 <>
                     <div className="mb-4">
@@ -526,8 +526,12 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                                 className="mt-2 h-10 sm:mt-1 w-full sm:w-auto block dark:text-gray-200 file:h-10 file:border-none file:rounded-lg file:mr-4 dark:file:bg-slate-900 dark:file:hover:bg-slate-900/70 dark:file:text-gray-200 file:cursor-pointer"
                             />
                         )}
-                        {(newImages.length + existingImages.length ) >= 6&&(
+                        {(newImages.length + existingImages.length ) == 6&&(
                             <p className='dark:text-gray-200 border-l-2 border-primary pl-1'>Limite de imagens atingido nesta atividade, você ainda pode trocar as imagens</p>
+                        )}
+
+                        {(newImages.length + existingImages.length ) > 6&&(
+                            <p className='text-danger border-l-2 border-l-danger pl-1'>Limite de 6 imagens  ultrapassado! <br /> Remova {(newImages.length + existingImages.length ) - 6} imagens.</p>
                         )}
 
                         {errors.activityThumbnail && <p className="text-red-500 text-body text-sm">{errors.activityThumbnail}</p>}

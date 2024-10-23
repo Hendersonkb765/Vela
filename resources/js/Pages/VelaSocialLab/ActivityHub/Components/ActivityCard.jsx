@@ -18,7 +18,6 @@ export default function ActivityCard({data, ...props}) {
         setIsModalOpen(false);
     };
 
-    console.log()
 
 
     return (
@@ -43,8 +42,8 @@ export default function ActivityCard({data, ...props}) {
                 </div>
 
                 <div className="flex flex-row ml-2 sm:flex-col space-x-4 sm:space-x-0 sm:space-y-4 xl:space-y-0 xl:flex-row xl:space-x-4 xl:scale-75 xl:group-hover:scale-90 transition-transform md:">
-                    <SecondaryIconButton onClick={openModal} rounded icon={<MdModeEditOutline className="sm:h-8 sm:w-8"/>} className="md:!w-32 xl:!w-fit xl:group-hover:!w-36  h-16 "><span className="xl:hidden group-hover:block">Editar</span></SecondaryIconButton>
-                    <SecondaryIconButton rounded icon={<MdMoreHoriz className="sm:h-8 sm:w-8"/>} className="md:w-32 xl:!w-fit xl:group-hover:!w-36 h-16 "><span className="xl:hidden group-hover:block">Ver mais</span></SecondaryIconButton>
+                    <SecondaryIconButton  onClick={openModal} rounded icon={<MdModeEditOutline className="sm:h-8 sm:w-8"/>} className="md:!w-32 xl:!w-fit xl:group-hover:!w-36  h-16 "><span className="xl:hidden group-hover:block">Editar</span></SecondaryIconButton>
+                    <SecondaryIconButton href={route('seemore', data.id)} rounded icon={<MdMoreHoriz className="sm:h-8 sm:w-8"/>} className="md:w-32 xl:!w-fit xl:group-hover:!w-36 h-16 "><span className="xl:hidden group-hover:block">Ver mais</span></SecondaryIconButton>
                 </div>
 
             </div>
