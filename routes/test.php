@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UsersListController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InvitationSender;
@@ -9,6 +10,7 @@ use App\Services\ChatGPT\OpenAi; // Ensure this namespace is correct according t
 use App\Models\Osc;
 use App\Models\Address; // Add this line to import the Address class
 use Illuminate\Support\Facades\Auth; // Add this line to import the Auth facade
+use Inertia\Inertia; // Add this line to import the Inertia facade
 
 
 Route::get('/teste-s3={id}',[ActivityController::class,'showMore'])->name('s3');
@@ -50,3 +52,9 @@ Route::get('/modeltest',function(){
     $axis = Auth::user()->osc->first()->axis->first();
     dd($axis->currentLevel());
 });
+Route::get('/dashboardtest', function () {
+    return Inertia::render('Test');
+})->name('dashboardtest');
+
+
+Route::get('/lista-usuarios-test',UsersListController::class);

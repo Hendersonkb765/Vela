@@ -82,7 +82,9 @@ class Osc extends Model
     public function googleToken(){
         return $this->hasMany(GoogleToken::class);
     }
-
+    public function invitationOsc(){
+        return $this->hasMany(InvitationOsc::class);
+    }
   
     
     
