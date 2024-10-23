@@ -19,7 +19,7 @@ class Activity extends Model
         'send_by',
         'description',
         'thumbnail_photo_url',
-        'osc_id',
+        'send_by_id'
     ];
 
     // muitos para um
