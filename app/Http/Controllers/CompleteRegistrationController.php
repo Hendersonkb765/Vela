@@ -80,9 +80,12 @@ class CompleteRegistrationController extends Controller
             ]);
 
             $user->save();
+            event(new Registered($user));
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
+
+
             //return response()->json(['status' => 200, 'message' => 'Registro completado com sucesso!']);
 
         }

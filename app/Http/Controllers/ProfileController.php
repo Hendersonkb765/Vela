@@ -78,7 +78,7 @@ class ProfileController extends Controller
         $user = $request->user();
         
         Auth::logout();
-        $user->activities()->update(['user_id' => null]);
+        $user->activities()->update(['send_by_id' => null]);
         $user->delete();
         
         $request->session()->invalidate();

@@ -55,7 +55,8 @@ class ActivityController extends Controller
                     'type' => $fileType,
                 ]);
             }
-        return response()->json(['status'=> 200,['images' => $images]]);
+        
+        return Inertia::render('VelaSocialLab/ActivityHub/Components/EditActivity/EditActivity',['images'=>$images]);
     }
 
     public function rephraseDescription(Request $request){
