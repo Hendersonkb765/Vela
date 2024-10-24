@@ -58,3 +58,47 @@ Route::get('/dashboardtest', function () {
 
 
 Route::get('/lista-usuarios-test',UsersListController::class);
+
+
+
+/*
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+<<<<<<< HEAD
+})->middleware(['auth'])->name('dashboard');
+// ->middleware(['auth', 'verified'])->name('dashboard');
+=======
+})->middleware(['auth', 'verified'])->name('dashboard');
+*/
+
+// ->middleware(['auth', 'verified'])->name('Configurações');
+
+
+// ->middleware(['auth', 'verified'])->name('myuploads');
+
+
+
+// ->middleware(['auth', 'verified'])->name('myuploads');
+
+
+// Route::get('/activityhub', function () {
+//     return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
+// })->middleware(['auth'])->name('activityhub');
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+// route('activity.filter',)
+// ->middleware(['auth', 'verified'])->name('taskhub');
+
+
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+// ->middleware(['auth', 'verified'])->name('axishub');
+
+
+
+

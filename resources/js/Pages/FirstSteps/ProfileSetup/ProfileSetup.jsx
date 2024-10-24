@@ -11,10 +11,13 @@ import Stage4 from "./Stage4";
 
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(() => {
+    
+        
         // Recupera o estado do localStorage, se disponível
         const savedStep = localStorage.getItem('currentStep');
         return savedStep ? JSON.parse(savedStep) : 1; // Valor padrão é 1
     });
+    console.log(currentStep);
     const [complete, setComplete] = useState(false);
     const { data, setData, post, patch, processing, errors, reset } = useForm({
         user: {

@@ -36,6 +36,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const minDate = "1900-01-01"; 
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
 
+    const images=''
     const { data, setData, processing, post, progress } = useForm({
         activityTitle: activityData.title,
         activityDescription: activityData.description,
@@ -56,7 +57,8 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
             try{
                 const response = await axios.get(route('activity.edit', activityData.id));
-                console.log(response.data);
+                console.log(response.data.images);
+                images = response.data.images;
             }
             catch(error){
                 console.log(error);

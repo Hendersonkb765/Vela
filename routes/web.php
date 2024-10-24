@@ -3,46 +3,17 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CompleteRegistrationController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OscController; // Add this line
 use App\Http\Middleware\CheckOsc; // Add this line
 use App\Http\Middleware\CheckUserRegistration;
-use App\Models\Axis;
-use App\Models\Level;
-use App\Models\Osc;
-use App\Models\User; // Add this line
-use App\Models\Task; // Add this line
-use App\Models\Address; // Add this line
-use App\Models\GoogleToken; // Add this line
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Psy\VersionUpdater\Checker;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use Google\Client;
-use Google\Service\Drive;
-use Google\Service\Drive\DriveFile;
-use App\Http\Controllers\Services\Google\DriveController;
 use App\Http\Controllers\UsersListController;
-use App\Http\Middleware\CheckGoogleConnection;
 use App\Http\Middleware\DeleteExpiredInvitations;
-use App\Models\Activity;
-use App\Models\GoogleDriveFolder;
-use App\Models\GoogleDriveFile;
-use App\Services\Google\Drive\File;
-use App\Services\Google\Drive\Folder;
-use App\Services\Google\Drive\GoogleDrive;
 use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite; // Add this line
-use Illuminate\Support\Facades\Mail; // Add this line
-use App\Services\ChatGPT\OpenAi;
-use Faker\Guesser\Name;
-use App\Mail\InvitationSender; // Add this line
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -52,48 +23,6 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-
-/*
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-<<<<<<< HEAD
-})->middleware(['auth'])->name('dashboard');
-// ->middleware(['auth', 'verified'])->name('dashboard');
-=======
-})->middleware(['auth', 'verified'])->name('dashboard');
-*/
-
-// ->middleware(['auth', 'verified'])->name('Configurações');
-
-
-// ->middleware(['auth', 'verified'])->name('myuploads');
-
-
-
-// ->middleware(['auth', 'verified'])->name('myuploads');
-
-
-// Route::get('/activityhub', function () {
-//     return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub');
-// })->middleware(['auth'])->name('activityhub');
-// ->middleware(['auth', 'verified'])->name('axishub');
-
-// route('activity.filter',)
-// ->middleware(['auth', 'verified'])->name('taskhub');
-
-
-// ->middleware(['auth', 'verified'])->name('axishub');
-
-
-// ->middleware(['auth', 'verified'])->name('axishub');
-
-// ->middleware(['auth', 'verified'])->name('axishub');
-
-// ->middleware(['auth', 'verified'])->name('axishub');
-
-
-
 
 
 Route::middleware(['auth','verified'])->group(function () {

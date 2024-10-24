@@ -56,7 +56,7 @@ class ActivityController extends Controller
                 ]);
             }
         
-        return Inertia::render('VelaSocialLab/ActivityHub/Components/EditActivity/EditActivity',['images'=>$images]);
+        return response()->json(['status'=> 200,'images' => $images]);
     }
 
     public function rephraseDescription(Request $request){
@@ -148,7 +148,7 @@ class ActivityController extends Controller
 
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
+            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!', 'error' => $e->getMessage()]);
         }
 
     }
