@@ -11,6 +11,7 @@ import PrimaryIconButton from '@/FigmaComponents/Button/PrimaryIconButton';
 import { FaRegPaperPlane } from "react-icons/fa";
 import { GoCheckCircleFill } from "react-icons/go";
 import { GoXCircleFill } from "react-icons/go";
+import axios from 'axios';
 
 
 
@@ -48,6 +49,11 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     console.log(data.activityThumbnail)
 
 
+    useEffect(() =>{
+
+        
+
+    },[])
 
 
 
@@ -317,47 +323,47 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
         console.log(newImages)
 
-        // if (data.activityThumbnail) {
-        //     setLoadingActivity(true); // Ativa o efeito de loading
+        if (data.activityThumbnail) {
+            setLoadingActivity(true); // Ativa o efeito de loading
 
-        //     try {
-        //         // Faz a requisição usando post (Inertia.js ou seu método específico)
-        //         await post(route('activity.store'), {
-        //             data: data,
-        //             onFinish: () => {
-        //                 setImgSrc(''); // Limpa o estado da imagem
-        //                 setLoadingActivity(false); // Desativa o efeito de loading
-        //             },
-        //             onSuccess: () => {
-        //                 setShowPopup(true); // Exibe o popup se deu certo
+            try {
+                // Faz a requisição usando post (Inertia.js ou seu método específico)
+                await post(route('activity.store'), {
+                    data: data,
+                    onFinish: () => {
+                        setImgSrc(''); // Limpa o estado da imagem
+                        setLoadingActivity(false); // Desativa o efeito de loading
+                    },
+                    onSuccess: () => {
+                        setShowPopup(true); // Exibe o popup se deu certo
 
-        //                 setTimeout(() => {
-        //                     setShowPopup(false); // Fecha o modal
-        //                 }, 5000);
-        //                 window.location.reload();
-        //             },
-        //             onError: (errors) => {
-        //                 if (errors.response) {
-        //                     // Se houver uma resposta JSON com erro
-        //                     const errorData = errors.response.data;
-        //                     console.error('Erro do servidor:', errorData);
-        //                     setErrors(errorData); // Exibe o erro na tela (se necessário)
-        //                     setRegisterError(true)
-        //                 } else {
-        //                     console.error('Erro desconhecido:', errors);
-        //                 }
-        //                 // setErrors(errors); // Define os erros se houver
-        //                 setLoadingActivity(false); // Desativa o loading ao receber o erro
-        //             },
-        //         });
-        //     } catch (error) {
-        //         console.error('Erro ao enviar o formulário:', error);
-        //         setLoadingActivity(false); // Desativa o loading em caso de erro
-        //     }
-        // } else {
-        //     setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
-        // }
-
+                        setTimeout(() => {
+                            setShowPopup(false); // Fecha o modal
+                        }, 5000);
+                        window.location.reload();
+                    },
+                    onError: (errors) => {
+                        if (errors.response) {
+                            // Se houver uma resposta JSON com erro
+                            const errorData = errors.response.data;
+                            console.error('Erro do servidor:', errorData);
+                            setErrors(errorData); // Exibe o erro na tela (se necessário)
+                            setRegisterError(true)
+                        } else {
+                            console.error('Erro desconhecido:', errors);
+                        }
+                        // setErrors(errors); // Define os erros se houver
+                        setLoadingActivity(false); // Desativa o loading ao receber o erro
+                    },
+                });
+            } catch (error) {
+                console.error('Erro ao enviar o formulário:', error);
+                setLoadingActivity(false); // Desativa o loading em caso de erro
+            }
+        } else {
+            setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
+        }
+  
 
     };
 
