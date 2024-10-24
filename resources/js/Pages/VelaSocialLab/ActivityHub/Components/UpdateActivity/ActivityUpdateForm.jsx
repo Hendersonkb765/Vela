@@ -12,6 +12,7 @@ import { FaRegPaperPlane } from "react-icons/fa";
 import { GoCheckCircleFill } from "react-icons/go";
 import { GoXCircleFill } from "react-icons/go";
 import axios from 'axios';
+import { useEffect } from 'react';
 
 
 
@@ -46,15 +47,44 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         // activityImages: activityImages,
     });
 
-    console.log(data.activityThumbnail)
+    // console.log(data.activityThumbnail)
 
 
     useEffect(() =>{
 
-        
+        const fetchData = async () =>{
+
+            try{
+                const response = await axios.get(route('activity.edit', activityData.id));
+                console.log(response.data);
+            }
+            catch(error){
+                console.log(error);
+            }
+
+        }
+
+        fetchData()
+
+        // axios.get('/editar/' + activityData.id)
+        // .then(response => {
+        //     console.log(response.data)
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // });
 
     },[])
 
+    // const fetchData = async(startDate,endDate) => {
+    //     try{
+    //         const response = await axios.get(route('activity.filterByDate', {startDate: startDate, endDate: endDate}));
+    //         alert(response.status);
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //     }
+    // };
 
 
     const [existingImages, setExistingImages] = useState(activityImages);

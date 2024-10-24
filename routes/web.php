@@ -160,7 +160,7 @@ Route::middleware(['auth','verified'])->group(function () {
             Route::get('/atividade/{id}','show')->name('activity.showMore');
             Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
         
-            Route::get('/editar', 'edit')->name('activity.edit');
+            Route::get('/editar/{id}', 'edit')->name('activity.edit');
         });
 
         // -----------------------------------------EDITAR PERFIL DO USUÁRIO------------------------------------------\\
