@@ -3,13 +3,14 @@ import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import './ImageDisplayer.css';
 import { useEffect } from 'react';
 
-export default function ImageDisplayer( images) {
+export default function ImageDisplayer(images) {
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sliderRef = useRef(null);
   const [acImages, setAcImages] = useState([])
+  console.log(images)
 
   // const images = [
   //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',

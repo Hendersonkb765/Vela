@@ -16,6 +16,7 @@ export default function SeeMorePage({
     activity,
     images
 }){
+    
     // console.log(activity)
     // console.log("Objeto Imagens: ", images)
     // console.log("Imagens", images.images)
