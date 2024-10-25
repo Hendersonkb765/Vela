@@ -23,7 +23,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Database\ConnectionException;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\Events\Authenticated;
+use App\Events\VerificationEmail;
 
 class CompleteRegistrationController extends Controller
 {
@@ -59,7 +61,6 @@ class CompleteRegistrationController extends Controller
                 'user.birthday.before' => 'A data de nascimento deve ser anterior a data atual.',
             ]);
 
-
             $userRequest = $request['user'];
             if (isset($userRequest['profilePicture'])) {
                 $imageData = $userRequest['profilePicture'];
@@ -80,12 +81,12 @@ class CompleteRegistrationController extends Controller
             ]);
 
             $user->save();
-            event(new Registered($user));
+
+           
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
-
-
+            event(new VerificationEmail($request->user()));
             //return response()->json(['status' => 200, 'message' => 'Registro completado com sucesso!']);
 
         }
@@ -118,13 +119,13 @@ class CompleteRegistrationController extends Controller
             'organization.CNPJ.cnpj' => 'O CNPJ informado é inválido.'
 
         ]);
-        
+
         $osc = Osc::create([
             'cnpj' => $request->input('organization.CNPJ', null),
             'institutional_email' => $request->input('organization.institutional_email', null),
             'fantasy_name' => $request->input('organization.organizationName', null),
             'presidents_name' => Auth::user()->name,
-            
+
         ]);
         $osc->user()->attach(Auth::user()->id);
         $axes = Axis::all();
@@ -139,9 +140,9 @@ class CompleteRegistrationController extends Controller
         foreach($level as $level){
             $osc->level()->attach($level->id);
         }
-        
+
         $focusAreas = $request->input('organization.focusAreas');
-        
+
         if(isset($focusAreas)){
             for ($i = 1; $i <= count($focusAreas); $i++){
                 $osc->targetAudience()->attach($i);
@@ -150,16 +151,16 @@ class CompleteRegistrationController extends Controller
         $image = $request->input('organization.organizationProfilePicture');
 
         if (isset($image)) {
-        
+
             $imageData = $image;
             list($type, $imageData) = explode(';', $imageData);
             list(, $imageData) = explode(',', $imageData);
             $imageData = base64_decode($imageData);
             $imageName =  uniqid() . '.png';
-           
+
             Storage::put("oscs/{$osc->id}/{$imageName}", $imageData,'public');
             $imageUrl = Storage::url("oscs/{$osc->id}/{$imageName}");
-            
+
 
         }
         else{

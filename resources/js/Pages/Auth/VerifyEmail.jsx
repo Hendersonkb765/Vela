@@ -42,6 +42,10 @@ export default function VerifyEmail({ status }) {
                         >
                             Sair
                         </Link>
+                        {status === 'verification-link-sent' && (
+                        <Link href={route('dashboard')} as="button" className=" min-w-32 h-12 rounded border-2 border-green-500/100 text-white bg-green-700 p-1">
+                            Já verifiquei!
+                        </Link>)}
                     </div>
                 </form>
             </div>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\InvitationVerifyEmailSender;
 use App\Events\VerificationEmail;
 
-class SendVerificationEmail
+class SendVerificationEmail implements ShouldQueue
 {
 
     /**

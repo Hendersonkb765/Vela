@@ -20,14 +20,8 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try{
-            // $user = $request->user();
-            // $url = URL::temporarySignedRoute(
-            //     'verification.verify', 
-            //     now()->addMinutes(10), 
-            //     ['id' => $user->id, 'hash' => hash('sha256', $user->email)]
-            // );
+ 
             event(new VerificationEmail($request->user()));
-            //Mail::to($user->email)->send(new InvitationVerifyEmailSender($user->name, $user->email, $url));
             return back()->with('status', 'verification-link-sent');
         }
         catch(\Exception $e){

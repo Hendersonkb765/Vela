@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UsersListController;
 use App\Http\Middleware\DeleteExpiredInvitations;
+use Aws\Middleware;
 use Illuminate\Http\Request;
 
 
@@ -24,13 +25,18 @@ Route::get('/', function () {
     ]);
 });
 
+Route::middleware('auth')->group(function(){
+// -----------------------------------------COMPLETANDO REGISTRO DE USUÁRIO------------------------------------------\\
+    Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create')->middleware('auth');
+    Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
+    Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
+});
+
+
+    
 
 Route::middleware(['auth','verified'])->group(function () {
 
-    // -----------------------------------------COMPLETANDO REGISTRO DE USUÁRIO------------------------------------------\\
-    Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
-    Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create');
-    Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
     
     // ---------------------------------------------ACEITAR CONVITE DA OSC------------------------------------------\\
 
