@@ -500,8 +500,8 @@ export default function ActivityForm({ onSubmit }) {
             )}
 
             {showPopup && (
-                <div className="animate-enter fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                    <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
+                <div className=" fixed inset-0 flex items-center justify-center ">
+                    <div className="bg-white animate-enter p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
                         <div className="flex gap-2 items-center">
 
                             <GoCheckCircleFill className="text-6xl text-success"/>
