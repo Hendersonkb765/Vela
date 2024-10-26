@@ -22,9 +22,10 @@ const MIN_SIZE = 150;
 const ASPECT_RATIO = 1;
 
 export default function ActivityUpdateForm({ onSubmit, activityData }) {
+    
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
-    const [imgSrc, setImgSrc] = useState(activityData.thumbnail_photo_url);
+    
     const [loadingIa, setLoadingIa] = useState(false)
     const [activityImages, setPreviewImages] = useState(['https://www.eusemfronteiras.com.br/wp-content/uploads/2017/08/11-810x456.png', 'https://lirp.cdn-website.com/82e2ead5/dms3rep/multi/opt/happy-people-volunteering-special-causes-1920w.jpg', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png', 'https://www.florence.edu.br/blog/wp-content/uploads/2022/07/Florence-voluntariado.png']);
     const [showPopup, setShowPopup] = useState(false);
@@ -32,10 +33,10 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const [registerError, setRegisterError] = useState(false);
     const [changeThumb, setChangeThumb] = useState(false)
     const [toRemoveImg, setToRemoveImg] = useState([])
-
     const minDate = "1900-01-01"; 
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
-
+    const [existingImages, setExistingImages] = useState([]);
+    const [newImages, setNewImages] = useState([]);
     const images=''
     const { data, setData, processing, post, progress } = useForm({
         activityTitle: activityData.title,
@@ -47,8 +48,11 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         activityThumbnail: activityData.thumbnail_photo_url,
         // activityImages: activityImages,
     });
+    const [imgSrc, setImgSrc] = useState(data.activityThumbnail);
 
     // console.log(data.activityThumbnail)
+
+
 
 
     useEffect(() =>{
@@ -58,7 +62,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
             try{
                 const response = await axios.get(route('activity.edit', activityData.id));
                 console.log(response.data.images);
-                images = response.data.images;
+                setExistingImages(response.data.images)
             }
             catch(error){
                 console.log(error);
@@ -67,36 +71,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         }
 
         fetchData()
-
-        // axios.get('/editar/' + activityData.id)
-        // .then(response => {
-        //     console.log(response.data)
-        // })
-        // .catch(error => {
-        //     console.log(error)
-        // });
-
     },[])
-
-    // const fetchData = async(startDate,endDate) => {
-    //     try{
-    //         const response = await axios.get(route('activity.filterByDate', {startDate: startDate, endDate: endDate}));
-    //         alert(response.status);
-    //     }
-    //     catch(error){
-    //         console.log(error);
-    //     }
-    // };
-
-
-    const [existingImages, setExistingImages] = useState(activityImages);
-    const [newImages, setNewImages] = useState([]);
-
-
-
-
-
-
 
 
     const handleTextIa = async () => {
@@ -289,38 +264,6 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const removeImage = (index, type) => {
         if (type === 'existing') {
             setToRemoveImg(toRemoveImg + existingImages[index])
@@ -353,48 +296,91 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(newImages)
+        if(data.activityTitle != activityData.title){
 
-        if (data.activityThumbnail) {
-            setLoadingActivity(true); // Ativa o efeito de loading
+            console.log("Houve Mudança de titulo")
 
-            try {
-                // Faz a requisição usando post (Inertia.js ou seu método específico)
-                await post(route('activity.store'), {
-                    data: data,
-                    onFinish: () => {
-                        setImgSrc(''); // Limpa o estado da imagem
-                        setLoadingActivity(false); // Desativa o efeito de loading
-                    },
-                    onSuccess: () => {
-                        setShowPopup(true); // Exibe o popup se deu certo
-
-                        setTimeout(() => {
-                            setShowPopup(false); // Fecha o modal
-                        }, 5000);
-                        window.location.reload();
-                    },
-                    onError: (errors) => {
-                        if (errors.response) {
-                            // Se houver uma resposta JSON com erro
-                            const errorData = errors.response.data;
-                            console.error('Erro do servidor:', errorData);
-                            setErrors(errorData); // Exibe o erro na tela (se necessário)
-                            setRegisterError(true)
-                        } else {
-                            console.error('Erro desconhecido:', errors);
-                        }
-                        // setErrors(errors); // Define os erros se houver
-                        setLoadingActivity(false); // Desativa o loading ao receber o erro
-                    },
-                });
-            } catch (error) {
-                console.error('Erro ao enviar o formulário:', error);
-                setLoadingActivity(false); // Desativa o loading em caso de erro
-            }
-        } else {
-            setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
         }
+        if(data.activityDescription != activityData.description){
+
+            console.log("Houve Mudança de descrição")
+
+        }
+        if(data.activityAudience != activityData.audience){
+
+            console.log("Houve Mudança de audiencia")
+
+        }
+        if(data.activityDate != activityData.date){
+
+            console.log("Houve Mudança de data")
+
+        }
+        if(data.activityHourStart != activityData.hour_start){
+
+            console.log("Houve Mudança de hora de inicio")
+
+        }
+        if(data.activityHourEnd != activityData.hour_end){
+
+            console.log("Houve Mudança de hora de terminno")
+
+        }
+        if(data.activityThumbnail != activityData.thumbnail_photo_url){
+
+            console.log("Houve Mudança de hora de thumb")
+
+        }
+        if(toRemoveImg){
+            console.log("Para remover as imagens: ", toRemoveImg)
+        }
+        if(newImages){
+
+            console.log("Para adicionar as imagens", newImages)
+
+        }
+
+
+        // console.log(newImages)
+
+        // if (data.activityThumbnail) {
+        //     setLoadingActivity(true); // Ativa o efeito de loading
+        //     try {
+        //         // Faz a requisição usando post (Inertia.js ou seu método específico)
+        //         await post(route('activity.store'), {
+        //             data: data,
+        //             onFinish: () => {
+        //                 setImgSrc(''); // Limpa o estado da imagem
+        //                 setLoadingActivity(false); // Desativa o efeito de loading
+        //             },
+        //             onSuccess: () => {
+        //                 setShowPopup(true); // Exibe o popup se deu certo
+        //                 setTimeout(() => {
+        //                     setShowPopup(false); // Fecha o modal
+        //                 }, 5000);
+        //                 window.location.reload();
+        //             },
+        //             onError: (errors) => {
+        //                 if (errors.response) {
+        //                     // Se houver uma resposta JSON com erro
+        //                     const errorData = errors.response.data;
+        //                     console.error('Erro do servidor:', errorData);
+        //                     setErrors(errorData); // Exibe o erro na tela (se necessário)
+        //                     setRegisterError(true)
+        //                 } else {
+        //                     console.error('Erro desconhecido:', errors);
+        //                 }
+        //                 // setErrors(errors); // Define os erros se houver
+        //                 setLoadingActivity(false); // Desativa o loading ao receber o erro
+        //             },
+        //         });
+        //     } catch (error) {
+        //         console.error('Erro ao enviar o formulário:', error);
+        //         setLoadingActivity(false); // Desativa o loading em caso de erro
+        //     }
+        // } else {
+        //     setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
+        // }
   
 
     };
@@ -563,7 +549,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                     <div className='mt-4 max-w-fit flex flex-wrap gap-4'>
                         {existingImages.map((image, index) => (
                             <div key={index} className='relative flex items-end hover:items-center justify-center w-fit group cursor-pointer transition-all'>
-                                <img src={image} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                <img src={image.url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
                                 <PrimaryIconButton onClick={() => removeImage(index, 'existing')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
                                     <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
                                 </PrimaryIconButton>
