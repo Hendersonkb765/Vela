@@ -600,10 +600,10 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                 
                     <div className="absolute flex justify-center items-center top-0 right-0 z-10 w-full h-full bg-gray-800 bg-opacity-50 dark:bg-opacity-70 ">
 
-                    <div className="flex flex-col gap-2 items-center justify-center h-screen">
-                        <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
-                        <p className="text-primary font-medium ">Carregando...</p>
-                    </div>
+                        <div className="flex flex-col gap-2 items-center justify-center h-screen">
+                            <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
+                            <p className="text-primary font-medium ">Carregando...</p>
+                        </div>
 
                     </div>
 
@@ -650,8 +650,8 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
             )}
 
             {showPopup && (
-                <div className="animate-enter fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                    <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
+                <div className=" fixed inset-0 flex items-center justify-center">
+                    <div className="animate-enter bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
                         <div className="flex gap-2 items-center">
 
                             <GoCheckCircleFill className="text-6xl text-success"/>
