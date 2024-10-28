@@ -161,7 +161,7 @@ export default function SeeMorePage({
                             {data.send_by&&(
                             <div className='flex gap-2 items-center' title='Membro da organização que enviou a atividade'>
                                 <FiUser className='text-primary stroke-primary stroke-2 text-xl'/>
-                                <p className=' font-normal'>Por: {data.send_by[0]} {data.send_by[1]}</p>
+                                <p className=' font-normal overflow-ellipsis truncate line-clamp-5 max-w-36'>Por: {data.send_by.split(" ")[0]} {data.send_by.split(" ")[1]}</p>
                             </div>)}
 
                         </div>
@@ -169,10 +169,10 @@ export default function SeeMorePage({
                     </div>
 
                     
-                        <div className='w-full'>
-                            {/* <ImageCarousel imgs={data.activityImgs}/> */}
-                            <ImageDisplayer images={images} />
-                        </div>
+                    <div className='w-full'>
+                        {/* <ImageCarousel imgs={data.activityImgs}/> */}
+                        <ImageDisplayer images={images} />
+                    </div>
                     
 
 

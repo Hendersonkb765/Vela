@@ -48,12 +48,12 @@ export default function ImageDisplayer(images) {
 
   // Função para avançar para a próxima imagem
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % acImages.length);
   };
 
   // Função para retroceder para a imagem anterior
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + acImages.length) % acImages.length);
   };
 
   // Função para avançar o scroll
@@ -117,7 +117,7 @@ export default function ImageDisplayer(images) {
         className="h-64 flex relative"
       >
         <div
-          className="flex gap-4 overflow-x-scroll scrollbar-custom"
+          className="flex flex-row-reverse gap-4 overflow-x-scroll scrollbar-custom"
           ref={sliderRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -171,7 +171,7 @@ export default function ImageDisplayer(images) {
           </button>
 
           <img
-            src={images[currentImageIndex]}
+            src={acImages[currentImageIndex].url}
             alt="Imagem grande"
             className="z-20 object-contain"
             style={{maxWidth: '95%', maxHeight: '95%'}}
