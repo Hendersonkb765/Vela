@@ -82,7 +82,7 @@ class CompleteRegistrationController extends Controller
 
             $user->save();
 
-           
+
             if ($request['hasOrganization'] === true) {
                 $this->createFirstOsc($request);
             }
@@ -211,4 +211,24 @@ class CompleteRegistrationController extends Controller
 
         return $cnpj[13] == $secondDigit;
     }
+
+    public function validateCNPJ(Request $request)
+    {
+        $validatedData = $request->validate([
+            'organization.CNPJ' => 'nullable|string|max:18|min:14',
+        ], [
+            'organization.CNPJ.min' => 'CNPJ não pode ser inferior a 14 caracteres.',
+        ]);
+        $cnpj = $validatedData['organization']['CNPJ'];
+
+        if ($cnpj && !$this->isValidCNPJ($cnpj)) {
+            return back()->withErrors([
+                'organization.CNPJ' => 'CNPJ inválido.',
+                'status' => 500
+            ])->withInput();
+        }
+
+        return back()->with(['status' => 200, 'message' => 'CNPJ válido.']);
+    }
+
 }

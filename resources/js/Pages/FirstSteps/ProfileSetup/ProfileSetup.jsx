@@ -11,13 +11,12 @@ import Stage4 from "./Stage4";
 
 export default function ProfileSetup() {
     const [currentStep, setCurrentStep] = useState(() => {
-    
-        
+
+
         // Recupera o estado do localStorage, se disponível
         const savedStep = localStorage.getItem('currentStep');
         return savedStep ? JSON.parse(savedStep) : 1; // Valor padrão é 1
     });
-    console.log(currentStep);
     const [complete, setComplete] = useState(false);
     const { data, setData, post, patch, processing, errors, reset } = useForm({
         user: {
@@ -76,17 +75,36 @@ export default function ProfileSetup() {
         }
     };
 
+    const validateCNPJ = async () => {
+        let status;
+
+        await post("/validate-cnpj", {
+            data: { organization: { CNPJ: data.organization.CNPJ } },
+            onError: (errors) => {
+                console.log(errors);
+                status = 500;
+            },
+            onSuccess: () => setCurrentStep((prev) => Math.min(prev + 1, maxStep)),
+
+        });
+    };
+
     const handlePrevStep = (e) => {
         e.preventDefault();
         setCurrentStep((prev) => Math.max(prev - 1, 1));
     };
 
-    const handleNextStep = (e) => {
+    const handleNextStep = async (e) => {
         e.preventDefault();
         if (currentStep === 1 && !isNameValid) return alert("Por favor, insira um nome válido.");
         if (currentStep === maxStep) handleSubmit();
         if (currentStep === 2 && !data.user.roleInOrganization) return alert("Selecione uma das opções");
         if (currentStep === 2 && !data.hasOrganization) handleSubmit();
+        if (currentStep === 3 && data.organization.CNPJ) {
+            await validateCNPJ();
+
+
+        }
         else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
         }
