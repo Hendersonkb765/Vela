@@ -30,21 +30,22 @@ Route::middleware('auth')->group(function(){
     Route::get('/criar/novo-usuario', [CompleteRegistrationController::class, 'create'])->name('completeRegistration.create')->middleware('auth');
     Route::patch('/criar/novo-usuario', [CompleteRegistrationController::class, 'store'])->name('completeRegistration.store');
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
+    Route::post('/validate-cnpj', [CompleteRegistrationController::class, 'validateCNPJ']);
 });
 
 
-    
+
 
 Route::middleware(['auth','verified'])->group(function () {
 
-    
+
     // ---------------------------------------------ACEITAR CONVITE DA OSC------------------------------------------\\
 
     Route::get('validar-convite/{code}/{oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
-    
+
     Route::get('membros-osc', UsersListController::class)->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
 
-    
+
     Route::middleware([CheckUserRegistration::class,CheckOsc::class])->group(function(){
 
         // -----------------------------------------Enviar CONVITE DA OSC------------------------------------------\\
@@ -54,27 +55,27 @@ Route::middleware(['auth','verified'])->group(function () {
         // -----------------------------------------DASHBOARD DO USUÁRIO------------------------------------------\\
 
         Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-        
+
         Route::get('/support', function () {
             return Inertia::render('VelaSocialLab/SupportPage/SupportPage');
         })->name('support');
-    
+
         Route::get('/timeline', function () {
             return Inertia::render('VelaSocialLab/Timeline/Timeline');
         })->name('timeline');
-        
+
         Route::get('/seemore', function () {
             return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage');
         })->name('seemore');
-    
+
         Route::get('/axishub', function () {
             return Inertia::render('VelaSocialLab/AxisHub/AxisHub');
         })->name('axishub');
-    
+
         Route::get('/axis', function () {
             return Inertia::render('VelaSocialLab/AxisHub/Axis/Axis');
         })->name('axis');
-    
+
         Route::get('/myuploads', function () {
             return Inertia::render('VelaSocialLab/MyUploads/MyUploads');
         })->name('myuploads');
@@ -84,7 +85,7 @@ Route::middleware(['auth','verified'])->group(function () {
             ['storageDrive'=>$request->attributes->get('storageDrive')]);
         })->name('settings');
         // -------------------------------------------------------------------------------------------\\
-    
+
 
         Route::controller(ActivityController::class)->group(function(){
             Route::get('/activityhub','index')->name('activityhub');
