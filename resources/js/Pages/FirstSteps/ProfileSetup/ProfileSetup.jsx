@@ -104,7 +104,7 @@ export default function ProfileSetup() {
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col " encType="multipart/form-data">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col space-y-4" encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
                     <div className="flex justify-end mt-auto space-x-4">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">
