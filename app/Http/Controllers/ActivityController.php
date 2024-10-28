@@ -89,7 +89,7 @@ class ActivityController extends Controller
                 $activitiesFilter = $activities->get();
             }
             return response()->json(['status'=> 200,'activities' => $activitiesFilter]);
-            return redirect()->with(['status' => 200, 'activities' => $activitiesFilter]);
+            //return redirect()->with(['status' => 200, 'activities' => $activitiesFilter]);
         }
         catch(\Exception $e){
             Log::error('Erro ao filtrar atividades: ' . $e->getMessage());
@@ -120,7 +120,7 @@ class ActivityController extends Controller
                 'date' => $request->activityDate,
                 'hour_start' => $request->activityHourStart,
                 'hour_end' => $request->activityHourEnd,
-                'status' => $request->activityStatus,
+                //'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
                 'send_by' => $user->name,
                 'thumbnail_photo_url' => '',
