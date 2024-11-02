@@ -94,7 +94,7 @@ class CompleteRegistrationController extends Controller
             return response()->json(['status'=>500,'error' => $e->errors()]);
         }
          catch (\Exception $e) {
-            return response()->json(['status'=>500,'error' => 'Erro ao completar o registro.']);
+            return response()->json(['status'=>500,'error' => 'Erro ao completar o registro.', 'message' => $e->getMessage()]);
             //return response()->json(['error' => 'Erro ao completar o registro.'], 500);
 
         }
