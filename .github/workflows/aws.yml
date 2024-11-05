@@ -29,3 +29,11 @@ jobs:
         ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela && php artisan migrate --force'
         ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela && npm install && npm run production'
     
+    - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+    - name: Deploy to AWS EC2
+        run: ssh ${{ secrets.AWS_INSTANCE_IP }} "cd /var/www/html && git pull && composer install - no-dev && php artisan migrate - force && php artisan optimize"
