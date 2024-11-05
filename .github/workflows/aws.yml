@@ -24,8 +24,8 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd Vela && pwd && git pull origin main'
-        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd Vela &&  sudo composer install --no-interaction --prefer-dist --optimize-autoloader'
-        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd Vela && php artisan migrate --force'
-        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd Vela && npm install && npm run production'
+        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela && pwd && git pull origin main'
+        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela &&  sudo composer install --no-interaction --prefer-dist --optimize-autoloader'
+        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela && php artisan migrate --force'
+        ssh -o StrictHostKeyChecking=no velaae@${{ secrets.EC2_PUBLIC_IP }} ' cd ~/Vela && npm install && npm run production'
     
