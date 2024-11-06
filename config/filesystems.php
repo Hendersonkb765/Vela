@@ -70,8 +70,8 @@ return [
     */
 
     'links' => [
-        public_path('storage/profile-photos') => storage_path('app/public/profile-photos'),
-        public_path('storage/profile-photos-osc') => storage_path('app/public/profile-photos-osc')
+        public_path('storage/profile-users') => storage_path('app/public/profile-users'),
+        public_path('storage/profile-oscs') => storage_path('app/public/profile-oscs')
     ],
     'visibility' => \League\Flysystem\Visibility::PUBLIC,
 
