@@ -140,44 +140,7 @@ class ActivityController extends Controller
             }
 
 
-            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$osc->id)->first();
-
-            if(!empty($googleDriveFolder)){
-
-                $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
-                $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
-                if($fileCreated){
-                    $webViewLink = $fileCreated['webViewLink'];
-                    if(!empty($request->file('activityImages'))){
-                    foreach($request->file('activityImages') as $fileDatabase){
-                        $driveFile = new File($osc->id);
-                        $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
-                        }
-                    }
-                    //$folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
-
-                        Activity::create([
-                            'title' => $request->activityTitle,
-                            'description' => $request->activityDescription,
-                            'date' => $request->activityDate,
-                            'hour_start' => $request->activityHourStart,
-                            'hour_end' => $request->activityHourEnd,
-                            'status' => $request->activityStatus,
-                            'audience' => $request->activityAudience,
-                            'thumbnail_photos_url' => $webViewLink,
-                            'folder_photos_id' => $googleDriveFolder->id,
-                            'send_by' => Auth::user()->name,
-                            'user_id' => Auth::user()->id,
-                            'osc_id' => Auth::user()->osc->first()->id
-                        ]);
-
-                }
-
-
-            }
-            else{
-                return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
-            }
+        
 
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
 
