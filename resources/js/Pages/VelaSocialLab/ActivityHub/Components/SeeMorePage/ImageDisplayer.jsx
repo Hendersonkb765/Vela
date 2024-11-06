@@ -30,7 +30,6 @@ export default function ImageDisplayer(images) {
 
     }
 
-    console.log("AC", acImages)
 
 
   }, [])

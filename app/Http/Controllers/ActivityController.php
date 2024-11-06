@@ -173,9 +173,6 @@ class ActivityController extends Controller
                     Storage::put($path.uniqid().'.png',file_get_contents($image),'public');
                 }
             }
-            if(!empty($thumbnailName)){
-                Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
-            }
             $activity = Activity::find($idActivity);
             $activity->update([
                 'title' => $request->activityTitle,
@@ -183,10 +180,24 @@ class ActivityController extends Controller
                 'date' => $request->activityDate,
                 'hour_start' => $request->activityHourStart,
                 'hour_end' => $request->activityHourEnd,
-                'status' => $request->activityStatus,
+                // 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'thumbnail_photo_url' => $request->activityThumbnailPhotosUrl,
+                //'thumbnail_photo_url' => $activityThumbnailPhotoUrl,
             ]);
+        
+            if(!empty($request->file('thumbnail'))){
+                Storage::delete($path.'thumbnail.png');
+                $activityThumbnailPhotoUrl = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                $activity->update([
+                    'thumbnail_photo_url' => $activityThumbnailPhotoUrl
+                ]);
+            }
+
+            
+            
+            
+
+            
             
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
             
