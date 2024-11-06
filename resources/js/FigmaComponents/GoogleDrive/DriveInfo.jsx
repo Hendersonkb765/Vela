@@ -11,7 +11,6 @@ const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false })
         usedSpace = storageDrive.storageUsage;
         totalSpace = storageDrive.storageLimit;
     }
-    console.log(storageDrive);
     // Atualiza o estado do tema ao montar o componente
     useEffect(() => {
         setIsDarkMode(localStorage.getItem('theme') === 'dark');
@@ -26,7 +25,6 @@ const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false })
     } else {
         color = '#057EE8'; // Azul para uso abaixo de 70%
     }
-    console.log(storageDrive);
 
 
     const statusStorageDrive = ()=>{
