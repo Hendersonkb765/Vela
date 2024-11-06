@@ -32,7 +32,7 @@ const Stage2 = ({ baseInfo, maxStep, data, setData, errors }) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8 ">
+        <div className="flex flex-col space-y-6">
             <Head title="Quem é você no terceiro setor?" />
 
             <div className="flex flex-col">

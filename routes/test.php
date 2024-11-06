@@ -59,7 +59,10 @@ Route::get('/dashboardtest', function () {
 
 Route::get('/lista-usuarios-test',UsersListController::class);
 
-
+Route::get('testar-email/{email}',function ($email){
+    $mail = Mail::to($email)->send(new InvitationSender('https://www.google.com','OSC Teste','https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg','Presidente Teste'));
+    dd($mail);
+});
 
 /*
 Route::get('/dashboard', function () {

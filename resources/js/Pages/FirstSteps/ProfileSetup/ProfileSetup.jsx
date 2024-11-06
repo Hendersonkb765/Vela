@@ -61,18 +61,8 @@ export default function ProfileSetup() {
 
     const maxStep = steps.length;
     const RenderStepContent = (step) => {
-        switch (step) {
-            case 1:
-                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 2:
-                return <Stage2 baseInfo={steps[1]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 3:
-                return <Stage3 baseInfo={steps[2]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 4:
-                return <Stage4 baseInfo={steps[3]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            default:
-                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-        }
+        const StageComponent = [Stage1, Stage2, Stage3, Stage4][step - 1];
+        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} />;
     };
 
     const validateCNPJ = async () => {
@@ -116,6 +106,7 @@ export default function ProfileSetup() {
             onSuccess: (page) => {
                 console.log('Registro completo com sucesso:', page);
                 reset();
+                setCurrentStep(1);
                 setComplete(true);
                 localStorage.removeItem('formData');
                 localStorage.removeItem('currentStep');
@@ -125,7 +116,8 @@ export default function ProfileSetup() {
                 alert('Ocorreu um erro ao tentar completar o registro. Por favor, tente novamente.');
             },
             onFinish: () => {
-                console.log('Requisição finalizada.');
+                setCurrentStep(1);
+                console.log(localStorage);
             },
         });
     };
@@ -133,7 +125,7 @@ export default function ProfileSetup() {
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col " encType="multipart/form-data">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col space-y-4" encType="multipart/form-data">
                     {RenderStepContent(currentStep)}
                     <div className="flex justify-end mt-auto space-x-4">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">

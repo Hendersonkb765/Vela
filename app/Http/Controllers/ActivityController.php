@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\activity;
+use App\Models\Activity;
 use App\Services\ChatGPT\OpenAI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,12 +25,12 @@ class ActivityController extends Controller
         //lista de atividades
         // $activities = Auth::user()->osc->first()->activities()->get();
         // dd($activities->with(['google_drive_folders','google_drive_folders']));
-        try{   
+        try{
             $activities = Auth::user()->osc->first()->activities()
             ->select('id','title','description','date')
             ->orderBy('date','asc')
             ->get();
-         
+
             return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub',[
                 'activities' => $activities,
             ]);
@@ -55,7 +55,7 @@ class ActivityController extends Controller
                     'type' => $fileType,
                 ]);
             }
-        
+
         return response()->json(['status'=> 200,'images' => $images]);
     }
 
@@ -109,9 +109,6 @@ class ActivityController extends Controller
             //'activityThumbnail' => 'required'|'url',
         ]);
         try{
-
-            
-           
             $user = Auth::user();
             $osc = Auth::user()->osc->first();
             $activity =Activity::create([
@@ -128,21 +125,22 @@ class ActivityController extends Controller
                 'osc_id' => $osc->id,
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
-            $thumbnailName = 'thumbnail.png'; 
+            $thumbnailName = 'thumbnail.png';
             Storage::put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
             $thumbnailUrl = Storage::url($path.$thumbnailName);
 
             //Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
-
             $activity->update(['thumbnail_photo_url' => $thumbnailUrl]);
             $activity->save();
 
             if(!empty($request->file('activityImages'))){
                 foreach($request->file('activityImages') as $fileDatabase){
                     Storage::put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
-                }    
+                }
             }
-                        
+
+
+        
 
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
 
@@ -152,10 +150,10 @@ class ActivityController extends Controller
         }
 
     }
-   
+
 
     public function update(Request $request){
-        try{    
+        try{
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->fist();
             $thumbnailName = $request->thumbnailName;
@@ -163,7 +161,7 @@ class ActivityController extends Controller
             $deletedImages = $request->deletedImages;
             $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             if(!empty($deletedImages)){
-             
+
                 foreach($deletedImages as $image){
                     Storage::delete($path.$image);
                 }
@@ -200,7 +198,7 @@ class ActivityController extends Controller
             
             
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
-            
+
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);
@@ -213,7 +211,7 @@ class ActivityController extends Controller
             Activity::destroy($request->ActivityId);
             $path ="oscs/{$osc->id}/activities/0{$request->ActivityId}";
             Storage::deleteDirectory($path);
-            
+
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);
         }
         catch(\Exception $e){
@@ -235,9 +233,9 @@ class ActivityController extends Controller
                     'url' => $fileUrl,
                     'type' => $fileType,
                 ]);
-                
+
             }
-        
+
             return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$images]);
         }
         catch(\Exception $e){

@@ -70,7 +70,7 @@ class CompleteRegistrationController extends Controller
                 $imageName = uniqid() . '.png';
                 $profileStatus= Storage::put('profile-users/'.$imageName, $imageData,'public');
                 if($profileStatus){
-                    Auth::user()->image_url = Storage::url('profile-users/' . $imageName);
+                    Auth::user()->image_url = asset('storage/profile-users/' . $imageName);
                 }
             }
             //$roleId = Role::where('name','=',$userRequest['roleInOrganization'])->first()->id;
@@ -94,7 +94,7 @@ class CompleteRegistrationController extends Controller
             return response()->json(['status'=>500,'error' => $e->errors()]);
         }
          catch (\Exception $e) {
-            return response()->json(['status'=>500,'error' => 'Erro ao completar o registro.']);
+            return response()->json(['status'=>500,'error' => 'Erro ao completar o registro.', 'message' => $e->getMessage()]);
             //return response()->json(['error' => 'Erro ao completar o registro.'], 500);
 
         }
@@ -158,8 +158,8 @@ class CompleteRegistrationController extends Controller
             $imageData = base64_decode($imageData);
             $imageName =  uniqid() . '.png';
 
-            Storage::put("oscs/{$osc->id}/{$imageName}", $imageData,'public');
-            $imageUrl = Storage::url("oscs/{$osc->id}/{$imageName}");
+            Storage::put("profile-oscs/$imageName", $imageData,'public');
+            $imageUrl = asset("storage/profile-oscs/$imageName");
 
 
         }
