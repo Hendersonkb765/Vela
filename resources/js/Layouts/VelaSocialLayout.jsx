@@ -9,7 +9,6 @@ export default function VelaSocialLayout({children}) {
 
     const { auth } = usePage().props;
     const { user } = auth;
-    console.log(user);
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });

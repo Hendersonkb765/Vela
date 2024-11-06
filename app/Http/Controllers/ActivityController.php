@@ -76,7 +76,6 @@ class ActivityController extends Controller
                 $activitiesFilter = $activities->get();
             }
             return response()->json(['status'=> 200,'activities' => $activitiesFilter]);
-            return redirect()->with(['status' => 200, 'activities' => $activitiesFilter]);
         }
         catch(\Exception $e){
             Log::error('Erro ao filtrar atividades: ' . $e->getMessage());
@@ -103,7 +102,7 @@ class ActivityController extends Controller
             $folder = new Folder($osc->id);
 
             $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$osc->id)->first();
-            
+
             if(!empty($googleDriveFolder)){
 
                 $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
@@ -114,10 +113,10 @@ class ActivityController extends Controller
                     foreach($request->file('activityImages') as $fileDatabase){
                         $driveFile = new File($osc->id);
                         $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
-                        }    
+                        }
                     }
                     //$folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
-                        
+
                         Activity::create([
                             'title' => $request->activityTitle,
                             'description' => $request->activityDescription,
@@ -135,12 +134,12 @@ class ActivityController extends Controller
 
                 }
 
-         
+
             }
             else{
                 return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
             }
-            
+
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
 /*
         }
@@ -149,7 +148,7 @@ class ActivityController extends Controller
         }
 */
     }
-   
+
 
     public function update(Request $request,$id){
         try{
@@ -166,7 +165,7 @@ class ActivityController extends Controller
                 'folder_photos_id' => 1//$request->activityPhotosUrl,
             ]);
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
-            
+
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);

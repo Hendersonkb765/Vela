@@ -5,18 +5,28 @@ import SecondaryIconButton from "../../Button/SecondaryIconButton";
 import TextInput from "@/FigmaComponents/Inputs/TextInput";
 import InputLabel from "@/FigmaComponents/Inputs/InputLabel";
 import InputError from "@/FigmaComponents/Inputs/InputError";
+import { useState } from "react";
 
 const AddMemberModal = ({ isOpen, onClose }) => {
     const { data, setData, post, processing, errors } = useForm({
         Invitemail: '',
     });
+    const [Message, setMessage] = useState('');
+    const [inviteStatus, setInviteStatus] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('invitation.send'), {
-            onSuccess: () => {
+            onSuccess: (response) => {
                 setData('Invitemail', '');
+                setMessage("Convite enviado com sucesso")
+                setInviteStatus(true);
             },
+            onError: (errors) => {
+                setMessage(errors.message)
+                console.error(errors.error)
+                setInviteStatus(false);
+            }
         });
     };
 
@@ -35,7 +45,7 @@ const AddMemberModal = ({ isOpen, onClose }) => {
                         Envie um convite por e-mail para adicionar um novo membro à sua equipe ou organização.
                         Basta inserir o endereço de e-mail da pessoa que deseja convidar.
                     </p>
-                    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row sm:items-start space-y-2 sm:space-y-0 sm:space-x-4">
                         <div>
                             <InputLabel htmlFor="Invitemail" />
                             <TextInput
@@ -48,7 +58,7 @@ const AddMemberModal = ({ isOpen, onClose }) => {
                                 onChange={(e) => setData('Invitemail', e.target.value)}
                                 required
                             />
-                            <InputError message={errors.Invitemail} className="mt-2 text-danger" />
+                            <InputError message={Message} className={`mt-2 text-danger ${inviteStatus && '!text-success'}`} />
                         </div>
 
                         <div className="">
