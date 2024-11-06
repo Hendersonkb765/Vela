@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\activity;
+use App\Models\Activity;
 use App\Services\ChatGPT\OpenAI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
