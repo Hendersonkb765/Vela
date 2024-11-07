@@ -339,7 +339,10 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
             console.log("Para adicionar as imagens", newImages)
 
         }
+        axios.post(route('activity.update', activityData.id), {
 
+        }) 
+        
 
         // console.log(newImages)
 

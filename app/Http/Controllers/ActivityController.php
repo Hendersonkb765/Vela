@@ -44,11 +44,11 @@ class ActivityController extends Controller
 
         $osc = Auth::user()->osc->first();
         $path = "oscs/{$osc->id}/activities/0{$id}/";
-        $allImages = Storage::allFiles($path);
+        $allImages = Storage::drive('s3')->allFiles($path);
         $images = [];
             foreach ($allImages as $image) {
-                $fileUrl = Storage::url($image);
-                $fileType = Storage::mimeType($image);
+                $fileUrl = Storage::drive('s3')->url($image);
+                $fileType = Storage::drive('s3')->mimeType($image);
                 array_push($images, [
                     'name' => basename($image),
                     'url' => $fileUrl,
@@ -126,8 +126,8 @@ class ActivityController extends Controller
             ]);
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
             $thumbnailName = 'thumbnail.png';
-            Storage::put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
-            $thumbnailUrl = Storage::url($path.$thumbnailName);
+            Storage::drive('s3')->put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
+            $thumbnailUrl = Storage::drive('s3')->url($path.$thumbnailName);
 
             //Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
             $activity->update(['thumbnail_photo_url' => $thumbnailUrl]);
@@ -135,7 +135,7 @@ class ActivityController extends Controller
 
             if(!empty($request->file('activityImages'))){
                 foreach($request->file('activityImages') as $fileDatabase){
-                    Storage::put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
+                    Storage::drive('s3')->put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
                 }
             }
 
@@ -163,16 +163,16 @@ class ActivityController extends Controller
             if(!empty($deletedImages)){
 
                 foreach($deletedImages as $image){
-                    Storage::delete($path.$image);
+                    Storage::drive('s3')->delete($path.$image);
                 }
             }
             if(!empty($newImages)){
                 foreach($newImages as $image){
-                    Storage::put($path.uniqid().'.png',file_get_contents($image),'public');
+                    Storage::drive('s3')->put($path.uniqid().'.png',file_get_contents($image),'public');
                 }
             }
             if(!empty($thumbnailName)){
-                Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                Storage::drive('s3')->put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
             }
             $activity = Activity::find($idActivity);
             $activity->update([
@@ -212,11 +212,11 @@ class ActivityController extends Controller
             $activity = Activity::find($id);
             $osc= Auth::user()->osc->first();
             $path = "oscs/{$osc->id}/activities/0{$activity->id}/";
-            $allImages = Storage::allFiles($path);
+            $allImages = Storage::drive('s3')->allFiles($path);
             $images = [];
             foreach ($allImages as $image) {
-                $fileUrl = Storage::url($image);
-                $fileType = Storage::mimeType($image);
+                $fileUrl = Storage::drive('s3')->url($image);
+                $fileType = Storage::drive('s3')->mimeType($image);
                 array_push($images, [
                     'name' => basename($image),
                     'url' => $fileUrl,
