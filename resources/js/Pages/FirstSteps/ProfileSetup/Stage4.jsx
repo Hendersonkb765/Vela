@@ -28,7 +28,7 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8 pb-8">
+        <div className="flex flex-col space-y-2 ">
             <Head title="Publico alvo"/>
 
             <div className="flex flex-col">

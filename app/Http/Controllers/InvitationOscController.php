@@ -31,16 +31,17 @@ class InvitationOscController extends Controller
                 ['email'=>$request->Invitemail,],
                 [
                 'email'=>$request->Invitemail,
-                'token' => $randomcode, 
+                'token' => $randomcode,
                 'osc_id' =>$osc->id,
                 'status' => 'pending',
                 'expires_at' => now()->addMinutes(20)
             ]);
-               
+
             Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
-            return response()->json(['status'=> 200,'message' => 'Convite enviado com sucesso!']);
-        }
-        catch(\Exception $e){
+
+
+            return redirect()->back()->with(['status' => 200, 'message' => 'Convite enviado com sucesso!']);
+        } catch (\Exception $e) {
             Log::error('Erro no envio do e-mail', ['error' => $e->getMessage()]);
             return response()->json(['status'=> 500,'message' => 'Erro ao enviar convite!', 'error' => $e->getMessage()]);
         }
@@ -51,7 +52,7 @@ class InvitationOscController extends Controller
             if(InvitationOsc::where('token',$code)){
                 $osc = Osc::find($oscId);
                 $osc->user()->attach(Auth::user()->id);
-                return redirect()->route('dashboard');               
+                return redirect()->route('dashboard');
             }
             else{
                 return response()->json(['status'=> 500,'message' => 'Convite inválido!']);
@@ -59,11 +60,11 @@ class InvitationOscController extends Controller
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao validar convite!']);
-        } 
+        }
     }
 
     public function invitationList(){
         $invitaionOsc = InvitationOsc::where('osc_id',Auth::user()->osc->first()->id)->get();
-        return redirect()->route('invitation.list',['invitations' => $invitaionOsc]); 
+        return redirect()->route('invitation.list',['invitations' => $invitaionOsc]);
     }
 }

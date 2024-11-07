@@ -1,10 +1,10 @@
 import React from 'react';
 import { Head } from '@inertiajs/react';
-import ProfileSetupLayout from '@/Layouts/ProfileSetupLayout';
+import VelaGuestLayout from '@/Layouts/VelaGuestLayout';
 
 export default function InvitationPage({ auth }) {
     return (
-        <ProfileSetupLayout>
+        <VelaGuestLayout>
             <Head title="Sem OSC" />
             <div className="h-full flex flex-col items-center justify-center space-y-8 py-20">
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-gray-100">Aguardando seu convite!</h1>
@@ -17,6 +17,6 @@ export default function InvitationPage({ auth }) {
 
                 </p>
             </div>
-        </ProfileSetupLayout>
+        </VelaGuestLayout>
     );
 }

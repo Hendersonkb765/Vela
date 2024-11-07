@@ -21,7 +21,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-2 ">
             <Head title="Fale sobre sua organização"/>
 
             <div className="flex flex-col">
@@ -90,7 +90,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
             </div>
 
 
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-8">
                 <div className="mb-2">
                     <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Escolha uma foto para o perfil da organização</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-400">Coloque uma foto que represente sua organização. Faça essa escolha com carinho, mas não se preocupe, você poderá mudar depois.</p>

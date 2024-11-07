@@ -30,11 +30,13 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $user = Auth::user();
         //dd($request->validated()['user']);
         //dd($request->user['profilePicture']);
         $imageData = $request->user['profilePicture'];
         $request->user()->fill($request->validated()['user']);
-        $profilePictureName = basename(Auth::user()->image_url);
+        $profilePictureName = basename($user->image_url);
+        
         if (isset( $imageData)) {
             //$imageData = $request->user['profilePicture'];
             
@@ -44,15 +46,19 @@ class ProfileController extends Controller
                 list(, $imageData) = explode(',', $imageData);
                 $imageData = base64_decode($imageData);
 
+                if(!empty($profilePictureName)){
+                    Storage::delete("profile-users/$profilePictureName");
+                }
+
                 if(empty($profilePictureName)){
                     $profilePictureName = uniqid() . '.png';
                 }
                 // if (!Storage::disk('public')->exists('profile-photos')) {
                 //     Storage::disk('public')->makeDirectory('profile-photos');
                 // }
-                $profileStatus = Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
+                $profileStatus = Storage::put("profile-users/$profilePictureName", $imageData,'public');
                 if($profileStatus){
-                    Auth::user()->image_url = Storage::disk('s3')->url('profile-users/' . $profilePictureName);
+                    Auth::user()->image_url = asset("storage/profile-users/$profilePictureName");
                 }
                 else{
                     return redirect()->back()->with(['status' => '500','message'=> 'Erro ao atualizar a imagem do perfil!']);
