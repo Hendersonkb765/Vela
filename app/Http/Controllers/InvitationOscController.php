@@ -42,7 +42,7 @@ class InvitationOscController extends Controller
         }
         catch(\Exception $e){
             Log::error('Erro no envio do e-mail', ['error' => $e->getMessage()]);
-            return response()->json(['status'=> 500,'message' => 'Erro ao enviar convite!']);
+            return response()->json(['status'=> 500,'message' => 'Erro ao enviar convite!', 'error' => $e->getMessage()]);
         }
     }
 
