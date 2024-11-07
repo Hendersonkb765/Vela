@@ -38,6 +38,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     const [existingImages, setExistingImages] = useState([]);
     const [newImages, setNewImages] = useState([]);
     const images=''
+    const [changes, setChange] = useState(0)
     const { data, setData, processing, post, progress } = useForm({
         activityTitle: activityData.title,
         activityDescription: activityData.description,
@@ -222,8 +223,6 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     // };
 
 
-
-
     const onSelectFiles = (e) => {
         const files = e.target.files;
         if (!files || files.length === 0) return;
@@ -295,71 +294,127 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if(data.activityTitle != activityData.title){
-
-            console.log("Houve Mudança de titulo")
-
+        
+        const update = {
+            idActivity: activityData.id,
+            activityTitle : data.activityTitle,
+            activityDescription: data.activityDescription,
+            activityDate: data.activityDate,
+            activityHourStart: data.activityHourStart,
+            activityHourEnd: data.activityHourEnd,
+            // activityStatus: data.activityStatus,
+            activityAudience: data.activityAudience,
+            newImages: null,
+            thumbnailName: null,
+            deletedImages: null,
         }
-        if(data.activityDescription != activityData.description){
+        
 
-            console.log("Houve Mudança de descrição")
+        if (data.activityTitle !== activityData.title) setChange((prev) => prev + 1);
+        if (data.activityDescription !== activityData.description) setChange((prev) => prev + 1);
+        if (data.activityAudience !== activityData.audience) setChange((prev) => prev + 1);
+        if (data.activityDate !== activityData.date) setChange((prev) => prev + 1);
+        if (data.activityHourStart !== activityData.hour_start) setChange((prev) => prev + 1);
+        if (data.activityHourEnd !== activityData.hour_end) setChange((prev) => prev + 1);
+        console.log("Verifiquei as modificações")
+        // if(data.activityTitle != activityData.title){
 
-        }
-        if(data.activityAudience != activityData.audience){
+        //     console.log("Houve Mudança de titulo")
+        //     setChange(changes + 1)
 
-            console.log("Houve Mudança de audiencia")
+        // }
+        // if(data.activityDescription != activityData.description){
 
-        }
-        if(data.activityDate != activityData.date){
+        //     console.log("Houve Mudança de descrição")
+        //     setChange(changes + 1)
 
-            console.log("Houve Mudança de data")
+        // }
+        // if(data.activityAudience != activityData.audience){
 
-        }
-        if(data.activityHourStart != activityData.hour_start){
+        //     console.log("Houve Mudança de audiencia")
+        //     setChange(changes + 1)
 
-            console.log("Houve Mudança de hora de inicio")
+        // }
+        // if(data.activityDate != activityData.date){
 
-        }
-        if(data.activityHourEnd != activityData.hour_end){
+        //     console.log("Houve Mudança de data")
+        //     setChange(changes + 1)
 
-            console.log("Houve Mudança de hora de terminno")
+        // }
+        // if(data.activityHourStart != activityData.hour_start){
 
-        }
+        //     console.log("Houve Mudança de hora de inicio")
+        //     setChange(changes + 1)
+
+        // }
+        // if(data.activityHourEnd != activityData.hour_end){
+
+        //     console.log("Houve Mudança de hora de terminno")
+        //     setChange(changes + 1)
+
+        // }
         if(data.activityThumbnail != activityData.thumbnail_photo_url){
 
-            console.log("Houve Mudança de hora de thumb")
+            console.log("Houve Mudança de thumb")
+            update.thumbnailName = data.activityThumbnail
+            setChange(changes + 1)
 
         }
         if(toRemoveImg){
             console.log("Para remover as imagens: ", toRemoveImg)
+            update.deletedImages = toRemoveImg
+            setChange(changes + 1)
         }
         if(newImages){
 
+            update.newImages = newImages
             console.log("Para adicionar as imagens", newImages)
+            setChange(changes + 1)
 
         }
-        axios.post(route('activity.update', activityData.id), {
 
-        }) 
-        
+        if (changes > 0) {
+            setLoadingActivity(true); // Ativa o loading
+            try {
+                const response = await axios.post(`/editar/${update.idActivity}`, update);
+    
+                console.log("Atualização realizada com sucesso:", response.data);
+                setShowPopup(true); // Exibe o popup de sucesso
+                setTimeout(() => setShowPopup(false), 5000); // Fecha o popup após 5 segundos
+                setImgSrc(''); // Limpa o estado da imagem, se necessário
+                // window.location.reload(); // Recarrega a página
+    
+            } catch (error) {
+                if (error.response) {
+                    console.error('Erro do servidor:', error.response.data);
+                    setErrors(error.response.data); // Exibe o erro na tela, se necessário
+                } else {
+                    console.error('Erro desconhecido:', error);
+                }
+            } finally {
+                setLoadingActivity(false); // Desativa o loading
+            }
+        } else {
+            setErrors({ noChanges: 'Nenhuma mudança a ser feita!' });
+        }
 
-        // console.log(newImages)
-
-        // if (data.activityThumbnail) {
+        // if (changes > 0) {
         //     setLoadingActivity(true); // Ativa o efeito de loading
-        //     try {
+        //     try{
         //         // Faz a requisição usando post (Inertia.js ou seu método específico)
-        //         await post(route('activity.store'), {
-        //             data: data,
+        //         await post(route('activity.edit'), {
+        //             data: update,
         //             onFinish: () => {
+        //                 console.log("Finalizei")
         //                 setImgSrc(''); // Limpa o estado da imagem
         //                 setLoadingActivity(false); // Desativa o efeito de loading
         //             },
         //             onSuccess: () => {
+        //                 console.log('Obtive sucesso')
         //                 setShowPopup(true); // Exibe o popup se deu certo
         //                 setTimeout(() => {
-        //                     setShowPopup(false); // Fecha o modal
+        //                     setShowPopup(false);
+        //                     console.log("Setei o popUP") // Fecha o modal
         //                 }, 5000);
         //                 window.location.reload();
         //             },
@@ -382,7 +437,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         //         setLoadingActivity(false); // Desativa o loading em caso de erro
         //     }
         // } else {
-        //     setErrors({ activityThumbnail: 'A imagem é obrigatória.' });
+        //     setErrors({ noChages: 'Nenhuma mudança a ser feita!' });
         // }
   
 
