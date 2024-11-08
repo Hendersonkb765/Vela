@@ -308,7 +308,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
             thumbnailName: null,
             deletedImages: null,
         }
-        
+      
 
         if (data.activityTitle !== activityData.title) setChange((prev) => prev + 1);
         if (data.activityDescription !== activityData.description) setChange((prev) => prev + 1);
@@ -353,6 +353,13 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         //     setChange(changes + 1)
 
         // }
+        if(changeThumb){
+
+            console.log("Houve Mudança de thumb")
+            update.thumbnailName = imgSrc
+            setChange(changes + 1)
+
+        }
         if(data.activityThumbnail != activityData.thumbnail_photo_url){
 
             console.log("Houve Mudança de thumb")
@@ -376,13 +383,14 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         if (changes > 0) {
             setLoadingActivity(true); // Ativa o loading
             try {
-                const response = await axios.post(`/editar/${update.idActivity}`, update);
-    
+                const response = await axios.patch(`/atualizar-atividade`, update);
+                
                 console.log("Atualização realizada com sucesso:", response.data);
                 setShowPopup(true); // Exibe o popup de sucesso
                 setTimeout(() => setShowPopup(false), 5000); // Fecha o popup após 5 segundos
                 setImgSrc(''); // Limpa o estado da imagem, se necessário
                 // window.location.reload(); // Recarrega a página
+                console.log('ATUALIZAÇÃO'.update)
     
             } catch (error) {
                 if (error.response) {

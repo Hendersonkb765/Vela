@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Address;
-use App\Services\Google\Drive\File;
-use App\Models\GoogleDriveFolder;
-use App\Models\GoogleToken;
-use App\Services\Google\Drive\Folder;
-use Google\Service\YouTube\Thumbnail;
 use Illuminate\Container\Attributes\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -154,14 +149,15 @@ class ActivityController extends Controller
 
     public function update(Request $request){
         try{
+            
             $idActivity = $request->idActivity;
-            $osc = Auth::user()->osc->fist();
+            $osc = Auth::user()->osc->first();
             $thumbnailName = $request->thumbnailName;
             $newImages = $request->file('newImages');
             $deletedImages = $request->deletedImages;
             $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             if(!empty($deletedImages)){
-
+ 
                 foreach($deletedImages as $image){
                     Storage::drive('s3')->delete($path.$image);
                 }
@@ -193,18 +189,12 @@ class ActivityController extends Controller
                     'thumbnail_photo_url' => $activityThumbnailPhotoUrl
                 ]);
             }
-
-            
-            
-            
-
-            
             
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
 
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);
+            return response()->json(['status'=> 500,'message' => "Erro ao atualizar atividade! | ". $e->getMessage()]);
         }
     }
 
