@@ -13,7 +13,7 @@ export default function Settings({ auth, mustVerifyEmail, status,storageDrive })
     return (
         <VelaSocialLayout
             userName={"Gustavo Raimundo Rodrigues"} // userName={auth.user}
-            imgUrl={'storage/Images/PerfilExemplo.jpg'} // imgUrl={auth.imgUrl}
+            imgUrl={'images/PerfilExemplo.jpg'} // imgUrl={auth.imgUrl}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Perfil</h2>}
         >
             <Head title="Profile" />

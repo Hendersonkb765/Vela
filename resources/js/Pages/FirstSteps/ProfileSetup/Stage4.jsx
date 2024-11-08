@@ -8,13 +8,13 @@ import { Head } from '@inertiajs/react';
 const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
     //Lembre: salvar as caixas selecionadas não está feito ainda
     const categories = [
-        { id: 1, name: 'Assistência social', image: '../storage/Images/Eixos/Eixo1.jpg' },
-        { id: 2, name: 'Saúde', image: '../storage/Images/Eixos/Eixo2.jpg' },
-        { id: 3, name: 'Defesa de direitos', image: '../storage/Images/Eixos/Eixo3.jpg' },
-        { id: 4, name: 'Meio ambiente', image: '../storage/Images/Eixos/Eixo4.jpg' },
-        { id: 5, name: 'Habitação', image: '../storage/Images/Eixos/Eixo5.jpg' },
-        { id: 6, name: 'Educação e pesquisa', image: '../storage/Images/Eixos/Eixo6.jpg' },
-        { id: 7, name: 'Cultura', image: '../storage/Images/Eixos/Eixo7.jpg' },
+        { id: 1, name: 'Assistência social', image: 'images/Eixos/Eixo1.jpg' },
+        { id: 2, name: 'Saúde', image: 'images/Eixos/Eixo2.jpg' },
+        { id: 3, name: 'Defesa de direitos', image: 'images/Eixos/Eixo3.jpg' },
+        { id: 4, name: 'Meio ambiente', image: 'images/Eixos/Eixo4.jpg' },
+        { id: 5, name: 'Habitação', image: 'images/Eixos/Eixo5.jpg' },
+        { id: 6, name: 'Educação e pesquisa', image: 'images/Eixos/Eixo6.jpg' },
+        { id: 7, name: 'Cultura', image: 'images/Eixos/Eixo7.jpg' },
     ];
 
     const handleSelectionChange = (selectedNames) => {
