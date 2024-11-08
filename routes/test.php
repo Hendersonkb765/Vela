@@ -64,6 +64,10 @@ Route::get('testar-email/{email}',function ($email){
     dd($mail);
 });
 
+Route::get('/email-test',function(){
+    return view('mail.verifyEmail');
+});
+
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

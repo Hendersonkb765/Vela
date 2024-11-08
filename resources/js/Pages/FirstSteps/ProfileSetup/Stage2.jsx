@@ -7,9 +7,9 @@ const Stage2 = ({ baseInfo, maxStep, data, setData, errors }) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     const options = [
-        { id: 1, title: 'Presidente de Organização', imageSrc: '../storage/Images/Presidente.svg' },
-        { id: 2, title: 'Membro de Organização', imageSrc: '../storage/Images/Membro.svg' },
-        { id: 3, title: 'Voluntário de Organização', imageSrc: '../storage/Images/Voluntario.svg' },
+        { id: 1, title: 'Presidente de Organização', imageSrc: 'images/Presidente.svg' },
+        { id: 2, title: 'Membro de Organização', imageSrc: 'images/Membro.svg' },
+        { id: 3, title: 'Voluntário de Organização', imageSrc: 'images/Voluntario.svg' },
     ];
 
     useEffect(() => {
