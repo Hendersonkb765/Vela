@@ -124,9 +124,12 @@ export default function ProfileSetup() {
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4  flex flex-col sm:mb-10" encType="multipart/form-data">
-                    {RenderStepContent(currentStep)}
-                    <div className="h-full flex justify-end items-end space-x-4 mb-auto pb-6">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-24 flex flex-col justify-between sm:mb-10 sm:gap-0" encType="multipart/form-data">
+                    <div>
+                        {RenderStepContent(currentStep)}
+                    </div>
+
+                    <div className="h-full flex justify-end items-end space-x-4 mb-auto pb-4">
                         <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="!h-12 w-1/3 sm:w-auto" onClick={handlePrevStep} type="button">
                             Voltar
                         </PrimaryButton>

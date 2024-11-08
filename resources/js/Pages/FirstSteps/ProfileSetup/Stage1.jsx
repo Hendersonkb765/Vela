@@ -80,7 +80,7 @@ export default function({ baseInfo, maxStep, data, setData, errors, onNameValida
                     firstletter={data.user.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
                     savedAvatar={data.user.profilePicture}
-                    className="scale-90 sm:scale-100"
+                    className="scale-90 sm:scale-100 "
                 />
             </div>
         </div>
