@@ -46,7 +46,7 @@ export default function({ baseInfo, maxStep, data, setData, errors, onNameValida
                         id="name"
                         name="name"
                         value={data.user.name}
-                        className="mt-1 block w-96"
+                        className="mt-1 block w-96 max-w-full"
                         autoComplete="name"
                         isFocused={true}
                         onChange={handleNameChange}
@@ -62,7 +62,7 @@ export default function({ baseInfo, maxStep, data, setData, errors, onNameValida
                         id="birthday"
                         name="birthday"
                         value={data.user.birthday}
-                        className="mt-1 block w-96"
+                        className="mt-1 block w-96 max-w-full"
                         autoComplete="birthday"
                         isFocused={true}
                         onChange={(e) => setData('user', { ...data.user, birthday: e.target.value })}

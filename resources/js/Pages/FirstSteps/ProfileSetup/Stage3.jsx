@@ -40,7 +40,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                             id="organizationName"
                             name="organizationName"
                             value={data.organization.organizationName}
-                            className="mt-1 block w-96 min-w-fit"
+                            className="mt-1 block w-96 min-w-fit max-w-full"
                             autoComplete="organizationName"
                             isFocused={true}
                             onChange={(e) => setData('organization', {
@@ -76,7 +76,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                                 <TextInput
                                     id="CNPJ"
                                     name="CNPJ"
-                                    className="mt-1 block w-96 min-w-fit"
+                                    className="mt-1 block w-96 min-w-fit  max-w-full"
                                     autoComplete="CNPJ"
                                     isFocused={true}
                                     placeholder="99.999.999/9999-99"
