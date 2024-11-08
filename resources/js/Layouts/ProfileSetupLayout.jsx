@@ -12,8 +12,8 @@ export default function ProfileSetupLayout({ children, hideProfile=true, imgUrl,
         <div className='flex overflow-hidden'>
             <NavBar className="pr-8 "  hideProfile={hideProfile} imgUrl={imgUrl} userName={userName}/>
 
-            <SideMenu className="pointer-events-none opacity-25 dark:opacity-100 [&>*]:dark:opacity-15"/>
-            <section className='flex-1 h-screen flex flex-col space-y-4 pt-14 dark:bg-slate-800'>
+            <SideMenu className="pointer-events-none opacity-25 dark:opacity-100 [&>*]:dark:opacity-15" hideMobileNav={true}/>
+            <section className='flex-1 h-screen flex flex-col space-y-4 pt-20 sm:pt-14 dark:bg-slate-800  overflow-y-scroll'>
                 {children}
             </section>
         </div>

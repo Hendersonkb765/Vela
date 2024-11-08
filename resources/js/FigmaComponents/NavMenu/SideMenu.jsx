@@ -5,7 +5,7 @@ import { GoCodeOfConduct, GoHome, GoTelescope, GoChecklist, GoGoal, GoUpload, Go
 
 
 
-const SideMenu = ({className}) => {
+const SideMenu = ({className, hideMobileNav=false }) => {
     const [isOpen, setIsOpen] = useState(false)
     const currentRoute = usePage();
     const MenusOptions = [
@@ -61,25 +61,27 @@ const SideMenu = ({className}) => {
                     ))}
                 </ul>
             </div>
-            <div>
-                <nav className="lg:hidden  fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm z-50">
-                    <ul className='flex w-full justify-evenly space-x-2 items-center '>
-                        {MobileMenusOptions.map((menu, index) => (
-                            <Link
-                                key={index}
-                                className={` w-14 h-14 flex items-center justify-center text-base cursor-pointer dark:text-white  hover:bg-neutralcolors dark:hover:bg-gray-950 rounded-full duration-300 ease-in-out'
-                                    ${menu.route === currentRoute.url.replace(/^\//, '') && 'sm:!bg-primary !text-primary sm:!text-white hover:!bg-primary-200'}
-                                `}
-                                href={route(menu.route) }
+            {!hideMobileNav &&
+                <div>
+                    <nav className="lg:hidden  fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-neutralcolors-100 dark:border-gray-800 duration-300 flex justify-around p-2 shadow-sm z-50">
+                        <ul className='flex w-full justify-evenly space-x-2 items-center '>
+                            {MobileMenusOptions.map((menu, index) => (
+                                <Link
+                                    key={index}
+                                    className={` w-14 h-14 flex items-center justify-center text-base cursor-pointer dark:text-white  hover:bg-neutralcolors dark:hover:bg-gray-950 rounded-full duration-300 ease-in-out'
+                                        ${menu.route === currentRoute.url.replace(/^\//, '') && 'sm:!bg-primary !text-primary sm:!text-white hover:!bg-primary-200'}
+                                    `}
+                                    href={route(menu.route) }
 
-                            >
-                                <div >{menu.icon}</div>
-                                <span className={`${!isOpen && 'hidden'} origin-left duration-400  text-body`}>{menu.title}</span>
-                            </Link>
-                        ))}
-                    </ul>
-                </nav>
-            </div>
+                                >
+                                    <div >{menu.icon}</div>
+                                    <span className={`${!isOpen && 'hidden'} origin-left duration-400  text-body`}>{menu.title}</span>
+                                </Link>
+                            ))}
+                        </ul>
+                    </nav>
+                </div>
+            }
         </>
 
     )
