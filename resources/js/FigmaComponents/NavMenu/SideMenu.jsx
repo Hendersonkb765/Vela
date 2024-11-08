@@ -10,10 +10,10 @@ const SideMenu = ({className}) => {
     const currentRoute = usePage();
     const MenusOptions = [
         {title: "Dashboard", icon: <GoHome className='w-6 h-6'/>, route: 'dashboard'},
-        {title: "Jornada", icon: <GoTelescope className='w-6 h-6'/>, route: 'timeline'},
+        // {title: "Jornada", icon: <GoTelescope className='w-6 h-6'/>, route: 'timeline'},
         {title: "Eixos", icon: <GoChecklist className='w-6 h-6'/>, route: 'axishub'},
         {title: "Atividades", icon: <GoCodeOfConduct className='w-6 h-6'/>, route: 'activityhub'},
-        {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
+        // {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
         {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'settings'},
         {title: "Suporte", icon: <GoQuestion className='w-6 h-6'/>, route: 'support'},
         {title: "Sair", icon: <GoSignOut className='w-6 h-6 '/>, route: 'logout', method: "post"}
@@ -21,10 +21,10 @@ const SideMenu = ({className}) => {
 
     const MobileMenusOptions = [
         {title: "Dashboard", icon: <GoHome className='w-6 h-6'/>, route: 'dashboard'},
-        {title: "Jornada", icon: <GoTelescope className='w-6 h-6'/>, route: 'timeline'},
+        // {title: "Jornada", icon: <GoTelescope className='w-6 h-6'/>, route: 'timeline'},
         {title: "Eixos", icon: <GoChecklist className='w-6 h-6'/>, route: 'axishub'},
         {title: "Atividades", icon: <GoCodeOfConduct className='w-6 h-6'/>, route: 'activityhub'},
-        {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
+        // {title: "Uploads", icon: <GoUpload className='w-6 h-6'/>, route: 'myuploads'},
         {title: "Configurações", icon: <GoGear className='w-6 h-6'/>, route: 'settings'},
 
     ]
