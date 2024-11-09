@@ -5,6 +5,7 @@ use App\Http\Controllers\InvitationOscController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompleteRegistrationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserQuestionController;
 use App\Http\Middleware\CheckOsc; // Add this line
 use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Foundation\Application;
@@ -32,9 +33,11 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::class])->group(function(){
 
+    Route::post('/ajuda',[UserQuestionController::class,'store'])->name('userquestion.store');
+
     // -----------------------------------------Enviar CONVITE DA OSC------------------------------------------\\
 
-    Route::post('enviar-convite/', [InvitationOscController::class,'sendInvitation'])->middleware([DeleteExpiredInvitations::class])->name('invitation.send');
+    Route::post('/enviar-convite', [InvitationOscController::class,'sendInvitation'])->middleware([DeleteExpiredInvitations::class])->name('invitation.send');
 
     // -----------------------------------------DASHBOARD DO USUÁRIO------------------------------------------\\
 
@@ -69,6 +72,7 @@ Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::clas
         ['storageDrive'=>$request->attributes->get('storageDrive')]);
     })->name('settings');
     // -------------------------------------------------------------------------------------------\\
+
 
 
     Route::controller(ActivityController::class)->group(function(){
