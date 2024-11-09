@@ -10,6 +10,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
+    // php artisan test --filter test_login_screen_can_be_rendered
     public function test_login_screen_can_be_rendered(): void
     {
         $response = $this->get('/login');
@@ -17,6 +18,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
+    // php artisan test --filter test_users_can_authenticate_using_the_login_screen
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
         $user = User::factory()->create();
