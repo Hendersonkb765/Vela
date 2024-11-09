@@ -36,11 +36,11 @@ const Stage2 = ({ baseInfo, maxStep, data, setData, errors, images }) => {
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
-                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
-                <p className="font-body font-normal text-base text-neutralcolors-700 dark:text-gray-300">{baseInfo.description}</p>
+                <h1 className="font-headers font-semibold text-3xl text-neutralcolors-700 dark:text-white sm:text-4xl">{baseInfo.title}</h1>
+                <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-300 sm:text-base">{baseInfo.description}</p>
             </div>
 
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 pb-4">
                 <RadialOptions
                     onSelect={handleOptionSelect}
                     options={options}

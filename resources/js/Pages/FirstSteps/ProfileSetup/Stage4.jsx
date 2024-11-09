@@ -28,14 +28,16 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors,images}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-2 ">
+        <div className="h-full min-h-fit flex-col space-y-12 mb-8 sm:flex-row sm:pb-0 ">
             <Head title="Publico alvo"/>
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
             </div>
-            <CheckboxGallery onSelectionChange={handleSelectionChange} categories={categories} />
+            <div className="flex flex-col">
+                <CheckboxGallery onSelectionChange={handleSelectionChange} categories={categories} />
+            </div>
 
         </div>
     )
