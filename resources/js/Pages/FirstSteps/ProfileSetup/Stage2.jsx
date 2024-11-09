@@ -3,13 +3,12 @@ import RadialOptions from "@/FigmaComponents/Inputs/RadialOptions";
 import React, { useState, useEffect } from "react";
 import { Head } from '@inertiajs/react';
 
-const Stage2 = ({ baseInfo, maxStep, data, setData, errors }) => {
+const Stage2 = ({ baseInfo, maxStep, data, setData, errors, images }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-
     const options = [
-        { id: 1, title: 'Presidente de Organização', imageSrc: 'images/Presidente.svg' },
-        { id: 2, title: 'Membro de Organização', imageSrc: 'images/Membro.svg' },
-        { id: 3, title: 'Voluntário de Organização', imageSrc: 'images/Voluntario.svg' },
+        { id: 1, title: 'Presidente de Organização', imageSrc: images.stage2.presidente },
+        { id: 2, title: 'Membro de Organização', imageSrc: images.stage2.membro },
+        { id: 3, title: 'Voluntário de Organização', imageSrc: images.stage2.voluntario },
     ];
 
     useEffect(() => {

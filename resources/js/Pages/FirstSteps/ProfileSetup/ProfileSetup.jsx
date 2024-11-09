@@ -9,7 +9,9 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 
-export default function ProfileSetup() {
+export default function ProfileSetup(images) {
+    
+ 
     const [currentStep, setCurrentStep] = useState(() => {
 
 
@@ -62,7 +64,7 @@ export default function ProfileSetup() {
     const maxStep = steps.length;
     const RenderStepContent = (step) => {
         const StageComponent = [Stage1, Stage2, Stage3, Stage4][step - 1];
-        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} />;
+        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} images={images}/>;
     };
 
     const validateCNPJ = async () => {
