@@ -25,6 +25,7 @@ class InvitationVerifyEmailSender extends Mailable
         $this->url = $url;
         $this->email = $email;
         $this->name = $name;
+   
     }
 
     /**
@@ -47,7 +48,8 @@ class InvitationVerifyEmailSender extends Mailable
             view: 'mail.verifyEmail',
             with: ['url' => $this->url,
                     'email' => $this->email,
-                    'name' => $this->name]
+                    'name' => $this->name,
+                ]
         );
     }
 

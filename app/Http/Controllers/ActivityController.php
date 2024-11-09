@@ -133,12 +133,7 @@ class ActivityController extends Controller
                     Storage::drive('s3')->put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
                 }
             }
-
-
-        
-
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!', 'error' => $e->getMessage()]);
