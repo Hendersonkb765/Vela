@@ -164,7 +164,7 @@ export default function ImageDisplayer(images) {
           </button>
 
           <img
-            src={acImages[currentImageIndex].url}
+            src={acImages[currentImageIndex].photo_url}
             alt="Imagem grande"
             className="z-20 object-contain"
             style={{maxWidth: '95%', maxHeight: '95%'}}
