@@ -10,7 +10,7 @@ export default function ImageDisplayer(images) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sliderRef = useRef(null);
   const [acImages, setAcImages] = useState([])
-  console.log(images)
+  console.log(images.images)
 
   // const images = [
   //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
@@ -22,16 +22,10 @@ export default function ImageDisplayer(images) {
   // ];
 
   useEffect(() => {
-
     
     if(images){
-
       setAcImages(images.images)
-
     }
-
-
-
   }, [])
 
   // Função para abrir o modal com a imagem clicada
@@ -130,7 +124,7 @@ export default function ImageDisplayer(images) {
         {Object.values(acImages).map((image, index) => (
           <img
             key={index}
-            src={image.url}
+            src={image.photo_url}
             alt={`Imagem ${index + 1}`}
             className="h-full w-auto object-cover rounded-lg cursor-pointer"
             onClick={() => openModal(index)} // Abre o modal ao clicar na imagem
