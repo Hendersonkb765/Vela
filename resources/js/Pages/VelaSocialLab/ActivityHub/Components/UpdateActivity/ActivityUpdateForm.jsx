@@ -154,7 +154,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         const reader = new FileReader();
         reader.addEventListener("load", () => {
             const imageElement = new Image();
-            const imageUrl = reader.result?.toString() || "";
+            const imageUrl = reader.result?.toString() || ""
             imageElement.src = imageUrl;
 
             imageElement.addEventListener("load", (event) => {
@@ -365,6 +365,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         if(data.activityThumbnail != activityData.thumbnail_photo_url){
 
             console.log("Houve Mudança de thumb")
+            console.log("Nova thumb: ", data.activityThumbnail)
             update.thumbnailName = data.activityThumbnail
             setChange(changes + 1)
 
@@ -378,7 +379,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         if(newImages){
 
             update.newImages = newImages
-            console.log("Para adicionar as imagens", newImages)
+            console.log("Para adicionar as imagens", update.newImages)
             setChange(changes + 1)
 
         }
@@ -616,10 +617,10 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                     </div>
 
                     
-                        <div className='mt-4 w-full sm:max-w-[560px] lg:max-w-full flex lg:flex-wrap gap-4 lg:max-h-fit overflow-x-auto'>
+                        <div className='mt-4 w-full sm:max-w-[560px] lg:max-w-[550px] flex lg:flex-wrap gap-4 overflow-x-auto lg:max-h-[208px] '>
                             {existingImages.map((image, index) => (
                                 <div key={index} className='relative flex items-end hover:items-center justify-center min-w-24 lg:w-fit group cursor-pointer transition-all'>
-                                    <img src={image.url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                    <img src={image.photo_url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
                                     <PrimaryIconButton onClick={() => removeImage(index, 'existing')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
                                         <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
                                     </PrimaryIconButton>
