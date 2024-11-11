@@ -26,7 +26,7 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
 
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
-            <Link href={route('axishub')} className={`h-16 sm:h-full sm:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
+            <Link href={route('axishub')} className={`h-16 sm:h-full  lg:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
                 <div className='flex items-center sm:scale-100 scale-90 space-x-2'>
                     <div className='sm:w-12 h-12 rounded-full flex items-center justify-center '>
                         {(NumberOfFails > 0) ? <GoAlertFill className='w-6 h-6 text-danger'/> : <GoAlert className='w-6 h-6 text-neutralcolors-300 dark:text-gray-300'/>}
@@ -46,10 +46,10 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
         >
             <Head title="Dashboard"/>
             <DashboardPath titleTask={"batata"}/>
-            <section className='w-full h-screen p-4 gap-4 flex flex-col md:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 px-2 '>
+            <section className='h-screen flex flex-col py-4 max-[376px]mx-auto min-[361px]:px-0.5 min-[376px]:px-2 gap-4  lg:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 '>
                 <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full md:w-1/2 sm:min-w-fit '>
                     <OscProfileCard OscProfilePicture={imageUrlOsc}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
-                    <div className='w-full md:min-w-fit flex flex-row justify-between fullhd:justify-start space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
+                    <div className='w-full md:min-w-fit flex flex-row justify-between fullhd:justify-start space-x-2 min-[376px]:space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
                         <SubmissionFailed NumberOfFails={Fails} />
                         <RecordActivity />
                     </div>
