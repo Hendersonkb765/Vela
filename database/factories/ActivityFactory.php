@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Osc;
+use App\Models\PhotoActivity;
 use App\Models\Activity;
 use App\Models\Address; // Add this line to import the Address class
 /**
@@ -36,6 +37,7 @@ class ActivityFactory extends Factory
     public function configure(){
         return $this->afterCreating(function(Activity $activity){
             $activity->address()->save(Address::factory()->make());
+            $activity->photos()->saveMany(PhotoActivity::factory()->count(3)->make());
         });
     }
 }

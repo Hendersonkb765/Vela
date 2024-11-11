@@ -25,9 +25,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $osc = $user->osc()->with(['axis.level.task.step.requirement', 'task'])->first();
         $axis = $osc->axis->first();
-       
         //dd("DEU CERTO BLZ! SO NÃO FOI CRIADA A PAGINA DE DASHBOARD AINDA");
-     
         $currentLevel = $axis->pivot->current_level;
         $level = $axis->level->where('position',$currentLevel)->first();
         $tasks = $level->task;
