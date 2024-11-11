@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const MembersList = ({ members }) => {
     const [selectedStatus, setSelectedStatus] = useState('TODOS');
 
-    // Função para filtrar membros com base no status
     const filteredMembers = members.filter((member) => {
         // Se "Todos" estiver selecionado, retorna todos os membros
         if (selectedStatus === "TODOS") return true;

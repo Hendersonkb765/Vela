@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SecondaryIconButton from '@/FigmaComponents/Button/SecondaryIconButton'; // Certifique-se de que o caminho está correto
+import SecondaryIconButton from '@/FigmaComponents/Button/SecondaryIconButton'; 
 import { GoX } from 'react-icons/go';
 
 export default function HelpModal({ isOpen, onClose }) {
