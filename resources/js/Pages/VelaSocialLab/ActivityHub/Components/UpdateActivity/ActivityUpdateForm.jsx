@@ -50,7 +50,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         // activityImages: activityImages,
     });
     const [imgSrc, setImgSrc] = useState(data.activityThumbnail);
-
+   
     // console.log(data.activityThumbnail)
 
 
@@ -265,7 +265,9 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
     const removeImage = (index, type) => {
         if (type === 'existing') {
-            setToRemoveImg(toRemoveImg + existingImages[index])
+            console.log('existingImages',existingImages[index].url)
+            console.log('toRemoveImg',toRemoveImg);
+            setToRemoveImg((prevRe) => [...prevRe, existingImages[index].url])
             setExistingImages((prevImages) => prevImages.filter((_, i) => i !== index));
             // Adicione lógica para excluir do banco caso necessário
         } else {
@@ -369,6 +371,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
         }
         if(toRemoveImg){
             console.log("Para remover as imagens: ", toRemoveImg)
+    
             update.deletedImages = toRemoveImg
             setChange(changes + 1)
         }
@@ -380,7 +383,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
         }
 
-        if (changes > 0) {
+        if(changes > 0) {
             setLoadingActivity(true); // Ativa o loading
             try {
                 const response = await axios.patch(`/atualizar-atividade`, update);
@@ -388,7 +391,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                 console.log("Atualização realizada com sucesso:", response.data);
                 setShowPopup(true); // Exibe o popup de sucesso
                 setTimeout(() => setShowPopup(false), 5000); // Fecha o popup após 5 segundos
-                setImgSrc(''); // Limpa o estado da imagem, se necessário
+                // setImgSrc(''); // Limpa o estado da imagem, se necessário
                 // window.location.reload(); // Recarrega a página
                 console.log('ATUALIZAÇÃO'.update)
     

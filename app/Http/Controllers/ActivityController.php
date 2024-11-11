@@ -11,6 +11,7 @@ use App\Models\Address;
 use Illuminate\Container\Attributes\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
  // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
@@ -148,6 +149,7 @@ class ActivityController extends Controller
 
 
     public function update(Request $request){
+        DB::beginTransaction();
         try{
             
             $idActivity = $request->idActivity;
@@ -156,21 +158,31 @@ class ActivityController extends Controller
             $newImages = $request->file('newImages');
             $deletedImages = $request->deletedImages;
             $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+            $activity = Activity::find($idActivity);
             if(!empty($deletedImages)){
- 
-                foreach($deletedImages as $image){
-                    Storage::drive('s3')->delete($path.$image);
+                
+                foreach($deletedImages as $imageUrl){
+                    $nameImage = basename($imageUrl);
+                    $activity->photos()->where('photos_url',$imageUrl)->delete();
+                    Storage::drive('s3')->delete($path.$nameImage);
                 }
             }
             if(!empty($newImages)){
                 foreach($newImages as $image){
-                    Storage::drive('s3')->put($path.uniqid().'.png',file_get_contents($image),'public');
+                    $nameImage = uniqid().'.png';
+                    Storage::drive('s3')->put($path.$nameImage,file_get_contents($image),'public');
+                    $imageUrl = Storage::drive('s3')->url($path.$nameImage);
+                    $activity->photos()->create($image);
+
                 }
             }
+            /*
             if(!empty($thumbnailName)){
+                Storage::drive('s3')->delete($path.'thumbnail.png');
                 Storage::drive('s3')->put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
             }
-            $activity = Activity::find($idActivity);
+                */
+            
             $activity->update([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
@@ -182,19 +194,20 @@ class ActivityController extends Controller
                 //'thumbnail_photo_url' => $activityThumbnailPhotoUrl,
             ]);
         
-            if(!empty($request->file('thumbnail'))){
+            if(!empty($request->file('thumbnailName'))){
                 Storage::delete($path.'thumbnail.png');
-                $activityThumbnailPhotoUrl = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                $thumbnailPhotoUrl = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
                 $activity->update([
-                    'thumbnail_photo_url' => $activityThumbnailPhotoUrl
+                    'thumbnail_photo_url' => $thumbnailPhotoUrl
                 ]);
             }
-            
+            DB::commit();
             return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
 
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => "Erro ao atualizar atividade! | ". $e->getMessage()]);
+            DB::rollBack();
+            return response()->json(['status'=> 500,'message' => "Erro ao atualizar atividade! | ". $e->getMessage(),'estruturaRequisicao'=>$request->all()]);
         }
     }
 
