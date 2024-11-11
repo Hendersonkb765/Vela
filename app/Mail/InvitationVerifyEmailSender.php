@@ -14,17 +14,19 @@ class InvitationVerifyEmailSender extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private string $url;
+    private $url;
     private string $email;
     private string $name;
     /**
      * Create a new message instance.
      */
-    public function __construct($name,$email,$url)
+    public function __construct(string $name, string $email, $url)
     {
+        
         $this->url = $url;
         $this->email = $email;
         $this->name = $name;
+   
     }
 
     /**
@@ -47,7 +49,8 @@ class InvitationVerifyEmailSender extends Mailable
             view: 'mail.verifyEmail',
             with: ['url' => $this->url,
                     'email' => $this->email,
-                    'name' => $this->name]
+                    'name' => $this->name,
+                ]
         );
     }
 

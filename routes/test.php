@@ -67,6 +67,15 @@ Route::get('testar-email/{email}',function ($email){
 Route::get('/email-test',function(){
     return view('mail.verifyEmail');
 });
+Route::get('/env-teste',function(){
+    $user = Auth::user();
+    $url = URL::temporarySignedRoute(
+        'verification.verify', 
+        now()->addMinutes(10), 
+        ['id' => $user->id, 'hash' => hash('sha256', $user->email)]
+    );
+    dd($url);
+});
 
 /*
 Route::get('/dashboard', function () {

@@ -9,7 +9,9 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 
-export default function ProfileSetup() {
+export default function ProfileSetup(images) {
+    
+ 
     const [currentStep, setCurrentStep] = useState(() => {
 
 
@@ -37,7 +39,6 @@ export default function ProfileSetup() {
 
     const isNameValid =  data.user.name.split(' ').length > 1;
 
-
     // Carrega os dados do formulário do localStorage, se disponíveis
     useEffect(() => {
         const savedData = localStorage.getItem('formData');
@@ -62,7 +63,7 @@ export default function ProfileSetup() {
     const maxStep = steps.length;
     const RenderStepContent = (step) => {
         const StageComponent = [Stage1, Stage2, Stage3, Stage4][step - 1];
-        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} />;
+        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} images={images}/>;
     };
 
     const validateCNPJ = async () => {
@@ -124,14 +125,17 @@ export default function ProfileSetup() {
 
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
-            {!complete ? ( 
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col space-y-4" encType="multipart/form-data">
-                    {RenderStepContent(currentStep)}
-                    <div className="flex justify-end mt-auto space-x-4">
-                        <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">
+            {!complete ? (
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-24 flex flex-col justify-between sm:mb-10 sm:gap-0" encType="multipart/form-data">
+                    <div>
+                        {RenderStepContent(currentStep)}
+                    </div>
+
+                    <div className="h-full flex justify-end items-end space-x-4 mb-auto pb-4">
+                        <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="!h-12 w-1/3 sm:w-auto" onClick={handlePrevStep} type="button">
                             Voltar
                         </PrimaryButton>
-                        <PrimaryButton center={true} className="h-12" type="submit">
+                        <PrimaryButton center={true} className="!h-12 w-1/3 sm:w-auto" type="submit">
                             {(currentStep === maxStep) ? "Finalizar" : "Continuar"}
                         </PrimaryButton>
                     </div>
@@ -145,7 +149,7 @@ export default function ProfileSetup() {
                         <h1 className="text-4xl font-bold font-headers capitalize dark:text-white">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
                         <p className="font-body text-base dark:text-gray-300">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
                     </div>
-                    <PrimaryButton href={route("dashboard")} center={true}>OK</PrimaryButton>
+                    <PrimaryButton href={route("dashboard")} center={true} className="w-36 h-12">OK</PrimaryButton>
                 </div>
 
             )}

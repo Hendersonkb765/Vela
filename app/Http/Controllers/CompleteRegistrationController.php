@@ -33,7 +33,30 @@ class CompleteRegistrationController extends Controller
 
     public function create()
     {
+        /*
+  { id: 1, title: 'Presidente de Organização', imageSrc: 'images/Presidente.svg' },
+        { id: 2, title: 'Membro de Organização', imageSrc: 'images/Membro.svg' },
+        { id: 3, title: 'Voluntário de Organização', imageSrc: 'images/Voluntario.svg' },
+        */
 
+        $images = [
+            'stage4' =>[
+                'eixo1'=>asset('images/eixos/eixo1.jpg'),
+                'eixo2'=>asset('images/eixos/eixo2.jpg'),
+                'eixo3'=>asset('images/eixos/eixo3.jpg'),
+                'eixo4'=>asset('images/eixos/eixo4.jpg'),
+                'eixo5'=>asset('images/eixos/eixo5.jpg'),
+                'eixo6'=>asset('images/eixos/eixo6.jpg'),
+                'eixo7'=>asset('images/eixos/eixo7.jpg'),
+            ],
+            'stage2'=>[
+                'presidente'=>asset('images/presidente.svg'),
+                'membro'=>asset('images/membro.svg'),
+                'voluntario'=>asset('images/voluntario.svg'),
+            ]         
+        ];
+        
+        /* 
         return Auth::user()->provider === 'google'
             ? Inertia::render('FirstSteps/ProfileSetup/ProfileSetup', [
                 'user' => [
@@ -41,7 +64,8 @@ class CompleteRegistrationController extends Controller
                     'image_url' => Auth::user()->image_url
                 ]
             ])
-            : Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
+            :*/
+        return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup',$images);
     }
 
     public function store(Request $request)

@@ -12,6 +12,10 @@ use Illuminate\Container\Attributes\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+
+
+use App\Models\PhotoActivity;
+
  // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
@@ -37,6 +41,7 @@ class ActivityController extends Controller
     }
 
     public function edit($id){
+
 
         $osc = Auth::user()->osc->first();
         $path = "oscs/{$osc->id}/activities/0{$id}/";
@@ -104,6 +109,7 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
+        DB::beginTransaction();
         try{
             $user = Auth::user();
             $osc = Auth::user()->osc->first();
@@ -120,6 +126,7 @@ class ActivityController extends Controller
                 'send_by_id' => $user->id,
                 'osc_id' => $osc->id,
             ]);
+            
             $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
             $thumbnailName = 'thumbnail.png';
             Storage::drive('s3')->put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
@@ -127,21 +134,26 @@ class ActivityController extends Controller
 
             //Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
             $activity->update(['thumbnail_photo_url' => $thumbnailUrl]);
-            $activity->save();
-
+          
+            $photos = [];
             if(!empty($request->file('activityImages'))){
                 foreach($request->file('activityImages') as $fileDatabase){
-                    Storage::drive('s3')->put($path.uniqid().'.png',file_get_contents($fileDatabase),'public');
+                    $photoName = uniqid().'.png';
+                    Storage::drive('s3')->put($path.$photoName,file_get_contents($fileDatabase),'public');
+                    $photoUrl = Storage::drive('s3')->url($path.$photoName);
+                    $photo = ['photo_url' =>$photoUrl];
+                    $photos[]= $photo;
+                    
                 }
+                
+                $activity->photos()->createMany($photos);
             }
-
-
-        
-
+            
+            DB::commit();
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-
         }
         catch(\Exception $e){
+            DB::rollBack(); 
             return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!', 'error' => $e->getMessage()]);
         }
 
@@ -230,7 +242,12 @@ class ActivityController extends Controller
             $osc= Auth::user()->osc->first();
             $path = "oscs/{$osc->id}/activities/0{$activity->id}/";
             $allImages = Storage::drive('s3')->allFiles($path);
-            $images = [];
+            $photosActivity = PhotoActivity::where('activity_id',$activity->id)->select('photo_url')->get();
+            //$photosActivity = $activity->photos()->select('photo_url')->join('')->get();
+            $photosActivity = $photosActivity->toArray();
+            array_push($photosActivity,['photo_url' => $activity->thumbnail_photo_url]);
+        
+            /*
             foreach ($allImages as $image) {
                 $fileUrl = Storage::drive('s3')->url($image);
                 $fileType = Storage::drive('s3')->mimeType($image);
@@ -239,10 +256,10 @@ class ActivityController extends Controller
                     'url' => $fileUrl,
                     'type' => $fileType,
                 ]);
-
             }
+            */
 
-            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$images]);
+            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$photosActivity]);
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);

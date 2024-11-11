@@ -27,6 +27,12 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('photo_activities', function (Blueprint $table) {
+            $table->id();
+            $table->string('photo_url');
+            $table->foreignId('activity_id')->constrained('activities');
+            $table->timestamps();
+        });
         /*
         Schema::create('address_activitie', function (Blueprint $table) {
             $table->id();

@@ -31,5 +31,8 @@ class Activity extends Model
     public function address(){
         return $this->morphMany(Address::class, 'addressable');
     }
+    public function photos(){
+        return $this->hasMany(PhotoActivity::class);
+    }
   
 }
