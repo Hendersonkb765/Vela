@@ -2,9 +2,16 @@ import SecondaryButton from '@/FigmaComponents/Button/SecondaryButton';
 import React, { useState, useEffect, useRef } from 'react';
 import { GoX } from "react-icons/go";
 import ImageModal from "./ImageModal"
+import { CiImageOn } from 'react-icons/ci';
 
 const ProfileUploadInput = ({updateAvatarUrl, savedAvatar, className='' }) => {
     const [ModalOpen, setModalOpen] = useState(false);
+    const [isImageValid, setIsImageValid] = useState(true);
+
+    const handleImageError = () => {
+        setIsImageValid(false);
+    };
+
     let avatarUrl =  useRef();
 
     const updateAvatar = (imgSrc) => {
@@ -15,10 +22,18 @@ const ProfileUploadInput = ({updateAvatarUrl, savedAvatar, className='' }) => {
     return (
         <div>
             <div className={`flex items-center space-x-4 ${className}`}>
+            {(savedAvatar || avatarUrl) && isImageValid ?
                 <img
                     src={savedAvatar ?? avatarUrl}
                     className="w-[150px] h-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
+                    onError={handleImageError}
                 />
+            :
+                <div className="w-[150px] h-[150px]  rounded-full  flex items-center justify-center object-cover  bg-neutralcolors-100 dark:bg-slate-700  z-10">
+                    <CiImageOn className='w-[80px] h-[80px] text-neutralcolors-200 ' />
+                </div>
+            }
+
                 <SecondaryButton className='h-12' onClick={() => setModalOpen(true)}>
                     {avatarUrl.current ? "Escolher outra foto" : "Escolher uma foto"}
                 </SecondaryButton>

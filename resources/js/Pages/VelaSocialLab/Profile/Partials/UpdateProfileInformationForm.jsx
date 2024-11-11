@@ -22,6 +22,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         patch(route('profile.update'));
     };
 
+
+
     const [imageUrl, setImageUrl] = useState(data.profilePicture || null);
     const handleImageChange = (url) => {
         setImageUrl(url);

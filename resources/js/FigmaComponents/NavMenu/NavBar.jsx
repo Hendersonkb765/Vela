@@ -4,8 +4,15 @@ import React from 'react';
 import DarkModeToggleicon from '../DarkMode/DarkModeToggleIcon';
 import DarkModeToggle from '../DarkMode/DarkModeToggle';
 import Notification from '../Notification/Notification';
+import { CiImageOn } from 'react-icons/ci';
+import { useState } from 'react';
 
 const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName="UserName", role="Nenhum", email="Nenhum"}) => {
+    const [isImageValid, setIsImageValid] = useState(true);
+
+    const handleImageError = () => {
+        setIsImageValid(false);
+    };
 
     return (
         <div className={`fixed h-16 sm:h-14 w-full py-2 sm:pr-4 bg-white dark:bg-gray-900 flex items-center z-40 shadow-sm  ${className}`}>
@@ -22,10 +29,18 @@ const NavBar = ({className, hideLogo=false, hideProfile=false, imgUrl, userName=
                             </div>
                             <Dropdown>
                                 <Dropdown.Trigger>
-                                    <img
-                                        className={`w-14 h-14 sm:w-12 sm:h-12 rounded-full  flex items-center justify-center object-cover  text-primary cursor-pointer`}
-                                        src={imgUrl}
-                                    />
+                                    {imgUrl && isImageValid ?
+                                        <img
+                                            className={`w-14 h-14 sm:w-12 sm:h-12 rounded-full  flex items-center justify-center object-cover  text-primary cursor-pointer`}
+                                            src={imgUrl}
+                                            onError={handleImageError}
+                                        />
+                                        :
+                                        <div className="w-14 h-14 sm:w-12 sm:h-12 rounded-full  flex items-center justify-center object-cover  bg-neutralcolors-100 dark:bg-slate-700  z-10">
+                                            <CiImageOn className='w-8 h-8 text-neutralcolors-200 ' />
+                                        </div>
+                                    }
+
                                 </Dropdown.Trigger>
                                 <Dropdown.Content>
                                     <Dropdown.Link href={'settings'}>Configurações</Dropdown.Link>

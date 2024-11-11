@@ -46,7 +46,7 @@ const OscProfileCard = ({ OscProfilePicture, OscName, OscLevel=0, Progress}) => 
                         className="w-16 h-16 sm:min-w-24 sm:h-24 max-w-24 max-h-24 rounded-full bg-white dark:bg-slate-800 object-contain z-10 p-1"
                     />
                 ) : (
-                    <div className="flex justify-center items-center min-w-24 h-24 rounded-full bg-white object-cover z-10">
+                    <div className="flex justify-center items-center min-w-24 h-24 rounded-full bg-white object-cover z-10 dark:bg-slate-700">
                         <CiImageOn className='w-12 h-12 text-neutralcolors-200' />
                     </div>
                 )}
