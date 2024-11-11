@@ -41,28 +41,19 @@ class ActivityController extends Controller
     }
 
     public function edit($id){
-
-
+      
         try{
             $osc = Auth::user()->osc->first();
             $path = "oscs/{$osc->id}/activities/0{$id}/";
-            $allImages = Storage::drive('s3')->allFiles($path);
-            $images = [];
-                foreach ($allImages as $image) {
-                    $fileUrl = Storage::drive('s3')->url($image);
-                    $fileType = Storage::drive('s3')->mimeType($image);
-                    array_push($images, [
-                        'name' => basename($image),
-                        'url' => $fileUrl,
-                        'type' => $fileType,
-                    ]);
-                }
+            $images = $osc->activities()->find($id)->photos()->select('photo_url')->get();
+            response()->json(['status'=> 200,'images' => $images]);
     
             return response()->json(['status'=> 200,'images' => $images]);
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
         }
+      
         
     }
 
