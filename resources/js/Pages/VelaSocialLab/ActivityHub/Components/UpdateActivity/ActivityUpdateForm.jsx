@@ -616,7 +616,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                     </div>
 
                     
-                        <div className='mt-4 w-full sm:max-w-[330px] lg:max-w-full flex lg:flex-wrap gap-4 lg:max-h-fit overflow-x-auto'>
+                        <div className='mt-4 w-full sm:max-w-[560px] lg:max-w-full flex lg:flex-wrap gap-4 lg:max-h-fit overflow-x-auto'>
                             {existingImages.map((image, index) => (
                                 <div key={index} className='relative flex items-end hover:items-center justify-center min-w-24 lg:w-fit group cursor-pointer transition-all'>
                                     <img src={image.url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
