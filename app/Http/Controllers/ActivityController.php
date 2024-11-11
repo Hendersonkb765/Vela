@@ -40,21 +40,27 @@ class ActivityController extends Controller
     public function edit($id){
 
 
-        $osc = Auth::user()->osc->first();
-        $path = "oscs/{$osc->id}/activities/0{$id}/";
-        $allImages = Storage::drive('s3')->allFiles($path);
-        $images = [];
-            foreach ($allImages as $image) {
-                $fileUrl = Storage::drive('s3')->url($image);
-                $fileType = Storage::drive('s3')->mimeType($image);
-                array_push($images, [
-                    'name' => basename($image),
-                    'url' => $fileUrl,
-                    'type' => $fileType,
-                ]);
-            }
-
-        return response()->json(['status'=> 200,'images' => $images]);
+        try{
+            $osc = Auth::user()->osc->first();
+            $path = "oscs/{$osc->id}/activities/0{$id}/";
+            $allImages = Storage::drive('s3')->allFiles($path);
+            $images = [];
+                foreach ($allImages as $image) {
+                    $fileUrl = Storage::drive('s3')->url($image);
+                    $fileType = Storage::drive('s3')->mimeType($image);
+                    array_push($images, [
+                        'name' => basename($image),
+                        'url' => $fileUrl,
+                        'type' => $fileType,
+                    ]);
+                }
+    
+            return response()->json(['status'=> 200,'images' => $images]);
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
+        }
+        
     }
 
     public function rephraseDescription(Request $request){
@@ -209,15 +215,24 @@ class ActivityController extends Controller
     }
 
     public function destroy(Request $request){
+        DB::beginTransaction();
+        
         try{
+            
             $osc = Auth::user()->osc->first();
             Activity::destroy($request->ActivityId);
+            $response = Activity::where('activity_id',$request->ActivityId)->delete();
+            
+           
+           
             $path ="oscs/{$osc->id}/activities/0{$request->ActivityId}";
             Storage::deleteDirectory($path);
 
+            DB::commit();
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);
         }
         catch(\Exception $e){
+            DB::rollBack();
             return response()->json(['status'=> 500,'message' => 'Erro ao deletar atividade!']);
         }
     }
@@ -243,7 +258,6 @@ class ActivityController extends Controller
                 ]);
             }
             */
-
             return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$photosActivity]);
         }
         catch(\Exception $e){
