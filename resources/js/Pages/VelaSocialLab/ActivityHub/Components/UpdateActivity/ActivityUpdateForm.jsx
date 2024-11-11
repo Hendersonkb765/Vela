@@ -591,7 +591,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                         </div>
                     }
                     <div className="my-4">
-                        <InputLabel>Fotos da Atividade</InputLabel>
+                        <InputLabel>Fotos da Atividade <span className='font-light'>(Até 6 fotos)</span></InputLabel>
                         <span className="sr-only ">Escolha fotos para galeria</span>
                         {(newImages.length + existingImages.length ) < 6 &&(
                             <input
@@ -644,9 +644,12 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                         <SecondaryButton center onClick={handlePreviousStep} className='!h-12 w-32 sm:w-40'>
                             Anterior
                         </SecondaryButton>
-                        <PrimaryButton center type='submit' disabled={processing} className='!h-12 w-32 sm:w-40'>
+                        {(newImages.length + existingImages.length ) <= 6&&(<PrimaryButton center type='submit' disabled={processing} className='!h-12 w-32 sm:w-40'>
                             Enviar
-                        </PrimaryButton>
+                        </PrimaryButton>)}
+                        {(newImages.length + existingImages.length ) > 6&&(<PrimaryButton center type='submit' disabled={true} className='!h-12 w-32 sm:w-40'>
+                            Enviar
+                        </PrimaryButton>)}
                     </div>
                 </>
             )}
