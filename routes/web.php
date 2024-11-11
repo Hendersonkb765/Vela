@@ -82,7 +82,7 @@ Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::clas
         Route::post('/reformular','rephraseDescription')->name('activity.rephraseDescription');
         Route::patch('/atualizar-atividade','update')->name('activity.update');
         Route::get('/atividade/{id}','showMore')->name('activity.showMore');
-        Route::delete('/deletar-atividade/{id}','destroy')->name('activity.destroy');
+        Route::delete('/deletar-atividade','destroy')->name('activity.destroy');
         Route::get('/editar/{id}', 'edit')->name('activity.edit');
     });
 
