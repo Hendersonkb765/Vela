@@ -455,7 +455,7 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     };
 
     return (
-        <form className='lg:max-w-[435px]' onSubmit={handleSubmit}>
+        <form className='' onSubmit={handleSubmit}>
             {step === 1 && (
                 <>
                     <div className="mb-4">
@@ -615,25 +615,27 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
                         
                     </div>
 
-                    <div className='mt-4 max-w-fit flex flex-wrap gap-4'>
-                        {existingImages.map((image, index) => (
-                            <div key={index} className='relative flex items-end hover:items-center justify-center w-fit group cursor-pointer transition-all'>
-                                <img src={image.url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
-                                <PrimaryIconButton onClick={() => removeImage(index, 'existing')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
-                                    <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
-                                </PrimaryIconButton>
-                            </div>
-                        ))}
+                    
+                        <div className='mt-4 w-full sm:max-w-[560px] lg:max-w-full flex lg:flex-wrap gap-4 lg:max-h-fit overflow-x-auto'>
+                            {existingImages.map((image, index) => (
+                                <div key={index} className='relative flex items-end hover:items-center justify-center min-w-24 lg:w-fit group cursor-pointer transition-all'>
+                                    <img src={image.url} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                    <PrimaryIconButton onClick={() => removeImage(index, 'existing')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
+                                        <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                                    </PrimaryIconButton>
+                                </div>
+                            ))}
 
-                        {newImages.map((file, index) => (
-                            <div key={index} className='relative flex items-end hover:items-center justify-center w-fit group cursor-pointer transition-all'>
-                                <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
-                                <PrimaryIconButton onClick={() => removeImage(index, 'new')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
-                                    <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
-                                </PrimaryIconButton>
-                            </div>
-                        ))}
-                    </div>
+                            {newImages.map((file, index) => (
+                                <div key={index} className='relative flex items-end hover:items-center justify-center min-w-24 lg:w-fit group cursor-pointer transition-all'>
+                                    <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} className="h-24 w-24 object-cover rounded-lg group-hover:brightness-50" />
+                                    <PrimaryIconButton onClick={() => removeImage(index, 'new')} className='!rounded-full absolute text-white/80 group-hover:!text-danger !bg-transparent group-hover:block flex-col !items-center'>
+                                        <GoTrash className='w-6 h-6 group-hover:w-8 group-hover:h-8' />
+                                    </PrimaryIconButton>
+                                </div>
+                            ))}
+                        </div>
+                   
 
 
 

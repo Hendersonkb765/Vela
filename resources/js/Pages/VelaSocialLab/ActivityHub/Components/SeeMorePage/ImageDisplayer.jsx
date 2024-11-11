@@ -8,9 +8,8 @@ export default function ImageDisplayer(images) {
   const [isDragging, setIsDragging] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const sliderRef = useRef(null);
+  const sliderRef = useRef(0);
   const [acImages, setAcImages] = useState([])
-  console.log(images.images)
 
   // const images = [
   //   'https://nossacausa.com/wp-content/uploads/2018/09/woman-donates-canned-goods-to-charity-picture-id513245786.jpg',
@@ -26,6 +25,11 @@ export default function ImageDisplayer(images) {
     if(images){
       setAcImages(images.images)
     }
+
+    if (sliderRef.current) {
+      sliderRef.current.scrollLeft = 0; // Define o início da rolagem para o começo
+    }
+
   }, [])
 
   // Função para abrir o modal com a imagem clicada
