@@ -7,7 +7,7 @@ export default function TaskUploadModal({ isOpen, onClose, children }) {
 
     return (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center px-2 sm:px-0">
-            <div className="bg-white p-8 rounded-lg sm:w-1/3 max-w-[448px] min-w-fit relative overflow-hidden dark:bg-slate-800 ">
+            <div className="bg-white p-8 rounded-lg sm:w-1/3 max-w-[448px] sm:min-w-fit md:max-w-[550px] relative overflow-hidden dark:bg-slate-800 ">
                 {children}
 
                 <SecondaryIconButton onClick={onClose}  className=' border-1 !border-danger !text-danger hover:!bg-danger absolute -top-2 -right-2 group !rounded-full'>
