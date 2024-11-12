@@ -21,12 +21,11 @@ class InvitationSender extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($linkInvitation,$oscName,$imgUrl,$presidentName)
+    public function __construct($linkInvitation,$oscName,$presidentName)
     {
         
         $this->linkInvitation = $linkInvitation;
         $this->oscName = $oscName;
-        $this->imgUrl = $imgUrl;
         $this->presidentName = $presidentName;
 
     }
@@ -52,7 +51,6 @@ class InvitationSender extends Mailable
             
             with: ['linkInvitation' => $this->linkInvitation,
                     'oscName' => $this->oscName,
-                    'imgUrl' => $this->imgUrl,
                     'presidentName' => $this->presidentName]
             
         );
