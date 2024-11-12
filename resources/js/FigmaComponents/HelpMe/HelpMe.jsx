@@ -18,7 +18,7 @@ const HelpMe = () => {
     return (
         <div className='fixed z-50 bottom-24 lg:bottom-8 right-8 flex items-center justify-center'>
             <div className='group flex items-center space-x-2'>
-                <span className='invisible dark:text-gray-200 group-hover:visible transition-opacity duration-1000'>Precisa de ajuda?</span>
+                <span className='invisible absolute w-fit sm:-right-12 sm:group-hover:right-28 dark:text-gray-200 sm:group-hover:visible transition-opacity duration-1000'>Precisa de ajuda?</span>
                 <div
                     className='bg-white dark:bg-slate-600 cursor-pointer p-2 rounded-full group-hover:scale-110'
                     onClick={handleOpenModal}

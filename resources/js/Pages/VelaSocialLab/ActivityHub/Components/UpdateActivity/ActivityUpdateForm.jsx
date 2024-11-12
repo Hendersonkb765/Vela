@@ -54,6 +54,9 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
     // console.log(data.activityThumbnail)
 
 
+    // useEffect(() => {
+    //     console.log('toRemoveImg atualizado:', toRemoveImg);
+    // }, [toRemoveImg]);
 
 
     useEffect(() =>{
@@ -265,9 +268,9 @@ export default function ActivityUpdateForm({ onSubmit, activityData }) {
 
     const removeImage = (index, type) => {
         if (type === 'existing') {
-            console.log('existingImages',existingImages[index].url)
+            console.log('existingImages',existingImages[index].photo_url)
+            setToRemoveImg((prevRe) => [...prevRe, existingImages[index].photo_url])
             console.log('toRemoveImg',toRemoveImg);
-            setToRemoveImg((prevRe) => [...prevRe, existingImages[index].url])
             setExistingImages((prevImages) => prevImages.filter((_, i) => i !== index));
             // Adicione lógica para excluir do banco caso necessário
         } else {
