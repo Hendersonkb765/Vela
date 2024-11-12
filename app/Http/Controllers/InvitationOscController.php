@@ -37,13 +37,12 @@ class InvitationOscController extends Controller
                 'expires_at' => now()->addMinutes(20)
             ]);
 
-            Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,'https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg',$osc->presidents_name));
-
+            Mail::to($request->Invitemail)->send(new InvitationSender($linkInvitation,$osc->name,$osc->presidents_name));
 
             return redirect()->back()->with(['status' => 200, 'message' => 'Convite enviado com sucesso!']);
         } catch (\Exception $e) {
             Log::error('Erro no envio do e-mail', ['error' => $e->getMessage()]);
-            return response()->json(['status'=> 500,'message' => 'Erro ao enviar convite!', 'error' => $e->getMessage()]);
+            return redirect()->back()->with(['status' => 500, 'message' => 'Erro ao enviar convite!']);
         }
     }
 

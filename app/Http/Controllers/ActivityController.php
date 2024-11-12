@@ -36,7 +36,7 @@ class ActivityController extends Controller
             ]);
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!','error' => $e->getMessage()]);
+            return redirect()->back()->with(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
     }
 
@@ -160,7 +160,7 @@ class ActivityController extends Controller
     public function update(Request $request){
         DB::beginTransaction();
         try{
-            
+            return response()->json(['dados' => $request->all()]);
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->first();
             $thumbnailName = $request->thumbnailName;
@@ -168,12 +168,12 @@ class ActivityController extends Controller
             $deletedImages = $request->deletedImages;
             $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             $activity = Activity::find($idActivity);
-            if(!empty($deletedImages)){
-                
+            if(!empty($deletedImages)){         
                 foreach($deletedImages as $imageUrl){
                     $nameImage = basename($imageUrl);
-                    $activity->photos()->where('photos_url',$imageUrl)->delete();
                     Storage::drive('s3')->delete($path.$nameImage);
+                    $activity->photos()->where('photo_url',$imageUrl)->delete();
+                    
                 }
             }
             if(!empty($newImages)){
@@ -205,13 +205,14 @@ class ActivityController extends Controller
         
             if(!empty($request->file('thumbnailName'))){
                 Storage::delete($path.'thumbnail.png');
-                $thumbnailPhotoUrl = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                $thumbnailPhoto = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                $thumbnailPhotoUrl = Storage::url($path.'thumbnail.png');
                 $activity->update([
                     'thumbnail_photo_url' => $thumbnailPhotoUrl
                 ]);
             }
             DB::commit();
-            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
+            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!', 'estruturaRequisicao' => $request->file('thumbnailName')]);
 
         }
         catch(\Exception $e){

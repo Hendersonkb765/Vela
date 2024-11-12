@@ -12,6 +12,8 @@ use Illuminate\Auth\Events\Authenticated;
 use App\Events\VerificationEmail;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\EmailVerified;
+use App\Events\InvitationEmailSent;
+use App\Listeners\SendInvitationEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,7 +32,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         Verified::class => [
             EmailVerified::class
-        ]
+        ],
+        InvitationEmailSent::class => [
+            SendInvitationEmail::class
+        ],
         
 
     ];
