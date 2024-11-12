@@ -160,20 +160,18 @@ class ActivityController extends Controller
     public function update(Request $request){
         DB::beginTransaction();
         try{
-            return response()->json(['message'=> $request->file('newImages')]);
+            return response()->json(['dados' => $request->all()]);
             $idActivity = $request->idActivity;
             $osc = Auth::user()->osc->first();
             $thumbnailName = $request->thumbnailName;
             $newImages = $request->file('newImages');
-            //response()->json(['newImages' => $newImages]);
             $deletedImages = $request->deletedImages;
-            //response()->json(['deletedImages' => $deletedImages]);
             $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
             $activity = Activity::find($idActivity);
             if(!empty($deletedImages)){         
                 foreach($deletedImages as $imageUrl){
-                    Storage::drive('s3')->delete($path.$nameImage);
                     $nameImage = basename($imageUrl);
+                    Storage::drive('s3')->delete($path.$nameImage);
                     $activity->photos()->where('photo_url',$imageUrl)->delete();
                     
                 }
@@ -214,7 +212,7 @@ class ActivityController extends Controller
                 ]);
             }
             DB::commit();
-            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!', 'estruturaRequisicao' => $request->all()]);
+            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!', 'estruturaRequisicao' => $request->file('thumbnailName')]);
 
         }
         catch(\Exception $e){
