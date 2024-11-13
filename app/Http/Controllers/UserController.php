@@ -24,6 +24,26 @@ class UserController extends Controller
         }
         
     }
+    public function destroy(Request $request){
+
+        try{
+            $user = Auth::user();
+            $osc = $user->osc->first();
+            if($user->role == 'Presidente'){
+                $isDeleted =$osc->user()->where('id',$request->id)->delete();
+
+                if($isDeleted == 0){
+                    return redirect()->back()->with('error', 'Erro ao excluir membro');
+                }
+            }
+
+            return redirect()->back()->with('success', 'Membro excluído com sucesso');
+        }
+        catch(Exception $e){
+            return redirect()->back()->with('error', 'Erro ao excluir membro');
+        }
+
+    }
 
  
     
