@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::class])->group(function(){
 
+
+    Route::delete('/remover-membro',[UserController::class,'destroy'])->name('user.destroy');
+
     Route::get('membros-osc', [UserController::class,'index'])->middleware([DeleteExpiredInvitations::class])->name('user.index');
 
     Route::post('/ajuda',[UserQuestionController::class,'store'])->name('userquestion.store');

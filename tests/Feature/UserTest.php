@@ -63,24 +63,22 @@ class UserTest extends TestCase
 
         //$response->assertStatus(200);
     }
-    public function test_exception_when_trying_to_access_all_members_and_guests_without_internet(){
-        $user = User::factory()->create();
+    // php artisan test tests --filter test_delete_member_from_osc
+    public function test_delete_member_from_osc(): void
+    {
+        $user = User::factory()->create(['role_id'=>2]);
         $osc = Osc::factory()->create();
         $user->osc()->attach($osc->id);
-
-        $this->actingAs($user);
+        Auth::loginUsingId($user->id);
         $this->assertTrue(Auth::check());
-        $members = User::factory()->count(3)->create();
-        $osc->user()->attach($members->pluck('id')->toArray());
-
-        $invitationOscPending1 =InvitationOsc::factory()->create(['osc_id' => $osc->id,'status'=>'pending']);
-        $invitationOscPending2=InvitationOsc::factory()->create(['osc_id' => $osc->id,'status'=>'pending']);
-        $invitationOscPending3= InvitationOsc::factory()->create(['osc_id' => $osc->id,'status'=>'expired']);
-
-        $invitationList = InvitationOsc::where('osc_id',$osc->id)->get();
-        DB::disconnect();
-        $response = $this->get(route('user.index'));
-
+        $member = User::factory()->create();
+        $osc->user()->attach($member->id);
+        $response = $this->delete(route('user.destroy'),['id'=>$member->id]);
+        $response->assertSessionHas('success');
+        
     }
+
+
+   
     
 }

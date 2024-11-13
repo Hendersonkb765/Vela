@@ -73,7 +73,7 @@ Route::get('/env-teste',function(){
     );
     dd($url);
 });
-
+Route::delete('deletar-membro',[ActivityController::class,'destroy'])->name('deletar-membro');
 /*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
