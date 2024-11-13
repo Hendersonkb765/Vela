@@ -11,7 +11,6 @@ use App\Http\Middleware\CheckUserRegistration;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\UsersListController;
 use App\Http\Middleware\DeleteExpiredInvitations;
 use Aws\Middleware;
 use Illuminate\Http\Request;

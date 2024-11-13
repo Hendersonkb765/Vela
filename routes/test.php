@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\UsersListController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InvitationSender;
@@ -56,8 +55,6 @@ Route::get('/dashboardtest', function () {
     return Inertia::render('Test');
 })->name('dashboardtest');
 
-
-Route::get('/lista-usuarios-test',UsersListController::class);
 
 Route::get('testar-email/{email}',function ($email){
     $mail = Mail::to($email)->send(new InvitationSender('https://www.google.com','OSC Teste','https://upload.wikimedia.org/wikipedia/commons/6/6e/Crian%C3%A7a_Esperan%C3%A7a.svg','Presidente Teste'));
