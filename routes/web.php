@@ -15,7 +15,7 @@ use App\Http\Controllers\UsersListController;
 use App\Http\Middleware\DeleteExpiredInvitations;
 use Aws\Middleware;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::class])->group(function(){
+
+    Route::get('membros-osc', [UserController::class,'index'])->middleware([DeleteExpiredInvitations::class])->name('user.index');
 
     Route::post('/ajuda',[UserQuestionController::class,'store'])->name('userquestion.store');
 
@@ -93,11 +95,8 @@ Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::clas
 
 });
 
-Route::middleware(['auth','verified'])->group(function () {
 
-    // ---------------------------------------------ACEITAR CONVITE DA OSC------------------------------------------\\
-    Route::get('membros-osc', UsersListController::class)->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.list');
-});
+
 
 Route::get('/profilesetup', function () {
     return Inertia::render('FirstSteps/ProfileSetup/ProfileSetup');
