@@ -44,6 +44,9 @@ class UserTest extends TestCase
         $response->assertSessionHas('invitations',function($invitations) use ($invitationOscPending1,$invitationOscPending2,$invitationOscPending3){
             return $invitations->pluck('id')->toArray() === [$invitationOscPending1->id,$invitationOscPending2->id,$invitationOscPending3->id];
         });
+        $response->assertSessionHas('members',function($members) use ($membersList){
+            return !empty($members);
+        });
       /*
         $response->assertSessionHas('members',function($members) use ($membersList){
             $expectedIds = $membersList->pluck('id')->toArray();
