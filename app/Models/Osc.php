@@ -85,6 +85,7 @@ class Osc extends Model
     public function invitationOsc(){
         return $this->hasMany(InvitationOsc::class);
     }
+    
   
     
     
