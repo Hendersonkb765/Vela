@@ -18,7 +18,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
     const { status, message } = props;
     const [filteredActivities, setFilteredActivities] = useState([]);
     const [noMatchFilter, setNoMatchFilter] = useState(false);
-    
+
     // Controle do ContextMenu
     const contextMenu = useRef(null); // Referência para o ContextMenu do PrimeReact
     const [selectedCard, setSelectedCard] = useState(null);
@@ -33,14 +33,14 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
     // const navigate = useNavigate();
 
     // const handleSeeMoreClick = async (activityId) => {
-       
+
     //     try {
     //         const response = await axios.get(`/showMore/${activityId}`);
-            
+
     //         if (response.status === 200) {
     //         const activityData = response.data.activity;
     //         const images = response.data.images;
-            
+
     //         // Redireciona para a página SeeMorePage com os dados
     //         // navigate('/seemore', { state: { activityData, images } });
     //         } else {
@@ -100,14 +100,14 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
         >
             <Head title="Minhas tarefas" />
             <section className="py-16 sm:py-8 flex flex-col min-h-fit h-screen overflow-x-hidden">
-                <div className="relative flex flex-col justify-center items-center min-h-64 bg-primary dark:bg-primary-200 fullhd:h-3/4">
+                <div className="relative flex flex-col justify-center items-center min-h-64 bg-primary dark:bg-primary-200 fullhd:!h-2/5">
                     <ActivityUpload />
                 </div>
                 <section className="w-full px-4 mx-4 grid grid-cols-1 gap-6 relative">
                     <Filter onFilter={fetchFilteredActivities} />
                     <aside className="flex h-full absolute mx-4 border-l-2 border-primary dark:border-primary-200"></aside>
                     <div className="px-4 lg:px-12 flex flex-col space-y-12 pb-8">
-                        
+
                         {/* Context Menu PrimeReact */}
                         <ContextMenu className='customul flex text-gray-800 dark:text-gray-200 justify-center w-40 h-fit py-2 shadow-sm dark:shadow-slate-950 shadow-slate-400 dark:bg-slate-800 bg-white rounded-md ' model={menuItems} ref={contextMenu} />
 
@@ -234,12 +234,12 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 //         setMenuVisible(true);
 //         setMenuPosition({ x: event.pageX, y: event.pageY });
 //     };
-    
+
 //     // Função para fechar o menu de contexto
 //     const handleClickOutside = () => {
 //         setMenuVisible(false);
 //     };
-    
+
 //     // Fecha o menu quando o usuário clica fora
 //     useEffect(() => {
 //         if (menuVisible) {
@@ -263,7 +263,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 //             endDate = new Date().toISOString().split('T')[0]
 //         }
 //         const filters = { 'title': title, 'startDate': startDate, 'endDate': endDate };
-    
+
 //         try {
 //             const response = await axios.post('/atividades/filtro', filters);
 //             console.log(filters)
@@ -284,7 +284,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 //     };
 
 
-    
+
 //     return (
 //         <VelaSocialLayout
 //             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Minhas Atividades</h2>}
@@ -308,11 +308,11 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 //                         {Object.keys(filteredActivitys).length > 0 &&(
 
 //                             filteredActivitys.map((activity) => (
-                                
+
 //                                 <ActivityCard key={activity.id} data={activity}
 //                                 onContextMenu={(event) => handleContextMenu(event, activity.id)}/>
 //                             ))
-//                         )}  
+//                         )}
 
 //                         {menuVisible &&(
 //                             <div className='absolute top-1/2 w-40 h-40 bg-primary'>
@@ -326,7 +326,7 @@ export default function ActivityHub({ auth, activities, isConnectedToGoogleDrive
 
 //                         )}
 
-                        
+
 //                     </div>
 //                 </section>
 
