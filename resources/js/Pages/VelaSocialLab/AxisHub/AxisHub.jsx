@@ -1,12 +1,8 @@
-import PrimaryButton from '@/FigmaComponents/Button/PrimaryButton';
 import VelaSocialLayout from '@/Layouts/VelaSocialLayout';
-import { GoLock } from "react-icons/go";
 import { Head } from '@inertiajs/react';
-import { FaArrowRight } from "react-icons/fa6";
 import { GoMegaphone } from "react-icons/go";
-import Tag from "./Axis/Components/Tag"
 import AxisCard from "./Components/AxisCard"
-import { GoNumber } from "react-icons/go";
+import { GoNumber, GoLaw, GoLock, GoLog  } from "react-icons/go";
 import { useEffect } from 'react';
 import AxisSkeleton from './Components/AxisSkeleton';
 
@@ -41,9 +37,11 @@ export default function TaskHub({ auth, }) {
             </div>
             <div className="flex p-5 gap-5 flex-wrap justify-center sm:justify-start">
 
-                <AxisCard title='Marketing'  axisIcon={[<GoMegaphone />,"bg-violet-600"]}/>
+                <AxisCard title='Marketing' blocked  axisIcon={[<GoMegaphone />,"bg-violet-600"]}/>
+                <AxisCard title='Contabilidade' blocked axisIcon={[<GoLog  />,"bg-yellow-600"]}/>
+                <AxisCard title='Jurídico' blocked  axisIcon={[<GoLaw />,"bg-red-600"]}/>
                 {/* <AxisCard title='Contabilidade' blocked={true} axisIcon={[<GoNumber />,"bg-orange-400"]}/> */}
-                <AxisSkeleton/>
+                {/* <AxisSkeleton/> */}
 
             </div>
 
