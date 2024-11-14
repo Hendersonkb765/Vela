@@ -57,7 +57,7 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
                 <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
                     <AllTasks tasks={tasks} className="hidden sm:block"/>
 
-                    <DriveInfo storageDrive={storageDrive}  isPresident={user.roleInOrganization=='Presidente'?true :false}/>
+                    {/* <DriveInfo storageDrive={storageDrive}  isPresident={user.roleInOrganization=='Presidente'?true :false}/> */}
                     {/* <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/> */}
                     <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>

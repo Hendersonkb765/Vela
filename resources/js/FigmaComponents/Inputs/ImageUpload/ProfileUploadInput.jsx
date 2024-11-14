@@ -25,16 +25,16 @@ const ProfileUploadInput = ({updateAvatarUrl, savedAvatar, className='' }) => {
             {(savedAvatar || avatarUrl) && isImageValid ?
                 <img
                     src={savedAvatar ?? avatarUrl}
-                    className="w-[150px] h-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
+                    className="size-[150px] rounded-full bg-cover  bg-center bg-no-repeat border-2  border-neutralcolors-200 flex items-center justify-center text-5xl font-bold text-primary"
                     onError={handleImageError}
                 />
             :
-                <div className="w-[150px] h-[150px]  rounded-full  flex items-center justify-center object-cover  bg-neutralcolors-100 dark:bg-slate-700  z-10">
-                    <CiImageOn className='w-[80px] h-[80px] text-neutralcolors-200 ' />
+                <div className="size-[150px] rounded-full  flex items-center justify-center object-cover  bg-neutralcolors-100 dark:bg-slate-700  z-10">
+                    <CiImageOn className='size-[80px]  text-neutralcolors-200 ' />
                 </div>
             }
 
-                <SecondaryButton className='h-12' onClick={() => setModalOpen(true)}>
+                <SecondaryButton className='text-xs lg:text-base h-12' onClick={() => setModalOpen(true)}>
                     {avatarUrl.current ? "Escolher outra foto" : "Escolher uma foto"}
                 </SecondaryButton>
             </div>
