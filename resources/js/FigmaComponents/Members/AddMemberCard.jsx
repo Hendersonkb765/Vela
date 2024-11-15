@@ -22,7 +22,7 @@ const AddMemberCard = () => {
         <>
             <div
                 onClick={openModal}  // Evento de clique para abrir o modal
-                className="w-full mt-4 sm:h-40 relative lg:w-80 min-w-[328px] fullhd:w-96 sm:rounded-xl bg-white dark:bg-slate-800 flex flex-col items-start justify-start px-6 py-4 space-y-4 text-white cursor-pointer lg:hover:scale-110 transition group overflow-hidden rounded-lg"
+                className="w-full mt-4 sm:h-40 relative lg:w-80 min-w-[328px] fullhd:w-96 sm:rounded-xl bg-white dark:bg-slate-800 flex flex-col items-start justify-start px-6 py-4 space-y-4 text-white cursor-pointer xl:hover:scale-110 transition group overflow-hidden rounded-lg"
             >
                 <div>
                     <h2 className="font-headers font-medium text-neutral-900 dark:text-white">Membros</h2>
