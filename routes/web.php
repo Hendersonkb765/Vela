@@ -20,7 +20,6 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('validar-convite/{code}/{oscId}', [InvitationOscController::class,'validateInvitation'])->middleware(['auth',DeleteExpiredInvitations::class])->name('invitation.validate');
 
 Route::middleware('auth')->group(function(){
 // -----------------------------------------COMPLETANDO REGISTRO DE USUÁRIO------------------------------------------\\
@@ -29,6 +28,8 @@ Route::middleware('auth')->group(function(){
     Route::patch('/criar/presidente', [CompleteRegistrationController::class, 'storePresident'])->name('completeRegistration.storePresident');
     Route::post('/validate-cnpj', [CompleteRegistrationController::class, 'validateCNPJ']);
 });
+Route::get('validar-convite/{code}/{oscId}', [InvitationOscController::class,'validateInvitation'])->middleware('auth','verified')->name('invitation.validate');
+
 
 Route::middleware(['auth',CheckUserRegistration::class,'verified',CheckOsc::class])->group(function(){
 
