@@ -12,11 +12,24 @@ class UserController extends Controller
     public function index()
     {
         try{
-            $osc = Auth::user()->osc->first(); 
+            $user = Auth::user();
+            $osc = $user->osc->first(); 
+
             $members = $osc->user()->get();
+            $members = $members->reject(function ($member) {
+                return $member->id == Auth::user()->id;
+            });
+            $members = $members->map(function ($member) {
+                $member->status = 'membro';
+                return $member;
+            });
+        
+
             $invitaionOsc = InvitationOsc::where('osc_id',$osc->id)->get();
-    
-            return redirect()->back()->with(['invitations' => $invitaionOsc,'members' => $members]); 
+
+            $members = $members->merge($invitaionOsc);
+
+            return response()->json(['members' => $members]); 
         }
         catch(\Exception $e)
         {
