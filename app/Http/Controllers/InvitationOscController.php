@@ -33,7 +33,6 @@ class InvitationOscController extends Controller
                 'email'=>$request->Invitemail,
                 'token' => $randomcode,
                 'osc_id' =>$osc->id,
-                'status' => 'pending',
                 'expires_at' => now()->addMinutes(20)
             ]);
 
@@ -48,9 +47,10 @@ class InvitationOscController extends Controller
 
     public function validateInvitation($code,$oscId){
         try{
-            if(InvitationOsc::where('token',$code)){
+            if(InvitationOsc::where('token',$code)->exists()){
                 $osc = Osc::find($oscId);
                 $osc->user()->attach(Auth::user()->id);
+                InvitationOsc::where('email',Auth::user()->email)->delete();
                 return redirect()->route('dashboard');
             }
             else{
