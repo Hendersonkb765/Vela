@@ -21,7 +21,7 @@ class InvitationOscFactory extends Factory
             'token' => $this->faker->sha256(),
             'expires_at' => $this->faker->dateTime(),
             'osc_id' => \App\Models\Osc::factory(),
-            'status' => $this->faker->randomElement(['pending', 'accepted', 'expired']),
+            'status' => $this->faker->randomElement(['Pendente', 'Expirado']),
             
         ];
     }
