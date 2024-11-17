@@ -9,7 +9,7 @@ import { GoPaperAirplane, GoPersonAdd, GoX } from 'react-icons/go';
 import MembersList from './MembersList';
 import axios from 'axios';
 
-const ManageTeamMembers = ({ isOpen, onClose, children }) => {
+const ManageTeamMembers = ({ isOpen, onClose, children, }) => {
     // const initialMembers = [
     //     { id: 1, name: 'Adedayo Bello', email: 'adedayo.bello@mail.com', status: 'MEMBRO', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3sqbhhfev_e_DCEWHWsZbyYh8UYSigVh8mQ&s'},
     //     { id: 2, name: 'Courtney Henry', email: 'courtney.henry@mail.com', status: 'PENDENTE', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX5zYaLainah5BClZST5tXxNk0u7_yJcD0KQ&s6bASBOZ8e43Ug+Jgea67mhed5rXJL7LvFum2bOUTypMyieoSsidChcVI8hRPXGEZWLXMFi04lZj54NSXELiq6s14YN/MLFi+rPnF2WJmKVIHcG7mEFim0NyxuSnGvAncvFi1rR0exG6yv6neL269f6oarY3gMF4jn+ysWIXjiEskiYYFcnXtvktX4Bcf8AzH4LFixwQSnI0ZgFUEE1XHzRl7buawa6rFiBIJsQ175w0OqR4swHvALFiWx0VQuos7zfEfNHirAc3nB9J+6xYgNmZZMOflII8yNPjC9vXS5ruYXqxcKfYf2sweYB+CEuzxWLEJyBX1Q4Q8Ho4aOH381EWU95qOPQNgnzJhYsXWNSN6d49rw9ncyiAN4y8jzVlstrqjIztzAgHu6aHmCfqsWIXCMuw45ZQ0mD3GLG8q6uLKbNTpORo9p2mrnH7IHEMQ7SoXNGVsBrG+6xoho+viSsWLoxSejs0m1sBc0b1pXqx3Rx3+CxYjEx2za7oEND43GPEcP31UAdxWLFzDjuJdf4YtmrWdAlrGiePecTH/5+CvxcsWLyfL/5Gej46+CNSVGaixYpRxqXg9FHXZCxYiRgOSsWLFph/9k=' },
@@ -19,14 +19,14 @@ const ManageTeamMembers = ({ isOpen, onClose, children }) => {
     const { data, setData, post, processing, errors } = useForm({
         Invitemail: '',
     });
-
+//invitations
     const [members, setMembers] = useState([]);
-
+    console.log(members);
     useEffect(() => {
         const fetchMembers = async () => {
             try {
-                const response = await axios.get(route('invitation.list'));
-                setMembers(response.data); // Armazena os membros no estado
+                const response = await axios.get(route('user.index'));
+                setMembers(response.data.members); // Armazena os membros no estado
             } catch (error) {
                 console.error("Erro ao buscar membros:", error);
             }
@@ -89,7 +89,7 @@ const ManageTeamMembers = ({ isOpen, onClose, children }) => {
                 </div>
                 <div className="border-t border-neutralcolors-200 dark:border-slate-600 mt-4 pt-4">
                     {/* Passa a lista de membros dinâmica para o componente MembersList */}
-                    <MembersList members={members} />
+                    <MembersList members={members}/>
                 </div>
 
                 <SecondaryIconButton onClick={onClose} className='border-1 !border-danger !text-danger hover:!bg-danger absolute -top-2 -right-2 group !rounded-full'>
