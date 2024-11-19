@@ -67,8 +67,8 @@ Route::get('/email-test',function(){
 Route::get('/env-teste',function(){
     $user = Auth::user();
     $url = URL::temporarySignedRoute(
-        'verification.verify', 
-        now()->addMinutes(10), 
+        'verification.verify',
+        now()->addMinutes(10),
         ['id' => $user->id, 'hash' => hash('sha256', $user->email)]
     );
     dd($url);
@@ -114,4 +114,7 @@ Route::get('/dashboard', function () {
 
 
 
-
+//Rota para acessar a mensagem de email validado
+Route::get('/emailvalidado', function () {
+    return Inertia::render('Auth/MailValidated');
+})->name('emailvalidado');

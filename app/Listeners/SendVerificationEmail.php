@@ -17,11 +17,11 @@ class SendVerificationEmail implements ShouldQueue
      */
     public function handle(VerificationEmail $event): void
     {
-        
+
         $user = $event->user;
         $url = URL::temporarySignedRoute(
-            'verification.verify', 
-            now()->addMinutes(10), 
+            'verification.verify',
+            now()->addMinutes(10),
             ['id' => $user->id, 'hash' => hash('sha256', $user->email)]
         );
         Mail::to($user->email)->send(new InvitationVerifyEmailSender($user->name, $user->email, $url));
