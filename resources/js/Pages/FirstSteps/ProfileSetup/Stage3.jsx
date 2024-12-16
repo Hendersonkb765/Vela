@@ -21,15 +21,15 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8">
+        <div className="h-full flex-col space-y-8 sm:flex-row ">
             <Head title="Fale sobre sua organização"/>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col space-y-2">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
-                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
+                <h1 className="font-headers font-semibold text-3xl text-neutralcolors-700 dark:text-white sm:text-4xl">{baseInfo.title}</h1>
                 <p className="font-body font-normal text-base text-neutralcolors-700 dark:text-gray-300">{baseInfo.description}</p>
             </div>
-            <div className="flex items-center space-x-12">
+            <div className="flex flex-col space-y-6  sm:flex-row sm:space-x-12 sm:space-y-0">
                 <div className="flex flex-col space-y-2">
                     <div>
                         <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Nome da sua Organização*</h3>
@@ -40,7 +40,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                             id="organizationName"
                             name="organizationName"
                             value={data.organization.organizationName}
-                            className="mt-1 block w-96 min-w-fit"
+                            className="mt-1 block w-96 min-w-fit max-w-full"
                             autoComplete="organizationName"
                             isFocused={true}
                             onChange={(e) => setData('organization', {
@@ -76,21 +76,21 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                                 <TextInput
                                     id="CNPJ"
                                     name="CNPJ"
-                                    className="mt-1 block w-96 min-w-fit"
+                                    className="mt-1 block w-96 min-w-fit  max-w-full"
                                     autoComplete="CNPJ"
                                     isFocused={true}
                                     placeholder="99.999.999/9999-99"
-                                   
+
                                 />
                             )}
                         </InputMask>
-                        <InputError message={errors.CNPJ} className="mt-2" />
+                        <InputError message={errors['organization.CNPJ']} className="mt-2" />
                     </div>
                 </div>
             </div>
 
 
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-8">
                 <div className="mb-2">
                     <h3 className="font-headers font-medium text-large text-neutralcolors-700 dark:text-gray-200">Escolha uma foto para o perfil da organização</h3>
                     <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-400">Coloque uma foto que represente sua organização. Faça essa escolha com carinho, mas não se preocupe, você poderá mudar depois.</p>
@@ -99,6 +99,7 @@ const Stage3 = ({baseInfo, maxStep, data, setData, errors}) => {
                     firstletter={data.organization.organizationName?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
                     savedAvatar={data.organization.organizationProfilePicture}
+                    className="scale-90 sm:scale-100 -mt-6 sm:mt-0"
                 />
             </div>
             <div>

@@ -22,6 +22,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         patch(route('profile.update'));
     };
 
+
+
     const [imageUrl, setImageUrl] = useState(data.profilePicture || null);
     const handleImageChange = (url) => {
         setImageUrl(url);
@@ -46,7 +48,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     firstletter={data.user.name?.charAt(0).toUpperCase()}
                     updateAvatarUrl={handleImageChange}
                     savedAvatar={data.user.profilePicture}
-                    className="px-4"
+                    className="lg:px-4"
                 />
                 <div className='sm:px-4'>
                     <InputLabel htmlFor="name" value="Nome" />

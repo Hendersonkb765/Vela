@@ -2,84 +2,97 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Services\ChatGPT\OpenAI;
-use App\Models\activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Address;
-use App\Services\Google\Drive\File;
-use App\Models\GoogleDriveFolder;
-use App\Models\GoogleToken;
-use App\Services\Google\Drive\Folder;
+use Illuminate\Container\Attributes\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
+
+use App\Models\PhotoActivity;
+
+ // Add this line to import the OpenAi class
 
 class ActivityController extends Controller
 {
 
     public function index(){
         //lista de atividades
+        // $activities = Auth::user()->osc->first()->activities()->get();
+        // dd($activities->with(['google_drive_folders','google_drive_folders']));
         try{
-            $activities = Auth::user()->osc->first()->activities()->orderBy('date','desc')->get();
-            $isConnectedToGoogleDrive = GoogleToken::where('osc_id',Auth::user()->osc->first()->id)->first();
+            $activities = Auth::user()->osc->first()->activities()
+            ->select('id','title','description','date')
+            ->orderBy('date','asc')
+            ->get();
+
             return Inertia::render('VelaSocialLab/ActivityHub/ActivityHub',[
                 'activities' => $activities,
-                'isConnectedToGoogleDrive' => !empty($isConnectedToGoogleDrive)
             ]);
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
+            return redirect()->back()->with(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
-
     }
+
+    public function edit($id){
+      
+        try{
+            $osc = Auth::user()->osc->first();
+            $path = "oscs/{$osc->id}/activities/0{$id}/";
+            $images = $osc->activities()->find($id)->photos()->select('photo_url')->get();
+            response()->json(['status'=> 200,'images' => $images]);
+    
+            return response()->json(['status'=> 200,'images' => $images]);
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
+        }
+      
+        
+    }
+
     public function rephraseDescription(Request $request){
         //reformular descrição da atividade
         try{
-            $openAI = new OpenAI();
-            $response = $openAI->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto:',$request->description);
+            $openAi = new OpenAI();
+            $response = $openAi->chatGPT('Reformule o seguinte texto, levando em conta o objetivo de registrar a atividade que a OSC teve no dia. Tenha como base o seguinte texto (Caso o texto esteja vazio, retorne a seguinte frase "Porfavor escreva algo."):',$request->description);
             return response()->json($response);
         }
         catch(\Exception $e){
             return response()->json(['status'=> 500,'message' => 'Erro ao reformular descrição!']);
         }
     }
-    public function filterByDate($dateFrom,$dateTo){
-        //detalhes da atividade
-        try{
-            if(!empty($dateFrom) && !empty($dateTo)){
-                $activities = Auth::user()->osc->first()->activities();
-                $activitiesFilterDate =$activities->whereBetween('date',[$dateFrom,$dateTo])->get();
-                return response()->json(['status'=> 200,'activities' => $activitiesFilterDate]);
-            }
-        }
-        catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
-        }
-    }
-    public function filter(Request $request,$title){
-        //detalhes da atividade
 
+    public function filter(Request $request){
+        //detalhes da atividade
         $activities = Auth::user()->osc->first()->activities();
+
         try{
-            if (!empty($title) && !empty($request->startDate) && !empty($request->endDate)) {
-                $activitiesFilter = $activities->where('title', 'like', $title . '%')
+            if (!empty($request->title) && !empty($request->startDate) && !empty($request->endDate)) {
+                $activitiesFilter = $activities->where('title', 'like', $request->title . '%')
                                                ->whereBetween('date', [$request->startDate, $request->endDate])
                                                ->get();
-            } elseif (!empty($title)) {
-                $activitiesFilter = $activities->where('title', 'like', $title . '%')->get();
+            } elseif (!empty($request->title)) {
+                $activitiesFilter = $activities->where('title', 'like', $request->title . '%')->get();
             } elseif (!empty($request->startDate) && !empty($request->endDate)) {
                 $activitiesFilter = $activities->whereBetween('date', [$request->startDate, $request->endDate])->get();
-            } else {
+            }
+            else {
                 $activitiesFilter = $activities->get();
             }
-            return redirect()->back()->with(['status' => 200, 'activities' => $activitiesFilter]);
-
-            
+            return response()->json(['status'=> 200,'activities' => $activitiesFilter]);
+            //return redirect()->with(['status' => 200, 'activities' => $activitiesFilter]);
         }
         catch(\Exception $e){
+            Log::error('Erro ao filtrar atividades: ' . $e->getMessage());
             return redirect()->back()->with(['status'=> 500,'message' => 'Erro ao buscar atividades!']);
         }
-
-
     }
 
     public function store(Request $request){
@@ -93,92 +106,170 @@ class ActivityController extends Controller
             'activityHourEnd' => 'required|date_format:H:i|after:activityHourStart',
             //'activityThumbnail' => 'required'|'url',
         ]);
-      //  try{
-
+        DB::beginTransaction();
+        try{
+            $user = Auth::user();
             $osc = Auth::user()->osc->first();
-
-            $fileDrive = new File($osc->id);
-            $folder = new Folder($osc->id);
-
-            $googleDriveFolder =GoogleDriveFolder::where('name','Atividades')->where('osc_id',$osc->id)->first();
+            $activity =Activity::create([
+                'title' => $request->activityTitle,
+                'description' => $request->activityDescription,
+                'date' => $request->activityDate,
+                'hour_start' => $request->activityHourStart,
+                'hour_end' => $request->activityHourEnd,
+                //'status' => $request->activityStatus,
+                'audience' => $request->activityAudience,
+                'send_by' => $user->name,
+                'thumbnail_photo_url' => '',
+                'send_by_id' => $user->id,
+                'osc_id' => $osc->id,
+            ]);
             
-            if(!empty($googleDriveFolder)){
+            $path ="oscs/{$osc->id}/activities/0{$activity->id}/";
+            $thumbnailName = 'thumbnail.png';
+            Storage::drive('s3')->put($path.$thumbnailName,file_get_contents($request->file('activityThumbnail')),'public');
+            $thumbnailUrl = Storage::drive('s3')->url($path.$thumbnailName);
 
-                $folderActivity = $folder->create($request->activityDate.'('.$request->activityTitle.')',$googleDriveFolder->folder_id);
-                $fileCreated = $fileDrive->create('thumbnail-'.uniqid(),$request->file('activityThumbnail'),$folderActivity->id,true);
-                if($fileCreated){
-                    $webViewLink = $fileCreated['webViewLink'];
-                    if(!empty($request->file('activityImages'))){
-                    foreach($request->file('activityImages') as $fileDatabase){
-                        $driveFile = new File($osc->id);
-                        $file = $driveFile->create(uniqid(),$fileDatabase,$folderActivity->id,true);
-                        }
-                        $folderActivityId = GoogleDriveFolder::where('folder_id',$folderActivity->id)->first();
-                        !empty($folderActivityId) ? $folderActivityId = $folderActivityId->id : $folderActivityId = null; 
-                        
-                        Activity::create([
-                            'title' => $request->activityTitle,
-                            'description' => $request->activityDescription,
-                            'date' => $request->activityDate,
-                            'hour_start' => $request->activityHourStart,
-                            'hour_end' => $request->activityHourEnd,
-                            'status' => $request->activityStatus,
-                            'audience' => $request->activityAudience,
-                            'thumbnail_photos_url' => $webViewLink,
-                            'folder_photos_id' => $folderActivityId,
-                            'send_by' => Auth::user()->name,
-                            'user_id' => Auth::user()->id,
-                            'osc_id' => Auth::user()->osc->first()->id
-                        ]);
-                    }
-
+            //Storage::disk('s3')->put('profile-users/' . $profilePictureName, $imageData,'public');
+            $activity->update(['thumbnail_photo_url' => $thumbnailUrl]);
+          
+            $photos = [];
+            if(!empty($request->file('activityImages'))){
+                foreach($request->file('activityImages') as $fileDatabase){
+                    $photoName = uniqid().'.png';
+                    Storage::drive('s3')->put($path.$photoName,file_get_contents($fileDatabase),'public');
+                    $photoUrl = Storage::drive('s3')->url($path.$photoName);
+                    $photo = ['photo_url' =>$photoUrl];
+                    $photos[]= $photo;
+                    
                 }
-
-         
-            }
-            else{
-                return response()->json(['status'=> 500,'message' => 'Pasta de atividades não encontrada! Pasta Velaae foi Alterada!!']);
+                
+                $activity->photos()->createMany($photos);
             }
             
+            DB::commit();
             return redirect()->back()->with(['status'=> 200,'message' => 'Atividade cadastrada com sucesso!']);
-/*
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!']);
+            DB::rollBack(); 
+            return response()->json(['status'=> 500,'message' => 'Erro ao cadastrar atividade!', 'error' => $e->getMessage()]);
         }
-*/
-    }
-   
 
-    public function update(Request $request,$id){
+    }
+
+
+    public function update(Request $request){
+        DB::beginTransaction();
         try{
-            $activity = Activity::find($id);
+            return response()->json(['dados' => $request->all()]);
+            $idActivity = $request->idActivity;
+            $osc = Auth::user()->osc->first();
+            $thumbnailName = $request->thumbnailName;
+            $newImages = $request->file('newImages');
+            $deletedImages = $request->deletedImages;
+            $path ="oscs/{$osc->id}/activities/0{$idActivity}/";
+            $activity = Activity::find($idActivity);
+            if(!empty($deletedImages)){         
+                foreach($deletedImages as $imageUrl){
+                    $nameImage = basename($imageUrl);
+                    Storage::drive('s3')->delete($path.$nameImage);
+                    $activity->photos()->where('photo_url',$imageUrl)->delete();
+                    
+                }
+            }
+            if(!empty($newImages)){
+                foreach($newImages as $image){
+                    $nameImage = uniqid().'.png';
+                    Storage::drive('s3')->put($path.$nameImage,file_get_contents($image),'public');
+                    $imageUrl = Storage::drive('s3')->url($path.$nameImage);
+                    $activity->photos()->create($image);
+
+                }
+            }
+            /*
+            if(!empty($thumbnailName)){
+                Storage::drive('s3')->delete($path.'thumbnail.png');
+                Storage::drive('s3')->put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+            }
+                */
+            
             $activity->update([
                 'title' => $request->activityTitle,
                 'description' => $request->activityDescription,
                 'date' => $request->activityDate,
                 'hour_start' => $request->activityHourStart,
                 'hour_end' => $request->activityHourEnd,
-                'status' => $request->activityStatus,
+                // 'status' => $request->activityStatus,
                 'audience' => $request->activityAudience,
-                'thumbnail_photos_url' => $request->activityThumbnailPhotosUrl,
-                'folder_photos_id' => 1//$request->activityPhotosUrl,
+                //'thumbnail_photo_url' => $activityThumbnailPhotoUrl,
             ]);
-            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!']);
-            
+        
+            if(!empty($request->file('thumbnailName'))){
+                Storage::delete($path.'thumbnail.png');
+                $thumbnailPhoto = Storage::put($path.'thumbnail.png',file_get_contents($request->file('thumbnail')),'public');
+                $thumbnailPhotoUrl = Storage::url($path.'thumbnail.png');
+                $activity->update([
+                    'thumbnail_photo_url' => $thumbnailPhotoUrl
+                ]);
+            }
+            DB::commit();
+            return response()->json(['status'=> 200,'message' => 'Atividade atualizada com sucesso!', 'estruturaRequisicao' => $request->file('thumbnailName')]);
+
         }
         catch(\Exception $e){
-            return response()->json(['status'=> 500,'message' => 'Erro ao atualizar atividade!']);
+            DB::rollBack();
+            return response()->json(['status'=> 500,'message' => "Erro ao atualizar atividade! | ". $e->getMessage(),'estruturaRequisicao'=>$request->all()]);
         }
     }
-    public function destroy($id){
+
+    public function destroy(Request $request){
+        DB::beginTransaction();
+        
         try{
-            $activity = Activity::find($id);
-            $activity->delete();
+            
+            $osc = Auth::user()->osc->first();
+            Activity::destroy($request->ActivityId);
+            $response = Activity::where('activity_id',$request->ActivityId)->delete();
+            
+           
+           
+            $path ="oscs/{$osc->id}/activities/0{$request->ActivityId}";
+            Storage::deleteDirectory($path);
+
+            DB::commit();
             return response()->json(['status'=> 200,'message' => 'Atividade deletada com sucesso!']);
         }
         catch(\Exception $e){
+            DB::rollBack();
             return response()->json(['status'=> 500,'message' => 'Erro ao deletar atividade!']);
         }
     }
+    public function showMore($id){
+        try{
+            $activity = Activity::find($id);
+            $osc= Auth::user()->osc->first();
+            $path = "oscs/{$osc->id}/activities/0{$activity->id}/";
+            $allImages = Storage::drive('s3')->allFiles($path);
+            $photosActivity = PhotoActivity::where('activity_id',$activity->id)->select('photo_url')->get();
+            //$photosActivity = $activity->photos()->select('photo_url')->join('')->get();
+            $photosActivity = $photosActivity->toArray();
+            array_push($photosActivity,['photo_url' => $activity->thumbnail_photo_url]);
+        
+            /*
+            foreach ($allImages as $image) {
+                $fileUrl = Storage::drive('s3')->url($image);
+                $fileType = Storage::drive('s3')->mimeType($image);
+                array_push($images, [
+                    'name' => basename($image),
+                    'url' => $fileUrl,
+                    'type' => $fileType,
+                ]);
+            }
+            */
+            return Inertia::render('VelaSocialLab/ActivityHub/Components/SeeMorePage/SeeMorePage',['activity'=>$activity,'images'=>$photosActivity]);
+        }
+        catch(\Exception $e){
+            return response()->json(['status'=> 500,'message' => 'Erro ao buscar atividade!']);
+        }
+    }
+
 }

@@ -53,7 +53,7 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
+            'throw' => true,
         ],
 
     ],
@@ -70,9 +70,10 @@ return [
     */
 
     'links' => [
-        public_path('storage/profile-photos') => storage_path('app/public/profile-photos'),
-        public_path('storage/profile-photos-osc') => storage_path('app/public/profile-photos-osc')
+        public_path('storage/profile-users') => storage_path('app/public/profile-users'),
+        public_path('storage/profile-oscs') => storage_path('app/public/profile-oscs')
     ],
+    'visibility' => \League\Flysystem\Visibility::PUBLIC,
+
 
 ];
-

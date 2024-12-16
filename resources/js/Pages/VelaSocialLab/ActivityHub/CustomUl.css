@@ -1,0 +1,19 @@
+.customul ul{
+
+    width: 100%;
+
+}
+
+.customul ul li a{
+
+    width: 100%;
+    padding-left: 10px;
+    padding: 10px 20px;
+
+}
+
+.customul ul li a:hover{
+
+    background: #0000003e;
+
+}

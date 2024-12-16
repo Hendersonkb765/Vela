@@ -18,10 +18,9 @@ class Activity extends Model
         'audience',
         'send_by',
         'description',
-        'thumbnail_photos_url',
-        'folder_photos_id',
-        'osc_id',
-        'user_id',
+        'thumbnail_photo_url',
+        'send_by_id',
+        'osc_id'
     ];
 
     // muitos para um
@@ -32,4 +31,8 @@ class Activity extends Model
     public function address(){
         return $this->morphMany(Address::class, 'addressable');
     }
+    public function photos(){
+        return $this->hasMany(PhotoActivity::class);
+    }
+  
 }

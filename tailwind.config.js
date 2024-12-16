@@ -15,9 +15,6 @@ export default {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-
             screens: {
                 'fullhd': '1920px', // Breakpoint para telas de 1920px ou maiores
             },
@@ -49,16 +46,7 @@ export default {
                 body: ['Open Sans'],
             },
             
-            keyframes: {
-                fade: {
-                  '0%, 100%': { opacity: '0.2' }, // Opacidade mínima
-                  '50%': { opacity: '1' }, // Opacidade máxima
-                },
-              },
-              // Associando a keyframe com a animação
-              animation: {
-                fade: 'fade 2s ease-in-out infinite', // 2s de duração, ease-in-out, repetição infinita
-            },
+
 
 
 
@@ -96,6 +84,16 @@ export default {
               fly: 'fly 3s ease-in-out infinite',
             },
 
+            keyframes: {
+              fade:{
+                '0%, 100%': { opacity: '0.2' }, // Opacidade mínima
+                '50%': { opacity: '1' }, // Opacidade máxima
+              },
+            },
+            // Associando a keyframe com a animação
+            animation: {
+              fade: 'fade 2s ease-in-out infinite', // 2s de duração, ease-in-out, repetição infinita
+            },
 
             keyframes: {
               enter: {
@@ -112,5 +110,6 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms]
+  
 };

@@ -5,16 +5,16 @@ import TextInput from "@/FigmaComponents/Inputs/TextInput";
 import React from "react";
 import { Head } from '@inertiajs/react';
 
-const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
+const Stage4 = ({baseInfo, maxStep, data, setData, errors,images}) => {
     //Lembre: salvar as caixas selecionadas não está feito ainda
     const categories = [
-        { id: 1, name: 'Assistência social', image: '../storage/Images/Eixos/Eixo1.jpg' },
-        { id: 2, name: 'Saúde', image: '../storage/Images/Eixos/Eixo2.jpg' },
-        { id: 3, name: 'Defesa de direitos', image: '../storage/Images/Eixos/Eixo3.jpg' },
-        { id: 4, name: 'Meio ambiente', image: '../storage/Images/Eixos/Eixo4.jpg' },
-        { id: 5, name: 'Habitação', image: '../storage/Images/Eixos/Eixo5.jpg' },
-        { id: 6, name: 'Educação e pesquisa', image: '../storage/Images/Eixos/Eixo6.jpg' },
-        { id: 7, name: 'Cultura', image: '../storage/Images/Eixos/Eixo7.jpg' },
+        { id: 1, name: 'Assistência social', image: images.stage4.eixo1 },
+        { id: 2, name: 'Saúde', image: images.stage4.eixo2 },
+        { id: 3, name: 'Defesa de direitos', image: images.stage4.eixo3 },
+        { id: 4, name: 'Meio ambiente', image: images.stage4.eixo4 },
+        { id: 5, name: 'Habitação', image: images.stage4.eixo5 },
+        { id: 6, name: 'Educação e pesquisa', image: images.stage4.eixo6 },
+        { id: 7, name: 'Cultura', image: images.stage4.eixo7 },
     ];
 
     const handleSelectionChange = (selectedNames) => {
@@ -28,14 +28,16 @@ const Stage4 = ({baseInfo, maxStep, data, setData, errors}) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8 pb-8">
+        <div className="h-full min-h-fit flex-col space-y-12 mb-8 sm:flex-row sm:pb-0 ">
             <Head title="Publico alvo"/>
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
                 <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
             </div>
-            <CheckboxGallery onSelectionChange={handleSelectionChange} categories={categories} />
+            <div className="flex flex-col">
+                <CheckboxGallery onSelectionChange={handleSelectionChange} categories={categories} />
+            </div>
 
         </div>
     )

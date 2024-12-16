@@ -41,6 +41,7 @@ class UserFactory extends Factory
     }
   
     public function configure(){
+        
         return $this->afterCreating(function(User $user){
             $user->phone()->create(
                 Phone::factory(
@@ -48,6 +49,7 @@ class UserFactory extends Factory
                     'phoneable_type'=>$user->getMorphClass()]
                 )->make()->toArray());
         });
+        
         //$osc->address()->create(Address::factory(['addressable_id'=>$osc->id,'addressable_type'=>$osc->getMorphClass()])->make()->toArray());
 
     }

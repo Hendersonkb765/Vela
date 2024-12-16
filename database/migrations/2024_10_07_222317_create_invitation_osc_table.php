@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('token');
             $table->foreignId('osc_id')->constrained('oscs');
-            $table->enum('status', ['pending', 'accepted', 'expired'])->default('pending');
+            $table->enum('status', ['Pendente', 'Expirado'])->default('Pendente');
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });

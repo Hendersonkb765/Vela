@@ -70,45 +70,6 @@ export default function ActivityForm({ onSubmit }) {
             console.error('Erro na requisição:', error);
         }
 
-        // try {
-        //     const response = await fetch(`/reformular`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Pega o token CSRF da meta tag
-        //         },
-        //         body: JSON.stringify({
-        //             description: data.activityDescription
-        //         }),
-        //     });
-
-        //     if (response.ok) {
-        //         const result = await response.json();
-        //         console.log(result)
-        //         setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
-        //     } else {
-        //         console.error('Erro ao reformular descrição.');
-        //     }
-        // } catch (error) {
-        //     console.error('Erro na requisição:', error);
-        // }
-        // const response = await fetch(`/reformular/${data.activityDescription}`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         description: data.activityDescription
-        //     }),
-        // });
-
-        // if (response.ok) {
-        //     const result = await response.json();
-        //     setData('activityDescription', result.rephrasedDescription); // Atualiza a descrição com a resposta da IA
-        // } else {
-        //     console.error('Erro ao reformular descrição.');
-        // }
-
         setLoadingIa(false); // Para o carregamento
 
     };
@@ -539,8 +500,8 @@ export default function ActivityForm({ onSubmit }) {
             )}
 
             {showPopup && (
-                <div className="animate-enter fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                    <div className="bg-white p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
+                <div className=" fixed inset-0 flex items-center justify-center ">
+                    <div className="bg-white animate-enter p-6 rounded shadow-lg dark:bg-slate-800 dark:text-white">
                         <div className="flex gap-2 items-center">
 
                             <GoCheckCircleFill className="text-6xl text-success"/>

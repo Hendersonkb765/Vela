@@ -30,11 +30,13 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $user = Auth::user();
         //dd($request->validated()['user']);
         //dd($request->user['profilePicture']);
         $imageData = $request->user['profilePicture'];
         $request->user()->fill($request->validated()['user']);
-        $profilePictureName = basename(Auth::user()->image_url);
+        $profilePictureName = basename($user->image_url);
+        
         if (isset( $imageData)) {
             //$imageData = $request->user['profilePicture'];
             
@@ -44,14 +46,25 @@ class ProfileController extends Controller
                 list(, $imageData) = explode(',', $imageData);
                 $imageData = base64_decode($imageData);
 
+                if(!empty($profilePictureName)){
+                    Storage::delete("profile-users/$profilePictureName");
+                }
+
                 if(empty($profilePictureName)){
                     $profilePictureName = uniqid() . '.png';
                 }
-                if (!Storage::disk('public')->exists('profile-photos')) {
-                    Storage::disk('public')->makeDirectory('profile-photos');
+                // if (!Storage::disk('public')->exists('profile-photos')) {
+                //     Storage::disk('public')->makeDirectory('profile-photos');
+                // }
+                $profileStatus = Storage::put("profile-users/$profilePictureName", $imageData,'public');
+                if($profileStatus){
+                    Auth::user()->image_url = asset("storage/profile-users/$profilePictureName");
                 }
-                Auth::user()->image_url = asset('storage/profile-photos/' . $profilePictureName);   
-                Storage::disk('public')->put('profile-photos/' . $profilePictureName, $imageData);
+                else{
+                    return redirect()->back()->with(['status' => '500','message'=> 'Erro ao atualizar a imagem do perfil!']);
+                }
+                  
+                
             }
         }
 
@@ -68,13 +81,12 @@ class ProfileController extends Controller
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
-
         $user = $request->user();
-
+        
         Auth::logout();
-
+        $user->activities()->update(['send_by_id' => null]);
         $user->delete();
-
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

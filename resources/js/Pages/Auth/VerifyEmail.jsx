@@ -34,15 +34,18 @@ export default function VerifyEmail({ status }) {
                 <form onSubmit={submit} >
                     <div className="mt-4 flex items-center justify-start space-x-4">
                         <PrimaryButton disabled={processing} type='submit' className='h-12'>Reenviar E-mail de Verificação</PrimaryButton>
-
-                        <SecondaryButton
+                        <Link
                             href={route('logout')}
                             method="POST"
                             as="button"
-                            className="h-12  !text-danger !border-danger hover:!bg-danger hover:!text-white transition-colors"
+                            className="min-w-32 h-12 !border-solid border-2 rounded-md !text-danger !border-danger hover:!bg-danger hover:!text-white transition-colors"
                         >
                             Sair
-                        </SecondaryButton>
+                        </Link>
+                        {status === 'verification-link-sent' && (
+                        <Link href={route('dashboard')} as="button" className=" min-w-32 h-12 rounded border-2 border-green-500/100 text-white bg-green-700 p-1">
+                            Já verifiquei!
+                        </Link>)}
                     </div>
                 </form>
             </div>

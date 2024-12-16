@@ -14,6 +14,7 @@ export default function Filter({onFilter}) {
     const minDate = "1900-01-01";
     const maxDate = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
     const [hasDateParameters, setHasDateParameters] = useState(false)
+    const [debouncedValue, setDebouncedValue] = useState('');
     const { data, setData } = useForm({
         name: '',
         startDate: '',
@@ -25,11 +26,11 @@ export default function Filter({onFilter}) {
 
         const { startDate, endDate } = data;
         if(startDate != '' || endDate !=''){
-            onFilter(data);
+            onFilter(data.name, data.startDate, data.endDate);
             setHasDateParameters(true)
         }else{
 
-            onFilter(data);
+            onFilter(data.name, data.startDate, data.endDate);
             setHasDateParameters(false)
 
         }
@@ -41,28 +42,34 @@ export default function Filter({onFilter}) {
     }
 
     const handleSearchChangeMobile = (value) =>{
-
         setData('name', value);
-
+        
     }
 
+
+    // useEffect que aplica o debounce
     useEffect(() => {
+        // Configura o debounce com um tempo de espera (por exemplo, 1000ms = 1 segundo)
         const handler = setTimeout(() => {
-            setDebouncedSearchTerm(data.name);
-        }, 500); // 500ms de espera
+        setDebouncedValue(data.name);
+        }, 500); // Define o atraso do debounce
 
-        // Limpa o timeout anterior ao definir um novo, evitando execuções desnecessárias
+        // Limpa o timeout se o valor mudar antes do tempo terminar
         return () => {
-            clearTimeout(handler);
+        clearTimeout(handler);
         };
-    }, [data.name]);
+    }, [data.name]); // O efeito é executado sempre que o inputValue mudar
 
-    // Envia a requisição ao backend quando o valor debounced mudar
+    // Efeito para acionar uma ação quando o valor debounced mudar
     useEffect(() => {
-        if (debouncedSearchTerm) {
-            onFilter(debouncedSearchTerm); // Envia o termo filtrado
+        if (debouncedValue !== undefined) {
+            // Aqui você pode colocar a sua lógica, como fazer uma requisição ou qualquer outra ação
+            onFilter(debouncedValue, data.startDate, data.endDate)
+        
         }
-    }, [debouncedSearchTerm, onFilter]);
+    }, [debouncedValue]); // Executa quando o valor debounced é atualizado
+
+
 
 
     const handleDateParameters = () =>{
@@ -79,8 +86,9 @@ export default function Filter({onFilter}) {
     const clenDateParametes = () =>{
         
         setData(data.startDate = '', data.endDate='')
-        onFilter(data);
+        onFilter(data.name);
         setHasDateParameters(false)
+        
 
     }
 

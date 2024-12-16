@@ -27,7 +27,9 @@ class GoogleDrive{
             if($this->client->isAccessTokenExpired()){
                 
                 if($token->refresh_token){
+                    
                     $newToken = $this->client->fetchAccessTokenWithRefreshToken($token->refresh_token);
+                    dd($newToken);
                     $token->update([
                         'access_token' => $newToken['access_token'],
                         //'expires_at' => now()->addSeconds($newToken['expires_in'])

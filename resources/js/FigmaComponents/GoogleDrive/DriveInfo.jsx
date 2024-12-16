@@ -11,7 +11,6 @@ const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false })
         usedSpace = storageDrive.storageUsage;
         totalSpace = storageDrive.storageLimit;
     }
-    console.log(storageDrive);
     // Atualiza o estado do tema ao montar o componente
     useEffect(() => {
         setIsDarkMode(localStorage.getItem('theme') === 'dark');
@@ -26,7 +25,6 @@ const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false })
     } else {
         color = '#057EE8'; // Azul para uso abaixo de 70%
     }
-    console.log(storageDrive);
 
 
     const statusStorageDrive = ()=>{
@@ -35,7 +33,7 @@ const DriveInfo = ({ storageDrive ,usedSpace=0,totalSpace=0,isPresident=false })
         className="{w-full h-16 lg:w-80 min-w-fit fullhd:w-96 rounded-xl bg-white dark:bg-slate-800 transition-colors flex items-center p-4 space-x-4 text-white cursor-pointer dark:hover:bg-slate-800/85 }"
     >
         <>
-        <img src="../storage/Images/google-drive.png" alt="Drive Icon" className='w-8 h-8' />
+        <img src="images/google-drive.png" alt="Drive Icon" className='w-8 h-8' />
         <div className='w-full h-full flex flex-col space-y-1'>
             <span className='font-headers text-xs text-neutral-600 dark:text-gray-300'>
                 {usedSpace} GB de {totalSpace} GB usados

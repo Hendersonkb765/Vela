@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Osc;
+use App\Models\PhotoActivity;
 use App\Models\Activity;
 use App\Models\Address; // Add this line to import the Address class
 /**
@@ -28,15 +29,15 @@ class ActivityFactory extends Factory
             'audience' => $this->faker->randomNumber(5),
             'send_by' => $user->name,
             'description' => $this->faker->text(),
-            'thumbnail_photos_url' => $this->faker->imageUrl(),
-            'folder_photos_id' => $this->faker->numberBetween(1, 5),
+            'thumbnail_photo_url' => $this->faker->imageUrl(),
             'osc_id' => Osc::inRandomOrder()->first()->id,
-            'user_id' => $user->id,
+            'send_by_id' => $user->id,
         ];
     }
     public function configure(){
         return $this->afterCreating(function(Activity $activity){
             $activity->address()->save(Address::factory()->make());
+            $activity->photos()->saveMany(PhotoActivity::factory()->count(3)->make());
         });
     }
 }

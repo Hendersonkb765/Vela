@@ -26,8 +26,8 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
 
     const SubmissionFailed = ({ NumberOfFails }) => {
         return (
-            <Link href={route('axishub')} className={`h-16 sm:h-full sm:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center  justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
-                <div className='flex items-center sm:scale-100 scale-90 space-x-2'>
+            <Link href={route('axishub')} className={`h-16 sm:h-full w-4/5 lg:w-3/5 fullhd:w-2/3 sm:min-w-fit bg-white flex flex-col sm:flex-row items-center justify-between p-2 space-x-4  dark:bg-slate-800 ${(NumberOfFails === 0) && '[&>*]:opacity-60'}`}>
+                <div className='flex items-center scale-90 sm:scale-100  space-x-2'>
                     <div className='sm:w-12 h-12 rounded-full flex items-center justify-center '>
                         {(NumberOfFails > 0) ? <GoAlertFill className='w-6 h-6 text-danger'/> : <GoAlert className='w-6 h-6 text-neutralcolors-300 dark:text-gray-300'/>}
                     </div>
@@ -45,19 +45,19 @@ export default function Dashboard({ user,osc,level,tasks, storageDrive }) {
             profilePicture={user.profilePicture}
         >
             <Head title="Dashboard"/>
-            <DashboardPath titleTask={currentTask.title}/>
-            <section className='w-full h-screen p-4 gap-4 flex flex-col md:flex-row sm:[&>*]:rounded-lg pb-16 sm:pt-4 sm:pb-4 px-2 '>
-                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full md:w-1/2 sm:min-w-fit '>
+            <DashboardPath titleTask={"batata"}/>
+            <section className='h-screen w-full flex flex-col py-4 gap-4 pb-16 sm:flex-row max-[376px]:mx-auto min-[361px]:px-0.5 min-[376px]:px-2  sm:[&>*]:rounded-lg  sm:pt-4 sm:pb-4 '>
+                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 md:w-7/12 lg:w-3/5 '>
                     <OscProfileCard OscProfilePicture={imageUrlOsc}  OscLevel={OscLevel} OscName={OscName} Progress={Progress}/>
-                    <div className='w-full md:min-w-fit flex flex-row justify-between fullhd:justify-start space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
+                    <div className='w-full md:min-w-fit flex flex-row justify-between fullhd:justify-start space-x-2 min-[376px]:space-x-4 sm:space-x-4 [&>*]:rounded-lg'>
                         <SubmissionFailed NumberOfFails={Fails} />
                         <RecordActivity />
                     </div>
                 </div>
-                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/2 sm:min-w-fit '>
+                <div className='flex flex-col gap-4 sm:[&>*]:rounded-lg w-full sm:w-1/3   lg:w-2/5 '>
                     <AllTasks tasks={tasks} className="hidden sm:block"/>
-                    
-                    <DriveInfo storageDrive={storageDrive}  isPresident={user.roleInOrganization=='Presidente'?true :false}/>
+
+                    {/* <DriveInfo storageDrive={storageDrive}  isPresident={user.roleInOrganization=='Presidente'?true :false}/> */}
                     {/* <DriveInfo usedSpace={usedSpace} totalSpace={totalSpace}/> */}
                     <AllTasks tasks={tasks} className="block sm:hidden "/>
                 </div>

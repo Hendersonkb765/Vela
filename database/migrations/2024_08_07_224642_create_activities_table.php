@@ -19,15 +19,20 @@ return new class extends Migration
             $table->time('hour_end');
             $table->date('date');
             $table->integer('audience');
-            $table->string('send_by');
             $table->text('description');
-            $table->string('thumbnail_photos_url');
-            $table->foreignId('folder_photos_id')->constrained('google_drive_folders');
+            $table->string('thumbnail_photo_url');
             $table->foreignId('osc_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('send_by_id')->nullable()->constrained('users');
+            $table->string('send_by');
             $table->timestamps();
         });
 
+        Schema::create('photo_activities', function (Blueprint $table) {
+            $table->id();
+            $table->string('photo_url');
+            $table->foreignId('activity_id')->constrained('activities');
+            $table->timestamps();
+        });
         /*
         Schema::create('address_activitie', function (Blueprint $table) {
             $table->id();

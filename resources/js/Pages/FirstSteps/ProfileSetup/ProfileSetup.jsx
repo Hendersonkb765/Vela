@@ -9,8 +9,12 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 
-export default function ProfileSetup() {
+export default function ProfileSetup(images) {
+    
+ 
     const [currentStep, setCurrentStep] = useState(() => {
+
+
         // Recupera o estado do localStorage, se disponível
         const savedStep = localStorage.getItem('currentStep');
         return savedStep ? JSON.parse(savedStep) : 1; // Valor padrão é 1
@@ -29,13 +33,11 @@ export default function ProfileSetup() {
             organizationProfilePicture: '',
             CNPJ: '',
             doesNotHaveCNPJ: false,
-            CPF: '',
             focusAreas: [],
         }
     });
-    
-    const isNameValid =  data.user.name.split(' ').length > 1;
 
+    const isNameValid =  data.user.name.split(' ').length > 1;
 
     // Carrega os dados do formulário do localStorage, se disponíveis
     useEffect(() => {
@@ -60,18 +62,22 @@ export default function ProfileSetup() {
 
     const maxStep = steps.length;
     const RenderStepContent = (step) => {
-        switch (step) {
-            case 1:
-                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 2:
-                return <Stage2 baseInfo={steps[1]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 3:
-                return <Stage3 baseInfo={steps[2]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            case 4:
-                return <Stage4 baseInfo={steps[3]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-            default:
-                return <Stage1 baseInfo={steps[0]} maxStep={maxStep} data={data} setData={setData} errors={errors} />;
-        }
+        const StageComponent = [Stage1, Stage2, Stage3, Stage4][step - 1];
+        return <StageComponent baseInfo={steps[step - 1]} maxStep={steps.length} data={data} setData={setData} errors={errors} images={images}/>;
+    };
+
+    const validateCNPJ = async () => {
+        let status;
+
+        await post("/validate-cnpj", {
+            data: { organization: { CNPJ: data.organization.CNPJ } },
+            onError: (errors) => {
+                console.log(errors);
+                status = 500;
+            },
+            onSuccess: () => setCurrentStep((prev) => Math.min(prev + 1, maxStep)),
+
+        });
     };
 
     const handlePrevStep = (e) => {
@@ -79,12 +85,17 @@ export default function ProfileSetup() {
         setCurrentStep((prev) => Math.max(prev - 1, 1));
     };
 
-    const handleNextStep = (e) => {
+    const handleNextStep = async (e) => {
         e.preventDefault();
         if (currentStep === 1 && !isNameValid) return alert("Por favor, insira um nome válido.");
         if (currentStep === maxStep) handleSubmit();
         if (currentStep === 2 && !data.user.roleInOrganization) return alert("Selecione uma das opções");
         if (currentStep === 2 && !data.hasOrganization) handleSubmit();
+        if (currentStep === 3 && data.organization.CNPJ) {
+            await validateCNPJ();
+
+
+        }
         else {
             setCurrentStep((prev) => Math.min(prev + 1, maxStep));
         }
@@ -93,11 +104,21 @@ export default function ProfileSetup() {
     const handleSubmit = () => {
         patch(route('completeRegistration.store'), {
             data: data,
-            onFinish: () => {
+            onSuccess: (page) => {
+                console.log('Registro completo com sucesso:', page);
                 reset();
-                setComplete(true); // Marca como completo
-                localStorage.removeItem('formData'); // Remove os dados do localStorage após a finalização
-                localStorage.removeItem('currentStep'); // Remove o step do localStorage após a finalização
+                setCurrentStep(1);
+                setComplete(true);
+                localStorage.removeItem('formData');
+                localStorage.removeItem('currentStep');
+            },
+            onError: (errors) => {
+                console.error('Erro ao completar o registro:', errors);
+                alert('Ocorreu um erro ao tentar completar o registro. Por favor, tente novamente.');
+            },
+            onFinish: () => {
+                setCurrentStep(1);
+                console.log(localStorage);
             },
         });
     };
@@ -105,13 +126,16 @@ export default function ProfileSetup() {
     return (
         <ProfileSetupLayout hideProfile={true} imgUrl={data.profilePicture} userName={data.name}>
             {!complete ? (
-                <form onSubmit={handleNextStep} className="h-full m-4 mb-10 flex flex-col " encType="multipart/form-data">
-                    {RenderStepContent(currentStep)}
-                    <div className="flex justify-end mt-auto space-x-4">
-                        <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="h-12" onClick={handlePrevStep} type="button">
+                <form onSubmit={handleNextStep} className="h-full m-4 mb-24 flex flex-col justify-between sm:mb-10 sm:gap-0" encType="multipart/form-data">
+                    <div>
+                        {RenderStepContent(currentStep)}
+                    </div>
+
+                    <div className="h-full flex justify-end items-end space-x-4 mb-auto pb-4">
+                        <PrimaryButton gray={true} center={true} disabled={currentStep === 1} className="!h-12 w-1/3 sm:w-auto" onClick={handlePrevStep} type="button">
                             Voltar
                         </PrimaryButton>
-                        <PrimaryButton center={true} className="h-12" type="submit">
+                        <PrimaryButton center={true} className="!h-12 w-1/3 sm:w-auto" type="submit">
                             {(currentStep === maxStep) ? "Finalizar" : "Continuar"}
                         </PrimaryButton>
                     </div>
@@ -125,7 +149,7 @@ export default function ProfileSetup() {
                         <h1 className="text-4xl font-bold font-headers capitalize dark:text-white">Registro concluído com <span className="text-green-400 uppercase">SUCESSO</span> 🎉</h1>
                         <p className="font-body text-base dark:text-gray-300">Agora é só dar uma olhadinha no seu e-mail para continuar. 😊</p>
                     </div>
-                    <PrimaryButton href={route("dashboard")} center={true}>OK</PrimaryButton>
+                    <PrimaryButton href={route("dashboard")} center={true} className="w-36 h-12">OK</PrimaryButton>
                 </div>
 
             )}

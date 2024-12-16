@@ -3,13 +3,12 @@ import RadialOptions from "@/FigmaComponents/Inputs/RadialOptions";
 import React, { useState, useEffect } from "react";
 import { Head } from '@inertiajs/react';
 
-const Stage2 = ({ baseInfo, maxStep, data, setData, errors }) => {
+const Stage2 = ({ baseInfo, maxStep, data, setData, errors, images }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-
     const options = [
-        { id: 1, title: 'Presidente de Organização', imageSrc: '../storage/Images/Presidente.svg' },
-        { id: 2, title: 'Membro de Organização', imageSrc: '../storage/Images/Membro.svg' },
-        { id: 3, title: 'Voluntário de Organização', imageSrc: '../storage/Images/Voluntario.svg' },
+        { id: 1, title: 'Presidente de Organização', imageSrc: images.stage2.presidente },
+        { id: 2, title: 'Membro de Organização', imageSrc: images.stage2.membro },
+        { id: 3, title: 'Voluntário de Organização', imageSrc: images.stage2.voluntario },
     ];
 
     useEffect(() => {
@@ -32,16 +31,16 @@ const Stage2 = ({ baseInfo, maxStep, data, setData, errors }) => {
     };
 
     return (
-        <div className="flex flex-col space-y-8 ">
+        <div className="flex flex-col space-y-6">
             <Head title="Quem é você no terceiro setor?" />
 
             <div className="flex flex-col">
                 <span className="font-headers font-normal text-primary text-sm">Etapa {baseInfo.stage} de {maxStep}</span>
-                <h1 className="font-headers font-semibold text-4xl text-neutralcolors-700 dark:text-white">{baseInfo.title}</h1>
-                <p className="font-body font-normal text-base text-neutralcolors-700 dark:text-gray-300">{baseInfo.description}</p>
+                <h1 className="font-headers font-semibold text-3xl text-neutralcolors-700 dark:text-white sm:text-4xl">{baseInfo.title}</h1>
+                <p className="font-body font-normal text-sm text-neutralcolors-700 dark:text-gray-300 sm:text-base">{baseInfo.description}</p>
             </div>
 
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 pb-4">
                 <RadialOptions
                     onSelect={handleOptionSelect}
                     options={options}
