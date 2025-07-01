@@ -24,19 +24,18 @@ O projeto foi idealizado para atender às principais necessidades enfrentadas pe
 
 - **Henderson Gomes** – Backend
 - **Gustavo Rodrigues** – Frontend
-- **Hathos Gomes**
+- **Hathos Gomes** - Product Owner
 
 ## 📁 Tecnologias Utilizadas
 
 - Backend: Laravel
-- Frontend: Vue.js / Inertia.js *(ou especifique conforme o que foi usado)*
-- Banco de dados: MySQL/MariaDB
-- Outras ferramentas: Docker, Git
+- Frontend: react / Inertia.js *(ou especifique conforme o que foi usado)*
+- Banco de dados: MySQL
+- Metodologia: SCRUM
+- Outras ferramentas: Trello
 
 ## 📄 Licença
 
 Este repositório está licenciado sob a [MIT License](LICENSE).
 
 ---
-
-Se tiver dúvidas ou quiser conversar sobre o projeto, sinta-se à vontade para abrir uma *issue* ou entrar em contato com os autores.
