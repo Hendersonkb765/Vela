@@ -1,8 +1,8 @@
-# 🌟 Projeto VELA
-
+#  Projeto VELA
+---
 **VELA** é uma plataforma web desenvolvida com o objetivo de apoiar as **Organizações da Sociedade Civil (OSCs)** em sua jornada de **formalização, organização e visibilidade institucional**.
 
-## ✨ Propósito
+## Propósito
 
 O projeto foi idealizado para atender às principais necessidades enfrentadas pelas OSCs, oferecendo:
 
